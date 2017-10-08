@@ -1,0 +1,43 @@
+.accord{
+	border: 1px solid $c_l-gray;
+	border-bottom: none;
+	&__button{
+		display: block;
+		padding: 20px 80px 20px 21px;
+		position: relative;
+		width: 100%;
+		text-align: left;
+		border-bottom: 1px solid $c_l-gray;
+		cursor: pointer;
+		@include tr;
+		&_active,
+		&:hover{
+			background: #f1f1f1;
+		}
+		span{
+			display: block;
+			width: 40px;
+			height: 40px;
+			-webkit-border-radius: 40px;
+			border-radius: 40px;
+			position: absolute;
+			right: 20px;
+			top: 50%;
+			margin-top: -20px;
+			border: 1px solid $c_l-gray;
+			background: #FFF;
+			&:after{
+				@include ab;
+				@include fwh;
+				background: url("../images/icon-arrow-down.svg") no-repeat 50% 50%;
+				-webkit-background-size: 28% auto;
+				     -o-background-size: 28% auto;
+				        background-size: 28% auto;
+			}
+		}
+	}
+	&__content{
+		display: none;
+		border-bottom: 1px solid $c_l-gray;
+	}
+}
