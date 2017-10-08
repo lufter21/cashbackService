@@ -114,7 +114,7 @@ class Cabinet extends Core {
 			);
 	}
 
-	protected function statTimeUpdate($upd=false) {
+	protected function statTimeUpdate($upd = false) {
 		$cur_timestamp = time();
 		if ($upd) {
 			$update_time = $this->db->prepare('UPDATE users SET last_upd_stat_time=? WHERE id=?');
@@ -131,7 +131,7 @@ class Cabinet extends Core {
 		}
 	}
 
-	protected function mergeCur($cur='', $val='') {
+	protected function mergeCur($cur, $val) {
 		switch ($cur) {
 			case 'usd':
 			$rtn = '$'.$val;
@@ -146,6 +146,21 @@ class Cabinet extends Core {
 			break;
 		}
 		return $rtn;
+	}
+
+	protected function calcCash($pay, $cart) {
+		
+		$cur_perc = $pay/($cart/100);
+
+		if ($cur_perc <= 2) {
+			$com_perc = 0.5;
+		} else if($cur_perc <= 3) {
+			$com_perc = 1;
+		} else {
+			$com_perc = 1.5;
+		}
+
+		return round($pay-(($cart/100)*$com_perc), 2);
 	}
 
 /*Admitad Statistics*/
@@ -167,7 +182,7 @@ class Cabinet extends Core {
 
 			if ((float) $val->payment) {
 
-				$cashback = round((float) $val->payment-(((float) $val->cart/100)*1.5), 2);
+				$cashback = $this->calcCash((float) $val->payment, (float) $val->cart);
 				$status = (string) $val->status;
 				$currency = strtolower((string) $val->currency);
 
@@ -236,7 +251,7 @@ class Cabinet extends Core {
 
 				if ((float) $val->payment) {
 
-					$cashback = round((float) $val->payment-(((float) $val->cart/100)*1.5), 2);
+					$cashback = $this->calcCash((float) $val->payment, (float) $val->cart);
 					$status = (string) $val->status;
 					$currency = strtolower((string) $val->currency);
 
