@@ -21,11 +21,17 @@
 		<form id="payment-form" action="/functions/payment.php" method="POST" class="form payment__form">
 			<?php foreach ($content['sum_approved_arr'] as $key => $val) { ?>
 
-			<?php if ($key == 'usd') { ?>
+			<?php if ($key == 'usd' && $val > 0) { ?>
 			<div class="row">
-				<div class="payment__val col-1">
-					$
+				<div class="col-1">
+					<div class="form__chbox">
+						<input id="fp-usd-chb" type="checkbox" name="currensy[]" class="form__chbox-input" value="usd">
+						<label for="fp-usd-chb" class="form__chbox-label">$</label>
+					</div>
 				</div>
+				<!--div class="payment__val col-1">
+					$
+				</div-->
 				<div class="col-2">
 					<div class="form__field">
 					<label for="fp-usd-txt-1" class="overlabel">Сумма</label>
@@ -51,10 +57,10 @@
 					</div>
 				</div>
 			</div>
-			<input type="hidden" name="currensy[]" value="usd">
+			
 			<?php } ?>
 
-			<?php if ($key == 'rub') { ?>
+			<?php if ($key == 'rub' && $val > 0) { ?>
 			<div class="row">
 				<div class="payment__val col-1">
 					руб
@@ -88,7 +94,7 @@
 			<input type="hidden" name="currensy[]" value="rub">
 			<?php } ?>
 
-			<?php if ($key == 'uah') { ?>
+			<?php if ($key == 'uah' && $val > 0) { ?>
 			<div class="row">
 				<div class="payment__val col-1">
 					грн
@@ -122,8 +128,6 @@
 			<?php } ?>
 			
 			<?php } ?>
-
-			<input type="hidden" name="user_id" value="<?php echo $user['user_id']; ?>">
 
 			<div class="row">
 				<div class="col col-45 col-offset-3 mt-14">

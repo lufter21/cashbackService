@@ -258,7 +258,7 @@
 
 	&__chbox{
 		position: relative;
-		margin: 0 em(10,16) em(25,16);
+		margin: 0 10px 14px;
 		@include clr;
 		&-input{
 			position: absolute;

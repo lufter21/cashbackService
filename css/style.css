@@ -2122,7 +2122,7 @@ top:4px;
 
 .form__chbox {
   position: relative;
-  margin: 0 0.625em 1.5625em;
+  margin: 0 10px 14px;
 }
 
 .form__chbox:after {
@@ -2139,7 +2139,7 @@ top:4px;
 
 .form__chbox-input:checked + .form__chbox-label:before {
   background: #F0F1F2 url("../images/chbox-bird.svg") no-repeat 50% 50%;
-  background-size: per(25, 29) auto;
+  background-size: 86.2069% auto;
 }
 
 .form__chbox-label {
