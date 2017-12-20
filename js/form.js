@@ -73,6 +73,12 @@ $(document).ready(function() {
 $('.form__text-input[data-type="tel"]').mask('+7(999)999-99-99');
 $('.form__text-input[data-type="date"]').mask('99.99.9999');
 
+//sortingForm
+$('#sorting-form select').change(function(){
+	$('#sorting-form').submit();
+	$('#load').fadeIn(121);
+});
+
 initOverLabels();
 
 
@@ -162,6 +168,7 @@ var Select = {
 			_$ = $(opt);
 
 			if (_$.hasClass('form__field')) {
+				_$.closest('.form__field-wrap').find('.form__field').addClass('form__field_hidden');
 				_$.removeClass('form__field_hidden');
 			} else if (_$.hasClass('form__fieldset')) {
 				_$.closest('.form__fieldset-wrap').find('.form__fieldset').addClass('form__fieldset_hidden');
@@ -377,14 +384,72 @@ var Form = {
 	tel: function() {
 		var _ = this,
 		err = false;
-		if (!/^\+7\([0-9]{3}\)[0-9]{3}-[0-9]{2}-[0-9]{2}$/.test(_.input.val())) {
-			_.error(true);
+		if (!/^(\+7|\+38)[0-9]{10}$/.test(_.input.val())) {
+			_.error(true, true);
 			err = true;
 		} else {
 			_.error(false);
 		}
 		return err;
 	},
+	num: function() {
+		var _ = this,
+		err = false,
+		maxNum = +_.input.attr('data-max-num'),
+		val = _.input.val().replace(',','.');
+
+		if (!/^[0-9]+((\.|,)[0-9]{1,2})?$/.test(_.input.val())) {
+			_.error(true, true);
+			err = true;
+		} else {
+			_.error(false);
+		}
+		return err;
+	},
+	wmz: function() {
+		var _ = this,
+		err = false;
+		if (!/^z[0-9]{12}$/i.test(_.input.val())) {
+			_.error(true, true);
+			err = true;
+		} else {
+			_.error(false);
+		}
+		return err;
+	},
+	wmr: function() {
+		var _ = this,
+		err = false;
+		if (!/^r[0-9]{12}$/i.test(_.input.val())) {
+			_.error(true, true);
+			err = true;
+		} else {
+			_.error(false);
+		}
+		return err;
+	},
+	wmu: function() {
+		var _ = this,
+		err = false;
+		if (!/^u[0-9]{12}$/i.test(_.input.val())) {
+			_.error(true, true);
+			err = true;
+		} else {
+			_.error(false);
+		}
+		return err;
+	},
+	yam: function() {
+		var _ = this,
+		err = false;
+		if (!/^[0-9]{15}$/i.test(_.input.val())) {
+			_.error(true, true);
+			err = true;
+		} else {
+			_.error(false);
+ 		}
+ 		return err;
+ 	},
 	pass: function() {
 		var _ = this,
 		err = false,
@@ -418,15 +483,7 @@ var Form = {
 		_.input = $(inp);
 		var type = _.input.attr('data-type');
 		if (_.input.hasClass('tested')) {
-			if (type == 'email') {
-				_.email();
-			}
-			if (type == 'tel') {
-				_.tel();
-			}
-			if (type == 'date') {
-				_.date();
-			}
+			_[type]();
 		}
 	},
 	fUploaded: false,
@@ -472,13 +529,7 @@ var Form = {
 				err++;
 			} else {
 				_.error(false);
-				if (type == 'email' && _.email()) {
-					err++;
-				}
-				if (type == 'tel' && _.tel()) {
-					err++;
-				}
-				if (type == 'date' && _.date()) {
+				if (type && _[type]()) {
 					err++;
 				}
 			}
@@ -591,6 +642,26 @@ Form.submit('.form', function(form) {
 		}
 	});*/
 
+});
+
+
+//payment form
+Form.submit('#payment-form', function(form) {
+	var _f = $(form);
+	$.ajax({
+		url: _f.attr('action'),
+		type:"POST",
+		dataType:"json",
+		data: _f.serialize(),
+		success: function(response){
+			if (response.status == 'ok') {
+				Popup.message('#message-popup', '<span class="c-green">Заявка на вывод средств успешно составлена.<br> Наш менеджер обработает ее в течении 2-х рабочих дней.</span>', function() { window.location.reload(); });
+			}
+		},
+		error: function() {
+			alert('Send Error');
+		}
+	});
 });
 		
 

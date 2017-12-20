@@ -172,7 +172,7 @@ class Cabinet extends Core {
 
 		//$xml = 'https://www.admitad.com/ru/webmaster/statistics/campaigns_xml/?export&format=xml&code=4091f1232c&user=lufter&start_date='.$date.'&end_date='.$date.'&action_type=0&sub_ids=userid'.$this->_user['user_id'];
 
-		//https://www.admitad.com/ru/webmaster/statistics/actions_xml/?export&format=xml&code=4091f1232c&user=lufter&default_currency=RUB&start_date=2017-09-04&end_date=2017-09-06&sub_ids=userid30
+		//https://www.admitad.com/ru/webmaster/statistics/actions_xml/?export&format=xml&code=4091f1232c&user=lufter&default_currency=RUB&start_date=2017-12-19&end_date=2017-12-19&sub_ids=userid30
 
 		$xml = 'https://www.admitad.com/ru/webmaster/statistics/actions_xml/?export&format=xml&code=4091f1232c&user=lufter&start_date='.$date.'&end_date='.$date.'&sub_ids=userid'.$this->_user['user_id'];
 
@@ -184,6 +184,12 @@ class Cabinet extends Core {
 
 				$cashback = $this->calcCash((float) $val->payment, (float) $val->cart);
 				$status = (string) $val->status;
+
+				if ($status == 'approved' && (empty($val->closing_date) || $val->closing_date == '-')) {
+					$status = 'pending';
+				}
+				
+
 				$currency = strtolower((string) $val->currency);
 
 				$stat_arr[] = array(

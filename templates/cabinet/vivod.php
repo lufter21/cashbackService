@@ -43,7 +43,7 @@
 						<div class="form__select">
 							<button type="button" class="form__select-button">Способ вывода</button>
 							<ul class="form__select-options">
-								<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd, Z-кошелек (Z.....), wmz" data-value="WebMoney Z-кошелек">WebMoney Z-кошелек</button></li>
+								<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd-wm, Z-кошелек (Z.....), wmz" data-value="WebMoney Z-кошелек">WebMoney Z-кошелек</button></li>
 								<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd, Номер телефона (+.....), tel" data-value="Мобильный телефон">Мобильный телефон (по курсу)</button></li>
 							</ul>
 							<input type="hidden" data-required="true" class="form__select-input" name="method_usd" value="">
@@ -51,13 +51,13 @@
 					</div>
 				</div>
 				<div class="col-45">
-					<div id="requisites-usd" class="form__field form__field_hidden">
+					<div id="requisites-usd-wm" class="form__field form__field_hidden">
 						<label for="fp-usd-txt-2" class="overlabel"></label>
 						<input id="fp-usd-txt-2" type="text" data-required="true" class="form__text-input" name="requisites_usd" value="">
 					</div>
+
 				</div>
 			</div>
-			
 			<?php } ?>
 
 			<?php if ($key == 'rub' && $val > 0) { ?>
