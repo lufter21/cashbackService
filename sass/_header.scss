@@ -10,7 +10,6 @@
 	&__logo{
 		max-width:100%;
 		height:auto;
-		margin: 27px 0 0 21px;
 	}
 }
 
@@ -19,11 +18,17 @@
 	height:28px;
 }
 .header-bottom{
-	height:84px;	
+	&__wrap{
+		height:70px;
+	}
 }
 
 .top-menu{
-	margin-top:37px;
+	position: relative;
+	top: 3px;
+}
+.top-menu .menu{
+	@include clr;
 }
 .top-menu .menu__item{
 	float:left;

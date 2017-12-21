@@ -47,20 +47,22 @@
 				</div>
 			</div>
 		</div>
-		<div class="header-bottom grid">
-			<div class="grid__col">
-				<a href="/" title="На главную страницу"><img class="header__logo" src="/images/bombonus.svg" onerror="this.onerror=null; this.src='/images/bombonus.png'" alt="«e-discount» — Кэшбэк, скидки/промокоды"/></a>
-			</div>
-			<div class="grid__col-3">
-				<nav class="top-menu">
-					<?php 
-					echo $lemon->getMenu(array(
-						'shops'=>'Магазины',
-						'discounts'=>'Скидки/промокоды',
-						'about'=>array('О сервисе', array('recomendations'=>'Рекомендации', 'faq'=>'Вопрос/Ответ'))
-						));
-					?>
-				</nav>
+		<div class="header-bottom">
+			<div class="header-bottom__wrap wrap row-col-mid">
+				<div class="col-3">
+					<a href="/" title="На главную страницу"><img class="header__logo" src="/images/bombonus.svg" onerror="this.onerror=null; this.src='/images/bombonus.png'" alt="«e-discount» — Кэшбэк, скидки/промокоды"/></a>
+				</div>
+				<div class="col-9">
+					<nav class="top-menu">
+						<?php 
+						echo $lemon->getMenu(array(
+							'shops'=>'Магазины',
+							'discounts'=>'Скидки/промокоды',
+							'about'=>array('О сервисе', array('recomendations'=>'Рекомендации', 'faq'=>'Вопрос/Ответ'))
+							));
+							?>
+					</nav>
+				</div>
 			</div>
 		</div>
 		

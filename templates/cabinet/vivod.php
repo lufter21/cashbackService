@@ -23,15 +23,9 @@
 
 			<?php if ($key == 'usd' && $val > 0) { ?>
 			<div class="row">
-				<div class="col-1">
-					<div class="form__chbox">
-						<input id="fp-usd-chb" type="checkbox" name="currensy[]" class="form__chbox-input" value="usd">
-						<label for="fp-usd-chb" class="form__chbox-label">$</label>
-					</div>
-				</div>
-				<!--div class="payment__val col-1">
+				<div class="payment__val col-1">
 					$
-				</div-->
+				</div>
 				<div class="col-2">
 					<div class="form__field">
 					<label for="fp-usd-txt-1" class="overlabel">Сумма</label>
@@ -43,8 +37,8 @@
 						<div class="form__select">
 							<button type="button" class="form__select-button">Способ вывода</button>
 							<ul class="form__select-options">
-								<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd-wm, Z-кошелек (Z.....), wmz" data-value="WebMoney Z-кошелек">WebMoney Z-кошелек</button></li>
-								<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd, Номер телефона (+.....), tel" data-value="Мобильный телефон">Мобильный телефон (по курсу)</button></li>
+								<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd-wm" data-value="WebMoney Z-кошелек">WebMoney Z-кошелек</button></li>
+								<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd-tel" data-value="Мобильный телефон">Мобильный телефон (по курсу)</button></li>
 							</ul>
 							<input type="hidden" data-required="true" class="form__select-input" name="method_usd" value="">
 						</div>
@@ -52,10 +46,15 @@
 				</div>
 				<div class="col-45">
 					<div id="requisites-usd-wm" class="form__field form__field_hidden">
-						<label for="fp-usd-txt-2" class="overlabel"></label>
-						<input id="fp-usd-txt-2" type="text" data-required="true" class="form__text-input" name="requisites_usd" value="">
+						<label for="fp-usd-txt-2-1" class="overlabel">WebMoney Z-кошелек</label>
+						<input id="fp-usd-txt-2-1" type="text" data-type="wmz" data-required="true" class="form__text-input" name="requisites_usd[]" value="Z">
+						<div class="form__error-tip" data-second-error-text="Некорректный Z-кошелек, формат: Z999999999999">Введите Z-кошелек</div>
 					</div>
-
+					<div id="requisites-usd-tel" class="form__field form__field_hidden">
+						<label for="fp-usd-txt-2-2" class="overlabel">Номер телефона</label>
+						<input id="fp-usd-txt-2-2" type="text" data-type="tel" data-required="true" class="form__text-input" name="requisites_usd[]" value="+">
+						<div class="form__error-tip" data-second-error-text="Некорректный номер, формат: +кодНомер">Введите номер телефона</div>
+					</div>
 				</div>
 			</div>
 			<?php } ?>

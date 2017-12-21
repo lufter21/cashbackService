@@ -1,0 +1,53 @@
+/*button close*/
+.btn-close{
+	display: block;
+	width:25px;
+	height:25px;
+	cursor:pointer;
+	position: relative;
+	&:after,
+	&:before{
+		@include ab;
+		width: 130%;
+		height: 3px;
+		background: #fff;
+		position: absolute;
+		left: -15%;
+		top: 50%;
+		margin-top: -1px;
+		transition: .5s;
+	}
+	&:after{
+		transform: rotate(-45deg);
+	}
+	&:before{
+		transform: rotate(45deg);
+	}
+	&:hover{
+		&:after,
+		&:before{
+			background: $o;
+		}
+	}
+}
+
+/*button*/
+.blue-button{
+	display: inline-block;
+	color:#ffffff !important;
+	font-size: 14px;
+	height:42px;
+	line-height:43px;
+	text-align:center;
+	text-decoration:none;
+	text-transform:uppercase;
+	font-weight:700;
+	background:#156692;
+	background-image: linear-gradient(to top, #105377 5%, #156591 50%, #1777aa 95%);
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	padding: 0 21px;
+	&:hover{
+		background:#e68717;
+	}
+}
