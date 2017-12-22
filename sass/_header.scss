@@ -15,7 +15,9 @@
 
 .header-top{
 	background:#c4c4c4;
-	height:28px;
+	&__wrap{
+		height:28px;
+	}
 }
 .header-bottom{
 	&__wrap{
@@ -136,8 +138,7 @@
 /*region*/
 .region-block{
 	position:relative;
-	float:left;
-	margin:5px 0 0 14px;
+	display: inline-block;
 	font-size:14px;
 }
 .region-block span{
@@ -169,7 +170,7 @@
 }
 .show-region-button:hover,
 .show-region-button.active{
-	border:none;
+	border-bottom:1px dashed transparent;
 }
 .show-region-button.active:hover{
 	border-bottom:1px dashed #ffffff;
@@ -203,8 +204,7 @@
 
 /*login-block*/
 .header__user{
-	float:right;
-	margin: 5px 14px 0 0;
+	display: inline-block;
 	color: #FFF;
 	a{
 		font-size:14px;

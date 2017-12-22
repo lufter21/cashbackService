@@ -20,30 +20,34 @@
 		<noscript class="noscript">Для корректной работы сервиса необходимо включить JavaScript</noscript>
 		<div id="alert" class="alert"></div>
 		<div class="header-top">
-			<div class="wrap">
-				<div class="region-block">
-					<span>Страна:</span>
-					<?php
-					if($region == 'ua') {
-						$rgn = 'Украина';
-					} elseif($region == 'ru') {
-						$rgn = 'Россия';
-					} else {
-						$rgn = 'выбрать';
-					}
-					?>
-					<button id="show-region-button" class="js-show-button show-region-button" data-block="menu-region"><?php echo $rgn; ?></button>
-					<ul id="menu-region" class="menu-region">
-						<li><a href="/ru">Россия</a></li>
-						<li><a href="/ua">Украина</a></li>
-					</ul>
+			<div class="header-top__wrap wrap row-col-mid">
+				<div class="col-6">
+					<div class="region-block">
+						<span>Страна:</span>
+						<?php
+						if($region == 'ua') {
+							$rgn = 'Украина';
+						} elseif($region == 'ru') {
+							$rgn = 'Россия';
+						} else {
+							$rgn = 'выбрать';
+						}
+						?>
+						<button id="show-region-button" class="js-show-button show-region-button" data-block="menu-region"><?php echo $rgn; ?></button>
+						<ul id="menu-region" class="menu-region">
+							<li><a href="/ru">Россия</a></li>
+							<li><a href="/ua">Украина</a></li>
+						</ul>
+					</div>
 				</div>
-				<div class="header__user">
-					<?php if($user){ ?>
+				<div class="col-6 ta-r">
+					<div class="header__user">
+						<?php if($user){ ?>
 						<a href="/cabinet" class="borno"><?php echo $user['name']; ?></a> <span class="gr">|</span> <a href="/logout" class="-gray">Выход</a>
-					<?php } else { ?>
+						<?php } else { ?>
 						<a href="#log-reg-window" data-tab="login" class="-dash js-open-popup">Вход</a> | <a href="#log-reg-window" data-tab="registration" class="-dash js-open-popup">Регистрация</a>
-					<?php } ?>
+						<?php } ?>
+					</div>
 				</div>
 			</div>
 		</div>

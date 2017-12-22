@@ -175,29 +175,7 @@ var Select = {
 
 		if(inputValue.length > 0){
 
-			/*if (opt == 'search-with-highlight') {
-
-				var inpVal = inputValue,
-				reg = new RegExp(inpVal, 'gi');
-
-				console.log(reg);
-
-				_._options.find('.form__select-val').each(function() {
-
-					var srcVal = $(this).attr('data-original');
-
-					if(srcVal.match(_reg)){
-						var newStr = srcVal.replace(reg, '<span>$&</span>');
-						$(this).html(newStr);
-						$(this).parent().removeClass('hidden');
-						match = true;
-					} else {
-						$(this).parent().addClass('hidden');
-					}
-
-				});
-
-			} else*/ if (opt == 'search-by-name') {
+			if (opt == 'search-by-name') {
 
 				var inpVal = inputValue,
 				reg = new RegExp(inpVal, 'gi');
@@ -374,7 +352,7 @@ var Form = {
 		err = false,
 		maxNum = +_.input.attr('data-max-num'),
 		val = _.input.val().replace(',','.');
-
+		
 		if (!/^[0-9]+((\.|,)[0-9]{1,2})?$/.test(_.input.val())) {
 			_.error(true, true);
 			err = true;

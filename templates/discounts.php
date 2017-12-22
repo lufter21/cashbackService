@@ -12,37 +12,47 @@ include('header.php');
 
 	<div class="col-3">
 		<aside id="js-sidebar" class="sidebar box">
-			<div class="title">Категории</div>
-			<?php echo $lemon->getCategoryMenu(); ?>
+			<div class="pad">
+				<div class="title">Категории</div>
+				<?php echo $lemon->getCategoryMenu(); ?>
+			</div>
 		</aside>
 	</div>
 
-	<div class="col-9">
-		
-		<div class="content-head box row-col-mid">
-			<div class="col-8">
-				<h1><?php echo $meta['name'];?></h1>
-				<div class="text-block">
-					<?php echo $meta['text'];?>
+	<div class="col-9 pad-0">
+
+		<div class="pad mb-28">
+			<div class="box">
+				<div class="row-col-mid">
+					<div class="col-9">
+						<article>
+							<h1><?php echo $meta['name'];?></h1>
+							<div class="article-block pad">
+								<?php echo $meta['text'];?>
+							</div>
+						</article>
+					</div>
+
+					<?php
+					if(!empty($content['discounts'])){
+						?>
+						<div class="sorting-block col-3">
+							<form id="sorting-form" action="/discounts<?php echo (!empty($alias)) ? '/'.$alias : '';?>" method="POST">
+								<select name="sorting">
+									<option value=" ORDER BY dis_count DESC" <?php if($content['sorting'] == ' ORDER BY dis_count DESC'){echo 'selected';}?>>Наибольшие скидки</option>
+									<option value=" ORDER BY date_start DESC" <?php if($content['sorting'] == ' ORDER BY date_start DESC'){echo 'selected';}?>>Самые новые</option>
+									<option value=" ORDER BY date_end ASC" <?php if($content['sorting'] == ' ORDER BY date_end ASC'){echo 'selected';}?>>Скоро заканчиваются</option>
+								</select>
+							</form>
+						</div>
+						<?php
+					}
+					?>
+
 				</div>
 			</div>
-
-			<?php
-			if(!empty($content['discounts'])){
-				?>
-				<div class="sorting-block col-4">
-					<form id="sorting-form" action="/discounts<?php echo (!empty($alias)) ? '/'.$alias : '';?>" method="POST">
-						<select name="sorting">
-							<option value=" ORDER BY dis_count DESC" <?php if($content['sorting'] == ' ORDER BY dis_count DESC'){echo 'selected';}?>>Наибольшие скидки</option>
-							<option value=" ORDER BY date_start DESC" <?php if($content['sorting'] == ' ORDER BY date_start DESC'){echo 'selected';}?>>Самые новые</option>
-							<option value=" ORDER BY date_end ASC" <?php if($content['sorting'] == ' ORDER BY date_end ASC'){echo 'selected';}?>>Скоро заканчиваются</option>
-						</select>
-					</form>
-				</div>
-				<?php
-			}
-			?>
 		</div>
+		
 
 		<div id="flex-wrap" class="flex-wrap">
 			<?php

@@ -25,6 +25,10 @@
 		padding-left: 45px;
 		padding-right: 45px;
 	}
+	&-0{
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
 }
 
 .flex-wrap{
@@ -33,6 +37,13 @@
 	-webkit-flex-wrap: wrap; 
 	-ms-flex-wrap: wrap;
 	flex-wrap: wrap;
+}
+
+.container{
+	padding-top: 28px;
+	padding-bottom: 28px;
+	background:#F1F1F1;
+	position: relative;
 }
 
 .row{
@@ -58,7 +69,7 @@
 
 	&-col-mid,
 	&-col-bot{
-		font-size: 0;
+		font-size: 0 !important;
 		&:before{
 			display: inline-block;
 			content: "";
@@ -101,7 +112,13 @@
 		}
 	}
 
-	&_col-pad-0{
+	&_full-height{
+		&, & > div[class*="col"]{
+			height: 100%;
+		}
+	}
+
+	&-col-pad-0{
 		padding-left: 15px;
 		padding-right: 15px;
 		& > div[class*="col"]{
@@ -114,12 +131,6 @@
 		}
 	}
 
-	&_full-height{
-		&, & > div[class*="col"]{
-			height: 100%;
-		}
-	}
-	
 }
 
 .col{
@@ -423,8 +434,3 @@
 }
 
 
-/*Container*/
-.container{
-	padding:28px 0;
-	background:#F1F1F1;
-}

@@ -1,7 +1,5 @@
 html, body{
 	font-family: 'Roboto', sans-serif;
-	font-size:16px;
-	line-height:1;
 	color: $g;
 	background:#F1F1F1;
 	height: 100%;
@@ -65,19 +63,6 @@ a,
 	margin:-11px 0 0 -60px
 }
 
-/*shadowsOnHoverBlock*/
-.inner, .content-head, .sub-menu, input[type="submit"]{
-	@include tr;
-}
-
-.inner:hover,
-.sub-menu,
-.box-shadow{
--moz-box-shadow: 0 3px 21px rgba(0, 0, 0, 0.21); 
--webkit-box-shadow: 0 3px 21px rgba(0, 0, 0, 0.21); 
-box-shadow: 0 3px 21px rgba(0, 0, 0, 0.21);
-}
-
 
 /*Margin*/
 .mt-14{
@@ -86,6 +71,9 @@ box-shadow: 0 3px 21px rgba(0, 0, 0, 0.21);
 
 .mb-35{
 	margin-bottom: 35px !important;
+}
+.mb-30{
+	margin-bottom: 30px;
 }
 .mb-28{
 	margin-bottom: 28px !important;
@@ -109,13 +97,13 @@ box-shadow: 0 3px 21px rgba(0, 0, 0, 0.21);
  
 /*Align*/
 .ta-l{
-	text-align: left !important;
+	text-align: left;
 }
 .ta-c{
-	text-align: center !important;
+	text-align: center;
 }
 .ta-r{
-	text-align: right !important;
+	text-align: right;
 }
 
 /*Color*/
@@ -157,9 +145,11 @@ img{
 	height: auto;
 }
 
+/*position*/
+
 /*Box*/
 .box{
 	background: #FFF;
 	border-radius: 3px;
-	padding: 21px;
+	padding: 21px 6px;
 }
