@@ -130,11 +130,10 @@
 		line-height: 1.3;
 	}
 	&__close{
-		position:absolute;
+		position:absolute !important;
 		right:-29px;
 		top:4px;
 		z-index:3;
-		cursor:pointer;
 	}
 
 	&__title{

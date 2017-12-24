@@ -17,122 +17,162 @@
 				<li>WebMoney (Доллар США, российский рубль, украинская гривна, соответственно на Z, R и U -кошельки)</li>
 				<li>Пополнение мобильного телефона (Российские и украинские операторы. Иностранная валюта по курсу, например: вывод долларов или рублей на номер украинского оператора)</li>
 			</ul>
+		</div>
 
-			<?php if ($content['sum_approved']) { ?>
+		<?php if ($content['sum_approved']) { ?>
+		<div class="pad content">
 			<h2>Закажите вывод средств</h2>
 		</div>
 
 		<form id="payment-form" action="/functions/payment.php" method="POST" class="form">
-			<?php foreach ($content['sum_approved_arr'] as $key => $val) { ?>
 
-			<?php if ($key == 'usd' && $val > 0) { ?>
 			<div class="row">
-				<div class="payment__val col-1">
-					$
-				</div>
-				<div class="col-2">
-					<div class="form__field">
-						<label for="fp-usd-txt-1" class="overlabel">Сумма</label>
-						<input id="fp-usd-txt-1" type="text" data-required="true" data-type="num" data-max-num="<?php echo $val; ?>" class="form__text-input" name="payment_usd" value="">
-						<div class="form__error-tip" data-second-error-text="Некорректная сумма">Введите сумму</div>
-					</div>
-				</div>
-				<div class="col-4-5">
+				<div class="col-4-5 col-offset-3">
 					<div class="form__field">
 						<div class="form__select">
-							<button type="button" class="form__select-button">Способ вывода</button>
+							<button type="button" class="form__select-button">Выберите валюту</button>
 							<ul class="form__select-options">
-								<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd-wm" data-value="WebMoney Z-кошелек">WebMoney Z-кошелек</button></li>
-								<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd-tel" data-value="Мобильный телефон">Мобильный телефон (по курсу)</button></li>
+								<?php foreach ($content['sum_approved_arr'] as $key => $val) { ?>
+
+								<?php if ($key == 'usd' && $val > 0) { ?>
+								<li><button type="button" class="form__select-val" data-show-hidden="#cur-usd-fieldset" data-value="usd">Американский доллар</button></li>
+								<?php } ?>
+
+								<?php if ($key == 'rub' && $val > 0) { ?>
+								<li><button type="button" class="form__select-val" data-show-hidden="#cur-rub-fieldset" data-value="rub">Российский рубль</button></li>
+								<?php } ?>
+
+								<?php if ($key == 'uah' && $val > 0) { ?>
+								<li><button type="button" class="form__select-val" data-show-hidden="#cur-uah-fieldset" data-value="uah">Украинская гривна</button></li>
+								<?php } ?>
+
+								<?php } ?>
 							</ul>
-							<input type="hidden" data-required="true" class="form__select-input" name="method_usd" value="">
+							<input type="hidden" data-required="true" class="form__select-input" name="currency" value="">
 						</div>
-						<div class="form__error-tip">Выборите способ вывода</div>
-					</div>
-				</div>
-				<div class="col-4-5 form__field-wrap">
-					<div id="requisites-usd-wm" class="form__field form__field_hidden">
-						<label for="fp-usd-txt-2-1" class="overlabel">WebMoney Z-кошелек</label>
-						<input id="fp-usd-txt-2-1" type="text" data-type="wmz" data-required="true" class="form__text-input" name="requisites_usd[]" value="Z">
-						<div class="form__error-tip" data-second-error-text="Некорректный Z-кошелек, формат: Z999999999999">Введите Z-кошелек</div>
-					</div>
-					<div id="requisites-usd-tel" class="form__field form__field_hidden">
-						<label for="fp-usd-txt-2-2" class="overlabel">Номер телефона</label>
-						<input id="fp-usd-txt-2-2" type="text" data-type="tel" data-required="true" class="form__text-input" name="requisites_usd[]" value="+">
-						<div class="form__error-tip" data-second-error-text="Некорректный номер, формат: +кодНомер">Введите номер телефона</div>
+						<div class="form__error-tip">Выберите валюту</div>
 					</div>
 				</div>
 			</div>
-			<?php } ?>
 
-			<?php if ($key == 'rub' && $val > 0) { ?>
-			<div class="row">
-				<div class="payment__val col-1">
-					руб
-				</div>
-				<div class="col-2">
-					<div class="form__field">
-						<label for="fp-rub-txt-1" class="overlabel">Сумма</label>
-						<input id="fp-rub-txt-1" type="text" data-required="true" data-type="num" data-max-num="<?php echo $val; ?>" class="form__text-input" name="payment_rub" value="">
-					</div>
-				</div>
-				<div class="col-4-5">
-					<div class="form__field">
-						<div class="form__select">
-							<button type="button" class="form__select-button">Способ вывода</button>
-							<ul class="form__select-options">
-								<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub, R-кошелек (R.....), wmr" data-value="WebMoney R-кошелек">WebMoney R-кошелек</button></li>
-								<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub, Кошелек Яндекс.Деньги, yam" data-value="Яндекс.Деньги">Яндекс.Деньги</button></li>
-								<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub, Номер телефона (+.....), tel" data-value="Мобильный телефон">Мобильный телефон</button></li>
-							</ul>
-							<input type="hidden" data-required="true" class="form__select-input" name="method_rub" value="">
+			<div class="form__fieldset-wrap">
+
+				<?php foreach ($content['sum_approved_arr'] as $key => $val) { ?>
+
+				<?php if ($key == 'usd' && $val > 0) { ?>
+				<div id="cur-usd-fieldset" class="form__fieldset form__fieldset_hidden">
+					<div class="row">
+						<div class="payment__val col-1">
+							$
+						</div>
+						<div class="col-2">
+							<div class="form__field">
+								<label for="fp-usd-txt-1" class="overlabel">Сумма</label>
+								<input id="fp-usd-txt-1" type="text" data-required="true" data-type="num" data-max-num="<?php echo $val; ?>" class="form__text-input" name="payment_usd" value="">
+								<div class="form__error-tip" data-second-error-text="Некорректная сумма" data-third-error-text="Недостаточно средств">Введите сумму</div>
+							</div>
+						</div>
+						<div class="col-4-5">
+							<div class="form__field">
+								<div class="form__select">
+									<button type="button" class="form__select-button">Способ вывода</button>
+									<ul class="form__select-options">
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd-wm" data-value="WebMoney Z-кошелек">WebMoney Z-кошелек</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd-tel" data-value="Мобильный телефон">Мобильный телефон (по курсу)</button></li>
+									</ul>
+									<input type="hidden" data-required="true" class="form__select-input" name="method_usd" value="">
+								</div>
+								<div class="form__error-tip">Выберите способ вывода</div>
+							</div>
+						</div>
+						<div class="col-4-5 form__field-wrap">
+							<div id="requisites-usd-wm" class="form__field form__field_hidden">
+								<label for="fp-usd-txt-2-1" class="overlabel">WebMoney Z-кошелек</label>
+								<input id="fp-usd-txt-2-1" type="text" data-type="wmz" data-required="true" class="form__text-input" name="requisites_usd[]" value="Z">
+								<div class="form__error-tip" data-second-error-text="Некорректный Z-кошелек, формат: Z999999999999">Введите Z-кошелек</div>
+							</div>
+							<div id="requisites-usd-tel" class="form__field form__field_hidden">
+								<label for="fp-usd-txt-2-2" class="overlabel">Номер телефона</label>
+								<input id="fp-usd-txt-2-2" type="text" data-type="tel" data-required="true" class="form__text-input" name="requisites_usd[]" value="+">
+								<div class="form__error-tip" data-second-error-text="Некорректный номер, формат: +кодНомер">Введите номер телефона</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-4-5">
-					<div id="requisites-rub" class="form__field form__field_hidden">
-						<label for="fp-rub-txt-2" class="overlabel"></label>
-						<input id="fp-rub-txt-2" type="text" data-required="true" class="form__text-input" name="requisites_rub" value="">
-					</div>
-				</div>
-			</div>
-			<input type="hidden" name="currensy[]" value="rub">
-			<?php } ?>
+				<?php } ?>
 
-			<?php if ($key == 'uah' && $val > 0) { ?>
-			<div class="row">
-				<div class="payment__val col-1">
-					грн
-				</div>
-				<div class="col-2">
-					<div class="form__field">
-						<label for="fp-uah-txt-1" class="overlabel">Сумма</label>
-						<input id="fp-uah-txt-1" type="text" data-required="true" data-type="num" data-max-num="<?php echo $val; ?>" class="form__text-input" name="payment_uah" value="">
-					</div>
-				</div>
-				<div class="col-4-5">
-					<div class="form__field">
-						<div class="form__select">
-							<button type="button" class="form__select-button">Способ вывода</button>
-							<ul class="form__select-options">
-								<li><button type="button" class="form__select-val" data-show-hidden="#requisites-uah, U-кошелек (U.....), wmu" data-value="WebMoney U-кошелек">WebMoney U-кошелек</button></li>
-								<li><button type="button" class="form__select-val" data-show-hidden="#requisites-uah, Номер телефона (+.....), tel" data-value="Мобильный телефон">Мобильный телефон</button></li>
-							</ul>
-							<input type="hidden" data-required="true" class="form__select-input" name="method_uah" value="">
+				<?php if ($key == 'rub' && $val > 0) { ?>
+				<div id="cur-rub-fieldset" class="form__fieldset form__fieldset_hidden">
+					<div class="row">
+						<div class="payment__val col-1">
+							руб
+						</div>
+						<div class="col-2">
+							<div class="form__field">
+								<label for="fp-rub-txt-1" class="overlabel">Сумма</label>
+								<input id="fp-rub-txt-1" type="text" data-required="true" data-type="num" data-max-num="<?php echo $val; ?>" class="form__text-input" name="payment_rub" value="">
+							</div>
+						</div>
+						<div class="col-4-5">
+							<div class="form__field">
+								<div class="form__select">
+									<button type="button" class="form__select-button">Способ вывода</button>
+									<ul class="form__select-options">
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub, R-кошелек (R.....), wmr" data-value="WebMoney R-кошелек">WebMoney R-кошелек</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub, Кошелек Яндекс.Деньги, yam" data-value="Яндекс.Деньги">Яндекс.Деньги</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub, Номер телефона (+.....), tel" data-value="Мобильный телефон">Мобильный телефон</button></li>
+									</ul>
+									<input type="hidden" data-required="true" class="form__select-input" name="method_rub" value="">
+								</div>
+							</div>
+						</div>
+						<div class="col-4-5">
+							<div id="requisites-rub" class="form__field form__field_hidden">
+								<label for="fp-rub-txt-2" class="overlabel"></label>
+								<input id="fp-rub-txt-2" type="text" data-required="true" class="form__text-input" name="requisites_rub" value="">
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-4-5">
-					<div id="requisites-uah" class="form__field form__field_hidden">
-						<label for="fp-uah-txt-2" class="overlabel"></label>
-						<input id="fp-uah-txt-2" type="text" data-required="true" class="form__text-input" name="requisites_uah" value="">
+				<?php } ?>
+
+				<?php if ($key == 'uah' && $val > 0) { ?>
+				<div id="cur-uah-fieldset" class="form__fieldset form__fieldset_hidden">
+					<div class="row">
+						<div class="payment__val col-1">
+							грн
+						</div>
+						<div class="col-2">
+							<div class="form__field">
+								<label for="fp-uah-txt-1" class="overlabel">Сумма</label>
+								<input id="fp-uah-txt-1" type="text" data-required="true" data-type="num" data-max-num="<?php echo $val; ?>" class="form__text-input" name="payment_uah" value="">
+							</div>
+						</div>
+						<div class="col-4-5">
+							<div class="form__field">
+								<div class="form__select">
+									<button type="button" class="form__select-button">Способ вывода</button>
+									<ul class="form__select-options">
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-uah, U-кошелек (U.....), wmu" data-value="WebMoney U-кошелек">WebMoney U-кошелек</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-uah, Номер телефона (+.....), tel" data-value="Мобильный телефон">Мобильный телефон</button></li>
+									</ul>
+									<input type="hidden" data-required="true" class="form__select-input" name="method_uah" value="">
+								</div>
+							</div>
+						</div>
+						<div class="col-4-5">
+							<div id="requisites-uah" class="form__field form__field_hidden">
+								<label for="fp-uah-txt-2" class="overlabel"></label>
+								<input id="fp-uah-txt-2" type="text" data-required="true" class="form__text-input" name="requisites_uah" value="">
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<input type="hidden" name="currensy[]" value="uah">
-			<?php } ?>
+				<?php } ?>
 
-			<?php } ?>
+				<?php } ?>
+
+			</div>
 
 			<div class="row">
 				<div class="col-4-5 col-offset-3 mt-14">

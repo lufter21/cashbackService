@@ -46,19 +46,6 @@ function hideLabel (field_id, hide) {
 }
 
 
-/*FormHandler*/
-
-$(document).ready(function() {
-
-//sortingForm
-$('#sorting-form select').change(function(){
-	$('#sorting-form').submit();
-	$('#load').fadeIn(121);
-});
-
-initOverLabels();
-
-
 //Form Select
 var Select = {
 	_el: null,
@@ -233,70 +220,37 @@ var Select = {
 	},
 };
 
-$('body').on('click', '.form__select-button', function() { 
-	Select.open(this); 
-});
-
-$('body').on('keyup', '.form__text-input_autocomplete, .form__textarea_autocomplete', function() { 
-	Select.autocomplete(this); 
-});
-
-$('body').on('click', '.form__select-val', function() { 
-	Select.select(this);
-});
-
-$(document).on('click', 'body', function(e) {
-	if (!$(e.target).closest('.form__select_opened').length) {
-		$('.form__select').removeClass('form__select_opened');
-		$('.form__select-options').slideUp(221);
-	}
-});
-
-//textarea with variable height
-$('.form__textarea_var-h').each(function() {
-	var _$ = $(this),
-	taW = _$.innerWidth();
-
-	_$.parent().append('<div class="form__textarea-shape" style="width:'+ taW +'px;"></div>');
-
-});
-
-function setTextareaHeight(_$) {
-	var val = _$.val(),
-	Shape = _$.parent().find('.form__textarea-shape');
-
-	Shape.html(val);
-
-	_$.css('height', Shape.height());
-}
-
-$('body').on('keyup', '.form__textarea_var-h', function() {
-	setTextareaHeight($(this));
-});
-
 
 //validateForm
 var Form = {
 	input: null,
-	error: function(err,sec) {
-		var _f = this.input.closest('.form__field'),
-		_errTip = _f.find('.form__error-tip');
+	error: function(err,sec,trd) {
+		var Field = this.input.closest('.form__field'),
+		ErrTip = Field.find('.form__error-tip');
 
 		if (!err) {
-			_f.removeClass('form__field_error');
+			Field.removeClass('form__field_error');
 		} else {
-			_f.addClass('form__field_error');
-			if (sec) {
+			Field.addClass('form__field_error');
 
-				if (!_errTip.attr('data-first-error-text')) {
-					_errTip.attr('data-first-error-text', _errTip.html());
+			if (trd) {
+
+				if (!ErrTip.attr('data-first-error-text')) {
+					ErrTip.attr('data-first-error-text', ErrTip.html());
 				}
-				_errTip.html(_errTip.attr('data-second-error-text'));
+				ErrTip.html(ErrTip.attr('data-third-error-text'));
+
+			} else if (sec) {
+
+				if (!ErrTip.attr('data-first-error-text')) {
+					ErrTip.attr('data-first-error-text', ErrTip.html());
+				}
+				ErrTip.html(ErrTip.attr('data-second-error-text'));
 
 			} else {
 
-				if (_errTip.attr('data-first-error-text')) {
-					_errTip.html(_errTip.attr('data-first-error-text'));
+				if (ErrTip.attr('data-first-error-text')) {
+					ErrTip.html(ErrTip.attr('data-first-error-text'));
 				}
 
 			}
@@ -352,9 +306,12 @@ var Form = {
 		err = false,
 		maxNum = +_.input.attr('data-max-num'),
 		val = _.input.val().replace(',','.');
-		
+
 		if (!/^[0-9]+((\.|,)[0-9]{1,2})?$/.test(_.input.val())) {
 			_.error(true, true);
+			err = true;
+		} else if (val > maxNum) {
+			_.error(true, true, true);
 			err = true;
 		} else {
 			_.error(false);
@@ -476,27 +433,35 @@ var Form = {
 
 		_form.find('.form__text-input, .form__textarea').each(function() {
 			_.input = $(this);
-			var type = _.input.attr('data-type');
-			_.input.addClass('tested');
 
-			if (_.input.attr('data-required') && _.input.val().length < 1) {
-				_.error(true);
-				err++;
-			} else {
-				_.error(false);
-				if (type && _[type]()) {
+			var type = _.input.attr('data-type'),
+			hidden = _.input.closest('.form__field_hidden, .form__fieldset_hidden');
+
+			if (!hidden.length) {
+				_.input.addClass('tested');
+
+				if (_.input.attr('data-required') && _.input.val().length < 1) {
+					_.error(true);
+					err++;
+				} else if (_.input.val().length > 0) {
+					_.error(false);
+					if (type && _[type]()) {
+						err++;
+					}
+				} else {
+					_.error(false);
+				}
+
+				if (type == 'pass' && _.pass()) {
 					err++;
 				}
-			}
-
-			if (type == 'pass' && _.pass()) {
-				err++;
 			}
 
 		});
 
 		_form.find('.form__select-input').each(function() {
-			if (_.select($(this))) {
+			var hidden = $(this).closest('.form__field_hidden, .form__fieldset_hidden');
+			if (!hidden.length && _.select($(this))) {
 				err++;
 			}
 		});
@@ -581,44 +546,97 @@ var Form = {
 
 
 
-Form.submit('.form', function(form) {
-	var _f = $(form);
-	Popup.message('#message-popup', 'Форма отправлена');
-	/*$.ajax({
-		url: _f.attr('action'),
-		type:"POST",
-		dataType:"html",
-		data: _f.serialize(), //new FormData(form),
-		success: function(response){
-			Popup.message('#message-popup', response);
-		},
-		error: function() {
-			alert('Send Error');
-		}
-	});*/
+$(document).ready(function() {
 
-});
+	//sortingForm
+	$('#sorting-form select').change(function(){
+		$('#sorting-form').submit();
+		$('#load').fadeIn(121);
+	});
+
+	initOverLabels();
 
 
-//payment form
-Form.submit('#payment-form', function(form) {
-	var _f = $(form);
-	$.ajax({
-		url: _f.attr('action'),
-		type:"POST",
-		dataType:"json",
-		data: _f.serialize(),
-		success: function(response){
-			if (response.status == 'ok') {
-				Popup.message('#message-popup', '<span class="c-green">Заявка на вывод средств успешно составлена.<br> Наш менеджер обработает ее в течении 2-х рабочих дней.</span>', function() { window.location.reload(); });
-			}
-		},
-		error: function() {
-			alert('Send Error');
+	$('body').on('click', '.form__select-button', function() { 
+		Select.open(this); 
+	});
+
+	$('body').on('keyup', '.form__text-input_autocomplete, .form__textarea_autocomplete', function() { 
+		Select.autocomplete(this); 
+	});
+
+	$('body').on('click', '.form__select-val', function() { 
+		Select.select(this);
+	});
+
+	$(document).on('click', 'body', function(e) {
+		if (!$(e.target).closest('.form__select_opened').length) {
+			$('.form__select').removeClass('form__select_opened');
+			$('.form__select-options').slideUp(221);
 		}
 	});
-});
-		
+
+	//textarea with variable height
+	$('.form__textarea_var-h').each(function() {
+		var _$ = $(this),
+		taW = _$.innerWidth();
+
+		_$.parent().append('<div class="form__textarea-shape" style="width:'+ taW +'px;"></div>');
+
+	});
+
+	function setTextareaHeight(_$) {
+		var val = _$.val(),
+		Shape = _$.parent().find('.form__textarea-shape');
+
+		Shape.html(val);
+
+		_$.css('height', Shape.height());
+	}
+
+	$('body').on('keyup', '.form__textarea_var-h', function() {
+		setTextareaHeight($(this));
+	});
+
+
+	Form.submit('.deform', function(form) {
+		var _f = $(form);
+		Popup.message('#message-popup', 'Форма отправлена');
+		/*$.ajax({
+			url: _f.attr('action'),
+			type:"POST",
+			dataType:"html",
+			data: _f.serialize(), //new FormData(form),
+			success: function(response){
+				Popup.message('#message-popup', response);
+			},
+			error: function() {
+				alert('Send Error');
+			}
+		});*/
+
+	});
+
+
+	//payment form
+	Form.submit('#payment-form', function(form) {
+		var _f = $(form);
+		$.ajax({
+			url: _f.attr('action'),
+			type:"POST",
+			dataType:"json",
+			data: _f.serialize(),
+			success: function(response){
+				if (response.status == 'ok') {
+					Popup.message('#message-popup', '<span class="c-green">Заявка на вывод средств успешно составлена.<br> Наш менеджер обработает ее в течении 2-х рабочих дней.</span>', function() { window.location.reload(); });
+				}
+			},
+			error: function() {
+				alert('Send Error');
+			}
+		});
+	});
+
 
 });
 
