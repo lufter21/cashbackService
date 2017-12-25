@@ -123,7 +123,7 @@ class Cabinet extends Core {
 			$last_time = $this->db->prepare('SELECT last_upd_stat_time FROM users WHERE id=?');
 			$last_time->execute(array($this->_user['user_id']));
 			$last_time = $last_time->fetch();
-			if ($cur_timestamp > ($last_time[0]+(0))) {
+			if ($cur_timestamp > ($last_time[0]+5*60)) {
 				return true;
 			} else {
 				return false;

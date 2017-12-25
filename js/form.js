@@ -619,7 +619,7 @@ $(document).ready(function() {
 
 
 	//payment form
-	Form.submit('#payment-form', function(form) {
+	Form.submit('#payment-for', function(form) {
 		var _f = $(form);
 		$.ajax({
 			url: _f.attr('action'),

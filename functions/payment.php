@@ -21,7 +21,7 @@ if($_SESSION['access']){
 	$currency = $_POST['currency'];
 	$payment = $_POST['payment_'.$currency];
 	$method = $_POST['method_'.$currency];
-	$requisites = $_POST['requisites_'.$currency];
+	$requisites = $_POST['requisites_'.$currency.'_'.$method];
 
 	if (!empty($payment) && !empty($method) && !empty($requisites)) {
 

@@ -77,8 +77,8 @@
 								<div class="form__select">
 									<button type="button" class="form__select-button">Способ вывода</button>
 									<ul class="form__select-options">
-										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd-wm" data-value="WebMoney Z-кошелек">WebMoney Z-кошелек</button></li>
-										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd-tel" data-value="Мобильный телефон">Мобильный телефон (по курсу)</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd-wm" data-value="wmz">WebMoney Z-кошелек</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd-tel" data-value="tel">Мобильный телефон (по курсу)</button></li>
 									</ul>
 									<input type="hidden" data-required="true" class="form__select-input" name="method_usd" value="">
 								</div>
@@ -88,12 +88,12 @@
 						<div class="col-4-5 form__field-wrap">
 							<div id="requisites-usd-wm" class="form__field form__field_hidden">
 								<label for="fp-usd-txt-2-1" class="overlabel">WebMoney Z-кошелек</label>
-								<input id="fp-usd-txt-2-1" type="text" data-type="wmz" data-required="true" class="form__text-input" name="requisites_usd[]" value="Z">
+								<input id="fp-usd-txt-2-1" type="text" data-type="wmz" data-required="true" class="form__text-input" name="requisites_usd_wmz" value="Z">
 								<div class="form__error-tip" data-second-error-text="Некорректный Z-кошелек, формат: Z999999999999">Введите Z-кошелек</div>
 							</div>
 							<div id="requisites-usd-tel" class="form__field form__field_hidden">
 								<label for="fp-usd-txt-2-2" class="overlabel">Номер телефона</label>
-								<input id="fp-usd-txt-2-2" type="text" data-type="tel" data-required="true" class="form__text-input" name="requisites_usd[]" value="+">
+								<input id="fp-usd-txt-2-2" type="text" data-type="tel" data-required="true" class="form__text-input" name="requisites_usd_tel" value="+">
 								<div class="form__error-tip" data-second-error-text="Некорректный номер, формат: +кодНомер">Введите номер телефона</div>
 							</div>
 						</div>
@@ -111,6 +111,7 @@
 							<div class="form__field">
 								<label for="fp-rub-txt-1" class="overlabel">Сумма</label>
 								<input id="fp-rub-txt-1" type="text" data-required="true" data-type="num" data-max-num="<?php echo $val; ?>" class="form__text-input" name="payment_rub" value="">
+								<div class="form__error-tip" data-second-error-text="Некорректная сумма" data-third-error-text="Недостаточно средств">Введите сумму</div>
 							</div>
 						</div>
 						<div class="col-4-5">
@@ -118,18 +119,30 @@
 								<div class="form__select">
 									<button type="button" class="form__select-button">Способ вывода</button>
 									<ul class="form__select-options">
-										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub, R-кошелек (R.....), wmr" data-value="WebMoney R-кошелек">WebMoney R-кошелек</button></li>
-										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub, Кошелек Яндекс.Деньги, yam" data-value="Яндекс.Деньги">Яндекс.Деньги</button></li>
-										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub, Номер телефона (+.....), tel" data-value="Мобильный телефон">Мобильный телефон</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub-wm" data-value="wmr">WebMoney R-кошелек</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub-yam" data-value="yam">Яндекс.Деньги</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub-tel" data-value="tel">Мобильный телефон</button></li>
 									</ul>
 									<input type="hidden" data-required="true" class="form__select-input" name="method_rub" value="">
 								</div>
+								<div class="form__error-tip">Выберите способ вывода</div>
 							</div>
 						</div>
-						<div class="col-4-5">
-							<div id="requisites-rub" class="form__field form__field_hidden">
-								<label for="fp-rub-txt-2" class="overlabel"></label>
-								<input id="fp-rub-txt-2" type="text" data-required="true" class="form__text-input" name="requisites_rub" value="">
+						<div class="col-4-5 form__field-wrap">
+							<div id="requisites-rub-wm" class="form__field form__field_hidden">
+								<label for="fp-rub-txt-2-1" class="overlabel">WebMoney R-кошелек</label>
+								<input id="fp-rub-txt-2-1" type="text" data-type="wmr" data-required="true" class="form__text-input" name="requisites_rub_wmr" value="R">
+								<div class="form__error-tip" data-second-error-text="Некорректный R-кошелек, формат: R999999999999">Введите R-кошелек</div>
+							</div>
+							<div id="requisites-rub-yam" class="form__field form__field_hidden">
+								<label for="fp-rub-txt-2-2" class="overlabel">Кошелек Яндекс.Деньги</label>
+								<input id="fp-rub-txt-2-2" type="text" data-type="yam" data-required="true" class="form__text-input" name="requisites_rub_yam" value="">
+								<div class="form__error-tip" data-second-error-text="Некорректный кошелек, формат: 999999999999999">Введите кошелек Яндекс.Деньги</div>
+							</div>
+							<div id="requisites-rub-tel" class="form__field form__field_hidden">
+								<label for="fp-rub-txt-2-3" class="overlabel">Номер телефона</label>
+								<input id="fp-rub-txt-2-3" type="text" data-type="tel" data-required="true" class="form__text-input" name="requisites_rub_tel" value="+">
+								<div class="form__error-tip" data-second-error-text="Некорректный номер, формат: +кодНомер">Введите номер телефона</div>
 							</div>
 						</div>
 					</div>
@@ -146,6 +159,7 @@
 							<div class="form__field">
 								<label for="fp-uah-txt-1" class="overlabel">Сумма</label>
 								<input id="fp-uah-txt-1" type="text" data-required="true" data-type="num" data-max-num="<?php echo $val; ?>" class="form__text-input" name="payment_uah" value="">
+								<div class="form__error-tip" data-second-error-text="Некорректная сумма" data-third-error-text="Недостаточно средств">Введите сумму</div>
 							</div>
 						</div>
 						<div class="col-4-5">
@@ -153,17 +167,24 @@
 								<div class="form__select">
 									<button type="button" class="form__select-button">Способ вывода</button>
 									<ul class="form__select-options">
-										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-uah, U-кошелек (U.....), wmu" data-value="WebMoney U-кошелек">WebMoney U-кошелек</button></li>
-										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-uah, Номер телефона (+.....), tel" data-value="Мобильный телефон">Мобильный телефон</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-uah-wm" data-value="wmu">WebMoney U-кошелек</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-uah-tel" data-value="tel">Мобильный телефон</button></li>
 									</ul>
 									<input type="hidden" data-required="true" class="form__select-input" name="method_uah" value="">
 								</div>
+								<div class="form__error-tip">Выберите способ вывода</div>
 							</div>
 						</div>
-						<div class="col-4-5">
-							<div id="requisites-uah" class="form__field form__field_hidden">
-								<label for="fp-uah-txt-2" class="overlabel"></label>
-								<input id="fp-uah-txt-2" type="text" data-required="true" class="form__text-input" name="requisites_uah" value="">
+						<div class="col-4-5 form__field-wrap">
+							<div id="requisites-uah-wm" class="form__field form__field_hidden">
+								<label for="fp-uah-txt-2-1" class="overlabel">WebMoney U-кошелек</label>
+								<input id="fp-uah-txt-2-1" type="text" data-type="wmu" data-required="true" class="form__text-input" name="requisites_uah_wmu" value="U">
+								<div class="form__error-tip" data-second-error-text="Некорректный U-кошелек, формат: U999999999999">Введите U-кошелек</div>
+							</div>
+							<div id="requisites-uah-tel" class="form__field form__field_hidden">
+								<label for="fp-uah-txt-2-2" class="overlabel">Номер телефона</label>
+								<input id="fp-uah-txt-2-2" type="text" data-type="tel" data-required="true" class="form__text-input" name="requisites_uah_tel" value="+">
+								<div class="form__error-tip" data-second-error-text="Некорректный номер, формат: +кодНомер">Введите номер телефона</div>
 							</div>
 						</div>
 					</div>
