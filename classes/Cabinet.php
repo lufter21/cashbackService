@@ -1,7 +1,7 @@
 <?php
 class Cabinet extends Core {
 
-	protected function getContent($query) {
+	protected function getContent() {
 
 		if ($this->statTimeUpdate()) {
 			$this->setStat();
@@ -97,21 +97,35 @@ class Cabinet extends Core {
 					$user_sum_approved_arr['uah'] = $val-$user['payment_uah']-$user['paid_uah'];
 					$user_sum_approved['uah'] = ($val-$user['payment_uah']-$user['paid_uah']).'грн';
 					break;
+
 				}
 			}
 		}
 
+		$user_sum_payment = array();
+		if ($user['payment_usd'] > 0) {
+			$user_sum_payment['usd'] = '$'.$user['payment_usd'];
+		}
+		if ($user['payment_rub'] > 0) {
+			$user_sum_payment['rub'] = $user['payment_rub'].'руб';
+		}
+		if ($user['payment_uah'] > 0) {
+			$user_sum_payment['uah'] = $user['payment_uah'].'грн';
+		}
 
 		$users_stat = $this->db->prepare('SELECT * FROM users_stat WHERE userid=? ORDER BY date DESC');
 		$users_stat->execute(array($this->_user['user_id']));
 		$users_stat_return = $users_stat->fetchAll(PDO::FETCH_ASSOC);
 
-		return array(
+		$result = array(
 			'sum_open'=>implode(' | ', $user_sum_open), 
-			'sum_approved'=>implode(' | ', $user_sum_approved), 
+			'sum_approved'=>implode(' | ', $user_sum_approved),
+			'sum_payment'=>implode(' | ', $user_sum_payment),
 			'stat'=>$users_stat_return,
 			'sum_approved_arr'=>$user_sum_approved_arr
 			);
+		
+		return $result;
 	}
 
 	protected function statTimeUpdate($upd = false) {

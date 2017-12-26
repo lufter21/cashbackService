@@ -1564,14 +1564,18 @@ img {
   color: #797979;
 }
 
+.orders__cashback_approved:before, .orders__cashback_declined:before {
+  display: inline-block;
+  font-size: 11px;
+  vertical-align: middle;
+}
+
 .orders__cashback_approved {
   color: #14CE95;
 }
 
 .orders__cashback_approved:before {
-  display: inline-block;
   content: "подтвержден";
-  font-size: 11px;
 }
 
 .orders__cashback_declined {
@@ -1579,10 +1583,7 @@ img {
 }
 
 .orders__cashback_declined:before {
-  display: inline-block;
   content: "отклонен";
-  font-size: 11px;
-  vertical-align: middle;
 }
 
 .orders__item {

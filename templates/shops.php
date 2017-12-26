@@ -42,9 +42,7 @@ include('header.php');
 							<div class="logo">
 								<a href="/shop/<?php echo $item['alias'];?>" title="Подробнее о <?php echo $item['name']; ?>"><img src="/images/logo/<?php echo $item['alias']; ?>.png" alt="<?php echo $item['name']; ?>"></a>
 							</div>
-							<!-- div class="title"><?php echo $item['name']; ?></div -->
 							<?php
-							/*cashback*/
 							if(!empty($item['cashback'])){
 								echo '<div class="cashback"><span>'.$item['cashback'].'</span></div>';
 							}

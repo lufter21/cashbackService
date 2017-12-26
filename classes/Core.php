@@ -67,6 +67,14 @@ class Core {
 	}
 	
 	protected function getRegion($region='') {
+
+		if (!empty($_POST['new_region'])) {
+			$_SESSION['region'] = $_POST['new_region'];
+			if ($this->_user) {
+				$this->getUser(array('country'=>$_POST['new_region']));
+			}
+		}
+
 		if ($region) {
 			$_SESSION['region'] = $region;
 			if ($this->_user && !$this->_user['country']) {

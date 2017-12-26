@@ -10,9 +10,9 @@ include('header.php');
 ?>
 
 <!--Container/-->
-<div class="container wrap">
+<div class="container wrap pad">
 
-	<div class="go content">
+	<div class="go content box">
 
 		<div id="go-block">
 			<h2 class="ta-c"><?php echo $meta['name']; ?></h2>
@@ -31,11 +31,11 @@ include('header.php');
 				В вашем браузере установленны сторонние плагины и расширения, которые могут помешать работе сервиса. Некоторые плагины могут подменить или обрезать ссылки&nbsp;и ваш заказ не будет засчитан.
 			</p>
 			
-			<div class="grid mb-35">
-				<div class="grid__col-2 ta-c">
+			<div class="row mb-35">
+				<div class="col-6 ta-r">
 					<img src="/images/extensions.jpg" alt="extensions" class="image">
 				</div>
-				<div class="grid__col-2">
+				<div class="col-6">
 					<p class="ta-l fs-15">
 						Для гарантированного начисления кэшбэка отключите все плагины и расширения, а&nbsp;также следуйте <a href="/recomendations" target="_blank">рекомендациям&nbsp;по&nbsp;совершению&nbsp;покупок</a>.
 					</p>

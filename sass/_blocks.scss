@@ -647,23 +647,27 @@
 		&_pending{
 			color: $g;
 		}
+		&_approved,
+		&_declined{
+			&:before{
+				display: inline-block;
+				font-size: 11px;
+				vertical-align: middle;
+			}
+		}
 		&_approved{
 			color: $lgn;
 			&:before{
-				display: inline-block;
 				content: "подтвержден";
-				font-size: 11px;
 			}
 		}
 		&_declined{ 
 			color: $lr;
 			&:before{
-				display: inline-block;
 				content: "отклонен";
-				font-size: 11px;
-				vertical-align: middle;
 			}
 		}
+
 	}
 	&__item{
 		padding: 15px 0;

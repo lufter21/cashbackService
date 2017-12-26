@@ -68,18 +68,16 @@ include('header.php');
 								<?php if(!empty($item['discount'])){ ?>
 								<div class="discount">— <?php echo $item['discount']; ?></div>
 								<?php } ?>
-								<a rel="nofollow" href="<?php echo $lemon->getUserLink($item['url']); ?>" target="_blank" onclick="ga('send', 'event', 'outbound', 'click'); yaCounter39630900.reachGoal('outbound');" class="title" title="Перейти в <?php echo $content['shop_name'][$item['shop']]; ?>"><?php echo $item['title']; ?></a>
+								<a rel="nofollow" href="/go/discount/<?php echo $item['id']; ?>" target="_blank" onclick="ga('send', 'event', 'outbound', 'click'); yaCounter39630900.reachGoal('outbound');" class="title" title="Перейти в <?php echo $content['shop_name'][$item['shop']]; ?>"><?php echo $item['title']; ?></a>
 								<div class="logo">
 									<a href="/shop/<?php echo $item['shop'];?>" title="Подробнее о <?php echo $content['shop_name'][$item['shop']]; ?>"><img src="/images/logo/<?php echo $item['shop']; ?>.png" alt="<?php echo $content['shop_name'][$item['shop']]; ?>"></a>
 								</div>
 
-								<?php 
-								/*cashback*/
+								<?php
 								if(!empty($content['shop_cashback'][$item['shop']])){
 									echo '<div class="cashback"><span>'.$content['shop_cashback'][$item['shop']].'</span></div>';
 								}
 
-								/*untill*/
 								$days = floor($d_sec/86400);
 								$d_sec = $d_sec-($days*86400);
 								$hours = floor($d_sec/3600);
@@ -112,12 +110,11 @@ include('header.php');
 									}
 									?>
 								</div>
-								<a rel="nofollow" href="<?php echo $lemon->getUserLink($item['url']); ?>" target="_blank" onclick="ga('send', 'event', 'outbound', 'click'); yaCounter39630900.reachGoal('outbound');" class="button" title="Перейти в <?php echo $content['shop_name'][$item['shop']]; ?>">В магазин</a>
+								<a rel="nofollow" href="/go/discount/<?php echo $item['id']; ?>" target="_blank" onclick="ga('send', 'event', 'outbound', 'click'); yaCounter39630900.reachGoal('outbound');" class="button" title="Перейти в <?php echo $content['shop_name'][$item['shop']]; ?>">В магазин</a>
 							</div>
 						</div>
 						<?php	
-					}
-					else{
+					} else {
 						$lemon->delDiscount($item['id']);
 						if($i >= $lemon->_itemsquantity){
 							echo '<div class="message">На данный момент, в этом разделе нет акций и скидок</div>';
@@ -125,8 +122,7 @@ include('header.php');
 						$i++;
 					}
 				}
-			}
-			else{
+			} else {
 				echo '<div class="message">На данный момент, в этом разделе нет акций и скидок</div>';
 			}
 			?>

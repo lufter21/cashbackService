@@ -8,6 +8,9 @@
 					<span>Доступно для вывода:</span><span class="balance__sum"><?php echo ($content['sum_approved']) ?: '0'; ?></span>
 				</div>
 				<div class="balance__item">
+					<span>Ожидает выплаты:</span><span class="balance__sum"><?php echo (!empty($content['sum_payment'])) ? $content['sum_payment'] : '0'; ?></span>
+				</div>
+				<div class="balance__item">
 					<!--<a href="#" class="balance__button">Вывести</a>-->
 				</div>
 			</div>

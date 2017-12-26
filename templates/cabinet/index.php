@@ -18,10 +18,9 @@
 				</div>
 			</div>
 
-			<?php 
-			//print_r($content);
-
+			<?php
 			if(!empty($content['stat'])){ ?>
+			<h2>Ваши заказы:</h2>
 			<div class="orders">
 				<div class="orders__head row">
 					<div class="col-6">
