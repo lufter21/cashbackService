@@ -13,7 +13,7 @@ include('templates/header.php');
 	<div class="col-3">
 		<aside class="sidebar box">
 			<div class="pad">
-				<?php include '/templates/sidebar-menu.php'; ?>
+				<?php include 'templates/sidebar-menu.php'; ?>
 			</div>
 		</aside>
 	</div>

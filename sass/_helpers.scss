@@ -47,22 +47,6 @@ $default-bg-position: 0 0 !default;
 	content: "";
 }
 
-//vertiacal align
-@mixin va-m(){
-	font-size: 0;
-	&:before{
-		display: inline-block;
-		content: "";
-		height: 100%;
-		vertical-align: middle;
-	}
-	img{
-		max-width: 100%;
-		max-height: 100%;
-		vertical-align: middle;
-	}
-}
-
 //fwh
 @mixin fwh(){
 	position: absolute;

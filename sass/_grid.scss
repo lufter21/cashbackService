@@ -42,8 +42,6 @@
 .container{
 	padding-top: 28px;
 	padding-bottom: 28px;
-	background:#F1F1F1;
-	position: relative;
 }
 
 .row{
@@ -233,14 +231,22 @@
 
 }
 
+
 /*middleBlock*/
 .middle{
 	height: 100%;
-	@include va-m;
+	font-size: 0;
+	&:before{
+		display: inline-block;
+		content: "";
+		height: 100%;
+		vertical-align: middle;
+	}
 	&__block{
 		display: inline-block;
 		width: 100%;
 		vertical-align: middle;
+		font-size: 16px;
 	}
 }
 

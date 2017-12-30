@@ -39,8 +39,8 @@ include('header.php');
 					?>	
 					<div class="shop-item">
 						<div class="inner">
-							<div class="logo">
-								<a href="/shop/<?php echo $item['alias'];?>" title="Подробнее о <?php echo $item['name']; ?>"><img src="/images/logo/<?php echo $item['alias']; ?>.png" alt="<?php echo $item['name']; ?>"></a>
+							<div class="logo mid-image-wrap">
+								<a href="/shop/<?php echo $item['alias'];?>" title="Подробнее о <?php echo $item['name']; ?>"><img src="/images/logo/<?php echo $item['alias']; ?>.png" alt="<?php echo $item['name']; ?>" class="mid-image"></a>
 							</div>
 							<?php
 							if(!empty($item['cashback'])){

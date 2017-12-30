@@ -13,7 +13,7 @@ include('templates/header.php');
 	<div class="col-3">
 		<aside class="sidebar box">
 			<div class="pad">
-				<?php include '/templates/sidebar-menu.php'; ?>
+				<?php include 'templates/sidebar-menu.php'; ?>
 			</div>
 		</aside>
 	</div>
@@ -65,21 +65,21 @@ include('templates/header.php');
 					<div class="accord__item">
 						<button class="faq__quest accord__button">Когда мне начислят кэшбэк?<span></span></button>
 						<div class="faq__answ accord__content">
-							<p>Кэшбэк начисляется в течении от 15 минут до 24 часов. Всю статистику вы можете просмотреть в личном кабинете.</p>
+							<p>Кэшбэк начисляется в течении от 15 минут до нескольких дней и зависит от скорости предоставления информации магазином. Всю статистику вы можете просмотреть в личном кабинете.</p>
 						</div>
 					</div>
 
 					<div class="accord__item">
 						<button class="faq__quest accord__button">Когда кэшбэк будет доступным для вывода?<span></span></button>
 						<div class="faq__answ accord__content">
-							<p>Кэшбэк станет доступен для вывода, когда товар будет оплачен и доставлен вам, и если вы не вернете товар в течении разрешенного для возврата срока.</p>
+							<p>Кэшбэк станет доступным для вывода, когда магазин подтвердит его. Среднее время подтверждения 30 дней. Это время необходимо магазину, чтоб убедиться, что заказ был доставлен вам, и вы его не вернете.</p>
 						</div>
 					</div>
 
 					<div class="accord__item">
 						<button class="faq__quest accord__button">Как вывести деньги?<span></span></button>
 						<div class="faq__answ accord__content">
-							<p>Зайдите в личный кабинет и закажите вывод средств. Мы можем перечислить деньги на кошельки Яндекс.Деньги, WebMoney или на счет мобильного телефона.</p>
+							<p>Зайдите в личный кабинет и закажите вывод средств. Мы можем перечислить деньги на кошельки Яндекс.Деньги, WebMoney, или на счет мобильного телефона.</p>
 						</div>
 					</div>
 
