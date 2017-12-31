@@ -91,7 +91,7 @@ include('templates/header.php');
 </div>
 <!--/Container-->
 
-<?php 
+<?php
 $js_include = array('accord.js');
 include('templates/footer.php');
 ?>
