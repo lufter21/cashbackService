@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 31 2017 г., 03:29
+-- Время создания: Янв 02 2018 г., 15:23
 -- Версия сервера: 5.6.37
 -- Версия PHP: 7.0.21
 
@@ -201,7 +201,14 @@ INSERT INTO `shops` (`id`, `category`, `name`, `alias`, `url`, `region`, `cashba
 (26, 'Одежда & Обувь, Цифровая & Бытовая техника, Мебель & Товары для дома, Товары для детей, Аксессуары, Спорт, Автотовары, Товары из Китая, Инструменты & Садовая техника', 'Tomtop', 'tomtop', 'https://ad.admitad.com/g/xljorca89630b9bc50924bf89f6ddb/', 'all', '7,5%', 'http://export.admitad.com/ru/webmaster/websites/506206/coupons/export/?website=506206&advcampaigns=14350&code=4091f1232c&user=lufter&format=csv&v=4', '<p class=\"c-red\">Валюта кэшбэка - Американский доллар</p>\r\n<p class=\"appr-time\">Среднее время подтверждения - 49 дней</p>', 1),
 (27, 'Одежда & Обувь, Аксессуары, Товары из Китая', 'Dresslily', 'dresslily', 'https://ad.admitad.com/g/dru1fiprm430b9bc5092c54bdbf551/', 'all', '7,5%', 'http://export.admitad.com/ru/webmaster/websites/506206/coupons/export/?website=506206&advcampaigns=15504&code=4091f1232c&user=lufter&format=csv&v=4', '<p class=\"appr-time\">Среднее время подтверждения - 19 дней</p>', 1),
 (28, 'Одежда & Обувь, Аксессуары, Спорт', 'КАНТ', 'kant', 'https://ad.admitad.com/g/0sqtzemoyx30b9bc5092135d19ca85/', 'ru', 'до 5,02%', 'http://export.admitad.com/ru/webmaster/websites/506206/coupons/export/?website=506206&advcampaigns=14806&code=4091f1232c&user=lufter&format=csv&v=4', '<ul>\r\n	<li>Товары, которые входят в список исключений: велосипеды Altair, Bergamont, Black One, Bulls, Challenger, CUBE, Dahon, Fisher, Format, Forward, Giant, Kellys, Olimp, ORBEA, Scool, Scott, Silverback, Stark, Stels; <br>\r\n	Cнаряжение Petzl, Stanley, Leatherman, Led Lenser, Pieps; веревки, репшнуры - 1,76%</li>\r\n	<li>Тариф за товары из категорий: Велосипеды - 3,71%</li>\r\n	<li>Тариф за товары из других категорий - 5,02%</li>\r\n</ul>\r\n<p class=\"appr-time\">Среднее время подтверждения - 25 дней</p>', 1),
-(29, 'Цифровая & Бытовая техника', 'Nikonstore', 'nikonstore', 'https://ad.admitad.com/g/wgui3grwsy30b9bc50921591d7082c/', 'ru', '5,5%', 'http://export.admitad.com/ru/webmaster/websites/506206/coupons/export/?website=506206&advcampaigns=15837&code=4091f1232c&user=lufter&format=csv&v=4', '<p class=\"appr-time\">Среднее время подтверждения - 30 дней</p>', 1);
+(29, 'Цифровая & Бытовая техника', 'Nikonstore', 'nikonstore', 'https://ad.admitad.com/g/wgui3grwsy30b9bc50921591d7082c/', 'ru', '5,5%', 'http://export.admitad.com/ru/webmaster/websites/506206/coupons/export/?website=506206&advcampaigns=15837&code=4091f1232c&user=lufter&format=csv&v=4', '<p class=\"appr-time\">Среднее время подтверждения - 30 дней</p>', 1),
+(30, 'Аксессуары', 'Адамас', 'adamas', 'https://ad.admitad.com/g/830685a7a830b9bc509275f1c04f0a/', 'ru', 'до 9,5%', 'http://export.admitad.com/ru/webmaster/websites/506206/coupons/export/?website=506206&advcampaigns=12907&code=4091f1232c&user=lufter&format=csv&v=4', '<ul>\r\n	<li>Оплаченный заказ ювелирного изделия с бриллиантом, в артикулах 41,4хх в конце - 9,5%</li>\r\n	<li>Оплаченный заказ ювелирного украшения (остальной ассортимент) - 7,5%</li>\r\n</ul>\r\n<p class=\"appr-time\">Среднее время подтверждения - 19 дней</p>', 1),
+(31, 'Красота & Здоровье, Товары для творчества', 'NYX Professional Makeup', 'nyx', 'https://ad.admitad.com/g/98obgo3gtn30b9bc50925b75425f0e/', 'ru', '8,5%', '', '<p class=\"appr-time\">Среднее время подтверждения - 32 дня</p>', 1),
+(32, 'Красота & Здоровье', 'KIKO MILANO', 'kiko', 'https://ad.admitad.com/g/eeh8b5g5ga30b9bc509272ea885266/', 'ru', '8,5%', '', '<p class=\"appr-time\">Среднее время подтверждения - 26 дней</p>', 1),
+(33, 'Одежда & Обувь, Красота & Здоровье', 'Mario Berluchi', 'marioberluchi', 'https://ad.admitad.com/g/3ywfwobzu930b9bc5092173362a5a2/', 'ru', '9,59%', 'http://export.admitad.com/ru/webmaster/websites/506206/coupons/export/?website=506206&advcampaigns=17799&code=4091f1232c&user=lufter&format=csv&v=4', '<p class=\"appr-time\">Среднее время подтверждения - 23 дня</p>', 1),
+(34, 'Красота & Здоровье', 'Myslitsky-Nail', 'myslitsky', 'https://ad.admitad.com/g/n84lxqg9pw30b9bc50929b53f9e671/', 'ru', '8,5%', '', '<p class=\"appr-time\">Среднее время подтверждения - 22 дня</p>', 1),
+(35, 'Красота & Здоровье', 'LA ROCHE-POSAY', 'larosheposay', 'https://ad.admitad.com/g/18ee485e9330b9bc5092e490185392/', 'ru', 'до 10,5%', '', '<ul>\r\n	<li>Оплаченный заказ без использования промокода - 10,5%</li>\r\n	<li>Оплаченный заказ с применением промокода - 5,5%</li>\r\n</ul>\r\n<p class=\"appr-time\">Среднее время подтверждения - 37 дней</p>', 1),
+(36, 'Цифровая & Бытовая техника, Мебель & Товары для дома, Красота & Здоровье', 'Shveiburg', 'shveiburg', 'https://ad.admitad.com/g/qzp53o7l9430b9bc50925a19b0c0b2/', 'ru', '2,12%', '', '<p class=\"appr-time\">Среднее время подтверждения - 26 дней</p>', 1);
 
 -- --------------------------------------------------------
 
@@ -241,7 +248,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `identity`, `network`, `name`, `email`, `country`, `password`, `seed`, `registration_date`, `activity`, `sum_open_usd`, `sum_approved_usd`, `sum_open_rub`, `sum_approved_rub`, `sum_open_uah`, `sum_approved_uah`, `last_upd_stat_time`, `payment_usd`, `payment_rub`, `payment_uah`, `paid_usd`, `paid_rub`, `paid_uah`, `access_key`) VALUES
-(30, '5d5408335aa7793596895916c23aa5e5', 'facebook', 'Vitaliy Lufter', 'lufter21@gmail.com', 'ua', '3b12b3a6d9858089b7686579f2cb1b20', 'ea665dddde3ee856a0352d2c9997069d4cdc71a2', '2017-10-01', '[\"2017-08-30\",\"2017-09-04\",\"2017-09-06\",\"2017-09-18\",\"2017-10-01\",\"2017-10-02\",\"2017-10-08\",\"2017-10-09\",\"2017-11-23\",\"2017-12-17\",\"2017-12-18\",\"2017-12-19\",\"2017-12-24\",\"2017-12-26\",\"2017-12-29\",\"2017-12-30\",\"2017-12-31\"]', '2.40', '1.26', '22.20', '12.11', '0.00', '0.00', 1514464666, '0.03', '3.35', '0.00', '1.20', '0.00', '0.00', '5d5408335aa7793596895916c23aa5e552c3cda427c5004321be04720232fb4534ea0636'),
+(30, '5d5408335aa7793596895916c23aa5e5', 'facebook', 'Vitaliy Lufter', 'lufter21@gmail.com', 'ua', '3b12b3a6d9858089b7686579f2cb1b20', 'ea665dddde3ee856a0352d2c9997069d4cdc71a2', '2017-10-01', '[\"2017-08-30\",\"2017-09-04\",\"2017-09-06\",\"2017-09-18\",\"2017-10-01\",\"2017-10-02\",\"2017-10-08\",\"2017-10-09\",\"2017-11-23\",\"2017-12-17\",\"2017-12-18\",\"2017-12-19\",\"2017-12-24\",\"2017-12-26\",\"2017-12-29\",\"2017-12-30\",\"2017-12-31\"]', '2.40', '1.26', '22.20', '12.11', '0.00', '0.00', 1514895099, '0.03', '3.35', '0.00', '1.20', '0.00', '0.00', '5d5408335aa7793596895916c23aa5e5952d93177ce48a4319417bc341d37eda608b6641'),
 (34, '26ac92ef135c17379544265ab197199d', '', 'lufter', 'lufter22@gmail.com', 'ua', 'a6652429c596b2215d5b27cf08a0c7a0', '9313b10be40215f50a8394173d423bd1017729b0', '2017-10-01', '[\"2017-10-01\"]', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1506849818, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '26ac92ef135c17379544265ab197199d448331d5ce18f200368095a73e71558704b3b835'),
 (35, 'ff54673e8a8ad85a5101059760f479c0', 'twitter', 'Vitaliy Lufter', 'lufter@gmail.com', 'ru', 'd39d3ca386e28c1660cd58740eba2dd3', 'db80c47317a5c9b41559ea0055f16afc26847e7c', '2017-10-02', '', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1506935955, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 'ff54673e8a8ad85a5101059760f479c014a9fc199a57e12a7e0302e694b56fb4380ff42c');
 
@@ -321,7 +328,7 @@ ALTER TABLE `users_stat`
 -- AUTO_INCREMENT для таблицы `shops`
 --
 ALTER TABLE `shops`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
