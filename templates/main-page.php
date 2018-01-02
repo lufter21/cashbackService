@@ -9,7 +9,7 @@ include('header.php');
 <div class="promo">
 	<div class="wrap">
 		<h1 class="promo__tit">
-			Cамый большой процент кэшбэка у нас!
+			У нас cамый большой процент кэшбэка!
 		</h1>
 		<div class="promo__shops clear">
 			<div class="promo__shops-item">

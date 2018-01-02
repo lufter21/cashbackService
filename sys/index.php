@@ -3,8 +3,7 @@
 error_reporting(E_ALL ^ E_NOTICE); 
 ini_set('display_errors', 1);
 
-class Db
-{	
+class Db{
 	public $db;
 	function __construct(){
 		$this->db = new PDO('mysql:host=localhost;dbname=bombonus','root','');
@@ -13,7 +12,7 @@ class Db
 }
 
 session_start();		
-	if(isset($_SESSION['log']) && isset($_SESSION['pass']) && $_SESSION['log']=="lufter" && $_SESSION['pass']=="luf21@!")
+	if(isset($_SESSION['log']) && isset($_SESSION['pass']) && $_SESSION['log']=="l" && $_SESSION['pass']=="21")
 	{
 		$db = new Db;
 		$route = 'shops';

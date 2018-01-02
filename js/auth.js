@@ -2,7 +2,7 @@ function socAuth(data) {
 	if(data){
 		console.log(data);
 		$.ajax({
-			url:"functions/auth.php",
+			url:"/functions/auth.php",
 			type:"POST",
 			dataType:"json",
 			data: 'token='+ data, 
