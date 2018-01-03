@@ -50,3 +50,65 @@
 		background:#e68717;
 	}
 }
+
+/*toggle*/
+.toggle{
+	display: block;
+	width:35px;
+	height:21px;
+	cursor:pointer;
+	position: relative;
+	
+	span{
+		height: 3px;
+		background: $b;
+		position: absolute;
+		left: 0;
+		width: 100%;
+		transition: .5s;
+	}
+
+	span:first-child{
+		top: 1px;
+	}
+
+	span:last-child{
+		bottom: 0;
+	}
+
+	span:nth-child(2),
+	span:nth-child(3){
+		top: 50%;
+		margin-top: -1px;
+	}
+
+	&.toggled{
+		span:first-child,
+		span:last-child{
+			opacity: 0;
+		}
+		span:nth-child(2){
+			transform: rotate(-45deg);
+			width: 130%;
+			left: -15%;
+		}
+		span:nth-child(3){
+			transform: rotate(45deg);
+			width: 130%;
+			left: -15%;
+		}
+	}
+}
+
+.on-toggled{
+	&-hide{
+		&.toggled{
+			display: none !important;
+		}
+	}
+	&-show{
+		&.toggled{
+			display: block !important;
+		}
+	}
+}

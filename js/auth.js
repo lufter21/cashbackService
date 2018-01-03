@@ -1,11 +1,10 @@
 function socAuth(data) {
 	if(data){
-		console.log(data);
 		$.ajax({
 			url:"/functions/auth.php",
 			type:"POST",
 			dataType:"json",
-			data: 'token='+ data, 
+			data: 'token='+ data,
 			success: function(response){
 				$('#js_auth_msg').empty().append('<span>'+ response.msg +'</span>');
 				if (response.msg == 'login') {

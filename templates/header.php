@@ -19,9 +19,9 @@
 	<header class="header">
 		<noscript class="noscript">Для корректной работы сервиса необходимо включить JavaScript</noscript>
 		<div id="alert" class="alert"></div>
-		<div class="header-top">
-			<div class="header-top__wrap wrap row-col-mid">
-				<div class="col-6">
+		<div id="header-top" class="header-top">
+			<div class="header-top__wrap wrap row-col-mid vw1000-row-col">
+				<div class="col-6 vw1000-mb-15">
 					<div class="region-block">
 						<span>Страна:</span>
 						<?php
@@ -53,39 +53,48 @@
 		</div>
 		<div class="header-bottom">
 			<div class="header-bottom__wrap wrap row-col-mid">
-				<div class="col-3">
+				<div class="col-3 vw1000-col-11">
 					<a href="/" title="На главную страницу"><img class="header__logo" src="/images/bombonus.svg" onerror="this.onerror=null; this.src='/images/bombonus.png'" alt="«e-discount» — Кэшбэк, скидки/промокоды"/></a>
 				</div>
-				<div class="col-9">
-					<nav class="top-menu">
-						<?php 
-						echo $lemon->getMenu(array(
-							'shops'=>'Магазины',
-							'discounts'=>'Скидки/промокоды',
-							'about'=>array('О сервисе', array('recomendations'=>'Рекомендации', 'faq'=>'Вопрос/Ответ'))
-							));
-							?>
-					</nav>
+				<div class="col-9 pad-0 vw1000-col-1">
+					<div id="header-mob-menu" class="header__menu-wrap row-col-mid vw1000-row-col">
+						<div class="col-9">
+							<nav class="top-menu">
+								<?php 
+								echo $lemon->getMenu(array(
+									'shops'=>'Магазины',
+									'discounts'=>'Скидки/промокоды',
+									'about'=>array('О сервисе', array('recomendations'=>'Рекомендации', 'faq'=>'Вопрос/Ответ'))
+								));
+								?>
+							</nav>
+						</div>
+						<div class="col-3">
+							<form action="#" class="form form_v1">
+								<div class="form__field m-0 form__field_btn">
+									<div class="form__select form__select_autocomplete">
+										<label for="i-txt-6s" class="overlabel">Поиск магазина</label>
+										<input id="i-txt-6s" type="text" class="form__text-input form__text-input_autocomplete" data-opt="search-by-name" value="">
+										<span class="form__btn form__btn_search"></span>
+										<ul class="form__select-options">
+											<?php foreach ($lemon->getShops() as $val) { ?>
+											<li>
+												<a href="/shop/<?php echo $val['alias']; ?>" class="form__select-val"><?php echo $val['name']; ?></a>
+											</li>
+											<?php } ?>
+										</ul>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
 				</div>
+
+				<button class="js-toggle toggle header__toggle" data-target-id="header-mob-menu" data-target-class="header"><span></span><span></span><span></span><span></span></button>
+
+				<button class="js-toggle header__user-btn-mob" data-target-id="header-top"></button>
+
 			</div>
 		</div>
-		
-		<!--<div id="mob-nav-block" class="nav-block">
-			
-			<button data-block="menu-block" class="button show-menu-button">Все скидки</button>
-			<nav id="menu-block" class="drop-block menu-block clear">
-				<?php echo $lemon->getCategoryMenu(); ?>
-			</nav>
-			<div class="search-form">
-				<form id="search-form" action="/search" method="POST">
-					<div><input id="sfi" type="text" name="search" value="<?php echo $content['search']; ?>" placeholder="Поиск..." required /></div>
-					<input type="submit" value="Найти" />
-				</form>
-			</div>
-			<div class="subscribe-button-wrap">
-				<button class="modal show-subscribe-button" data-window="subscribe-modal">Подписаться</button>
-			</div>
-		</div>-->
-		<button id="open-mob-menu" class="mob-menu-button"></button>
 	</header>
 	<!--/Header-->

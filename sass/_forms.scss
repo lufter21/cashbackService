@@ -34,7 +34,7 @@
 		display: block;
 		position: absolute;
 		left: 0;
-		top: 2px;
+		top: 3px;
 		z-index: 2;
 		max-width: 100%;
 		cursor: text;
@@ -122,7 +122,7 @@
 			border-top: none;
 			background: #F0F1F2;
 			display: none;
-			margin: 0 !important;
+			margin-top: -1px;
 			li{
 				border-top: 1px solid #c3c3c3;
 				margin: 0;
@@ -130,9 +130,6 @@
 				line-height: 1;
 				&.hidden{
 					display: none;
-				}
-				&:first-child{
-					border: none;
 				}
 			}
 		}
@@ -408,6 +405,31 @@
 
 	&__txt{
 		margin-bottom: 14px;
+	}
+
+	&_v1{
+		font-size: 15px;
+		.form{
+			&__text-input,
+			&__textarea,
+			&__select-button,
+			&__select-val{
+				padding: 7px 15px;
+			}
+			&__field_btn .form__text-input{
+				padding-right: 42px;
+			}
+			&__btn{
+				height: 33px;
+				&_search{
+					width: 33px;
+				}
+			}
+		}
+		.overlabel,
+		.overlabel-apply{
+			padding: 7px 15px;
+		}
 	}
 
 }

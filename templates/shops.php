@@ -8,10 +8,10 @@ if(!$meta){
 include('header.php');
 ?>
 <!--Container/-->
-<div class="container wrap row">
+<div class="container wrap row vw1000-row-col">
 
 	<div class="col-3">
-		<aside id="js-sidebar" class="sidebar box">
+		<aside class="sidebar box">
 			<div class="pad">
 				<div class="title">Категории</div>
 				<?php echo $lemon->getCategoryMenu(); ?>

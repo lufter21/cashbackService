@@ -8,7 +8,7 @@ class Shops extends Core {
 	protected function getContent($query) {
 		
 		$cat = array();
-		if($this->_alias){
+		if ($this->_alias) {
 			$category = $this->db->prepare('SELECT id,key_s,all_shops,ru_shops,ua_shops FROM categories WHERE alias=?');
 			$category->execute(array($this->_alias));
 			$category_arr = $category->fetch(PDO::FETCH_ASSOC);
@@ -22,14 +22,13 @@ class Shops extends Core {
 				$cat[3] = 1;
 				$par = 'category LIKE ? AND (region=? OR region=?) AND available=?';
 				$this->_itemsquantity = $category_arr['all_shops'] + $category_arr[$this->_region.'_shops'];
-			}
-			else{
+			} else {
 				$cat[0] = '%'.$category_arr['key_s'].'%';
 				$cat[1] = 1;
 				$par = 'category LIKE ? AND available=?';
 				$this->_itemsquantity = $category_arr['all_shops'] + $category_arr['ru_shops'] + $category_arr['ua_shops'];
 			}
-		}else{
+		} else {
 			if(!empty($this->_region)){
 				$cat[0] = 'all';
 				$cat[1] = $this->_region;

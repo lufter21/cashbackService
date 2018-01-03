@@ -8,7 +8,7 @@ if(empty($meta)){
 include('templates/header.php');
 ?>
 <!--Container/-->
-<div class="container wrap row">
+<div class="container wrap row vw1000-row-col">
 
 	<div class="col-3">
 		<aside class="sidebar box">

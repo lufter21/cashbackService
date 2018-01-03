@@ -29,7 +29,7 @@ session_start();
 
 		if(isset($_POST['login']) && isset($_POST['pass']))
 		{	
-			if($_POST['login']=="lufter" && $_POST['pass']=="luf21@!"){
+			if($_POST['login']=="l" && $_POST['pass']=="21"){
 				$_SESSION['log'] = $_POST['login'];
 				$_SESSION['pass'] = $_POST['pass'];
 				header("Location: /sys");

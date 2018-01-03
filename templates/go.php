@@ -14,6 +14,17 @@ include('header.php');
 
 	<div class="go content box">
 
+		<?php if (empty($user)) { ?>
+		
+		<div class="ta-c">
+			<div class="go__warning-tit">Войдите в свой аккаунт</div>
+			<p>
+				Чтобы получить кэшбэк, необходимо войти в свой аккаунт.
+			</p>
+		</div>
+
+		<?php } else { ?>
+
 		<div id="go-block">
 			<h2 class="ta-c"><?php echo $meta['name']; ?></h2>
 			<div class="ta-c mb-35">
@@ -24,7 +35,7 @@ include('header.php');
 				<div class="timer__icon"></div>
 			</div>
 		</div>
-		
+
 		<div id="go-warning" class="go__warning">
 			<div class="go__warning-tit">Внимание! Кэшбэк может быть не начислен</div>
 			<p>
@@ -44,8 +55,9 @@ include('header.php');
 			<a rel="nofollow" href="<?php echo $content['red_url']; ?>" class="go__warning-btn">Перейти в магазин</a>
 		</div>
 
-	</div>
+		<?php } ?>
 
+	</div>
 </div>
 <!--/Container-->
 <script> var redUrl = '<?php echo $content['red_url']; ?>'; </script>

@@ -1,6 +1,6 @@
 /*Header*/
 .header{
-	//position:fixed;
+	position:fixed;
 	top: 0;
 	left: 0;
 	z-index: 7;
@@ -11,6 +11,53 @@
 		max-width:100%;
 		height:auto;
 	}
+	&__toggle,
+	&__user-btn-mob{
+		display: none !important;
+	}
+	&_fixed{
+		box-shadow: 0 3px 21px rgba(0, 0, 0, 0.21);
+	}
+
+	@media(max-width: 1000px){
+		&__menu-wrap{
+			display: block;
+			visibility: hidden;
+			opacity: 0;
+			position: fixed;
+			top: 100px;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			overflow: auto;
+			background: #FFF;
+			border-top: 1px solid $c_l-gray;
+			transition: .5s;
+			padding: 20px 0;
+			&.toggled{
+				visibility: visible;
+				opacity: 1;
+			}
+			.form__select-options{
+				margin-bottom: 35px;
+			}
+		}
+		&__toggle{
+			display: block !important;
+			position: absolute !important;
+			right: 15px;
+			bottom: 12px;
+		}
+		&__user-btn-mob{
+			display: block !important;
+			position: absolute;
+			width: 25px;
+			height: 25px;
+			background: red;
+			right: 75px;
+			bottom: 10px;
+		}
+	}
 }
 
 .header-top{
@@ -18,10 +65,36 @@
 	&__wrap{
 		height:28px;
 	}
+	@media(max-width: 1000px){
+		position: fixed;
+		left: 0;
+		top: 100px;
+		bottom: 0;
+		width: 100%;
+		opacity: 0;
+		visibility: hidden;
+		transition: .5s;
+		&.toggled{
+			opacity: 1;
+			visibility: visible;
+		}
+		&__wrap{
+			height: auto;
+			padding-top: 15px;
+			padding-bottom: 15px;
+			.col-6{
+				text-align: center;
+			}
+		}
+	}
 }
+
 .header-bottom{
 	&__wrap{
 		height:70px;
+		@media(max-width: 1000px){
+			height: 45px;
+		}
 	}
 }
 
@@ -37,6 +110,9 @@
 	margin-right:35px;
 	position:relative;
 	color: $b;
+	&:last-child{
+		margin: 0;
+	}
 }
 .top-menu .menu__item_has-sub-menu{
 	position: relative;
@@ -78,9 +154,11 @@
 	top:-14px;
 	left:-14px;
 	z-index:3;
-	visibility: hidden;
-	opacity: 0;
-	@include tr;
+	@media(min-width: 1001px){
+		visibility: hidden;
+		opacity: 0;
+		@include tr;
+	}
 }
 .top-menu .menu__sub-menu li{
 	margin-bottom:14px;
@@ -91,6 +169,33 @@
 .top-menu .menu__item:hover .menu__sub-menu{
 	visibility: visible;
 	opacity: 1;
+}
+
+@media(max-width: 1200px){
+	.top-menu .menu__item{
+		margin-right:25px;
+	}
+}
+
+@media(max-width: 1000px){
+	.top-menu{
+		margin-bottom: 10px;
+	}
+	.top-menu .menu__item{
+		margin: 0;
+		padding: 15px 25px;
+		text-align: center;
+		float: none;
+	}
+	.top-menu .menu__item_has-sub-menu:after{
+		display: none;
+	}
+	.top-menu .menu__sub-menu{
+		position: static;
+		border: none;
+		padding: 25px 0 0;
+		min-width: 1px;
+	}
 }
 
 /*search-form*/
@@ -186,8 +291,6 @@
 	border:1px solid #c4c4c4;
 	z-index:6;
 	padding:14px 14px 7px;
-	-moz-box-shadow: 0 3px 21px rgba(0, 0, 0, 0.21); 
-	-webkit-box-shadow: 0 3px 21px rgba(0, 0, 0, 0.21); 
 	box-shadow: 0 3px 21px rgba(0, 0, 0, 0.21);
 }
 .menu-region li{
@@ -222,80 +325,4 @@
 	.-gray{
 		color:#dddddd;
 	}
-}
-
-
-
-/*Menu*/
-.show-menu-button{
-	width: 155px;
-	height: 36px;
-	line-height:36px;	
-	background:#E68717;
-	font-size:18px;
-	color:#ffffff;
-	text-align:center;
-	cursor:pointer;
-	margin-left:1px;
-}
-.show-menu-button:after{
-	display: inline-block;
-	content:"";
-	width: 0;
-	height: 0;
-	border: 5px solid transparent;
-	border-top: 5px solid #ffffff;
-	position: relative;
-	top: 3px;
-	left:10px;
-}
-.show-menu-button.active:after{
-	border-bottom: 5px solid #ffffff;
-	border-top:none;
-	top: -3px;
-}
-.show-menu-button:hover,
-.show-menu-button.active{
-	background:#F6B362;
-}
-.menu-block{
-	display:none;
-	position:absolute;
-	left:0;
-	right:0;
-	z-index:5;
-	background:#ffffff;
-	border:1px solid #F6B362;
-	padding:14px 21px 7px;
-}
-.menu-block ul{
-	float:left;
-	width:20%;
-}
-.menu-block li{
-	margin-bottom:7px;
-	padding-right:21px;
-}
-.menu-block a{
-	font-size:14px;
-	color:#156692;
-	text-decoration:none;
-	font-weight:700;
-}
-.menu-block a:hover{
-	color:#E68717;	
-}
-.mob-menu-button{
-	width:45px;
-	height:45px;
-	background-color:transparent;
-	background-image:url('../images/menu-button.svg');
-	background-position:50% 11px;
-	position:absolute;
-	left:14px;
-	top:0;
-	display:none;
-}
-.mob-menu-button.active{
-	background-position:50% -66px;
 }

@@ -2,9 +2,12 @@
 .wrapper{
 	min-width:320px;
 	min-height: 100%;
-	padding: 112px 0 50px;
+	padding: 112px 0 32px;
 	position: relative;
 	overflow: hidden;
+	@media(max-width: 1000px){
+		padding-top: 45px;
+	}
 }
 
 .wrap{
@@ -263,6 +266,10 @@
 					left: 0;
 					right: 0;
 				}
+				&.row-col-mid:before,
+				&.row-col-bot:before{
+					display: none;
+				}
 			}
 		}
 		&-col{
@@ -356,6 +363,10 @@
 					width: 100%;
 					left: 0;
 					right: 0;
+				}
+				&.row-col-mid:before,
+				&.row-col-bot:before{
+					display: none;
 				}
 			}
 		}

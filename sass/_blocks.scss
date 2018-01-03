@@ -17,6 +17,9 @@
 	font-size: 13px;
 	line-height: 1.3;
 	text-align:center;
+	@media(max-width: 1000px){
+		font-size: 11px;
+	}
 }
 
 
@@ -66,7 +69,9 @@
 			}
 		}
 	}
-
+	@media(max-width: 1000px){
+		margin-bottom: 28px;
+	}
 }
 
 /*article block*/
@@ -87,7 +92,6 @@
 	float:left;
 	width:33.333%;
 	margin-bottom:28px;
-
 	.inner{
 		margin:0 15px;
 		padding:69px 21px 221px;
@@ -139,9 +143,16 @@
 		top:21px;
 		left:21px;
 		padding-left:23px;
-		height:15px;
-		line-height:15px;
-		@include sp;
+		&:before{
+			@include ab;
+			width: 16px;
+			height: 16px;
+			position: absolute;
+			left: 0;
+			top: 50%;
+			margin-top: -9px;
+			@include sp;
+		}
 	}
 
 	p{
@@ -255,6 +266,12 @@
 		color:#0f986e;
 	}
 
+	@media(max-width: 1000px){
+		display: block;
+		float: none;
+		width: 100%;
+	}
+
 }
 
 .message{
@@ -267,14 +284,13 @@
 
 /*shopsBlock*/
 .shop-item{
-	display: -webkit-flex;
-	display: flex;
-	float:left;
-	width:33.333%;
 	margin-bottom:28px;
-	
+	.flex-wrap &{
+		display: flex;
+		float:left;
+		width:33.333%;
+	}
 	.inner{
-		margin:0 14px;
 		padding:21px 21px 169px;
 		background:#ffffff;
 		position:relative;
@@ -285,6 +301,9 @@
 		-webkit-flex:1;
 		-ms-flex:1;
 		flex:1;
+		.flex-wrap &{
+			margin:0 14px;
+		}
 	}
 
 	.logo{
@@ -384,7 +403,13 @@
 		}
 
 	}
-
+	@media(max-width: 1000px){
+		.flex-wrap &{
+			display: block;
+			float:none;
+			width:100%;
+		}
+	}
 }
  
 

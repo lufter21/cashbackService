@@ -167,8 +167,6 @@ var Select = {
 				var inpVal = inputValue,
 				reg = new RegExp(inpVal, 'gi');
 
-				console.log(reg);
-
 				_._options.find('.form__select-val').each(function() {
 
 					var srcVal = $(this).html();

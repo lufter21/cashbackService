@@ -152,11 +152,22 @@ img{
 	height: auto;
 }
 
-/*position*/
+/*height*/
+.min-h-272{
+	min-height: 272px;
+}
 
 /*Box*/
 .box{
 	background: #FFF;
 	border-radius: 3px;
 	padding: 21px 6px;
+}
+
+@media(max-width: 1000px){
+	.vw1000{
+		&-mb-15{
+			margin-bottom: 15px;
+		}
+	}
 }

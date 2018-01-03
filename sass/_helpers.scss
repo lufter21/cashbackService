@@ -26,18 +26,11 @@ $default-border-radius: 5px !default;
 //sprite
 $default-bg-position: 0 0 !default;
 
-@mixin sp($bg-position: $default-bg-position){
-	background-image: url("../images/sprite.png");
+@mixin sp($bg-position: ""){
+	background-image: url("../../images/sprite.svg");
 	background-repeat: no-repeat;
-	background-position: $bg-position;
-}
-
-@mixin sp2($bg-position-x: 0, $bg-position-y: 0){
-	background-image: url("../images/sprite@2x.png");
-	background-size: 480px auto;
-	background-repeat: no-repeat;
-	@if $bg-position-x != 0 OR $bg-position-y != 0 {
-		background-position: ($bg-position-x / 2) ($bg-position-y / 2);
+	@if $bg-position != "" {
+		background-position: $bg-position;
 	}
 }
 

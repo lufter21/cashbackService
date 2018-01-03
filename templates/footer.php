@@ -104,20 +104,17 @@
 <script type="text/javascript" src="/js/select.js"></script>
 <script type="text/javascript" src="/js/form.js"></script>
 <script type="text/javascript" src="/js/auth.js"></script>
-<!-- script type="text/javascript" src="/js/script.js"></script -->
+<script type="text/javascript" src="/js/button.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 
 <?php
-
 if (!empty($js_include)) {
 	foreach ($js_include as $js) {
 		echo '<script type="text/javascript" src="/js/'.$js.'"></script>';
 	}
 }
-
-
-if(empty($region) && (!empty($user) && empty($user['country']))){
-	echo '<script type="text/javascript">$(document).ready(function(){sel_reg();});</script>';
+if (empty($region) /*&& (!empty($user) && empty($user['country']))*/) {
+	echo '<script>$(document).ready(function(){sel_reg();});</script>';
 }
 ?>
 
