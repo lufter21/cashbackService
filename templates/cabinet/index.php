@@ -13,16 +13,16 @@
 				<div class="balance__item c-l-green">
 					<span>Доступно для вывода:</span><span class="balance__sum"><?php echo (!empty($content['sum_approved'])) ? $content['sum_approved'] : '0'; ?></span>
 				</div>
-				<div class="balance__item">
-					<!--<a href="#" class="balance__button">Вывести</a>-->
-				</div>
+				<!--<div class="balance__item">
+					<a href="#" class="balance__button">Вывести</a>
+				</div>-->
 			</div>
 
 			<?php
 			if(!empty($content['stat'])){ ?>
 			<h2>Ваши заказы:</h2>
 			<div class="orders">
-				<div class="orders__head row">
+				<div class="orders__head row vw1000-hide">
 					<div class="col-6">
 						Заказ
 					</div>
@@ -42,7 +42,7 @@
 
 				<?php foreach (json_decode($value['data']) as $val) { ?>
 
-				<div class="orders__item row-col-mid">
+				<div class="orders__item row-col-mid vw1000-row-col vw1000-row-col-pad-0">
 					<div class="col-6 row-col-mid row-col-pad-0">
 						<div class="col-4">
 							<img src="<?php echo $val->product_image; ?>" alt="order">

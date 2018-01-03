@@ -165,9 +165,15 @@ img{
 }
 
 @media(max-width: 1000px){
+	h1{
+		font-size: 21px;
+	}
 	.vw1000{
 		&-mb-15{
 			margin-bottom: 15px;
+		}
+		&-hide{
+			display: none;
 		}
 	}
 }

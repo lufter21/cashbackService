@@ -28,7 +28,7 @@ include('templates/header.php');
 
 				<div class="recomend">
 
-					<div class="row">
+					<div class="row vw1000-row-col">
 						<div class="col-4">
 							<img src="/images/begin.jpg" alt="begin">
 						</div>
@@ -46,7 +46,7 @@ include('templates/header.php');
 						</div>
 					</div>
 
-					<div class="row">
+					<div class="row vw1000-row-col">
 						<div class="col-4">
 							<img src="/images/extensions.jpg" alt="extensions">
 						</div>
@@ -58,7 +58,7 @@ include('templates/header.php');
 						</div>
 					</div>
 
-					<div class="row">
+					<div class="row vw1000-row-col">
 						<div class="col-4">
 							<img src="/images/cart.jpg" alt="cart">
 						</div>
@@ -70,7 +70,7 @@ include('templates/header.php');
 						</div>
 					</div>
 
-					<div class="row">
+					<div class="row vw1000-row-col">
 						<div class="col-4">
 							<img src="/images/discount.jpg" alt="discount">
 						</div>
@@ -82,7 +82,7 @@ include('templates/header.php');
 						</div>
 					</div>
 
-					<div class="row">
+					<div class="row vw1000-row-col">
 						<div class="col-4">
 							<img src="/images/promocode.jpg" alt="promocode">
 						</div>

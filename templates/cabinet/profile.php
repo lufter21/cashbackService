@@ -4,13 +4,13 @@
 			<h1>Настройка профиля <?php echo $user['name']; ?></h1>
 		</div>
 
-		<div class="row">
-			<div class="col-2">
+		<div class="row vw1000-row-col">
+			<div class="col-2 vw1000-mb-15">
 				<b>Регион:</b>
 			</div>
 			<div class="col-7 pad-0">
 				<form action="/cabinet/profile" method="POST" class="form">
-					<div class="row pad-0">
+					<div class="row pad-0 vw1000-row-col">
 						<div class="col-8">
 							<div class="form__field">
 								<div class="form__select">

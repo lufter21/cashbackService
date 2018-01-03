@@ -418,6 +418,8 @@
 			}
 			&__field_btn .form__text-input{
 				padding-right: 42px;
+				position: relative;
+				z-index: 4;
 			}
 			&__btn{
 				height: 33px;

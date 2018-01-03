@@ -368,12 +368,25 @@
 				&.row-col-bot:before{
 					display: none;
 				}
+				&-pad-0{
+					padding-left: 15px;
+					padding-right: 15px;
+					& > div[class*="col"]{
+						padding-left: 0;
+						padding-right: 0;
+					}
+					&.wrap{
+						padding-left: 45px;
+						padding-right: 45px;
+					}
+				}
 			}
 		}
 		&-col{
 			width: 100%;
 			float: none !important;
 			clear: both;
+			margin-left: 0;
 			&-0-1{
 				width: 4.166665%;
 			}

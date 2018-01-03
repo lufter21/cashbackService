@@ -51,11 +51,11 @@
 		&__user-btn-mob{
 			display: block !important;
 			position: absolute;
-			width: 25px;
-			height: 25px;
-			background: red;
+			width: 26px;
+			height: 26px;
 			right: 75px;
-			bottom: 10px;
+			bottom: 9px;
+			@include sp(0 -18px);
 		}
 	}
 }
@@ -186,6 +186,9 @@
 		padding: 15px 25px;
 		text-align: center;
 		float: none;
+		& > a{
+			font-size: 18px;
+		}
 	}
 	.top-menu .menu__item_has-sub-menu:after{
 		display: none;
@@ -193,7 +196,7 @@
 	.top-menu .menu__sub-menu{
 		position: static;
 		border: none;
-		padding: 25px 0 0;
+		padding: 17px 0 0;
 		min-width: 1px;
 	}
 }
@@ -305,6 +308,12 @@
 	color:#E68717;	
 }
 
+@media(max-width: 1000px){
+	.region-block{
+		margin-bottom: 100px;
+	}
+}
+
 /*login-block*/
 .header__user{
 	display: inline-block;
@@ -324,5 +333,15 @@
 	}
 	.-gray{
 		color:#dddddd;
+	}
+	@media(max-width: 1000px){
+		a{
+			font-size: 20px;
+		}
+		.gr{
+			display: block;
+			font-size: 0;
+			margin: 10px 0;
+		}
 	}
 }
