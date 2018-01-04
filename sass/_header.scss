@@ -33,7 +33,7 @@
 			background: #FFF;
 			border-top: 1px solid $c_l-gray;
 			transition: .5s;
-			padding: 20px 0;
+			padding: 25px 0;
 			&.toggled{
 				visibility: visible;
 				opacity: 1;
@@ -101,6 +101,7 @@
 .top-menu{
 	position: relative;
 	top: 3px;
+	float: right;
 }
 .top-menu .menu{
 	@include clr;
@@ -179,7 +180,8 @@
 
 @media(max-width: 1000px){
 	.top-menu{
-		margin-bottom: 10px;
+		float: none;
+		padding-top: 20px;
 	}
 	.top-menu .menu__item{
 		margin: 0;

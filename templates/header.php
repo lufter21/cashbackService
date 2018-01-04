@@ -58,15 +58,6 @@
 				</div>
 				<div class="col-9 pad-0 vw1000-col-1">
 					<div id="header-mob-menu" class="header__menu-wrap row-col-mid vw1000-row-col">
-						<div class="col-8">
-							<nav class="top-menu">
-								<?php echo $lemon->getMenu(array(
-									'shops'=>'Магазины',
-									'discounts'=>'Скидки/промокоды',
-									'about'=>array('О сервисе', array('recomendations'=>'Рекомендации', 'faq'=>'Вопрос/Ответ'))
-								)); ?>
-							</nav>
-						</div>
 						<div class="col-4">
 							<form action="#" class="form form_v1">
 								<div class="form__field m-0 form__field_btn">
@@ -84,6 +75,15 @@
 									</div>
 								</div>
 							</form>
+						</div>
+						<div class="col-8">
+							<nav class="top-menu">
+								<?php echo $lemon->getMenu(array(
+									'shops'=>'Магазины',
+									'discounts'=>'Скидки/промокоды',
+									'about'=>array('О сервисе', array('recomendations'=>'Рекомендации', 'faq'=>'Вопрос/Ответ'))
+								)); ?>
+							</nav>
 						</div>
 					</div>
 				</div>

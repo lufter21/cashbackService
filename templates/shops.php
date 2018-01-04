@@ -53,9 +53,14 @@ include('header.php');
 			}
 			?>
 		</div>
+
+		<?php $pnav = $lemon->getPagenav();
+		if (!empty($pnav)) { ?>
 		<div class="pagination">
-			<?php echo $lemon->getPagenav(); ?>
+			<?php echo $pnav; ?>
 		</div>
+		<?php } ?>
+
 	</div>
 
 </div>

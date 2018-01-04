@@ -413,13 +413,30 @@
 	}
 	@media(max-width: 1000px){
 		.flex-wrap &{
-			display: block;
-			float:none;
-			width:100%;
+			width:50%;
+			margin-bottom: 15px;
+			.inner{
+				padding: 20px 15px 135px;
+				margin: 0 7px;
+			}
+			.cashback{
+				bottom: 100px;
+				span{
+					font-size: 18px;
+				}
+			}
+			.logo{
+				height: 50px !important;
+			}
 		}
 	}
 }
- 
+
+@media(max-width: 1000px){
+	#flex-wrap{
+		padding: 0 8px;
+	}
+}
 
 /*pagination*/
 .pagination{
