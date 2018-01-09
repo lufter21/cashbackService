@@ -18,7 +18,7 @@ System Header ТЦ «Lemon»
 <div id="wrapper">
 <div id="header">
 <?php echo $log;
-if($_SESSION['log']=="l"){
+if(!empty($_SESSION['log'])){
 ?>
 <a class="btn" href="?route=categories&action=rfd">Remove Finished Discounts</a>
 <a class="btn" href="?route=categories">Categories</a>

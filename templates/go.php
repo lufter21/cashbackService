@@ -23,6 +23,8 @@ include('header.php');
 			</p>
 		</div>
 
+		<script>var unknownUser = true;</script>
+
 		<?php } else { ?>
 
 		<div id="go-block">

@@ -1,18 +1,21 @@
 $(document).ready(function() {
 
-	if (adBlock) {
+	if (adBlock || unknownUser) {
 		$('#go-block').hide();
 		$('#go-warning').show();
 	} else {
-		var _timerNum = $('#timer-num'), i = 5;
-		_timerNum.html(i);
+		var TimerNum = $('#timer-num'),
+		i = 5;
+
+		TimerNum.html(i);
+		
 		function runTimer() {
 			if (i > 0) {
 				setTimeout(runTimer, 1000);
 			} else {
 				window.location.href = redUrl;
 			}
-			_timerNum.html(i);
+			TimerNum.html(i);
 			i--;
 		}
 		runTimer();

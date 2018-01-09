@@ -32,6 +32,7 @@ header, footer, section, nav, article, aside {
 
 button {
   overflow: visible;
+  cursor: pointer;
 }
 
 html, body {
@@ -50,7 +51,7 @@ img {
 .wrapper {
   min-width: 320px;
   min-height: 100%;
-  padding: 112px 0 32px;
+  padding: 97px 0 32px;
   position: relative;
   overflow: hidden;
 }
@@ -899,6 +900,10 @@ img {
   text-decoration: none;
   font-weight: 700;
   color: #156692;
+}
+
+.menu-region.bg-red a {
+  color: #FFF;
 }
 
 .menu-region a:hover {
@@ -1808,7 +1813,7 @@ img {
 
 /*promo*/
 .promo {
-  padding: 14% 0;
+  padding: 100px 0 220px;
   background: url("../images/bg-banner.jpg") no-repeat 50% 0;
   -moz-background-size: cover;
     -o-background-size: cover;
@@ -1817,69 +1822,38 @@ img {
 
 .promo__tit {
   font-family: 'Roboto Slab', serif;
-  font-size: 55px;
+  font-size: 42px;
   font-weight: 700;
-  text-align: justify;
   color: #FFF;
   text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
   margin-bottom: 30px;
-  line-height: 0;
-}
-
-.promo__tit:after {
-  content: "";
-  display: inline-block;
-  width: 100%;
 }
 
 .promo__shops {
   padding: 7px 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.7);
   position: relative;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
        border-radius: 3px;
 }
 
-.promo__shops-item {
-  float: left;
-  width: 25%;
-  font-size: 0;
-}
-
 .promo__shops-logo {
-  display: inline-block;
   height: 50px;
-  width: 50%;
   text-align: center;
-  vertical-align: middle;
-}
-
-.promo__shops-logo img {
-  display: inline-block;
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.promo__shops-desc {
-  display: inline-block;
-  vertical-align: middle;
-  width: 50%;
-  height: 50px;
-  padding-left: 15px;
 }
 
 .promo__shops-desc p {
-  font-size: 19px;
+  font-size: 18px;
   padding: 3px 0;
 }
 
 .promo__shops-desc .another {
-  color: #ff0000;
+  color: #c90101;
 }
 
 .promo__shops-desc .we {
-  color: #14CE95;
+  color: #0F986E;
 }
 
 .promo__note {
@@ -1911,11 +1885,41 @@ img {
 }
 
 .promo__note .red {
-  background: #ff0000;
+  background: #c90101;
 }
 
 .promo__note .grn {
-  background: #14CE95;
+  background: #0F986E;
+}
+
+@media (max-width: 1000px) {
+  .promo {
+    padding: 55px 0 110px;
+  }
+  .promo__tit {
+    font-size: 28px;
+  }
+  .promo__shops {
+    padding: 30px 0;
+  }
+  .promo__shops-item {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  .promo__shops-item:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border: none;
+  }
+  .promo__note {
+    bottom: -47px;
+  }
+  .promo__note p {
+    float: none;
+    padding: 3px 0;
+    margin: 0;
+  }
 }
 
 .descript {
@@ -3276,10 +3280,6 @@ html, body {
   clear: both;
 }
 
-button {
-  cursor: pointer;
-}
-
 /*Float*/
 .left {
   float: left !important;
@@ -3430,6 +3430,11 @@ img {
      -moz-border-radius: 3px;
           border-radius: 3px;
   padding: 21px 6px;
+}
+
+/*Background*/
+.bg-red {
+  background: #c90101;
 }
 
 @media (max-width: 1000px) {

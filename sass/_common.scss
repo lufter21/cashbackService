@@ -19,10 +19,6 @@ html, body{
 	clear:both
 }
 
-button{
-	cursor: pointer;
-}
-
 /*Float*/
 .left{
 	float:left !important;
@@ -162,6 +158,11 @@ img{
 	background: #FFF;
 	border-radius: 3px;
 	padding: 21px 6px;
+}
+
+/*Background*/
+.bg-red{
+	background: $r;
 }
 
 @media(max-width: 1000px){

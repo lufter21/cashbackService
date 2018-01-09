@@ -80,6 +80,8 @@ class Core {
 			if ($this->_user && !$this->_user['country']) {
 				$this->getUser(array('country'=>$region));
 			}
+			header('Location: /');
+			exit;
 		} else {
 
 			if ($_SESSION['region']) {

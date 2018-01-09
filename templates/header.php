@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,9 +8,8 @@
 <link rel="canonical" href="https://bombonus.dealersair.com/<?php echo $alias; ?>">
 <link type="text/css" rel="stylesheet" href="/css/style.css">
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-<!--[if lt IE 9]><script type="text/javascript" src="/js/html5.min.js"></script><![endif]-->
-<script>var adBlock = true;</script>
-<script type="text/javascript" src="/js/adframe.js"></script>
+<script>var adBlock = true, unknownUser = false;</script>
+<script src="/js/adframe.js"></script>
 </head>
 <body>
 <!--Wrapper/-->
