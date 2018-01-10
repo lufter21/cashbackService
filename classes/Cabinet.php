@@ -152,11 +152,11 @@ class Cabinet extends Core {
 			break;
 
 			case 'rub':
-			$rtn = $val.'руб';
+			$rtn = $val.' руб';
 			break;
 
 			case 'uah':
-			$rtn = $val.'грн';
+			$rtn = $val.' грн';
 			break;
 		}
 		return $rtn;
@@ -177,6 +177,20 @@ class Cabinet extends Core {
 		return round($pay-(($cart/100)*$com_perc), 2);
 	}
 
+	protected function getRate() {
+		$sql_rate = $this->db->prepare('SELECT * FROM rate WHERE date=?');
+		$sql_rate->execute(array(date('Y-m-d')));
+		$rate = $sql_rate->fetch(PDO::FETCH_ASSOC);
+
+		if ($this->_user['country'] == 'ru') {
+			$result = $this->mergeCur('rub', $rate['usd_rub']);
+		} else if ($this->_user['country'] == 'ua') {
+			$result = $this->mergeCur('uah', $rate['usd_uah']);
+		}
+
+		return $result;
+	}
+
 /*Admitad Statistics*/
 	protected function getAdmitadStat($date){
 
@@ -186,7 +200,7 @@ class Cabinet extends Core {
 
 		//$xml = 'https://www.admitad.com/ru/webmaster/statistics/campaigns_xml/?export&format=xml&code=4091f1232c&user=lufter&start_date='.$date.'&end_date='.$date.'&action_type=0&sub_ids=userid'.$this->_user['user_id'];
 
-		//https://www.admitad.com/ru/webmaster/statistics/actions_xml/?export&format=xml&code=4091f1232c&user=lufter&default_currency=RUB&start_date=2017-12-19&end_date=2017-12-19&sub_ids=userid30
+		//https://www.admitad.com/ru/webmaster/statistics/actions_xml/?export&format=xml&code=4091f1232c&user=lufter&default_currency=RUB&start_date=2018-01-09&end_date=2018-01-09&sub_ids=userid30
 
 		$xml = 'https://www.admitad.com/ru/webmaster/statistics/actions_xml/?export&format=xml&code=4091f1232c&user=lufter&start_date='.$date.'&end_date='.$date.'&sub_ids=userid'.$this->_user['user_id'];
 

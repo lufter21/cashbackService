@@ -33,10 +33,14 @@ foreach(shops($db) as $arr){
 echo '<tr>
 <td>'.$arr['name'].'</td>
 <td>'.quant($arr['alias'],$db).'</td>
-<td>
-	<a href="?route=import-discounts&region='.$arr['region'].'&shop='.$arr['alias'].'" >Upload Discounts</a>
-	<a href="?route=show-discounts&shop='.$arr['alias'].'" >Show Discounts List</a>
-	<input type="hidden" name="change-available" value="true">
+<td>';
+
+if (!empty($arr['csv_discounts'])) {
+	echo '<a href="?route=import-discounts&region='.$arr['region'].'&shop='.$arr['alias'].'" >Upload Discounts</a>
+	<a href="?route=show-discounts&shop='.$arr['alias'].'" >Show Discounts List</a>';
+}
+
+echo '<input type="hidden" name="change-available" value="true">
 	<select name="available['.$arr['alias'].']">
 		<option value="1"'; if($arr['available'] == 1){echo 'selected';}
 		echo '>on</option>

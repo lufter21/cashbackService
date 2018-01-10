@@ -29,12 +29,12 @@ include('header.php');
 				<div class="promo__shops-item col-3 row-col-mid">
 					<div class="promo__shops-logo col-6">
 						<div class="mid-image-wrap">
-							<img src="images/logo/tomtop.png" alt="tomtop" class="mid-image">
+							<img src="images/logo/gearbest.png" alt="gearbest" class="mid-image">
 						</div>
 					</div>
 					<div class="promo__shops-desc col-6">
-						<p class="another">4,5%</p>
-						<p class="we">7,5%</p>
+						<p class="another">5%</p>
+						<p class="we">до 48,5%</p>
 					</div>
 				</div>
 

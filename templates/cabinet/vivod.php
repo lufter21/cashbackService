@@ -13,9 +13,9 @@
 			</div>
 			<h2>Доступные способы вывода:</h2>
 			<ul>
-				<li>Яндекс.Деньги (Российский рубль)</li>
-				<li>WebMoney (Доллар США, российский рубль, украинская гривна, соответственно на Z, R и U -кошельки)</li>
-				<li>Пополнение мобильного телефона (Российские и украинские операторы. Иностранная валюта по курсу, например: вывод долларов или рублей на номер украинского оператора)</li>
+				<li>Яндекс.Деньги</li>
+				<li>WebMoney</li>
+				<li>Пополнение мобильного телефона</li>
 			</ul>
 		</div>
 
@@ -77,8 +77,8 @@
 								<div class="form__select">
 									<button type="button" class="form__select-button">Способ вывода</button>
 									<ul class="form__select-options">
-										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd-wm" data-value="wmz">WebMoney Z-кошелек</button></li>
-										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd-tel" data-value="tel">Мобильный телефон (по курсу)</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd-wm, #requisites-usd-wm-info" data-value="wmz">WebMoney Z-кошелек</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-usd-tel, #requisites-usd-tel-info" data-value="tel">Мобильный телефон</button></li>
 									</ul>
 									<input type="hidden" data-required="true" class="form__select-input" name="method_usd" value="">
 								</div>
@@ -95,6 +95,20 @@
 								<label for="fp-usd-txt-2-2" class="overlabel">Номер телефона</label>
 								<input id="fp-usd-txt-2-2" type="text" data-type="tel" data-required="true" class="form__text-input" name="requisites_usd_tel" value="+">
 								<div class="form__error-tip" data-second-error-text="Некорректный номер, формат: +кодНомер">Введите номер телефона</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-4-5 col-offset-3 vw1000-col form__field-wrap">
+							<div id="requisites-usd-wm-info" class="form__field form__field_hidden">
+								<p class="form__txt">
+									Комиссия WebMoney - 0.8%
+								</p>
+							</div>
+							<div id="requisites-usd-tel-info" class="form__field form__field_hidden">
+								<p class="form__txt">
+									1$ = <?php echo $lemon->getRate(); ?>
+								</p>
 							</div>
 						</div>
 					</div>

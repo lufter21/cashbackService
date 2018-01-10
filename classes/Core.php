@@ -29,9 +29,6 @@ class Core {
 				if ($update['country']) {
 					$update_user_country = $this->db->prepare('UPDATE users SET country=? WHERE access_key=?');
 					$update_user_country->execute(array($update['country'], $access_key));
-				} elseif ($update['activity']) {
-					$update_user_activity = $this->db->prepare('UPDATE users SET activity=? WHERE access_key=?');
-					$update_user_activity->execute(array($update['activity'], $access_key));
 				}
 			}
 

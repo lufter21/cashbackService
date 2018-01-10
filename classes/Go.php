@@ -35,9 +35,9 @@ class Go extends Core {
 		$date = date('Y-m-d');
 		$sql_activity = $this->db->prepare('SELECT activity FROM users WHERE id=?');
 		$sql_activity->execute(array($this->_user['user_id']));
-		$activity = $sql_activity->fetch();
+		$activity_fetch = $sql_activity->fetch();
 		
-		$activity = json_decode($activity[0]) ?: array();
+		$activity = (!empty($activity_fetch[0])) ? json_decode($activity_fetch[0]) : array();
 
 		if (!in_array($date, $activity)) {
 			$activity[] = $date;
