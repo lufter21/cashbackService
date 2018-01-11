@@ -2650,9 +2650,10 @@ img {
   background-image: -moz-linear-gradient(bottom, #105377 5%, #156591 50%, #1777aa 95%);
   background-image: -o-linear-gradient(bottom, #105377 5%, #156591 50%, #1777aa 95%);
   background-image: linear-gradient(to top, #105377 5%, #156591 50%, #1777aa 95%);
-  -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  letter-spacing: 1px;
 }
 
 .form__button:hover {
@@ -2660,8 +2661,9 @@ img {
 }
 
 .form__txt {
+  font-size: 14px;
+  line-height: 1.5;
   margin-bottom: 14px;
-  line-height: 1.25;
 }
 
 .form_v1 {
@@ -3388,6 +3390,10 @@ a,
 
 .c-d-gray {
   color: #212121 !important;
+}
+
+.c-or {
+  color: #E68717 !important;
 }
 
 /*Border*/

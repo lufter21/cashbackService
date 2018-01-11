@@ -33,18 +33,8 @@ class Go extends Core {
 
 	protected function updateActivity() {
 		$date = date('Y-m-d');
-		$sql_activity = $this->db->prepare('SELECT activity FROM users WHERE id=?');
-		$sql_activity->execute(array($this->_user['user_id']));
-		$activity_fetch = $sql_activity->fetch();
-		
-		$activity = (!empty($activity_fetch[0])) ? json_decode($activity_fetch[0]) : array();
-
-		if (!in_array($date, $activity)) {
-			$activity[] = $date;
-			$new_activity = json_encode($activity);
-			$update_activity = $this->db->prepare('UPDATE users SET activity=? WHERE id=?');
-			$update_activity->execute(array($new_activity, $this->_user['user_id']));
-		}
+		$update_activity = $this->db->prepare('UPDATE users SET activity=? WHERE id=?');
+		$update_activity->execute(array($date, $this->_user['user_id']));
 	}
 
 }

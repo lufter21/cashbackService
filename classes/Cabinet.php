@@ -187,15 +187,19 @@ class Cabinet extends Core {
 		$sql_rate->execute(array(date('Y-m-d')));
 		$rate = $sql_rate->fetch(PDO::FETCH_ASSOC);
 
-		if ($this->_user['country'] == 'ru') {
-			$result = $this->mergeCur('rub', $rate['usd_rub']);
-		} else if ($this->_user['country'] == 'ua') {
-			$result = $this->mergeCur('uah', $rate['usd_uah']);
-		}
+		$result = array();
 
+		$result['rub'] = $this->mergeCur('rub', $rate['usd_rub']);
+		$result['uah'] = $this->mergeCur('uah', $rate['usd_uah']);
+
+		if ($this->_user['country'] == 'ru') {
+			$result['user'] = $result['rub'];
+		} else if ($this->_user['country'] == 'ua') {
+			$result['user'] = $result['uah'];
+		}
+		
 		return $result;
 	}
-
 
 	/*Admitad Statistics*/
 	protected function getAdmitadStat($start_date,$end_date){
