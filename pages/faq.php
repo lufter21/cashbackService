@@ -40,6 +40,13 @@ include('templates/header.php');
 					</div>
 
 					<div class="accord__item">
+						<button class="faq__quest accord__button">В какой валюте начисляется кэшбэк?<span></span></button>
+						<div class="faq__answ accord__content">
+							<p>Кэшбэк начисляется в валюте той страны, в которой открыт интернет-магазин. За покупки в международном магазине, например AliExpress, кэшбэк начисляется в долларах США, независимо от способа оплаты.</p>
+						</div>
+					</div>
+
+					<div class="accord__item">
 						<button class="faq__quest accord__button">Как получить кэшбэк?<span></span></button>
 						<div class="faq__answ accord__content">
 							<ol>

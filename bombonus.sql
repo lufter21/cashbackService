@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Янв 10 2018 г., 19:21
+-- Время создания: Янв 11 2018 г., 15:12
 -- Версия сервера: 5.6.37
 -- Версия PHP: 7.0.21
 
@@ -54,22 +54,22 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `alias`, `nav`, `name`, `title`, `description`, `text`, `all_qnt`, `ru_qnt`, `ua_qnt`, `name_shops`, `title_shops`, `description_shops`, `text_shops`, `all_shops`, `ru_shops`, `ua_shops`, `key_s`) VALUES
-(1, 'kompyuteri', 'Компьютеры', 'Компьютеры', 'Скидки на компьютеры', '', '', 18, 0, 0, '', '', '', '', 0, 0, 0, 'компьютер'),
-(2, 'elektronika', 'Электроника', 'Электронику', 'Скидки на электронику', '', '', 18, 0, 0, '', '', '', '', 0, 0, 0, 'электрон'),
-(3, 'avtotovari', 'Автотовары', 'Автотовары', 'Скидки на автотовары', '', '', 4, 0, 0, '', '', '', '', 3, 3, 0, 'автотовар'),
-(4, 'odezhda', 'Одежда', 'Одежда', 'Скидки на одежду', '', '', 20, 0, 0, '', '', '', '', 5, 8, 0, 'одежд'),
-(5, 'aksessuari', 'Аксессуары', 'Аксессуары', 'Скидки на аксессуары', '', '', 21, 0, 0, '', '', '', '', 5, 9, 0, 'аксессуар'),
+(1, 'kompyuteri', 'Компьютеры', 'Компьютеры', 'Скидки на компьютеры', '', '', 13, 0, 0, '', '', '', '', 0, 0, 0, 'компьютер'),
+(2, 'elektronika', 'Электроника', 'Электронику', 'Скидки на электронику', '', '', 13, 0, 0, '', '', '', '', 0, 0, 0, 'электрон'),
+(3, 'avtotovari', 'Автотовары', 'Автотовары', 'Скидки на автотовары', '', '', 3, 0, 0, '', '', '', '', 3, 3, 0, 'автотовар'),
+(4, 'odezhda', 'Одежда', 'Одежда', 'Скидки на одежду', '', '', 18, 0, 0, '', '', '', '', 5, 8, 0, 'одежд'),
+(5, 'aksessuari', 'Аксессуары', 'Аксессуары', 'Скидки на аксессуары', '', '', 20, 0, 0, '', '', '', '', 5, 9, 0, 'аксессуар'),
 (6, 'moda', 'Мода', 'Модные товары', 'Скидки на модные товары', '', '', 0, 0, 0, '', '', '', '', 0, 0, 0, 'мода'),
-(7, 'krasota', 'Красота', 'Товары для красоты', 'Скидки на товары для красоты', '', '', 17, 0, 0, '', '', '', '', 1, 10, 0, 'красот'),
-(8, 'zdorove', 'Здоровье', 'Товары для здоровья', 'Скидки на товары для здоровья', '', '', 17, 0, 0, '', '', '', '', 1, 10, 0, 'здоров'),
-(9, 'detskie-tovari', 'Детские товары', 'Детские товары', 'Скидки и акции на детские товары от лучших интернет магазинов. Радуйте своих детишек и при этом экономьте', 'Акции и скидки на детские товары от самых хороших интернет магазинов. Все товары для детей отличного качества, а сэкономленные деньги - это очень приятно.', '', 14, 0, 0, '', '', '', '', 2, 8, 0, 'дет'),
-(10, 'dlya-doma', 'Для дома', 'Товары для дома', 'Скидки на товары для дома', '', '', 20, 0, 0, '', '', '', '', 3, 6, 0, 'дом'),
-(11, 'obuv', 'Обувь', 'Обувь', 'Скидки на обувь', '', '', 16, 0, 0, '', '', '', '', 5, 8, 0, 'обув'),
-(12, 'sportivnie-tovari', 'Спортивные товары', 'Спортивные товары', 'Скидки на спортивные товары', '', '', 23, 0, 0, '', '', '', '', 2, 3, 0, 'спорт'),
+(7, 'krasota', 'Красота', 'Товары для красоты', 'Скидки на товары для красоты', '', '', 16, 0, 0, '', '', '', '', 1, 10, 0, 'красот'),
+(8, 'zdorove', 'Здоровье', 'Товары для здоровья', 'Скидки на товары для здоровья', '', '', 16, 0, 0, '', '', '', '', 1, 10, 0, 'здоров'),
+(9, 'detskie-tovari', 'Детские товары', 'Детские товары', 'Скидки и акции на детские товары от лучших интернет магазинов. Радуйте своих детишек и при этом экономьте', 'Акции и скидки на детские товары от самых хороших интернет магазинов. Все товары для детей отличного качества, а сэкономленные деньги - это очень приятно.', '', 12, 0, 0, '', '', '', '', 2, 8, 0, 'дет'),
+(10, 'dlya-doma', 'Для дома', 'Товары для дома', 'Скидки на товары для дома', '', '', 17, 0, 0, '', '', '', '', 3, 6, 0, 'дом'),
+(11, 'obuv', 'Обувь', 'Обувь', 'Скидки на обувь', '', '', 15, 0, 0, '', '', '', '', 5, 8, 0, 'обув'),
+(12, 'sportivnie-tovari', 'Спортивные товары', 'Спортивные товары', 'Скидки на спортивные товары', '', '', 22, 0, 0, '', '', '', '', 2, 3, 0, 'спорт'),
 (13, 'chasi', 'Часы', 'Часы', 'Скидки на часы', '', '', 12, 0, 0, '', '', '', '', 0, 0, 0, 'часы'),
-(14, 'turizm', 'Туризм', 'Туризм', 'Скидки на товары для туризма', '', '', 4, 0, 0, '', '', '', '', 0, 0, 0, 'туризм'),
+(14, 'turizm', 'Туризм', 'Туризм', 'Скидки на товары для туризма', '', '', 3, 0, 0, '', '', '', '', 0, 0, 0, 'туризм'),
 (15, 'puteshestviya', 'Путешествия', 'Путешествия', 'Скидки на путешествия', '', '', 0, 0, 0, '', '', '', '', 0, 0, 0, 'путешеств'),
-(16, 'igrushki', 'Игрушки', 'Игрушки', 'Скидки на игрушки', '', '', 13, 0, 0, '', '', '', '', 0, 1, 0, 'игр'),
+(16, 'igrushki', 'Игрушки', 'Игрушки', 'Скидки на игрушки', '', '', 10, 0, 0, '', '', '', '', 0, 1, 0, 'игр'),
 (17, 'cveti', 'Цветы', 'Цветы', 'Скидки на цветы', '', '', 12, 0, 0, '', '', '', '', 0, 0, 0, 'цветы'),
 (18, 'podarki', 'Подарки', 'Подарки', 'Скидки на подарки', '', '', 12, 0, 0, '', '', '', '', 0, 1, 0, 'подар'),
 (19, 'zoo-tovari', 'ЗОО товары', 'ЗОО товары', 'Скидки на зоо товары', '', '', 6, 0, 0, '', '', '', '', 0, 0, 0, 'зоо'),
@@ -147,14 +147,6 @@ INSERT INTO `discounts` (`id`, `category`, `title`, `description`, `shop`, `prom
 (11606361, 'Красота и здоровье', 'Rabaty do 50% na towary dla urody i włosów!', '', 'aliexpress', '', '50%', 50, '2017-12-18 18:22:00', '2018-01-31 23:59:00', 'https://alitems.com/g/yjbw7nshtu30b9bc509216525dc3e8/?i=3', 'all', 1),
 (11606371, 'Аксессуары и сумки, Цветы и подарки, Часы и украшения', 'Rabaty do 80% na akcesoria!', '', 'aliexpress', '', '80%', 80, '2017-12-18 18:22:00', '2018-01-31 23:59:00', 'https://alitems.com/g/twz1t6sqnd30b9bc509216525dc3e8/?i=3', 'all', 1),
 (11606381, 'Аксессуары и сумки, Обувь ', 'Rabaty do 60% na torebki i buty!', '', 'aliexpress', '', '60%', 60, '2017-12-18 18:22:00', '2018-01-31 23:59:00', 'https://alitems.com/g/88hed431p830b9bc509216525dc3e8/?i=3', 'all', 1),
-(11620101, 'Товары для детей, Красота и здоровье, Одежда, Товары для дома, Игры, Автотовары', 'TMALL! Скидки до 50% на детские товары!', '', 'aliexpress', '', '50%', 50, '2017-12-26 16:26:00', '2018-01-07 23:59:00', 'https://alitems.com/g/sz992s2xb830b9bc509216525dc3e8/?i=3', 'all', 1),
-(11620111, 'Аксессуары и сумки, Обувь , Одежда, Спорт и отдых, Товары для туризма', 'TMALL! Скидки до 60% на одежду, обувь, сумки, товары для спорта, отдыха и путешествий!', '', 'aliexpress', '', '60%', 60, '2017-12-26 16:26:00', '2018-01-07 23:59:00', 'https://alitems.com/g/4cli1alosm30b9bc509216525dc3e8/?i=3', 'all', 1),
-(11620171, 'Товары для детей, Игры', 'TMALL! Скидки до 25% на LEGO!', '', 'aliexpress', '', '25%', 25, '2017-12-26 16:26:00', '2018-01-07 23:59:00', 'https://alitems.com/g/qgb64lq6ae30b9bc509216525dc3e8/?i=3', 'all', 1),
-(11620191, 'Компьютеры и электроника, Игры', 'TMALL! Скидки до 27% на Игровые ноутбуки MSI!', '', 'aliexpress', '', '27%', 27, '2017-12-26 16:26:00', '2018-01-07 23:59:00', 'https://alitems.com/g/yaw3s7ocl530b9bc509216525dc3e8/?i=3', 'all', 1),
-(11620251, 'Компьютеры и электроника', 'TMALL! Скидки до 30% на компьютеры, комплектующие и планшеты!', '', 'aliexpress', '', '30%', 30, '2017-12-26 16:56:00', '2018-01-07 23:59:00', 'https://alitems.com/g/jizhu6om0p30b9bc509216525dc3e8/?i=3', 'all', 1),
-(11620291, 'Компьютеры и электроника', 'TMALL! Скидки до 45% на смартфоны и аксессуары!', '', 'aliexpress', '', '45%', 45, '2017-12-26 16:56:00', '2018-01-07 23:59:00', 'https://alitems.com/g/q1if3bwca730b9bc509216525dc3e8/?i=3', 'all', 1),
-(11620331, 'Товары для дома, Компьютеры и электроника', 'TMALL! Скидки до 60% на бытовую технику!', '', 'aliexpress', '', '60%', 60, '2017-12-26 16:56:00', '2018-01-07 23:59:00', 'https://alitems.com/g/blcgphmi6j30b9bc509216525dc3e8/?i=3', 'all', 1),
-(11620351, 'Товары для дома, Компьютеры и электроника', 'TMALL! Скидки до 33% на электронику и технику для дома!', '', 'aliexpress', '', '33%', 33, '2017-12-26 16:56:00', '2018-01-07 23:59:00', 'https://alitems.com/g/fwhec16fqs30b9bc509216525dc3e8/?i=3', 'all', 1),
 (11624891, 'Товары для детей, Красота и здоровье, Аксессуары и сумки, Обувь , Одежда, Спорт и отдых, Товары для дома, Компьютеры и электроника, Часы и украшения, Игры, Автотовары, Инструменты и садовая техника, Товары для туризма', 'TMALL! Скидка 5$ при регистрации!', '', 'aliexpress', '', '5 $', 5, '2017-12-28 12:42:00', '2018-02-28 23:59:00', 'https://alitems.com/g/s5co1u6clz30b9bc509216525dc3e8/?i=3', 'all', 1),
 (11627591, 'Товары для детей, Красота и здоровье, Аксессуары и сумки, Обувь , Одежда, Спорт и отдых, Товары для дома, Компьютеры и электроника, Цветы и подарки, Часы и украшения, Зоотовары, Игры, Автотовары, Инструменты и садовая техника, Товары для туризма', 'Get $4 in coupons after first registration!', 'The deal is only available for new customers.', 'aliexpress', '', '4 $', 4, '2017-12-29 11:55:00', '2018-02-28 23:59:00', 'https://alitems.com/g/hq5i8wowiv30b9bc509216525dc3e8/?i=3', 'all', 1),
 (11627651, 'Товары для детей, Красота и здоровье, Аксессуары и сумки, Обувь , Одежда, Спорт и отдых, Товары для дома, Компьютеры и электроника, Цветы и подарки, Часы и украшения, Зоотовары, Игры, Автотовары, Инструменты и садовая техника, Товары для туризма', 'Recibe $4 en cupones después de su primer registro!', 'Oferta válida solo para clientes nuevos.', 'aliexpress', '', '4 $', 4, '2017-12-29 11:55:00', '2018-02-28 23:59:00', 'https://alitems.com/g/ioc54x9n3z30b9bc509216525dc3e8/?i=3', 'all', 1);
@@ -255,32 +247,32 @@ CREATE TABLE `users` (
   `country` varchar(21) NOT NULL,
   `password` varchar(255) NOT NULL,
   `seed` varchar(255) NOT NULL,
+  `access_key` varchar(255) NOT NULL,
   `registration_date` date NOT NULL,
-  `activity` text NOT NULL,
-  `sum_open_usd` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
-  `sum_approved_usd` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
-  `sum_open_rub` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
-  `sum_approved_rub` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
-  `sum_open_uah` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
-  `sum_approved_uah` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
+  `activity` date NOT NULL,
   `last_upd_stat_time` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `sum_open_usd` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
+  `sum_open_rub` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
+  `sum_open_uah` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
+  `sum_approved_usd` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
+  `sum_approved_rub` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
+  `sum_approved_uah` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
   `payment_usd` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
   `payment_rub` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
   `payment_uah` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
   `paid_usd` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
   `paid_rub` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
-  `paid_uah` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
-  `access_key` varchar(255) NOT NULL
+  `paid_uah` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `identity`, `network`, `name`, `email`, `country`, `password`, `seed`, `registration_date`, `activity`, `sum_open_usd`, `sum_approved_usd`, `sum_open_rub`, `sum_approved_rub`, `sum_open_uah`, `sum_approved_uah`, `last_upd_stat_time`, `payment_usd`, `payment_rub`, `payment_uah`, `paid_usd`, `paid_rub`, `paid_uah`, `access_key`) VALUES
-(30, '5d5408335aa7793596895916c23aa5e5', 'facebook', 'Vitaliy Lufter', 'lufter21@gmail.com', 'ua', '3b12b3a6d9858089b7686579f2cb1b20', 'ea665dddde3ee856a0352d2c9997069d4cdc71a2', '2017-10-01', '[\"2017-08-30\",\"2017-09-04\",\"2017-09-06\",\"2017-09-18\",\"2017-11-23\",\"2017-12-18\",\"2017-12-19\",\"2017-12-24\",\"2018-01-10\"]', '29.40', '0.00', '0.00', '0.00', '0.00', '0.00', 1515598594, '0.03', '3.35', '0.00', '1.20', '0.00', '0.00', '5d5408335aa7793596895916c23aa5e57b149ce076de20eb4bebc9cce6d9a7e3b44ef065'),
-(34, '26ac92ef135c17379544265ab197199d', '', 'lufter', 'lufter22@gmail.com', 'ua', 'a6652429c596b2215d5b27cf08a0c7a0', '9313b10be40215f50a8394173d423bd1017729b0', '2017-10-01', '[\"2017-10-01\"]', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1506849818, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '26ac92ef135c17379544265ab197199d448331d5ce18f200368095a73e71558704b3b835'),
-(35, 'ff54673e8a8ad85a5101059760f479c0', 'twitter', 'Vitaliy Lufter', 'lufter@gmail.com', 'ru', 'd39d3ca386e28c1660cd58740eba2dd3', 'db80c47317a5c9b41559ea0055f16afc26847e7c', '2017-10-02', '', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1506935955, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 'ff54673e8a8ad85a5101059760f479c014a9fc199a57e12a7e0302e694b56fb4380ff42c');
+INSERT INTO `users` (`id`, `identity`, `network`, `name`, `email`, `country`, `password`, `seed`, `access_key`, `registration_date`, `activity`, `last_upd_stat_time`, `sum_open_usd`, `sum_open_rub`, `sum_open_uah`, `sum_approved_usd`, `sum_approved_rub`, `sum_approved_uah`, `payment_usd`, `payment_rub`, `payment_uah`, `paid_usd`, `paid_rub`, `paid_uah`) VALUES
+(30, '5d5408335aa7793596895916c23aa5e5', 'facebook', 'Vitaliy Lufter', 'lufter21@gmail.com', 'ua', '3b12b3a6d9858089b7686579f2cb1b20', 'ea665dddde3ee856a0352d2c9997069d4cdc71a2', '5d5408335aa7793596895916c23aa5e57b149ce076de20eb4bebc9cce6d9a7e3b44ef065', '2017-07-21', '2018-01-11', 1515668315, '2.40', '21.09', '0.00', '1.26', '12.11', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00'),
+(34, '26ac92ef135c17379544265ab197199d', '', 'lufter', 'lufter22@gmail.com', 'ua', 'a6652429c596b2215d5b27cf08a0c7a0', '9313b10be40215f50a8394173d423bd1017729b0', '26ac92ef135c17379544265ab197199d448331d5ce18f200368095a73e71558704b3b835', '2017-10-01', '2017-10-01', 1506849818, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00'),
+(35, 'ff54673e8a8ad85a5101059760f479c0', 'twitter', 'Vitaliy Lufter', 'lufter@gmail.com', 'ru', 'd39d3ca386e28c1660cd58740eba2dd3', 'db80c47317a5c9b41559ea0055f16afc26847e7c', 'ff54673e8a8ad85a5101059760f479c014a9fc199a57e12a7e0302e694b56fb4380ff42c', '2017-10-02', '2017-10-02', 1506935955, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00');
 
 -- --------------------------------------------------------
 
@@ -300,8 +292,8 @@ CREATE TABLE `users_stat` (
 --
 
 INSERT INTO `users_stat` (`id`, `userid`, `date`, `data`) VALUES
-(3020170830, 30, '2017-08-30', '[{\"shop_name\":\"Magazin\",\"cashback\":\"5.32 \\u0440\\u0443\\u0431\",\"status\":\"pending\",\"currensy\":\"rub\",\"product_image\":\"https:\\/\\/ae01.alicdn.com\\/kf\\/HTB1v6VIOXXXXXaUaFXXq6xXFXXXZ\\/Original-Power-Bank-10000mAh-Portable-External-Battery-Portable-Charger-with-LED-Indicator-for-iphone-5-6s.jpg\",\"product_name\":\"Original Power Bank 10000mAh Portable External Battery Portable Charger with LED Indicator for iphone 5 6s plus Xiaomi Cellphone\",\"price\":\"145.49 \\u0440\\u0443\\u0431\"},{\"shop_name\":\"Magazin\",\"cashback\":\"1.77 \\u0440\\u0443\\u0431\",\"status\":\"pending\",\"currensy\":\"rub\",\"product_image\":\"https:\\/\\/ae01.alicdn.com\\/kf\\/HTB1v6VIOXXXXXaUaFXXq6xXFXXXZ\\/Original-Power-Bank-10000mAh-Portable-External-Battery-Portable-Charger-with-LED-Indicator-for-iphone-5-6s.jpg\",\"product_name\":\"Original Power Bank 10000mAh Portable External Battery Portable Charger with LED Indicator for iphone 5 6s plus Xiaomi Cellphone\",\"price\":\"145.49 \\u0440\\u0443\\u0431\"},{\"shop_name\":\"Magazin\",\"cashback\":\"$1.57\",\"status\":\"pending\",\"currensy\":\"usd\",\"product_image\":\"https:\\/\\/ae01.alicdn.com\\/kf\\/HTB1By4wNFXXXXb0XpXXq6xXFXXXP\\/SUOYANG-Power-Bank-20000mAh-10000mAh-Mi-External-Battery-Bank-Portable-Charger-Powerbank-18650-For-iPhone-Xiaomi.jpg\",\"product_name\":\"SUOYANG Power Bank 20000mAh 10000mAh Mi External Battery Bank Portable Charger Powerbank 18650 For iPhone Xiaomi Android Phones\",\"price\":\"$28.05\"},{\"shop_name\":\"Magazin\",\"cashback\":\"12.11 \\u0440\\u0443\\u0431\",\"status\":\"approved\",\"currensy\":\"rub\",\"product_image\":\"https:\\/\\/ae01.alicdn.com\\/kf\\/HTB1By4wNFXXXXb0XpXXq6xXFXXXP\\/SUOYANG-Power-Bank-20000mAh-10000mAh-Mi-External-Battery-Bank-Portable-Charger-Powerbank-18650-For-iPhone-Xiaomi.jpg\",\"product_name\":\"SUOYANG Power Bank 20000mAh 10000mAh Mi External Battery Bank Portable Charger Powerbank 18650 For iPhone Xiaomi Android Phones\",\"price\":\"218.05 \\u0440\\u0443\\u0431\"}]'),
-(3020170904, 30, '2017-09-04', '[{\"shop_name\":\"Aliexpress INT\",\"cashback\":\"$0.72\",\"status\":\"declined\",\"currensy\":\"usd\",\"product_image\":\"https:\\/\\/ae01.alicdn.com\\/kf\\/HTB1By4wNFXXXXb0XpXXq6xXFXXXP\\/SUOYANG-Power-Bank-20000mAh-10000mAh-Mi-External-Battery-Bank-Portable-Charger-Powerbank-18650-For-iPhone-Xiaomi.jpg\",\"product_name\":\"SUOYANG Power Bank 20000mAh 10000mAh Mi External Battery Bank Portable Charger Powerbank 18650 For iPhone Xiaomi Android Phones\",\"price\":\"$18.05\"},{\"shop_name\":\"Magazin\",\"cashback\":\"15.11 \\u0440\\u0443\\u0431\",\"status\":\"pending\",\"currensy\":\"rub\",\"product_image\":\"https:\\/\\/ae01.alicdn.com\\/kf\\/HTB1By4wNFXXXXb0XpXXq6xXFXXXP\\/SUOYANG-Power-Bank-20000mAh-10000mAh-Mi-External-Battery-Bank-Portable-Charger-Powerbank-18650-For-iPhone-Xiaomi.jpg\",\"product_name\":\"SUOYANG Power Bank 20000mAh 10000mAh Mi External Battery Bank Portable Charger Powerbank 18650 For iPhone Xiaomi Android Phones\",\"price\":\"18.05 \\u0440\\u0443\\u0431\"}]'),
+(3020170830, 30, '2017-08-30', '[{\"shop_name\":\"Magazin\",\"cashback\":\"1.77 \\u0440\\u0443\\u0431\",\"status\":\"pending\",\"currensy\":\"rub\",\"product_image\":\"https:\\/\\/ae01.alicdn.com\\/kf\\/HTB1v6VIOXXXXXaUaFXXq6xXFXXXZ\\/Original-Power-Bank-10000mAh-Portable-External-Battery-Portable-Charger-with-LED-Indicator-for-iphone-5-6s.jpg\",\"product_name\":\"Original Power Bank 10000mAh Portable External Battery Portable Charger with LED Indicator for iphone 5 6s plus Xiaomi Cellphone\",\"price\":\"145.49 \\u0440\\u0443\\u0431\"},{\"shop_name\":\"Magazin\",\"cashback\":\"$1.57\",\"status\":\"pending\",\"currensy\":\"usd\",\"product_image\":\"https:\\/\\/ae01.alicdn.com\\/kf\\/HTB1By4wNFXXXXb0XpXXq6xXFXXXP\\/SUOYANG-Power-Bank-20000mAh-10000mAh-Mi-External-Battery-Bank-Portable-Charger-Powerbank-18650-For-iPhone-Xiaomi.jpg\",\"product_name\":\"SUOYANG Power Bank 20000mAh 10000mAh Mi External Battery Bank Portable Charger Powerbank 18650 For iPhone Xiaomi Android Phones\",\"price\":\"$28.05\"},{\"shop_name\":\"Magazin\",\"cashback\":\"12.11 \\u0440\\u0443\\u0431\",\"status\":\"approved\",\"currensy\":\"rub\",\"product_image\":\"https:\\/\\/ae01.alicdn.com\\/kf\\/HTB1By4wNFXXXXb0XpXXq6xXFXXXP\\/SUOYANG-Power-Bank-20000mAh-10000mAh-Mi-External-Battery-Bank-Portable-Charger-Powerbank-18650-For-iPhone-Xiaomi.jpg\",\"product_name\":\"SUOYANG Power Bank 20000mAh 10000mAh Mi External Battery Bank Portable Charger Powerbank 18650 For iPhone Xiaomi Android Phones\",\"price\":\"218.05 \\u0440\\u0443\\u0431\"}]'),
+(3020170904, 30, '2017-09-04', '[{\"shop_name\":\"Aliexpress INT\",\"cashback\":\"$0.72\",\"status\":\"declined\",\"currensy\":\"usd\",\"product_image\":\"https:\\/\\/ae01.alicdn.com\\/kf\\/HTB1By4wNFXXXXb0XpXXq6xXFXXXP\\/SUOYANG-Power-Bank-20000mAh-10000mAh-Mi-External-Battery-Bank-Portable-Charger-Powerbank-18650-For-iPhone-Xiaomi.jpg\",\"product_name\":\"SUOYANG Power Bank 20000mAh 10000mAh Mi External Battery Bank Portable Charger Powerbank 18650 For iPhone Xiaomi Android Phones\",\"price\":\"$18.05\"},{\"shop_name\":\"Magazin\",\"cashback\":\"19.32 \\u0440\\u0443\\u0431\",\"status\":\"pending\",\"currensy\":\"rub\",\"product_image\":\"https:\\/\\/ae01.alicdn.com\\/kf\\/HTB1v6VIOXXXXXaUaFXXq6xXFXXXZ\\/Original-Power-Bank-10000mAh-Portable-External-Battery-Portable-Charger-with-LED-Indicator-for-iphone-5-6s.jpg\",\"product_name\":\"Original Power Bank 10000mAh Portable External Battery Portable Charger with LED Indicator for iphone 5 6s plus Xiaomi Cellphone\",\"price\":\"145.49 \\u0440\\u0443\\u0431\"}]'),
 (3020170906, 30, '2017-09-06', '[{\"shop_name\":\"Aliexpress INT\",\"cashback\":\"$0.57\",\"status\":\"declined\",\"currensy\":\"usd\",\"product_image\":\"https:\\/\\/ae01.alicdn.com\\/kf\\/HTB1v6VIOXXXXXaUaFXXq6xXFXXXZ\\/Original-Power-Bank-10000mAh-Portable-External-Battery-Portable-Charger-with-LED-Indicator-for-iphone-5-6s.jpg\",\"product_name\":\"Original Power Bank 10000mAh Portable External Battery Portable Charger with LED Indicator for iphone 5 6s plus Xiaomi Cellphone\",\"price\":\"$14.49\"}]'),
 (3020170918, 30, '2017-09-18', '[{\"shop_name\":\"Aliexpress INT\",\"cashback\":\"$0.71\",\"status\":\"approved\",\"currensy\":\"usd\",\"product_image\":\"https:\\/\\/ae01.alicdn.com\\/kf\\/HTB1qMi.OFXXXXcTaXXXq6xXFXXX3\\/ROMOSS-Sense4-Plus-with-LCD-Battery-Indicator-Power-Bank-10400mAh-Portable-Charger-Battery-18650-Dual-USB.jpg\",\"product_name\":\"ROMOSS Sense4 Plus with LCD Battery Indicator Power Bank 10400mAh Portable Charger Battery 18650 Dual USB Output\",\"price\":\"$17.99\"}]'),
 (3020171123, 30, '2017-11-23', '[{\"shop_name\":\"Aliexpress INT\",\"cashback\":\"$0.55\",\"status\":\"approved\",\"currensy\":\"usd\",\"product_image\":\"https:\\/\\/ae01.alicdn.com\\/kf\\/HTB1_9oIcBcHL1JjSZFBq6yiGXXa0\\/7-Frequency-Silicone-Prostate-Massager-Sex-Toys-For-Men-Rechargeable-Anal-Vibrator-Vibrating-butt-plug-Erotic.jpg\",\"product_name\":\"7 Frequency Silicone Prostate Massager Sex Toys For Men Rechargeable Anal Vibrator Vibrating butt plug Erotic Anal Toys\",\"price\":\"$12.49\"}]'),
