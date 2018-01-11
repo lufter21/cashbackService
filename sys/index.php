@@ -1,20 +1,18 @@
 <?php
+require_once ('../classes/DbConect.php');
+
+$adm_log = 'l';
+$adm_pass = '21';
 
 error_reporting(E_ALL ^ E_NOTICE); 
 ini_set('display_errors', 1);
 
-class Db{
-	public $db;
-	function __construct(){
-		$this->db = new PDO('mysql:host=localhost;dbname=bombonus','root','');
-		$this->db->query('SET NAMES utf8');
-	}
-}
-
 session_start();		
-	if(isset($_SESSION['log']) && isset($_SESSION['pass']) && $_SESSION['log']=="l" && $_SESSION['pass']=="21")
+	if(isset($_SESSION['log']) && isset($_SESSION['pass']) && $_SESSION['log']==$adm_log && $_SESSION['pass']==$adm_pass)
 	{
-		$db = new Db;
+		$db = DbConect::getInstance();
+		$db = $db->getDb();
+
 		$route = 'shops';
 		$log = $_SESSION['log'].' &nbsp;&nbsp;<a href="/sys/logout.php">Logout</a>';
 		if(isset($_GET['route']))
@@ -29,9 +27,9 @@ session_start();
 
 		if(isset($_POST['login']) && isset($_POST['pass']))
 		{	
-			if($_POST['login']=="l" && $_POST['pass']=="21"){
-				$_SESSION['log'] = $_POST['login'];
-				$_SESSION['pass'] = $_POST['pass'];
+			if($_POST['login']==$adm_log && $_POST['pass']==$adm_pass){
+				$_SESSION['log'] = $adm_log;
+				$_SESSION['pass'] = $adm_pass;
 				header("Location: /sys");
 				exit;
 			}

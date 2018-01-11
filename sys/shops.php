@@ -1,7 +1,7 @@
 <?php
 if(!empty($_POST['change-available'])){
-	$update_disc = $db->db->prepare('UPDATE discounts SET available=? WHERE shop=?');
-	$update_shop = $db->db->prepare('UPDATE shops SET available=? WHERE alias=?');
+	$update_disc = $db->prepare('UPDATE discounts SET available=? WHERE shop=?');
+	$update_shop = $db->prepare('UPDATE shops SET available=? WHERE alias=?');
 	foreach($_POST['available'] as $shop=>$val){
 		$update_disc->execute(array($val,$shop));
 		$update_shop->execute(array($val,$shop));
@@ -9,14 +9,14 @@ if(!empty($_POST['change-available'])){
 }
 
 function shops($db){
-	$shops = $db->db->prepare('SELECT * FROM shops ORDER BY name');
+	$shops = $db->prepare('SELECT * FROM shops ORDER BY name');
 	$shops->execute();
 	$shops = $shops->fetchAll(PDO::FETCH_ASSOC);
 	return $shops;
 }
 
 function quant($shop,$db){
-	$pagcount = $db->db->prepare('SELECT id FROM discounts WHERE shop=?');
+	$pagcount = $db->prepare('SELECT id FROM discounts WHERE shop=?');
 	$pagcount->execute(array($shop));
 	$pagcount = $pagcount->rowCount();
 	return $pagcount;

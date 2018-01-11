@@ -16,46 +16,51 @@ class Cabinet extends Core {
 		$sql_activity = $this->db->prepare('SELECT activity FROM users WHERE id=?');
 		$sql_activity->execute(array($this->_user['user_id']));
 		$activity_fetch = $sql_activity->fetch();
-		$activity = json_decode($activity_fetch[0]);
 
-		
-		if ($activity) {
+		$start_date = $this->_user['registration_date'];
+		$end_date = $activity_fetch[0];
+
+		$admitad_arr = $this->getAdmitadStat($start_date, $end_date);
+		$other_arr = $this->getOtherStat($start_date, $end_date);
+
+		$result_data_arr = array_merge_recursive($admitad_arr['data'], $other_arr['data']);
+
+		if (!empty($result_data_arr)) {
 
 			$add_stat = $this->db->prepare('INSERT INTO users_stat (id,userid,date,data) VALUES (:id,:userid,:date,:data) ON DUPLICATE KEY UPDATE data=:u_data');
 
 			$result_sum_open = array('usd'=>0,'rub'=>0,'uah'=>0);
 			$result_sum_approved = array('usd'=>0,'rub'=>0,'uah'=>0);
 
-			foreach ($activity as $date) {
+			foreach ($result_data_arr as $date => $val) {
 
-				$admitad_arr = $this->getAdmitadStat($date);
-				$other_arr = $this->getOtherStat($date);
+				if (!empty($val)) {
 
-				$result_data_arr = array_merge($admitad_arr['data'], $other_arr['data']);
-
-				if (!empty($result_data_arr)) {
-					$data = json_encode($result_data_arr);
+					$data = json_encode($val);
+					
 					$add_stat->execute(array(
 						'id'=>$this->_user['user_id'].str_replace('-', '', $date),
 						'userid'=>$this->_user['user_id'],
 						'date'=>$date,
 						'data'=>$data,
 						'u_data'=>$data
-						));
-				}
+					));
 
-				foreach ($result_sum_open as $key => $val) {
-					$result_sum_open[$key] += $admitad_arr['sum_open'][$key] + $other_arr['sum_open'][$key];
-					$result_sum_approved[$key] += $admitad_arr['sum_approved'][$key] + $other_arr['sum_approved'][$key];
 				}
-
+				
+			}
+			
+			foreach ($result_sum_open as $key => $val) {
+				$result_sum_open[$key] += $admitad_arr['sum_open'][$key] + $other_arr['sum_open'][$key];
+				$result_sum_approved[$key] += $admitad_arr['sum_approved'][$key] + $other_arr['sum_approved'][$key];
 			}
 
 			$update_sum = $this->db->prepare('UPDATE users SET sum_open_usd=?, sum_approved_usd=?, sum_open_rub=?, sum_approved_rub=?, sum_open_uah=?, sum_approved_uah=? WHERE id=?');
 
 			$update_sum->execute(array($result_sum_open['usd'], $result_sum_approved['usd'], $result_sum_open['rub'], $result_sum_approved['rub'], $result_sum_open['uah'], $result_sum_approved['uah'], $this->_user['user_id']));
-		}
 
+		}
+		
 		return true;
 	}
 
@@ -137,7 +142,7 @@ class Cabinet extends Core {
 			$last_time = $this->db->prepare('SELECT last_upd_stat_time FROM users WHERE id=?');
 			$last_time->execute(array($this->_user['user_id']));
 			$last_time = $last_time->fetch();
-			if ($cur_timestamp > ($last_time[0]+5*60)) {
+			if ($cur_timestamp > 0 /*($last_time[0]+5*60)*/) {
 				return true;
 			} else {
 				return false;
@@ -191,18 +196,15 @@ class Cabinet extends Core {
 		return $result;
 	}
 
-/*Admitad Statistics*/
-	protected function getAdmitadStat($date){
 
-		$stat_arr = array();
+	/*Admitad Statistics*/
+	protected function getAdmitadStat($start_date,$end_date){
+
+		$stat_arr = array(array());
 		$sum_open = array();
 		$sum_approved = array();
 
-		//$xml = 'https://www.admitad.com/ru/webmaster/statistics/campaigns_xml/?export&format=xml&code=4091f1232c&user=lufter&start_date='.$date.'&end_date='.$date.'&action_type=0&sub_ids=userid'.$this->_user['user_id'];
-
-		//https://www.admitad.com/ru/webmaster/statistics/actions_xml/?export&format=xml&code=4091f1232c&user=lufter&default_currency=RUB&start_date=2018-01-09&end_date=2018-01-09&sub_ids=userid30
-
-		$xml = 'https://www.admitad.com/ru/webmaster/statistics/actions_xml/?export&format=xml&code=4091f1232c&user=lufter&start_date='.$date.'&end_date='.$date.'&sub_ids=userid'.$this->_user['user_id'];
+		$xml = 'https://www.admitad.com/ru/webmaster/statistics/actions_xml/?export&format=xml&code=4091f1232c&user=lufter&start_date='.$start_date.'&end_date='.$end_date.'&sub_ids=userid'.$this->_user['user_id'];
 
 		$xml_obj = simplexml_load_file($xml);
 
@@ -217,10 +219,11 @@ class Cabinet extends Core {
 					$status = 'pending';
 				}
 				
-
 				$currency = strtolower((string) $val->currency);
 
-				$stat_arr[] = array(
+				$date = explode(' ', (string) $val->action_date);
+
+				$stat_arr[$date[0]][] = array(
 					'shop_name'=>(string) $val->advcampaign_name,
 					'cashback'=>$this->mergeCur($currency, $cashback),
 					'status'=>$status,
@@ -229,6 +232,7 @@ class Cabinet extends Core {
 					'product_name'=>(string) $val->product_name,
 					'price'=>$this->mergeCur($currency, (float) $val->cart)
 					);
+
 
 				if ($status == 'pending') {
 					switch ($currency) {
@@ -269,14 +273,15 @@ class Cabinet extends Core {
 		return array('sum_open'=>$sum_open, 'sum_approved'=>$sum_approved, 'data'=>$stat_arr);
 	}
 
-/*other Statistics*/
-	protected function getOtherStat($date){
 
-		$stat_arr = array();
+	/*other Statistics*/
+	protected function getOtherStat($start_date,$end_date){
+
+		$stat_arr = array(array());
 		$sum_open = array();
 		$sum_approved = array();
 
-		$xml = 'test-xml/a-'.$date.'-userid'.$this->_user['user_id'].'.xml';
+		$xml = 'test-xml/a-2017-08-30-userid'.$this->_user['user_id'].'.xml';
 
 		if(file_exists($xml)){
 			$xml_obj = simplexml_load_file($xml);
@@ -289,7 +294,9 @@ class Cabinet extends Core {
 					$status = (string) $val->status;
 					$currency = strtolower((string) $val->currency);
 
-					$stat_arr[] = array(
+					$date = explode(' ', (string) $val->action_date);
+
+					$stat_arr[$date[0]][] = array(
 						'shop_name'=>(string) $val->advcampaign_name,
 						'cashback'=>$this->mergeCur($currency, $cashback),
 						'status'=>$status,

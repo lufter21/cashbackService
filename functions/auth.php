@@ -58,7 +58,7 @@ function do_registr($user_data, $password = ""){
 		$user_data['password'] = md5($identity.$user_data['seed']);
 	}
 	
-	$ins_users = $db->prepare('INSERT INTO users (identity,network,name,email,password,seed,registration_date,country) VALUES (:identity,:network,:name,:email,:password,:seed,:registration_date,:country)');
+	$ins_users = $db->prepare('INSERT INTO users (identity,network,name,email,password,seed,registration_date,activity,country) VALUES (:identity,:network,:name,:email,:password,:seed,:registration_date,:activity,:country)');
 
 	$ins_users->execute(array(
 		'identity'=>$identity,
@@ -68,6 +68,7 @@ function do_registr($user_data, $password = ""){
 		'password'=>$user_data['password'],
 		'seed'=>$user_data['seed'],
 		'registration_date'=>date('Y-m-d'),
+		'activity'=>date('Y-m-d'),
 		'country'=>country_code($user_data['country'])
 		));
 
@@ -77,14 +78,20 @@ function do_registr($user_data, $password = ""){
 }
 
 /*get message*/
-function get_message($value=''){
+function get_message($value){
 	$network = array(
 		'vkontakte'=>'Вконтакте',
 		'facebook'=>'Facebook',
 		'twitter'=>'Twitter',
-		'yandex'=>'Яндекс'
+		'yandex'=>'Яндекс',
+		'odnoklassniki'=>'Одноклассники',
+		'google'=>'Google',
+		'mailru'=>'MailRU'
 		);
-	return 'Вы входили ранее через аккаунт '.str_replace(array_keys($network), array_values($network), $value).'. Попробуйте авторизироваться используя соответствующую кнопку.';
+	
+	$msg = 'Вы входили ранее через аккаунт '.str_replace(array_keys($network), array_values($network), $value).'. Попробуйте авторизироваться используя соответствующую кнопку.';
+
+	return $msg; 
 }
 
 

@@ -3,10 +3,10 @@
 Import of discounts
 */
 
-$ins_act = $db->db->prepare('INSERT INTO discounts (id,category,title,description,promocode,discount,dis_count,date_start,date_end,url,shop,region) VALUES (:id,:category,:title,:description,:promocode,:discount,:dis_count,:date_start,:date_end,:url,:shop,:region)');
+$ins_act = $db->prepare('INSERT INTO discounts (id,category,title,description,promocode,discount,dis_count,date_start,date_end,url,shop,region) VALUES (:id,:category,:title,:description,:promocode,:discount,:dis_count,:date_start,:date_end,:url,:shop,:region)');
 
 function get_shop($shop,$db){
-	$get_act = $db->db->prepare('SELECT id,csv_discounts FROM shops WHERE alias=?');
+	$get_act = $db->prepare('SELECT id,csv_discounts FROM shops WHERE alias=?');
 	$get_act->execute(array($shop));
 	$return = $get_act->fetch(PDO::FETCH_ASSOC);
 	return $return;
@@ -54,8 +54,8 @@ $tit = 'Upload '.$the_shop_name.' Discounts';
 include('header.php');
 
 if(isset($_POST['import_csv_link'])){
-	$get_discounts = $db->db->prepare('SELECT id,date_end FROM discounts WHERE shop=?');
-	$del_discount = $db->db->prepare('DELETE FROM discounts WHERE id=?');
+	$get_discounts = $db->prepare('SELECT id,date_end FROM discounts WHERE shop=?');
+	$del_discount = $db->prepare('DELETE FROM discounts WHERE id=?');
 	$get_discounts->execute(array($shop));
 	$get_discounts_arr = $get_discounts->fetchAll(PDO::FETCH_ASSOC);
 	$current_time = time();

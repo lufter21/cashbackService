@@ -2,18 +2,18 @@
 
 if(!empty($_POST['update'])){
 	if(!empty($_POST['param'])){
-		$update_disc = $db->db->prepare('UPDATE discounts SET category=? WHERE id=?');
+		$update_disc = $db->prepare('UPDATE discounts SET category=? WHERE id=?');
 		foreach($_POST['param'] as $key=>$val){
 			$update_disc->execute(array($val['category'],$key));
 		}
 	}
 }
 
-$pre = $db->db->prepare('SELECT * FROM discounts WHERE shop=? ORDER BY category');
+$pre = $db->prepare('SELECT * FROM discounts WHERE shop=? ORDER BY category');
 $pre->execute(array($_GET['shop']));
 $pre = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-$del = $db->db->prepare('DELETE FROM discounts WHERE id=?');
+$del = $db->prepare('DELETE FROM discounts WHERE id=?');
 
 $tit = $_GET['shop'].' discounts';
 include('header.php');

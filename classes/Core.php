@@ -41,6 +41,7 @@ class Core {
 					'user_id'=>$user_data['id'],
 					'name'=>$user_data['name'],
 					'country'=>$user_data['country'],
+					'registration_date'=>$user_data['registration_date']
 					);
 			}
 

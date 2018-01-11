@@ -3,14 +3,14 @@
 if(!empty($_POST['update_cats'])){
 	
 	if(!empty($_POST['del_cat'])){
-		$del_cats = $db->db->prepare('DELETE FROM categories WHERE id=?');
+		$del_cats = $db->prepare('DELETE FROM categories WHERE id=?');
 		foreach($_POST['del_cat'] as $val){
 			$del_cats->execute(array($val));
 		}
 	}
 	
 	if(!empty($_POST['param'])){
-		$update_cats = $db->db->prepare('UPDATE categories SET nav=?,key_s=?,name=?,title=?,description=?,text=? WHERE id=?');
+		$update_cats = $db->prepare('UPDATE categories SET nav=?,key_s=?,name=?,title=?,description=?,text=? WHERE id=?');
 		foreach($_POST['param'] as $key=>$val){
 			$update_cats->execute(array($val['nav'],$val['key_s'],$val['name'],$val['title'],$val['description'],$val['text'],$key));
 		}
@@ -20,7 +20,7 @@ if(!empty($_POST['update_cats'])){
 
 if(!empty($_POST['add_cat'])){
 	
-	$add_cat = $db->db->prepare('INSERT INTO categories (id,nav,key_s,name,title) VALUES (:id,:nav,:key_s,:name,:title)');
+	$add_cat = $db->prepare('INSERT INTO categories (id,nav,key_s,name,title) VALUES (:id,:nav,:key_s,:name,:title)');
 	
 	$add_cat->execute(array(
 		'id'=>$_POST['param']['id'],
@@ -118,15 +118,15 @@ return $alias;
 }
 
 function par_al($pre_par_id,$db){
-$pre_par = $db->db->prepare('SELECT * FROM categories WHERE id=?');
+$pre_par = $db->prepare('SELECT * FROM categories WHERE id=?');
 $pre_par->execute(array($pre_par_id));
 $pre_par = $pre_par->fetch(PDO::FETCH_ASSOC);
 return $pre_par;
 }
 
 if(!empty($_GET['action']) && $_GET['action'] == 'rfd'){
-	$del_discount = $db->db->prepare('DELETE FROM discounts WHERE id=?');
-	$get_discounts = $db->db->prepare('SELECT id,date_end FROM discounts');
+	$del_discount = $db->prepare('DELETE FROM discounts WHERE id=?');
+	$get_discounts = $db->prepare('SELECT id,date_end FROM discounts');
 	$get_discounts->execute();
 	$get_discounts_arr = $get_discounts->fetchAll(PDO::FETCH_ASSOC);
 	$current_time = time();
@@ -141,27 +141,27 @@ if(!empty($_GET['action']) && $_GET['action'] == 'rfd'){
 }
 
 if(!empty($_POST['add_cat']) || !empty($_POST['update_cats']) || (!empty($_GET['action']) && $_GET['action'] == 'rfd')){
-	$update_alias = $db->db->prepare('UPDATE categories SET alias=? WHERE id=?');
+	$update_alias = $db->prepare('UPDATE categories SET alias=? WHERE id=?');
 	
-	$set_all_qnt = $db->db->prepare('UPDATE categories SET all_qnt=? WHERE id=?');
-	$get_all_qnt = $db->db->prepare('SELECT id FROM discounts WHERE region=? AND category LIKE ? AND available=?');
+	$set_all_qnt = $db->prepare('UPDATE categories SET all_qnt=? WHERE id=?');
+	$get_all_qnt = $db->prepare('SELECT id FROM discounts WHERE region=? AND category LIKE ? AND available=?');
 	
-	$set_ru_qnt = $db->db->prepare('UPDATE categories SET ru_qnt=? WHERE id=?');
-	$get_ru_qnt = $db->db->prepare('SELECT id FROM discounts WHERE region=? AND category LIKE ? AND available=?');
+	$set_ru_qnt = $db->prepare('UPDATE categories SET ru_qnt=? WHERE id=?');
+	$get_ru_qnt = $db->prepare('SELECT id FROM discounts WHERE region=? AND category LIKE ? AND available=?');
 	
-	$set_ua_qnt = $db->db->prepare('UPDATE categories SET ua_qnt=? WHERE id=?');
-	$get_ua_qnt = $db->db->prepare('SELECT id FROM discounts WHERE region=? AND category LIKE ? AND available=?');
+	$set_ua_qnt = $db->prepare('UPDATE categories SET ua_qnt=? WHERE id=?');
+	$get_ua_qnt = $db->prepare('SELECT id FROM discounts WHERE region=? AND category LIKE ? AND available=?');
 	
-	$set_all_shops = $db->db->prepare('UPDATE categories SET all_shops=? WHERE id=?');
-	$get_all_shops = $db->db->prepare('SELECT id FROM shops WHERE region=? AND category LIKE ? AND available=?');
+	$set_all_shops = $db->prepare('UPDATE categories SET all_shops=? WHERE id=?');
+	$get_all_shops = $db->prepare('SELECT id FROM shops WHERE region=? AND category LIKE ? AND available=?');
 	
-	$set_ru_shops = $db->db->prepare('UPDATE categories SET ru_shops=? WHERE id=?');
-	$get_ru_shops = $db->db->prepare('SELECT id FROM shops WHERE region=? AND category LIKE ? AND available=?');
+	$set_ru_shops = $db->prepare('UPDATE categories SET ru_shops=? WHERE id=?');
+	$get_ru_shops = $db->prepare('SELECT id FROM shops WHERE region=? AND category LIKE ? AND available=?');
 	
-	$set_ua_shops = $db->db->prepare('UPDATE categories SET ua_shops=? WHERE id=?');
-	$get_ua_shops = $db->db->prepare('SELECT id FROM shops WHERE region=? AND category LIKE ? AND available=?');
+	$set_ua_shops = $db->prepare('UPDATE categories SET ua_shops=? WHERE id=?');
+	$get_ua_shops = $db->prepare('SELECT id FROM shops WHERE region=? AND category LIKE ? AND available=?');
 
-	$pre = $db->db->prepare('SELECT * FROM categories');
+	$pre = $db->prepare('SELECT * FROM categories');
 	$pre->execute();
 	$pre = $pre->fetchAll(PDO::FETCH_ASSOC);
 
@@ -191,7 +191,7 @@ if(!empty($_POST['add_cat']) || !empty($_POST['update_cats']) || (!empty($_GET['
 }
 
 
-$show = $db->db->prepare('SELECT * FROM categories');
+$show = $db->prepare('SELECT * FROM categories');
 $show->execute();
 $show = $show->fetchAll(PDO::FETCH_ASSOC);
 
