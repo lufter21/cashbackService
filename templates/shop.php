@@ -2,7 +2,8 @@
 if(!$meta){
 	$meta = array(
 		'name'=>$content['name'],
-		'title'=>$content['name']
+		'title'=>$content['name'],
+		'description'=>$content['category']
 	);
 }
 include('header.php');

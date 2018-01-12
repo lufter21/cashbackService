@@ -41,30 +41,30 @@ if(!empty($_GET['route'])){
 					'alias'=>'',
 					'region'=>$rt[1]
 				);
-			}elseif($rt[0] == 'discounts' || $rt[0] == 'shops' || $rt[0] == 'shop' || $rt[0] == 'cabinet'){
+			} elseif ($rt[0] == 'discounts' || $rt[0] == 'shops' || $rt[0] == 'shop' || $rt[0] == 'cabinet'){
 				$query = array(
 					'class'=>ucfirst($rt[0]),
 					'template'=>$rt[0],
 					'alias'=>$rt[1]
 				);
-			}else{
+			} else {
 				$query = array(
 					'class'=>'Page',
 					'template'=>'page',
-					'alias'=>$rt[1]
+					'alias'=>$rt[0].'/'.$rt[1]
 				);
 			}
 		break;
 		
 		case 3:
-			if($rt[1] == 'page'){			
+			if ($rt[1] == 'page') {			
 				$query = array(
-					'class'=>'Page',
-					'template'=>'page',
+					'class'=>ucfirst($rt[0]),
+					'template'=>$rt[0],
 					'alias'=>'',
 					'page'=>$rt[2]
 				);
-			}elseif($rt[0] == 'go'){
+			} elseif($rt[0] == 'go') {
 				$query = array(
 					'class'=>'Go',
 					'template'=>'go',
@@ -78,8 +78,8 @@ if(!empty($_GET['route'])){
 		case 4:
 			if($rt[2] == 'page'){
 				$query = array(
-					'class'=>'Page',
-					'template'=>'page',
+					'class'=>ucfirst($rt[0]),
+					'template'=>$rt[0],
 					'alias'=>$rt[1],
 					'page'=>$rt[3]
 				);
