@@ -2,7 +2,8 @@
 if(empty($meta)){
 	$meta = array(
 		'title'=>'Скидки и промокоды от лучших интернет магазинов',
-		'name'=>'Скидки/промокоды'
+		'name'=>'Скидки/промокоды',
+		'description'=>'Совместно с кэшбэком вы также можете получить дополнительную скидку'
 	);
 }
 include('header.php');
@@ -25,12 +26,7 @@ include('header.php');
 			<div class="box">
 				<div class="row-col-mid">
 					<div class="col-9">
-						<article>
-							<h1><?php echo $meta['name'];?></h1>
-							<div class="article-block pad">
-								<?php echo $meta['text'];?>
-							</div>
-						</article>
+						<h1><?php echo $meta['name'];?></h1>
 					</div>
 
 					<?php

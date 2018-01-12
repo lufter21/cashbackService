@@ -10,9 +10,9 @@ if(!empty($_POST['update_cats'])){
 	}
 	
 	if(!empty($_POST['param'])){
-		$update_cats = $db->prepare('UPDATE categories SET nav=?,key_s=?,name=?,title=?,description=?,text=? WHERE id=?');
+		$update_cats = $db->prepare('UPDATE categories SET nav=?,key_s=?,name=?,title=?,description=? WHERE id=?');
 		foreach($_POST['param'] as $key=>$val){
-			$update_cats->execute(array($val['nav'],$val['key_s'],$val['name'],$val['title'],$val['description'],$val['text'],$key));
+			$update_cats->execute(array($val['nav'],$val['key_s'],$val['name'],$val['title'],$val['description'],$key));
 		}
 	}
 }
@@ -243,11 +243,11 @@ if($i_del > 0){
 echo '<form class="upd-cats" action="" method="POST">
 <table>
 <input type="hidden" name="update_cats" value="true">
-<tr><td>Id</td><td>Alias</td><td>Nav</td><td>Name</td><td>Keys</td><td>Title</td><td>Description</td><td>Text</td><td>All Disc</td><td>Ru Disc</td><td>Ua Disc</td><td>All Shops</td><td>Ru Shops</td><td>Ua Shops</td></tr>';
+<tr><td>Id</td><td>Alias</td><td>Nav</td><td>Name</td><td>Keys</td><td>Title</td><td>Description</td><td>All Disc</td><td>Ru Disc</td><td>Ua Disc</td><td>All Shops</td><td>Ru Shops</td><td>Ua Shops</td></tr>';
 
 foreach($show as $show){
 	echo '<tr id="row'.$show['id'].'" data-id="'.$show['id'].'" ';
-	echo '><td id="id'.$show['id'].'">'.$show['id'].'</td><td>'.$show['alias'].'</td><td id="nav'.$show['id'].'">'.$show['nav'].'</td><td id="name'.$show['id'].'">'.$show['name'].'</td><td id="key_s'.$show['id'].'">'.$show['key_s'].'</td><td id="title'.$show['id'].'">'.$show['title'].'</td><td id="description'.$show['id'].'">'.$show['description'].'</td><td id="text'.$show['id'].'">'.$show['text'].'</td><td>'.$show['all_qnt'].'</td><td>'.$show['ru_qnt'].'</td><td>'.$show['ua_qnt'].'</td><td>'.$show['all_shops'].'</td><td>'.$show['ru_shops'].'</td><td>'.$show['ua_shops'].'</td><tr>';
+	echo '><td id="id'.$show['id'].'">'.$show['id'].'</td><td>'.$show['alias'].'</td><td id="nav'.$show['id'].'">'.$show['nav'].'</td><td id="name'.$show['id'].'">'.$show['name'].'</td><td id="key_s'.$show['id'].'">'.$show['key_s'].'</td><td id="title'.$show['id'].'">'.$show['title'].'</td><td id="description'.$show['id'].'">'.$show['description'].'</td><td>'.$show['all_qnt'].'</td><td>'.$show['ru_qnt'].'</td><td>'.$show['ua_qnt'].'</td><td>'.$show['all_shops'].'</td><td>'.$show['ru_shops'].'</td><td>'.$show['ua_shops'].'</td><tr>';
 }
 
 echo '</table>

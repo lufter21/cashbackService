@@ -15,6 +15,10 @@ class Discounts extends Core {
 			
 			$this->_category_id = $category_arr['id'];
 
+			if (empty($this->_category_id)) {
+				$this->_page_not_found = true;
+			}
+
 			if(!empty($this->_region)){
 				$cat[0] = '%'.$category_arr['key_s'].'%';
 				$cat[1] = 'all';

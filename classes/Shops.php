@@ -15,6 +15,10 @@ class Shops extends Core {
 			
 			$this->_category_id = $category_arr['id'];
 
+			if (empty($this->_category_id)) {
+				$this->_page_not_found = true;
+			}
+
 			if(!empty($this->_region)){
 				$cat[0] = '%'.$category_arr['key_s'].'%';
 				$cat[1] = 'all';
@@ -29,13 +33,12 @@ class Shops extends Core {
 				$this->_itemsquantity = $category_arr['all_shops'] + $category_arr['ru_shops'] + $category_arr['ua_shops'];
 			}
 		} else {
-			if(!empty($this->_region)){
+			if (!empty($this->_region)) {
 				$cat[0] = 'all';
 				$cat[1] = $this->_region;
 				$cat[2] = 1;
 				$par = '(region=? OR region=?) AND available=?';
-			}
-			else{
+			} else {
 				$cat[0] = 1;
 				$par = 'available=?';
 			}

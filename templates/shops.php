@@ -2,7 +2,8 @@
 if(!$meta){
 	$meta = array(
 		'name'=>'Все магазины',
-		'title'=>'Каталог магазинов'
+		'title'=>'Каталог магазинов',
+		'description'=>'Каталог магазинов для покупок с кэшбэком'
 	);
 }
 include('header.php');
@@ -23,12 +24,9 @@ include('header.php');
 
 		<div class="pad mb-28">
 			<div class="box">
-				<article class="pad">
+				<div class="pad">
 					<h1><?php echo $meta['name'];?></h1>
-					<div class="article-block pad">
-						<?php echo $meta['text'];?>
-					</div>
-				</article>
+				</div>
 			</div>
 		</div>
 

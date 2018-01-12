@@ -7,6 +7,7 @@ class Core {
 	protected $_template;
 	protected $_route;
 	protected $_user;
+	protected $_page_not_found;
 	
 	public function __construct() {
 		$this->db = DbConect::getInstance();
@@ -101,8 +102,8 @@ class Core {
 	}
 	
 	protected function getMeta(){
-		if($this->_category_id){	
-			$cats = $this->db->prepare('SELECT name,title,description,text FROM categories WHERE id=?');
+		if($this->_category_id){
+			$cats = $this->db->prepare('SELECT name,title,description FROM categories WHERE id=?');
 			$cats->execute(array($this->_category_id));
 			$result = $cats->fetch(PDO::FETCH_ASSOC);
 			return $result;
@@ -215,14 +216,18 @@ class Core {
 		$lemon = $this;
 		$user = $this->_user = $this->getUser();
 		$template = $this->_template = $query['template'];
-		$this->_route = $query['route'];
+		$route = $this->_route = $query['route'];
 		$alias = $this->_alias = $query['alias'];
 		$region = $this->_region = $this->getRegion($query['region']);
 		$content = $this->getContent($query);
 		$meta = $this->getMeta();
-		if(file_exists('templates/'.$template.'.php')){
+		
+		if (file_exists('templates/'.$template.'.php') && !$this->_page_not_found) {
 			include('templates/'.$template.'.php');
+		} else {
+			include('templates/404.php');
 		}
+
 	}
 	
 }

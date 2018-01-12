@@ -1,7 +1,8 @@
 <?php
 if(empty($meta)){
 	$meta = array(
-		'title'=> $user['name']
+		'title'=> $user['name'],
+		'description'=>'Личный кабинет '.$user['name']
 		);
 }
 include('header.php');

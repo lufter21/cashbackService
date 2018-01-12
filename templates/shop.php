@@ -13,7 +13,7 @@ include('header.php');
 		<div class="shop-item shop-item_sng">
 			<div class="inner">
 				<div class="logo mid-image-wrap">
-					<a href="/shop/<?php echo $content['alias'];?>" title="Подробнее о <?php echo $content['name']; ?>"><img src="/images/logo/<?php echo $content['alias']; ?>.png" alt="<?php echo $content['name']; ?>" class="mid-image"></a>
+					<img src="/images/logo/<?php echo $content['alias']; ?>.png" alt="<?php echo $content['name']; ?>" class="mid-image">
 				</div>
 				<div class="cashback"><span><?php echo $content['cashback'];?></span></div>
 				<a rel="nofollow" href="/go/shop/<?php echo $content['id']; ?>" target="_blank" onclick="ga('send', 'event', 'outbound', 'click'); yaCounter39630900.reachGoal('outbound');" class="button" title="Перейти в <?php echo $content['name']; ?>">В магазин</a>

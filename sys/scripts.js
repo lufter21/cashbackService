@@ -19,13 +19,10 @@ $(document).ready(function(){
 			var cellDescription = $('#description'+rowId).text();
 			$('#description'+rowId).html('<textarea name="param['+rowId+'][description]">'+cellDescription+'</textarea>');
 			
-			var cellText = $('#text'+rowId).text();
-			$('#text'+rowId).html('<textarea name="param['+rowId+'][text]">'+cellText+'</textarea>');
-			
 			var cellCat = $('#category'+rowId).text();
 			$('#category'+rowId).html('<input type="text" name="param['+rowId+'][category]" value="'+cellCat+'">');
 			
-			$('#id'+rowId).prepend('<input type="checkbox" name="del_cat[]" value="'+rowId+'">');
+			$('#id'+rowId).prepend('<input type="checkbox" name="del_cat[]" title="Delete?" value="'+rowId+'">');
 			
 			$(this).addClass('checked');
 		}
