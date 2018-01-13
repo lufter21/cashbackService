@@ -38,12 +38,6 @@
 
 /*sidebar*/
 .sidebar{
-	position:relative;
-	background:#ffffff;
-	-moz-border-radius: 3px; 
-	-webkit-border-radius: 3px; 
-	border-radius: 3px;
-	padding: 21px;
 	.title{
 		border-bottom:1px solid #dddddd;
 		padding-bottom:7px;
@@ -51,6 +45,11 @@
 		text-transform:uppercase;
 		font-size:16px;
 		color: $g;
+	}
+	.accord{
+		ul{
+			padding: 21px;
+		}
 	}
 	li{
 		margin-bottom:14px;

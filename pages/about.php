@@ -49,9 +49,11 @@ include('templates/header.php');
 				<h2>Получить кэшбэк очень просто:</h2>
 
 				<ol>
+					<?php if(!$user){ ?>
 					<li>
-						<a href="#log-reg-window" data-tab="registration" class="js_open-popup">Зарегистрируйтесь</a>.
+						<a href="#log-reg-window" data-tab="registration" class="js-open-popup">Зарегистрируйтесь</a>.
 					</li>
+					<?php } ?>
 					<li>
 						Ознакомьтесь с <a href="/recomendations" title="Правила" target="_blank">рекомендациями по совершению покупок</a>.
 					</li>

@@ -17,4 +17,28 @@ $(document).ready(function() {
 		return false;
 	});
 
+	$('.js-create-accord').each(function() {
+		var _$ = $(this),
+		group = _$.attr('data-group'),
+		viewportWidth = _$.attr('data-viewport-width'),
+		cont = '';
+
+		if (winW < viewportWidth) {
+
+			$('.js-add-button-to-accord[data-group="'+ group +'"]').each(function() {
+				var ind = $(this).attr('data-index'),
+				Cont = $('.js-add-content-to-accord[data-group="'+ group +'"][data-index="'+ ind +'"]');
+
+				cont += '<div class="accord__item"><button class="accord__button">'+ $(this).html() +'<span></span></button><div class="accord__content">'+ Cont.html() +'</div></div>';
+
+				$(this).remove();
+				Cont.remove();
+
+			});
+
+			_$.addClass('accord').html(cont);
+		}
+		
+	});
+
 });

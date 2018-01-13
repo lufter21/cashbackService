@@ -12,11 +12,16 @@ include('header.php');
 <div class="container wrap row vw1000-row-col">
 
 	<div class="col-3">
-		<aside class="sidebar box">
-			<div class="pad">
-				<div class="title">Категории</div>
-				<?php echo $lemon->getCategoryMenu(); ?>
+		<aside class="sidebar">
+			<div class="box vw1000-hide">
+				<div class="pad">
+					<div class="title js-add-button-to-accord" data-group="cat" data-index="0">Категории</div>
+					<div class="js-add-content-to-accord" data-group="cat" data-index="0">
+						<?php echo $lemon->getCategoryMenu(); ?>
+					</div>
+				</div>
 			</div>
+			<div class="js-create-accord" data-viewport-width="1000" data-group="cat"></div>
 		</aside>
 	</div>
 
@@ -63,4 +68,7 @@ include('header.php');
 
 </div>
 <!--/Container-->
-<?php include('footer.php');?>
+<?php
+$js_include = array('accord.js'); 
+include('footer.php');
+?>
