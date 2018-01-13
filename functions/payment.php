@@ -35,7 +35,6 @@ if($_SESSION['access']){
 			'uah' => $user_sum_return['sum_approved_uah']
 			);
 
-		
 		$payment = preg_replace(array('/[^\d,\.]/', '/,/'), array('', '.'), $payment);
 
 		if ($payment <= $approved[$currency])  {

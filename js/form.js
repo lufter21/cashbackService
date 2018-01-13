@@ -302,13 +302,14 @@ var Form = {
 	num: function() {
 		var _ = this,
 		err = false,
+		minNum = +_.input.attr('data-min-num'),
 		maxNum = +_.input.attr('data-max-num'),
 		val = _.input.val().replace(',','.');
 
 		if (!/^[0-9]+((\.|,)[0-9]{1,2})?$/.test(_.input.val())) {
 			_.error(true, true);
 			err = true;
-		} else if (val > maxNum) {
+		} else if (val < minNum || val > maxNum) {
 			_.error(true, true, true);
 			err = true;
 		} else {

@@ -1,10 +1,6 @@
 <?php
 
-$query = array(
-	'class'=>'Page',
-	'template'=>'page',
-	'alias'=>''
-);
+$query = array();
 
 if(!empty($_GET['route'])){
 	$route = trim(htmlspecialchars(strip_tags($_GET['route'])));
@@ -28,7 +24,7 @@ if(!empty($_GET['route'])){
 				$query = array(
 					'class'=>'Page',
 					'template'=>'page',
-					'alias'=>$rt[0]
+					'alias'=>$route
 				);
 			}
 		break;
@@ -51,7 +47,7 @@ if(!empty($_GET['route'])){
 				$query = array(
 					'class'=>'Page',
 					'template'=>'page',
-					'alias'=>$rt[0].'/'.$rt[1]
+					'alias'=>$route
 				);
 			}
 		break;
@@ -64,7 +60,7 @@ if(!empty($_GET['route'])){
 					'alias'=>'',
 					'page'=>$rt[2]
 				);
-			} elseif($rt[0] == 'go') {
+			} elseif ($rt[0] == 'go') {
 				$query = array(
 					'class'=>'Go',
 					'template'=>'go',
@@ -72,19 +68,40 @@ if(!empty($_GET['route'])){
 					'units'=>$rt[1],
 					'id'=>$rt[2]
 				);
+			} else {
+				$query = array(
+					'class'=>'Page',
+					'template'=>'page',
+					'alias'=>$route
+				);
 			}
 		break;
 		
 		case 4:
-			if($rt[2] == 'page'){
+			if ($rt[2] == 'page') {
 				$query = array(
 					'class'=>ucfirst($rt[0]),
 					'template'=>$rt[0],
 					'alias'=>$rt[1],
 					'page'=>$rt[3]
 				);
+			} else {
+				$query = array(
+					'class'=>'Page',
+					'template'=>'page',
+					'alias'=>$route
+				);
 			}
 		break;
+
+		default:
+		$query = array(
+			'class'=>'Page',
+			'template'=>'page',
+			'alias'=>$route
+		);
+		break;
+
 	}
 } else {
 	$query = array(

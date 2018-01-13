@@ -41,7 +41,7 @@ include('header.php');
 								<a href="/shop/<?php echo $item['alias'];?>" title="Подробнее о <?php echo $item['name']; ?>"><img src="/images/logo/<?php echo $item['alias']; ?>.png" alt="<?php echo $item['name']; ?>" class="mid-image"></a>
 							</div>
 							<div class="cashback"><span><?php echo $item['cashback']; ?></span></div>
-							<a rel="nofollow" href="/go/shop/<?php echo $item['id']; ?>" target="_blank" onclick="ga('send', 'event', 'outbound', 'click'); yaCounter39630900.reachGoal('outbound');" class="button" title="Перейти в <?php echo $item['name']; ?>">В магазин</a>
+							<a rel="nofollow" href="/go/shop/<?php echo $item['id']; ?>" target="_blank" onclick="ga('send', 'event', 'outbound', 'click'); yaCounter39630900.reachGoal('outbound');" class="shop-item__button" title="Перейти в <?php echo $item['name']; ?>">В магазин</a>
 
 							<a href="/shop/<?php echo $item['alias'];?>" class="more" title="Подробнее о <?php echo $item['name']; ?>">Подробнее</a>
 						</div>

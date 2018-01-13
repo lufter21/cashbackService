@@ -7,11 +7,11 @@
 
 			<div class="balance mb-35">
 				<div class="balance__item">
-					<span>Ожидает&nbsp;подтверждения:</span><span class="balance__sum"><?php echo ($content['sum_open']) ?: '0'; ?></span>
+					<span class="balance__label">Ожидает&nbsp;подтверждения:</span><span class="balance__sum"><?php echo ($content['sum_open']) ?: '0'; ?></span>
 				</div>
 
 				<div class="balance__item c-l-green">
-					<span>Доступно для вывода:</span><span class="balance__sum"><?php echo (!empty($content['sum_approved'])) ? $content['sum_approved'] : '0'; ?></span>
+					<span class="balance__label">Подтверждено:</span><span class="balance__sum"><?php echo (!empty($content['sum_approved'])) ? $content['sum_approved'] : '0'; ?></span>
 				</div>
 				<!--<div class="balance__item">
 					<a href="#" class="balance__button">Вывести</a>

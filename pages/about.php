@@ -2,7 +2,8 @@
 if(empty($meta)){
 	$meta = array(
 		'name'=>'О сервисе BomBonus.dealersAir',
-		'title'=>'О сервисе'
+		'title'=>'О сервисе',
+		'description'=>'Что такое кэшбэк и как его получить'
 		);
 }
 include('templates/header.php');

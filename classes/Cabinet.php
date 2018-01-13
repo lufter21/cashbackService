@@ -77,30 +77,30 @@ class Cabinet extends Core {
 			if ($val > 0) {
 				switch ($key) {
 					case 'sum_open_usd':
-					$user_sum_open['usd'] = '$'.$val;
+					$user_sum_open['usd'] = $this->mergeCur('usd', $val);
 					break;
 
 					case 'sum_open_rub':
-					$user_sum_open['rub'] = $val.'руб';
+					$user_sum_open['rub'] = $this->mergeCur('rub', $val);
 					break;
 
 					case 'sum_open_uah':
-					$user_sum_open['uah'] = $val.'грн';
+					$user_sum_open['uah'] = $this->mergeCur('uah', $val);
 					break;
 
 					case 'sum_approved_usd':
-					$user_sum_approved_arr['usd'] = $val-$user['payment_usd']-$user['paid_usd'];
-					$user_sum_approved['usd'] = '$'.($val-$user['payment_usd']-$user['paid_usd']);
+					$user_sum_approved_arr['usd'] = ($val-$user['payment_usd']-$user['paid_usd']);
+					$user_sum_approved['usd'] = $this->mergeCur('usd', ($val-$user['payment_usd']-$user['paid_usd']));
 					break;
 
 					case 'sum_approved_rub':
-					$user_sum_approved_arr['rub'] = $val-$user['payment_rub']-$user['paid_rub'];
-					$user_sum_approved['rub'] = ($val-$user['payment_rub']-$user['paid_rub']).'руб';
+					$user_sum_approved_arr['rub'] = ($val-$user['payment_rub']-$user['paid_rub']);
+					$user_sum_approved['rub'] = $this->mergeCur('rub', ($val-$user['payment_rub']-$user['paid_rub']));
 					break;
 
 					case 'sum_approved_uah':
-					$user_sum_approved_arr['uah'] = $val-$user['payment_uah']-$user['paid_uah'];
-					$user_sum_approved['uah'] = ($val-$user['payment_uah']-$user['paid_uah']).'грн';
+					$user_sum_approved_arr['uah'] = ($val-$user['payment_uah']-$user['paid_uah']);
+					$user_sum_approved['uah'] = $this->mergeCur('uah', ($val-$user['payment_uah']-$user['paid_uah']));
 					break;
 
 				}
@@ -109,13 +109,13 @@ class Cabinet extends Core {
 
 		$user_sum_payment = array();
 		if ($user['payment_usd'] > 0) {
-			$user_sum_payment['usd'] = '$'.$user['payment_usd'];
+			$user_sum_payment['usd'] = $this->mergeCur('usd', $user['payment_usd']);
 		}
 		if ($user['payment_rub'] > 0) {
-			$user_sum_payment['rub'] = $user['payment_rub'].'руб';
+			$user_sum_payment['rub'] = $this->mergeCur('rub', $user['payment_rub']);
 		}
 		if ($user['payment_uah'] > 0) {
-			$user_sum_payment['uah'] = $user['payment_uah'].'грн';
+			$user_sum_payment['uah'] = $this->mergeCur('uah', $user['payment_uah']);
 		}
 
 		$users_stat = $this->db->prepare('SELECT * FROM users_stat WHERE userid=? ORDER BY date DESC');
@@ -123,9 +123,9 @@ class Cabinet extends Core {
 		$users_stat_return = $users_stat->fetchAll(PDO::FETCH_ASSOC);
 
 		$result = array(
-			'sum_open'=>implode(' | ', $user_sum_open), 
-			'sum_approved'=>implode(' | ', $user_sum_approved),
-			'sum_payment'=>implode(' | ', $user_sum_payment),
+			'sum_open'=>implode('<span class="balance__sep"></span>', $user_sum_open), 
+			'sum_approved'=>implode('<span class="balance__sep"></span>', $user_sum_approved),
+			'sum_payment'=>implode('<span class="balance__sep"></span>', $user_sum_payment),
 			'stat'=>$users_stat_return,
 			'sum_approved_arr'=>$user_sum_approved_arr
 			);

@@ -106,7 +106,7 @@ include('header.php');
 									}
 									?>
 								</div>
-								<a rel="nofollow" href="/go/discount/<?php echo $item['id']; ?>" target="_blank" onclick="ga('send', 'event', 'outbound', 'click'); yaCounter39630900.reachGoal('outbound');" class="button" title="Перейти в <?php echo $content['shop_name'][$item['shop']]; ?>">В магазин</a>
+								<a rel="nofollow" href="/go/discount/<?php echo $item['id']; ?>" target="_blank" onclick="ga('send', 'event', 'outbound', 'click'); yaCounter39630900.reachGoal('outbound');" class="discount-item__button" title="Перейти в <?php echo $content['shop_name'][$item['shop']]; ?>">В магазин</a>
 							</div>
 						</div>
 						<?php	

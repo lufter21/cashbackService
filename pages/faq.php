@@ -2,7 +2,8 @@
 if(empty($meta)){
 	$meta = array(
 		'name'=>'Вопрос/Ответ',
-		'title'=>'Вопрос/Ответ'
+		'title'=>'Вопрос/Ответ',
+		'description'=>'Ответы на часто задаваемые вопросы при покупках с кэшбэком'
 		);
 }
 include('templates/header.php');

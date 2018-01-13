@@ -17,7 +17,7 @@ include('header.php');
 					<img src="/images/logo/<?php echo $content['alias']; ?>.png" alt="<?php echo $content['name']; ?>" class="mid-image">
 				</div>
 				<div class="cashback"><span><?php echo $content['cashback'];?></span></div>
-				<a rel="nofollow" href="/go/shop/<?php echo $content['id']; ?>" target="_blank" onclick="ga('send', 'event', 'outbound', 'click'); yaCounter39630900.reachGoal('outbound');" class="button" title="Перейти в <?php echo $content['name']; ?>">В магазин</a>
+				<a rel="nofollow" href="/go/shop/<?php echo $content['id']; ?>" target="_blank" onclick="ga('send', 'event', 'outbound', 'click'); yaCounter39630900.reachGoal('outbound');" class="shop-item__button" title="Перейти в <?php echo $content['name']; ?>">В магазин</a>
 			</div>
 		</div>
 	</div>

@@ -5,10 +5,10 @@
 			<h1>Вывод средств <?php echo $user['name']; ?></h1>
 			<div class="balance mb-35">
 				<div class="balance__item c-l-green">
-					<span>Доступно для вывода:</span><span class="balance__sum"><?php echo ($content['sum_approved']) ?: '0'; ?></span>
+					<span class="balance__label">Подтверждено:</span><span class="balance__sum"><?php echo ($content['sum_approved']) ?: '0'; ?></span>
 				</div>
 				<div class="balance__item">
-					<span>Ожидает выплаты:</span><span class="balance__sum"><?php echo (!empty($content['sum_payment'])) ? $content['sum_payment'] : '0'; ?></span>
+					<span class="balance__label">Ожидает выплаты:</span><span class="balance__sum"><?php echo (!empty($content['sum_payment'])) ? $content['sum_payment'] : '0'; ?></span>
 				</div>
 			</div>
 			<h2>Доступные способы вывода:</h2>
@@ -16,6 +16,12 @@
 				<li>Яндекс.Деньги</li>
 				<li>WebMoney</li>
 				<li>Пополнение мобильного телефона</li>
+			</ul>
+			<h2>Минимальные суммы для вывода:</h2>
+			<ul>
+				<li>$1</li>
+				<li>50 руб.</li>
+				<li>25 грн.</li>
 			</ul>
 		</div>
 
@@ -68,7 +74,7 @@
 						<div class="col-2 vw1000-col-9">
 							<div class="form__field">
 								<label for="fp-usd-txt-1" class="overlabel">Сумма</label>
-								<input id="fp-usd-txt-1" type="text" data-required="true" data-type="num" data-max-num="<?php echo $val; ?>" class="form__text-input" name="payment_usd" value="">
+								<input id="fp-usd-txt-1" type="text" data-required="true" data-type="num" data-min-num="1" data-max-num="<?php echo $val; ?>" class="form__text-input" name="payment_usd" value="">
 								<div class="form__error-tip" data-second-error-text="Некорректная сумма" data-third-error-text="Недостаточно средств">Введите сумму</div>
 							</div>
 						</div>
@@ -120,6 +126,10 @@
 							<div id="requisites-usd-tel-info" class="form__field form__field_hidden">
 								<p class="form__txt c-or">
 									1$ = <?php echo $lemon->getRate()['user']; ?>
+									<?php if ($user['country'] == 'ua') {
+										echo '<br> Комиссия системы - 1 грн';
+									}
+									?>
 								</p>
 							</div>
 						</div>
@@ -147,9 +157,9 @@
 								<div class="form__select">
 									<button type="button" class="form__select-button">Способ вывода</button>
 									<ul class="form__select-options">
-										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub-wm" data-value="wmr">WebMoney R-кошелек</button></li>
-										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub-yam" data-value="yam">Яндекс.Деньги</button></li>
-										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub-tel" data-value="tel">Мобильный телефон</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub-wm, #requisites-rub-wm-info" data-value="wmr">WebMoney R-кошелек</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub-yam, #requisites-rub-yam-info" data-value="yam">Яндекс.Деньги</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-rub-tel, #requisites-rub-tel-info" data-value="tel">Мобильный телефон</button></li>
 									</ul>
 									<input type="hidden" data-required="true" class="form__select-input" name="method_rub" value="">
 								</div>
@@ -174,6 +184,23 @@
 							</div>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-4-5 col-offset-3 vw1000-col form__field-wrap">
+							<div id="requisites-rub-wm-info" class="form__field form__field_hidden">
+								<p class="form__txt c-or">
+									Комиссия WebMoney - 0.8%
+								</p>
+							</div>
+							<div id="requisites-rub-yam-info" class="form__field form__field_hidden">
+								<p class="form__txt c-or">
+									Комиссия Яндекс.Деньги - 0.5%
+								</p>
+							</div>
+							<div id="requisites-rub-tel-info" class="form__field form__field_hidden">
+								
+							</div>
+						</div>
+					</div>
 				</div>
 				<?php } ?>
 
@@ -195,8 +222,8 @@
 								<div class="form__select">
 									<button type="button" class="form__select-button">Способ вывода</button>
 									<ul class="form__select-options">
-										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-uah-wm" data-value="wmu">WebMoney U-кошелек</button></li>
-										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-uah-tel" data-value="tel">Мобильный телефон</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-uah-wm, #requisites-uah-wm-info" data-value="wmu">WebMoney U-кошелек</button></li>
+										<li><button type="button" class="form__select-val" data-show-hidden="#requisites-uah-tel, #requisites-uah-tel-info" data-value="tel">Мобильный телефон</button></li>
 									</ul>
 									<input type="hidden" data-required="true" class="form__select-input" name="method_uah" value="">
 								</div>
@@ -213,6 +240,20 @@
 								<label for="fp-uah-txt-2-2" class="overlabel">Номер телефона</label>
 								<input id="fp-uah-txt-2-2" type="text" data-type="tel" data-required="true" class="form__text-input" name="requisites_uah_tel" value="+">
 								<div class="form__error-tip" data-second-error-text="Некорректный номер, формат: +кодНомер">Введите номер телефона</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-4-5 col-offset-3 vw1000-col form__field-wrap">
+							<div id="requisites-uah-wm-info" class="form__field form__field_hidden">
+								<p class="form__txt c-or">
+									Комиссия WebMoney - 0.8%
+								</p>
+							</div>
+							<div id="requisites-uah-tel-info" class="form__field form__field_hidden">
+								<p class="form__txt c-or">
+									Комиссия системы - 1 грн
+								</p>
 							</div>
 						</div>
 					</div>
