@@ -148,7 +148,7 @@
 						<div class="col-2 vw1000-col-9">
 							<div class="form__field">
 								<label for="fp-rub-txt-1" class="overlabel">Сумма</label>
-								<input id="fp-rub-txt-1" type="text" data-required="true" data-type="num" data-max-num="<?php echo $val; ?>" class="form__text-input" name="payment_rub" value="">
+								<input id="fp-rub-txt-1" type="text" data-required="true" data-type="num" data-min-num="50" data-max-num="<?php echo $val; ?>" class="form__text-input" name="payment_rub" value="">
 								<div class="form__error-tip" data-second-error-text="Некорректная сумма" data-third-error-text="Недостаточно средств">Введите сумму</div>
 							</div>
 						</div>
@@ -213,7 +213,7 @@
 						<div class="col-2 vw1000-col-9">
 							<div class="form__field">
 								<label for="fp-uah-txt-1" class="overlabel">Сумма</label>
-								<input id="fp-uah-txt-1" type="text" data-required="true" data-type="num" data-max-num="<?php echo $val; ?>" class="form__text-input" name="payment_uah" value="">
+								<input id="fp-uah-txt-1" type="text" data-required="true" data-type="num" data-min-num="25" data-max-num="<?php echo $val; ?>" class="form__text-input" name="payment_uah" value="">
 								<div class="form__error-tip" data-second-error-text="Некорректная сумма" data-third-error-text="Недостаточно средств">Введите сумму</div>
 							</div>
 						</div>

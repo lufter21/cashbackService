@@ -6,7 +6,7 @@
 
 		<div class="row vw1000-row-col">
 			<div class="col-2 vw1000-mb-15">
-				<b>Регион:</b>
+				<b>Страна:</b>
 			</div>
 			<div class="col-7 pad-0">
 				<form action="/cabinet/profile" method="POST" class="form">

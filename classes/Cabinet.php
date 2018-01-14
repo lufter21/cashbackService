@@ -183,8 +183,8 @@ class Cabinet extends Core {
 	}
 
 	protected function getRate() {
-		$sql_rate = $this->db->prepare('SELECT * FROM rate WHERE date=?');
-		$sql_rate->execute(array(date('Y-m-d')));
+		$sql_rate = $this->db->prepare('SELECT * FROM rate ORDER BY id DESC');
+		$sql_rate->execute();
 		$rate = $sql_rate->fetch(PDO::FETCH_ASSOC);
 
 		$result = array();

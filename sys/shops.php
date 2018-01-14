@@ -1,10 +1,10 @@
 <?php
 if(!empty($_POST['change-available'])){
 	$update_disc = $db->prepare('UPDATE discounts SET available=? WHERE shop=?');
-	$update_shop = $db->prepare('UPDATE shops SET available=? WHERE alias=?');
-	foreach($_POST['available'] as $shop=>$val){
-		$update_disc->execute(array($val,$shop));
-		$update_shop->execute(array($val,$shop));
+	$update_shop = $db->prepare('UPDATE shops SET available=?, popular=? WHERE alias=?');
+	foreach($_POST['available'] as $shop => $val){
+		$update_disc->execute(array($val, $shop));
+		$update_shop->execute(array($val, $_POST['popular'][$shop], $shop));
 	}
 }
 
@@ -27,11 +27,12 @@ include('header.php');
 ?>
 <form id="shops-form" class="shops-form" action="" method="POST">
 <table>
-<tr class="bold"><td>Shop</td><td>Discounts Quantity</td><td>Actions</td><tr>
+<tr class="bold"><td>Shop</td><td>Country</td><td>Discounts Quantity</td><td>Actions</td><tr>
 <?php
 foreach(shops($db) as $arr){
 echo '<tr>
 <td>'.$arr['name'].'</td>
+<td>'.$arr['region'].'</td>
 <td>'.quant($arr['alias'],$db).'</td>
 <td>';
 
@@ -46,6 +47,12 @@ echo '<input type="hidden" name="change-available" value="true">
 		echo '>on</option>
 		<option value="0"'; if($arr['available'] == 0){echo 'selected';}
 		echo '>Off</option>
+	</select>
+	<select name="popular['.$arr['alias'].']">
+		<option value="1"'; if($arr['popular'] == 1){echo 'selected';}
+		echo '>IS POPULAR</option>
+		<option value="0"'; if($arr['popular'] == 0){echo 'selected';}
+		echo '>no popular</option>
 	</select>
 </td>
 </tr>';
