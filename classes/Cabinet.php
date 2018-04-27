@@ -202,11 +202,14 @@ class Cabinet extends Core {
 	}
 
 	/*Admitad Statistics*/
-	protected function getAdmitadStat($start_date,$end_date){
+	protected function getAdmitadStat($st_date,$end_date){
 
 		$stat_arr = array(array());
 		$sum_open = array();
 		$sum_approved = array();
+
+		$end_d = strtotime($end_date);
+		$start_date = date('Y-m-d', strtotime('-5 months', $end_d));
 
 		$xml = 'https://www.admitad.com/ru/webmaster/statistics/actions_xml/?export&format=xml&code=4091f1232c&user=lufter&start_date='.$start_date.'&end_date='.$end_date.'&sub_ids=userid'.$this->_user['user_id'];
 
