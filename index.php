@@ -19,7 +19,6 @@ function __autoload($cl) {
 		require_once("classes/".$cl.".php");
 	}
 }
-
 if(class_exists($query['class'])){
 	$lemon = new $query['class'];
 	$lemon->getBody($query);

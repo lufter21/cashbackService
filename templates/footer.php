@@ -101,6 +101,7 @@
 <script src="/js/common.js"></script> -->
 
 <script>
+// script loading
 document.addEventListener('DOMContentLoaded', function() {
 	var scriptsSrcArr = ['/js/script.js', '/js/common.js'],
 	count = 0;

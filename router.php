@@ -14,7 +14,7 @@ if(!empty($_GET['route'])){
 					'template'=>'main-page',
 					'region'=>$rt[0]
 				);
-			} else if ($rt[0] == 'discounts' || $rt[0] == 'shops' || $rt[0] == 'shop' || $rt[0] == 'cabinet' || $rt[0] == 'logout') {
+			} else if ($rt[0] == 'coupons' || $rt[0] == 'shops' || $rt[0] == 'shop' || $rt[0] == 'cabinet' || $rt[0] == 'logout') {
 				$query = array(
 					'class'=>ucfirst($rt[0]),
 					'template'=>$rt[0],
@@ -37,7 +37,7 @@ if(!empty($_GET['route'])){
 					'alias'=>'',
 					'region'=>$rt[1]
 				);
-			} elseif ($rt[0] == 'discounts' || $rt[0] == 'shops' || $rt[0] == 'shop' || $rt[0] == 'cabinet'){
+			} elseif ($rt[0] == 'coupons' || $rt[0] == 'shops' || $rt[0] == 'shop' || $rt[0] == 'cabinet'){
 				$query = array(
 					'class'=>ucfirst($rt[0]),
 					'template'=>$rt[0],

@@ -1,5 +1,5 @@
 <?php
-class Discounts extends Core {
+class Coupons extends Core {
 
 	private $_page;
 	protected $_itemsquantity;

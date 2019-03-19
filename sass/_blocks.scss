@@ -9,7 +9,7 @@
 }
 
 /*Alert*/
-.alert{
+.alert{ 
 	display:none;
 	padding: 7px 21px;
 	background: $r;
@@ -81,8 +81,8 @@
 	}
 }
 
-/*discounts Block*/
-.discount-item{
+/*coupons Block*/
+.coupon-item{
 	display: -webkit-flex;
 	display: flex;
 	float:left;
@@ -90,7 +90,8 @@
 	margin-bottom:28px;
 	.inner{
 		margin:0 15px;
-		padding:69px 21px 221px;
+		padding:69px 21px 71px;
+		min-height: 320px;
 		background:#ffffff;
 		position:relative;
 		-moz-border-radius: 3px; 
@@ -104,16 +105,17 @@
 
 	.logo{
 		text-align:center;
-		height:62px;
+		height:50px;
 		position: absolute;
-		left: 0;
-		right: 0;
-		bottom: 150px;
-		line-height: 62px;
+		right: 20px;
+		top: 0;
+		width: 50%;
+		line-height: 50px;
 		text-align: center;
+		text-align: right;
 		img{
 			display: inline-block;
-			max-width:35%;
+			max-width:50%;
 			height:auto;
 			vertical-align: middle;
 		}
@@ -157,119 +159,37 @@
 		text-align:center;
 	}
 
-	.cashback{
-		height: 25px;
-		position:absolute;
-		bottom:111px;
-		left:0;
-		right:0;
-		text-align:center;
-		color:#0F986E;
-		span{
-			display:inline-block;
-			font-size:21px;
-			height: 28px;
-			line-height:22px;
-			background:url('../images/icon-cashback.svg') no-repeat;
-			-webkit-background-size: auto 100%;
-			-o-background-size: auto 100%;
-			background-size: auto 100%;
-			padding-left:42px;
-		}
-	}
-
 	&__button{
 		display:block;
-		width:100%;
 		position:absolute;
-		left:0;
-		bottom:0;
+		left:20px;
+		right: 20px;
+		bottom:15px;
 		z-index:2;
-		color:#ffffff;
+		color:#156692;
 		height:42px;
-		line-height:44px;
+		line-height:43px;
 		text-align:center;
 		text-decoration:none;
 		text-transform:uppercase;
-		font-size: 15px;
-		font-weight:700;
-		letter-spacing: 1px;
-		background:#156692; 
-		background-image: linear-gradient(to top, #105377 5%, #156591 50%, #1777aa 95%);
+		font-size: 14px;
+		background: #f1f1f1;
 		&:hover{
+			color: #ffffff;
 			background:#e68717;
 		}
 	}
-
 	.discount{
-		background:#e68717;
-		padding:0 14px 0 2px;
-		position:absolute;
-		right:0;
-		top:0;
-		z-index:2;
-		color:#ffffff;
+		font-size:32px;
 		font-weight:700;
-		font-size:19px;
-		height:33px;
-		line-height:33px;
+		color:#e68717;
+		text-align: center;
 	}
-
-	.discount:after{
-		display:block;
-		content:"";
-		width:0;
-		height:0;
-		border:33px solid transparent;
-		border-right:23px solid #e68717;
-		position:absolute;
-		top:-33px;
-		left:-56px;
-	}
-
-	.promocode{
-		color:#797979;
-		text-align:center;
-		height:42px;
-		line-height:42px;
-		position:absolute;
-		bottom:42px;
-		left:0;
-		width:100%;
-		border-top:1px solid #dddddd;
-		&:before{
-			display: block;
-			content: "promocode";
-			position: absolute;
-			left: 0;
-			top: -16px;
-			background: #FFF;
-			border-right:1px solid #dddddd;
-			border-top:1px solid #dddddd;
-			border-bottom: 1px solid #fff;
-			padding: 0 5px;
-			font-size: 10px;
-			line-height: 15px;
-			height: 15px;
-		}
-	}
-
-	.promocode .prc-none{
-		text-transform:uppercase;
-		font-size:14px;
-	}
-
-	.promocode .code{
-		font-size:21px;
-		color:#0f986e;
-	}
-
 	@media(max-width: 1000px){
 		display: block;
 		float: none;
 		width: 100%;
 	}
-
 }
 
 .message{

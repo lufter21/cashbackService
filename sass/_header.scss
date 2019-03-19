@@ -101,14 +101,13 @@
 .top-menu{
 	position: relative;
 	top: 3px;
-	float: right;
 }
 .top-menu .menu{
 	@include clr;
 }
 .top-menu .menu__item{
 	float:left;
-	margin-right:35px;
+	margin-right:55px;
 	position:relative;
 	color: $b;
 	&:last-child{
