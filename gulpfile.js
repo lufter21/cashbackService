@@ -6,6 +6,7 @@ cssmin = require('gulp-cssmin'),
 rename = require('gulp-rename'),
 autoprefixer = require('gulp-autoprefixer'),
 uglify = require('gulp-uglify'),
+concat = require('gulp-concat'),
 gulpUtil = require('gulp-util');
 
 gulp.task('default', function() {
@@ -21,12 +22,24 @@ gulp.task('sass', function () {
 	.pipe(notify('CSS Compiled!'));
 });
 
-gulp.task('w', function () {
+gulp.task('js', function () {
+	gulp.src(['!./js/common.js', '!./js/script.js', './js/*.js'])
+	.pipe(sourcemaps.init())
+	.pipe(concat('script.js'))
+	.pipe(sourcemaps.write('.'))
+	.pipe(gulp.dest('./js'));
+});
+
+gulp.task('dev', function () {
 
 	gulp.watch('./sass/*.scss', function() {
 		setTimeout(function() {
 			return gulp.start('sass');
 		}, 521);
+	});
+
+	gulp.watch('./js/*.js', function() {
+		return gulp.start('js');
 	});
 
 });
@@ -50,8 +63,10 @@ gulp.task('fincss', function () {
 });
 
 gulp.task('jsmin', function () {
-	gulp.src(['./js/*.js'])
+	gulp.src(['!./js/common.js', './js/*.js'])
+	.pipe(concat('script.js'))
 	.pipe(uglify())
+	.pipe(sourcemaps.write('.'))
 	.pipe(rename({suffix: '.min'}))
 	.pipe(gulp.dest('./js'));
 });

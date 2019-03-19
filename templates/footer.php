@@ -15,7 +15,7 @@
 <!--POPUP/-->
 <div class="popup">
 
-	<div id="log-reg-window" class="popup__window">
+	<!-- <div id="log-reg-window" class="popup__window">
 		<button class="popup__close btn-close"></button>
 
 		<div id="js_auth_msg" class="popup__alert"></div>
@@ -36,7 +36,7 @@
 					</div>
 				</div>
 
-				<!--TAB/-->
+				
 				<div id="login-tab" class="tab__content">
 					<form id="js-login-form" action="/functions/auth.php" method="POST" class="form">
 						<div class="form__field">
@@ -53,9 +53,7 @@
 						<input type="hidden" name="form_role" value="log">
 					</form>
 				</div>
-				<!--/TAB-->
-
-				<!--TAB/-->
+				
 				<div id="registration-tab" class="tab__content">
 					<form id="js-registration-form" action="/functions/auth.php" method="POST" class="form">
 						<div class="form__field">
@@ -81,12 +79,12 @@
 						<input type="hidden" name="form_role" value="reg">
 					</form>
 				</div>
-				<!--/TAB-->
+				
 			</div>
 
 		</div>
 
-	</div>
+	</div> -->
 
 	<div id="message-popup" class="popup__window">
 		<button class="popup__close btn-close"></button>
@@ -99,24 +97,46 @@
 
 <div id="load" class="load"><img src="/images/loader.gif" alt="loader"></div>
 
-<script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="/js/popup.js"></script>
-<script type="text/javascript" src="/js/select.js"></script>
-<script type="text/javascript" src="/js/form.js"></script>
-<script type="text/javascript" src="/js/auth.js"></script>
-<script type="text/javascript" src="/js/button.js"></script>
-<script type="text/javascript" src="/js/common.js"></script>
+<!-- <script src="/js/script.js"></script>
+<script src="/js/common.js"></script> -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	var scriptsSrcArr = ['/js/script.js', '/js/common.js'],
+	count = 0;
+
+	function loaded() {
+		count++;
+		
+		if (count == scriptsSrcArr.length) {
+			console.log('loaded');
+			scriptLoaded();
+		}
+	}
+
+	for (var i = 0; i < scriptsSrcArr.length; i++) {
+		var src = scriptsSrcArr[i],
+		scriptElem = document.createElement('script');
+		
+		scriptElem.async = true;
+		scriptElem.src = src;
+
+		scriptElem.addEventListener('load', loaded);
+
+		document.body.appendChild(scriptElem);
+	}
+});
+
+var selRegion = false;
 
 <?php
-if (!empty($js_include)) {
-	foreach ($js_include as $js) {
-		echo '<script type="text/javascript" src="/js/'.$js.'"></script>';
-	}
-}
 if (empty($region)) {
-	echo '<script>$(document).ready(function(){sel_reg();});</script>';
+	echo 'selRegion = true;';
 }
 ?>
+</script>
+
+
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-49744337-3"></script>

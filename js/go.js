@@ -1,4 +1,5 @@
-$(document).ready(function() {
+;(function() {
+	if (!window.redUrl || !redUrl) return;
 
 	if (adBlock || unknownUser) {
 		$('#go-block').hide();
@@ -6,7 +7,7 @@ $(document).ready(function() {
 	} else {
 		var TimerNum = $('#timer-num'),
 		i = 5;
-
+		
 		TimerNum.html(i);
 		
 		function runTimer() {
@@ -20,5 +21,4 @@ $(document).ready(function() {
 		}
 		runTimer();
 	}
-
-});
+})();
