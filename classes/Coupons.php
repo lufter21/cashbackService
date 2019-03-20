@@ -33,19 +33,17 @@ class Coupons extends Core {
 				$par = 'category LIKE ? AND available=?';
 				$this->_itemsquantity = $category_arr['all_qnt'] + $category_arr['ru_qnt'] + $category_arr['ua_qnt'];
 			}
-		}
-		else{
+		} else {
 			if(!empty($this->_region)){
 				$cat[0] = 'all';
 				$cat[1] = $this->_region;
 				$cat[2] = 1;
 				$par = '(region=? OR region=?) AND available=?';
-			}
-			else{
+			} else {
 				$cat[0] = 1;
 				$par = 'available=?';
 			}
-			$sql = $this->db->prepare('SELECT COUNT(*) FROM discounts WHERE '.$par);
+			$sql = $this->db->prepare('SELECT COUNT(*) FROM coupons WHERE '.$par);
 			$sql->execute($cat);
 			$this->_itemsquantity = $sql->fetchColumn();
 		}
@@ -61,15 +59,17 @@ class Coupons extends Core {
 		
 		$result['sorting'] = $sorting = $this->getSorting();
 		
-		$sql = $this->db->prepare('SELECT * FROM discounts WHERE '.$par.$sorting.' LIMIT '.$page.',24');
+		$sql = $this->db->prepare('SELECT * FROM coupons WHERE '.$par.$sorting.' LIMIT '.$page.',24');
 		$sql->execute($cat);
-		$result['discounts'] = $sql->fetchAll(PDO::FETCH_ASSOC);
+		$result['coupons'] = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+		print_r($cat);
+		echo $par;
 		
-		$shops = $this->db->prepare('SELECT alias,cashback,name FROM shops');
+		$shops = $this->db->prepare('SELECT * FROM shops');
 		$shops->execute();
 		$shops = $shops->fetchAll(PDO::FETCH_ASSOC);
 		foreach($shops as $shop) {
-			$result['shop_cashback'][$shop['alias']] = $shop['cashback'];
 			$result['shop_name'][$shop['alias']] = $shop['name'];
 		}
 		
@@ -123,7 +123,7 @@ class Coupons extends Core {
 				{
 					$dots = '<span class="dots">...</span>';
 				}
-				$pagination = '<a rel="nofollow" href="/discounts'.$alias.'/page/1" title="1-я страница">1</a>'.$dots;
+				$pagination = '<a rel="nofollow" href="/coupons'.$alias.'/page/1" title="1-я страница">1</a>'.$dots;
 			}
 			for($i;$i<=$pag;$i++)
 			{
@@ -133,7 +133,7 @@ class Coupons extends Core {
 				}
 				else
 				{
-					$pagination .= '<a rel="nofollow" href="/discounts'.$alias.'/page/'.$i.'" title="'.$i.'-я страница">'.$i.'</a>';
+					$pagination .= '<a rel="nofollow" href="/coupons'.$alias.'/page/'.$i.'" title="'.$i.'-я страница">'.$i.'</a>';
 				}
 			}
 			if($pages>5 && $page<$pages-2)
@@ -143,13 +143,13 @@ class Coupons extends Core {
 				{
 					$dots = '<span class="dots">...</span>';
 				}
-				$pagination .= $dots.'<a rel="nofollow" href="/discounts'.$alias.'/page/'.$pages.'" title="'.$pages.'-я страница">'.$pages.'</a>';
+				$pagination .= $dots.'<a rel="nofollow" href="/coupons'.$alias.'/page/'.$pages.'" title="'.$pages.'-я страница">'.$pages.'</a>';
 			}
 		}
 		return $pagination;
 	}
 	
-	private function getSorting(){
+	private function getSorting() {
 		if(isset($_POST['sorting'])) {
 			$result = $_SESSION['sorting'] = $_POST['sorting'];
 			$this->_page = 1;
@@ -171,7 +171,7 @@ class Coupons extends Core {
 	}
 	
 	protected function delDiscount($id) {
-		$del = $this->db->prepare('DELETE FROM discounts WHERE id=?');
+		$del = $this->db->prepare('DELETE FROM coupons WHERE id=?');
 		$del->execute(array($id));
 	}
 	

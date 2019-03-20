@@ -30,7 +30,7 @@ include('header.php');
 					</div>
 
 					<?php
-					if(!empty($content['discounts'])){
+					if(!empty($content['coupons'])){
 						?>
 						<div class="sorting-block col-3">
 							<form id="sorting-form" action="/discounts<?php echo (!empty($alias)) ? '/'.$alias : '';?>" method="POST">

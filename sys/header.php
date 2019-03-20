@@ -1,6 +1,6 @@
 <?php
 /*
-System Header ТЦ «Lemon»
+System Header
 */
 ?>
 <!DOCTYPE html>
@@ -20,9 +20,10 @@ System Header ТЦ «Lemon»
 <?php echo $log;
 if(!empty($_SESSION['log'])){
 ?>
-<a class="btn" href="?route=categories&action=rfd">Remove Finished Discounts</a>
-<a class="btn" href="?route=categories">Categories</a>
-<a class="btn" href="/sys/">Shops</a>
+<a class="btn" href="?route=categories&action=rfd">Remove Finished Coupons</a>
+<a class="btn" href="?route=import-coupons">Import all coupons</a>
+<a class="link-btn" href="?route=categories">Categories</a>
+<a class="link-btn" href="/sys/">Shops</a>
 <?
 }
 ?>

@@ -25,9 +25,16 @@ function quant($shop,$db){
 $tit = "Shops";
 include('header.php');
 ?>
+
+<div class="right">
+	<a class="btn" href="?route=update-shops">Update shops</a>
+</div>
+
+<div class="clr"></div>
+
 <form id="shops-form" class="shops-form" action="" method="POST">
 <table>
-<tr class="bold"><td>Shop</td><td>Country</td><td>Discounts Quantity</td><td>Actions</td><tr>
+<tr class="bold"><td>Shop</td><td>Country</td><td>Coupons Quantity</td><td>-actions-</td><tr>
 <?php
 foreach(shops($db) as $arr){
 echo '<tr>
@@ -36,10 +43,7 @@ echo '<tr>
 <td>'.quant($arr['alias'],$db).'</td>
 <td>';
 
-if (!empty($arr['csv_discounts'])) {
-	echo '<a href="?route=import-discounts&region='.$arr['region'].'&shop='.$arr['alias'].'" >Upload Discounts</a>
-	<a href="?route=show-discounts&shop='.$arr['alias'].'" >Show Discounts List</a>';
-}
+echo '<a href="?route=show-discounts&shop='.$arr['alias'].'" >Show Coupons List</a>';
 
 echo '<input type="hidden" name="change-available" value="true">
 	<select name="available['.$arr['alias'].']">

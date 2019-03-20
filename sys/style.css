@@ -3,185 +3,198 @@ html, body, div, span,
 h1, h2, h3, h4, h5, h6, p,
 a, img, ol, ul, li,
 form, input, textarea, label, td{
-margin: 0;
-padding: 0;
-border: 0;
-outline: none;
-font-weight: inherit;
-font-style: inherit;
-font-size: inherit;
-font-family: inherit;
-color:inherit;
-vertical-align: baseline;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: none;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: inherit;
+	font-family: inherit;
+	color:inherit;
+	vertical-align: baseline;
 }
 ol, ul, li{
-list-style:none
+	list-style:none
 }
 .clr{clear:both}
 /*----------------------------------------GENERAL---STYLES-----------------------------------*/
 html, body{
-font-family: 'Open Sans', sans-serif;
-font-size:14px;
-line-height:1;
-background:#ffffff;
-font-weight:400;
-height:100%
+	font-family: 'Open Sans', sans-serif;
+	font-size:14px;
+	line-height:1;
+	background:#ffffff;
+	font-weight:400;
+	height:100%
 }
 a:hover{
-text-decoration:none;
+	text-decoration:none;
 }
 #wrapper{
-min-width:1221px;
-position:relative;
-min-height:100%;
-background:#F7F7F7
+	min-width:1221px;
+	position:relative;
+	min-height:100%;
+	background:#F7F7F7
 }
 #header{
-background:#72A0C1;
-color:#ffffff;
-height:39px;
-line-height:39px;
-padding:0 21px
+	background:#72A0C1;
+	color:#ffffff;
+	height:39px;
+	line-height:39px;
+	padding:0 21px
 }
 form{
-width:290px;
-margin:121px auto
+	width:290px;
+	margin:121px auto
 }
 form.wide,form.wide input{
-width:100%;
-box-sizing:border-box
+	width:100%;
+	box-sizing:border-box
 }
 input[type=text],input[type="password"],select,textarea{
-width:121px;
-border:1px solid #72A0C1;
-font-size:16px;
-padding:5px 10px;
-margin-bottom:21px
+	width:121px;
+	border:1px solid #72A0C1;
+	font-size:16px;
+	padding:5px 10px;
+	margin-bottom:21px
 }
 form.wide select{
-display:block;
-width:290px !important;
-margin:0 auto 21px;
+	display:block;
+	width:290px !important;
+	margin:0 auto 21px;
 }
 input[type=submit]{
-display:block;
-width:290px;
-cursor:pointer;
-background:#72A0C1;
-color:#ffffff;
-font-weight:700;
-text-transform:uppercase;
-margin:0 auto;
-padding:5px 10px;
-font-size:16px;
+	display:block;
+	width:290px;
+	cursor:pointer;
+	background:#72A0C1;
+	color:#ffffff;
+	font-weight:700;
+	text-transform:uppercase;
+	margin:0 auto;
+	padding:5px 10px;
+	font-size:16px;
 }
 input[type=submit]:hover{
-opacity:0.8
+	opacity:0.8
 }
 form.ch input{
-width:268px
+	width:268px
 }
 table{
-padding:21px;
-width:100%;
+	padding:21px;
+	width:100%;
 }
 td{
-border:1px solid #999999;
-background:#ffffff;
-padding:7px 10px;
-vertical-align:middle
+	border:1px solid #999999;
+	background:#ffffff;
+	padding:7px 10px;
+	vertical-align:middle
 }
-.btn,td a{
-display:block;
-padding:7px 15px;
-color:#3E5567;
-border:1px solid #3E5567;
-font-weight:700;
-text-decoration:none;
-border-radius:3px;
-background:linear-gradient(to top,#C9C9C9,#EDEDED);
-text-align:center;
-cursor:pointer;
+.btn, .link-btn ,td a{
+	display:block;
+	padding:7px 15px;
+	color:#3E5567;
+	border:1px solid #3E5567;
+	font-weight:700;
+	text-decoration:none;
+	border-radius:3px;
+	background:linear-gradient(to top,#C9C9C9,#EDEDED);
+	text-align:center;
+	cursor:pointer;
 }
+
+.link-btn{
+	background: none !important;
+	border: none;
+	color: #EDEDED;
+	text-decoration: underline;
+}
+
 .btn:hover,td a:hover{
-background:linear-gradient(to top,#EDEDED,#C9C9C9)
+	background:linear-gradient(to top,#EDEDED,#C9C9C9)
 }
 td a{
-padding:5px 21px;
-margin:5px;
-float:left
+	padding:5px 21px;
+	margin:5px;
+	float:left
 }
-#header a.btn{
-float:right;
-padding:3px 21px;
-height:21px;
-margin:5px 0 0 3px;
-line-height:21px
+#header a.btn,
+#header a.link-btn{
+	float:right;
+	padding:3px 21px;
+	height:21px;
+	margin:5px 0 0 3px;
+	line-height:21px
 }
 .bold{
-font-weight:700
+	font-weight:700
 }
 .wrap{
-padding:21px
+	padding:21px
 }
 .mb-21 a{
-margin-bottom:21px
+	margin-bottom:21px
 }
 
 .title{
-padding:21px;
-font-size:21px
+	padding:21px;
+	font-size:21px;
+	float: left;
 }
-
+.right{
+	float: right;
+	padding:21px;
+}
 .key-form
 {
-float:left;
-margin:0;
-width:221px
+	float:left;
+	margin:0;
+	width:221px
 }
 .key-form p
 {
-overflow:hidden;
-white-space:nowrap
+	overflow:hidden;
+	white-space:nowrap
 }
 .key-form input,
 .key-form select{
-width:45px;
-float:right;
-margin-right:35px;
-height:11px
+	width:45px;
+	float:right;
+	margin-right:35px;
+	height:11px
 }
 .key-form input[name='shop']{
-width:121px
+	width:121px
 }
 .key-form label{
-padding-top:10px;
-float:left
+	padding-top:10px;
+	float:left
 }
 .key-form select{
-width:121px;
-margin-bottom:21px;
-height:auto
+	width:121px;
+	margin-bottom:21px;
+	height:auto
 }
 .key-form input[type="submit"]{
-width:121px!important;
-height:38px
+	width:121px!important;
+	height:38px
 }
 .key-form.check p{
-padding-bottom:7px
+	padding-bottom:7px
 }
 .key-form.pb p{
-padding-bottom:30px
+	padding-bottom:30px
 }
 .key-form.pb{
-padding-top:5px
+	padding-top:5px
 }
 
 .message{
-font-size:21px;
-text-align:center;
-color:#f6ce2a;
-padding-bottom:21px
+	font-size:21px;
+	text-align:center;
+	color:#f6ce2a;
+	padding-bottom:21px
 }
 
 .item{
@@ -265,10 +278,10 @@ form.upd-cats{
 }
 
 form.shops-form{
-margin: 0;
-width:auto;
+	margin: 0;
+	width:auto;
 }
 form.shops-form select{
-margin-bottom:0;
-float:right;
+	margin-bottom:0;
+	float:right;
 }

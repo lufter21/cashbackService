@@ -125,8 +125,8 @@ return $pre_par;
 }
 
 if(!empty($_GET['action']) && $_GET['action'] == 'rfd'){
-	$del_discount = $db->prepare('DELETE FROM discounts WHERE id=?');
-	$get_discounts = $db->prepare('SELECT id,date_end FROM discounts');
+	$del_discount = $db->prepare('DELETE FROM coupons WHERE id=?');
+	$get_discounts = $db->prepare('SELECT id,date_end FROM coupons');
 	$get_discounts->execute();
 	$get_discounts_arr = $get_discounts->fetchAll(PDO::FETCH_ASSOC);
 	$current_time = time();
@@ -144,13 +144,13 @@ if(!empty($_POST['add_cat']) || !empty($_POST['update_cats']) || (!empty($_GET['
 	$update_alias = $db->prepare('UPDATE categories SET alias=? WHERE id=?');
 	
 	$set_all_qnt = $db->prepare('UPDATE categories SET all_qnt=? WHERE id=?');
-	$get_all_qnt = $db->prepare('SELECT id FROM discounts WHERE region=? AND category LIKE ? AND available=?');
+	$get_all_qnt = $db->prepare('SELECT id FROM coupons WHERE region=? AND category LIKE ? AND available=?');
 	
 	$set_ru_qnt = $db->prepare('UPDATE categories SET ru_qnt=? WHERE id=?');
-	$get_ru_qnt = $db->prepare('SELECT id FROM discounts WHERE region=? AND category LIKE ? AND available=?');
+	$get_ru_qnt = $db->prepare('SELECT id FROM coupons WHERE region=? AND category LIKE ? AND available=?');
 	
 	$set_ua_qnt = $db->prepare('UPDATE categories SET ua_qnt=? WHERE id=?');
-	$get_ua_qnt = $db->prepare('SELECT id FROM discounts WHERE region=? AND category LIKE ? AND available=?');
+	$get_ua_qnt = $db->prepare('SELECT id FROM coupons WHERE region=? AND category LIKE ? AND available=?');
 	
 	$set_all_shops = $db->prepare('UPDATE categories SET all_shops=? WHERE id=?');
 	$get_all_shops = $db->prepare('SELECT id FROM shops WHERE region=? AND category LIKE ? AND available=?');
