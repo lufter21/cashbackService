@@ -40,13 +40,7 @@
 					</div>
 				</div>
 				<div class="col-6 ta-r">
-					<div class="header__user">
-						<?php if($user){ ?>
-						<a href="/cabinet" class="borno"><?php echo $user['name']; ?></a> <span class="gr">|</span> <a href="/logout" class="-gray">Выход</a>
-						<?php } else { ?>
-						<a href="#log-reg-window" data-tab="login" class="-dash js-open-popup">Вход</a> | <a href="#log-reg-window" data-tab="registration" class="-dash js-open-popup">Регистрация</a>
-						<?php } ?>
-					</div>
+					
 				</div>
 			</div>
 		</div>

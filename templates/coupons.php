@@ -6,7 +6,7 @@ if(empty($meta)){
 		'description'=>'Совместно с кэшбэком вы также можете получить дополнительную скидку'
 	);
 }
-include('header.php');
+include $_SERVER['DOCUMENT_ROOT'] .'/templates/header.php';
 ?>
 <!--Container/-->
 <div class="container wrap row vw1000-row-col">
@@ -33,9 +33,9 @@ include('header.php');
 					if(!empty($content['coupons'])){
 						?>
 						<div class="sorting-block col-3">
-							<form id="sorting-form" action="/discounts<?php echo (!empty($alias)) ? '/'.$alias : '';?>" method="POST">
+							<form id="sorting-form" action="/coupons<?php echo (!empty($alias)) ? '/'.$alias : '';?>" method="POST">
 								<select name="sorting">
-									<option value=" ORDER BY dis_count DESC" <?php if($content['sorting'] == ' ORDER BY dis_count DESC'){echo 'selected';}?>>Наибольшие скидки</option>
+									<option value=" ORDER BY discount_abs DESC" <?php if($content['sorting'] == ' ORDER BY discount_abs DESC'){echo 'selected';}?>>Наибольшие скидки</option>
 									<option value=" ORDER BY date_start DESC" <?php if($content['sorting'] == ' ORDER BY date_start DESC'){echo 'selected';}?>>Самые новые</option>
 									<option value=" ORDER BY date_end ASC" <?php if($content['sorting'] == ' ORDER BY date_end ASC'){echo 'selected';}?>>Скоро заканчиваются</option>
 								</select>
@@ -49,31 +49,20 @@ include('header.php');
 			</div>
 		</div>
 		
-
 		<div id="flex-wrap" class="flex-wrap">
 			<?php
-			if(!empty($content['discounts'])){
-				$i = 1;
-				$current_time = time();
-				foreach($content['discounts'] as $item){
-					$d_sec = strtotime($item['date_end']) - $current_time;
-					if($d_sec > 0){
-						include 'inc/coupon-item.php';
-					} else {
-						$lemon->delDiscount($item['id']);
-						if($i >= $lemon->_itemsquantity){
-							echo '<div class="message">На данный момент, в этом разделе нет акций и скидок</div>';
-						}
-						$i++;
-					}
+			if (!empty($content['coupons'])) {
+				foreach ($content['coupons'] as $item) {
+					include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/coupon-item.php';
 				}
 			} else {
 				echo '<div class="message">На данный момент, в этом разделе нет акций и скидок</div>';
 			}
 			?>
 		</div>
+		
 		<div class="pagination">
-			<?php echo $lemon->getPagenav(); ?>
+			<?php echo $lemon -> getPagenav(); ?>
 		</div>
 		
 	</div>
@@ -81,4 +70,4 @@ include('header.php');
 </div>
 <!--/Container-->
 
-<?php include('footer.php');?>
+<?php include $_SERVER['DOCUMENT_ROOT'] .'/templates/footer.php'; ?>

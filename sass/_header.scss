@@ -91,7 +91,7 @@
 
 .header-bottom{
 	&__wrap{
-		height:70px;
+		height:60px;
 		@media(max-width: 1000px){
 			height: 45px;
 		}
@@ -100,14 +100,14 @@
 
 .top-menu{
 	position: relative;
-	top: 3px;
+	top: 2px;
 }
 .top-menu .menu{
 	@include clr;
 }
 .top-menu .menu__item{
 	float:left;
-	margin-right:55px;
+	margin-right:75px;
 	position:relative;
 	color: $b;
 	&:last-child{
@@ -130,7 +130,7 @@
 	}
 }
 .top-menu .menu__item > a{
-	font-weight:700;
+	font-size: 15px;
 	text-decoration:none;
 	text-transform:uppercase;
 	position:relative;
@@ -143,7 +143,7 @@
 }
 .top-menu .menu__item_current > a,
 .top-menu .menu__item_current-parent > a{
-	border-bottom:3px solid #E68717;
+	border-bottom:2px solid #E68717;
 }
 .top-menu .menu__sub-menu{
 	position:absolute;

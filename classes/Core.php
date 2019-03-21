@@ -1,6 +1,5 @@
 <?php
 class Core {
-	
 	protected $db;
 	protected $_region;
 	protected $_alias;
@@ -15,7 +14,6 @@ class Core {
 	}
 	
 	protected function getUser($update=''){
-
 		if(!$_SESSION['access']){
 			if($_COOKIE['access']){
 				$access_key = $_SESSION['access'] = $_COOKIE['access'];
@@ -144,47 +142,49 @@ class Core {
 		return $menu;
 	}
 	
-	protected function getCategoryMenu(){
-		$cats = $this->db->prepare('SELECT * FROM categories ORDER BY nav');
-		$cats->execute();
-		$cats = $cats->fetchAll(PDO::FETCH_ASSOC);
+	protected function getCategoryMenu() {
+		$cats = $this -> db -> prepare('SELECT * FROM categories WHERE relation=? ORDER BY name');
 		$categories_arr = array();
 		
-		if($this->_template == 'discounts'){
+		if ($this->_template == 'coupons') {
+			$cats -> execute(array('coupons'));
+			$cats = $cats -> fetchAll(PDO::FETCH_ASSOC);
+
 			foreach($cats as $item){
 				if($this->_region){
 					if($item['all_qnt'] > 0 || $item[$this->_region.'_qnt'] > 0){
 						$categories_arr[] = '<li';
 						$categories_arr[] .= ($item['alias'] == $this->_alias) ? ' class="current"':'';
-						$categories_arr[] .= '><a href="/discounts/'.$item['alias'].'">'.$item['nav'].'</a></li>';
+						$categories_arr[] .= '><a href="/coupons/'.$item['alias'].'">'.$item['name'].'</a></li>';
 					}
 				} else {
 					if($item['all_qnt'] > 0 || $item['ru_qnt'] > 0 || $item['ua_qnt'] > 0){
 						$categories_arr[] = '<li';
 						$categories_arr[] .= ($item['alias'] == $this->_alias) ? ' class="current"':'';
-						$categories_arr[] .= '><a href="/discounts/'.$item['alias'].'">'.$item['nav'].'</a></li>';
+						$categories_arr[] .= '><a href="/coupons/'.$item['alias'].'">'.$item['name'].'</a></li>';
 					}
 				}
 			}
-		}
-		elseif($this->_template == 'shops'){
+		} elseif ($this->_template == 'shops') {
+			$cats -> execute(array('shops'));
+			$cats = $cats -> fetchAll(PDO::FETCH_ASSOC);
+
 			foreach($cats as $item){
 				if($this->_region){
 					if($item['all_shops'] > 0 || $item[$this->_region.'_shops'] > 0){
 						$categories_arr[] = '<li';
 						$categories_arr[] .= ($item['alias'] == $this->_alias) ? ' class="current"':'';
-						$categories_arr[] .= '><a href="/shops/'.$item['alias'].'">'.$item['nav'].'</a></li>';
+						$categories_arr[] .= '><a href="/shops/'.$item['alias'].'">'.$item['name'].'</a></li>';
 					}
 				} else {
 					if($item['all_shops'] > 0 || $item['ru_shops'] > 0 || $item['ua_shops'] > 0){
 						$categories_arr[] = '<li';
 						$categories_arr[] .= ($item['alias'] == $this->_alias) ? ' class="current"':'';
-						$categories_arr[] .= '><a href="/shops/'.$item['alias'].'">'.$item['nav'].'</a></li>';
+						$categories_arr[] .= '><a href="/shops/'.$item['alias'].'">'.$item['name'].'</a></li>';
 					}
 				}
 			}
 		}
-		
 		
 		$categories = '<ul>';
 		foreach($categories_arr as $item){

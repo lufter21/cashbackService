@@ -1,38 +1,78 @@
-<div class="coupon-item">
-   <div class="inner">
-      <?php if(!empty($item['discount'])){ ?>
-         <div class="discount">
-            <?php echo $item['discount']; ?>
-         </div>
-      <?php } ?>
-      <a href="/coupon/<?php echo $item['id']; ?>" class="title"><?php echo $item['title']; ?></a>
-      <div class="logo">
-         <a href="/shop/<?php echo $item['shop'];?>" title="Все промокоды от <?php echo $content['shop_name'][$item['shop']]; ?>"><img src="/images/logo/<?php echo $item['shop']; ?>.png" alt="<?php echo $content['shop_name'][$item['shop']]; ?>"></a>
-      </div>
-      <?php
+<?php
+$until = '';
+$block_class = '';
+$d_sec = 0;
+$end = true;
+$expired = false;
+
+if ($item['date_end'] != 0) {
+   $d_sec = strtotime($item['date_end']) - time();
+} else {
+   $end = false;
+}
+
+if ($end) {
+   if ($d_sec > 0) {
       $days = floor($d_sec/86400);
       $d_sec = $d_sec-($days*86400);
       $hours = floor($d_sec/3600);
       $d_sec = $d_sec-($hours*3600);
       $minutes = floor($d_sec/60);
-      echo '<div class="until">';
-      if($days>0){
-         echo $days.'д. ';
+      
+      if ($days>0) {
+         $until .= $days.'д. ';
       }
-      if($hours < 10){
-         echo '0'.$hours.'ч. ';
-      } 
-      else{
-         echo $hours.'ч. ';
+
+      if ($hours < 10) {
+         $until .= '0'.$hours.'ч. ';
+      } else {
+         $until .= $hours.'ч. ';
       }
-      if($minutes < 10){
-         echo '0'.$minutes.'мин.';
-      } 
-      else{
-         echo $minutes.'мин.';
+
+      if ($minutes < 10) {
+         $until .= '0'.$minutes.'мин.';
+      } else {
+         $until .= $minutes.'мин.';
       }
-      echo '</div>';
+   } else {
+      $until .= 'Купон просрочен';
+      $block_class = ' coupon-item_expired';
+      $expired = true;
+   }
+} else {
+   $until .= 'Вечно';
+}
+?>
+
+<div class="coupon-item<?php echo $block_class; ?>">
+   <div class="inner">
+      <?php
+      if(!empty($item['discount'])){
+         if ($expired) {
       ?>
+      <span class="discount"><?php echo $item['discount']; ?></span>
+      <?php } else { ?>
+      <a rel="nofollow" href="/coupon/<?php echo $item['id']; ?>" class="discount"><?php echo $item['discount']; ?></a>
+      <?php
+         }
+      }
+      ?>
+
+      <?php if ($expired) { ?>
+      <span class="title"><?php echo $item['title']; ?></span>
+      <?php } else { ?>
+      <a href="/coupon/<?php echo $item['id']; ?>" class="title"><?php echo $item['title']; ?></a>
+      <?php } ?>
+
+      <div class="logo">
+         <a href="/shop/<?php echo $content['shops'][$item['shop_id']]['alias']; ?>" title="Все промокоды от <?php echo $content['shops'][$item['shop_id']]['name']; ?>"><img src="/images/logo/<?php echo $content['shops'][$item['shop_id']]['alias']; ?>.png" alt="<?php echo $content['shops'][$item['shop_id']]['name']; ?>"></a>
+      </div>
+      
+      <?php if (!$expired) { ?>
+      <div class="until"><?php echo $until; ?></div>
       <a rel="nofollow" href="/coupon/<?php echo $item['id']; ?>" class="coupon-item__button">Получить промокод</a>
+      <?php } else { ?>
+      <div class="expired">Купон просрочен</div>
+      <?php } ?>
    </div>
 </div>

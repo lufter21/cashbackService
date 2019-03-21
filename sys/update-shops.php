@@ -1,5 +1,5 @@
 <?php
-$update_shops = $db->prepare('INSERT INTO shops (id,name,category) VALUES (:id,:name,:category) ON DUPLICATE KEY UPDATE category=:u_category');
+$update_shops = $db->prepare('INSERT INTO shops (id,name,category,category_ids) VALUES (:id,:name,:category,:category_ids) ON DUPLICATE KEY UPDATE category=:u_category,category_ids=:u_category_ids');
 
 //get XML
 $coupons_xml = simplexml_load_file('admitad_coupons.xml');
@@ -13,12 +13,13 @@ foreach ($coupons_xml -> advcampaign_categories -> children() as $value) {
 }
 
 function get_shop_categories($shop, $cats) {
-	$categories = '';
+	$categories = array('txt' => '', 'ids' => '');
 	$k = 0;
-
+	
 	foreach ($shop -> categories -> children() as $value) {
 		if ((int) $value != 62) {
-			$categories .= (($k) ? ', ' : ''). $cats[(int) $value];
+			$categories['txt'] .= (($k) ? ', ' : ''). $cats[(int) $value];
+			$categories['ids'] .= (($k) ? ',' : ''). (int) $value;
 			$k++;
 		}
 	}
@@ -32,8 +33,10 @@ foreach ($coupons_xml -> advcampaigns -> children() as $value) {
 	$update_shops->execute(array(
 		'id' => (int) $value -> attributes()['id'],
 		'name' => (string) $value -> name,
-		'category' => $cats,
-		'u_category' => $cats
+		'category' => $cats['txt'],
+		'category_ids' => $cats['ids'],
+		'u_category' => $cats['txt'],
+		'u_category_ids' => $cats['ids']
 	));
 }
 

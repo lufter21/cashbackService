@@ -142,6 +142,10 @@ td a{
 	font-size:21px;
 	float: left;
 }
+.left{
+	float: left;
+	padding:21px;
+}
 .right{
 	float: right;
 	padding:21px;

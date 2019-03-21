@@ -1,8 +1,3 @@
-<?php
-/*
-System Header
-*/
-?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -10,7 +5,7 @@ System Header
 <title><?php echo $tit;?></title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <link type="text/css" rel="stylesheet" href="style.css"/>
-<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/0-jquery-3.1.1.min.js"></script>
 <script src="scripts.js"></script>
 </head>
 <body>

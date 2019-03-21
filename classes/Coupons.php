@@ -1,12 +1,10 @@
 <?php
 class Coupons extends Core {
-
 	private $_page;
 	protected $_itemsquantity;
 	protected $_category_id;
 
 	protected function getContent($query) {
-		
 		$cat = array();
 		if(!empty($this->_alias)){
 			$category = $this->db->prepare('SELECT id,key_s,all_qnt,ru_qnt,ua_qnt FROM categories WHERE alias=?');
@@ -59,18 +57,16 @@ class Coupons extends Core {
 		
 		$result['sorting'] = $sorting = $this->getSorting();
 		
-		$sql = $this->db->prepare('SELECT * FROM coupons WHERE '.$par.$sorting.' LIMIT '.$page.',24');
+		$sql = $this -> db -> prepare('SELECT * FROM coupons WHERE '.$par.$sorting.' LIMIT '.$page.',24');
 		$sql->execute($cat);
 		$result['coupons'] = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-		print_r($cat);
-		echo $par;
 		
 		$shops = $this->db->prepare('SELECT * FROM shops');
 		$shops->execute();
 		$shops = $shops->fetchAll(PDO::FETCH_ASSOC);
+
 		foreach($shops as $shop) {
-			$result['shop_name'][$shop['alias']] = $shop['name'];
+			$result['shops'][$shop['id']] = $shop;
 		}
 		
 		return $result;
@@ -159,20 +155,20 @@ class Coupons extends Core {
 				$result = $_SESSION['sorting'];
 			}
 			else {
-				$result = ' ORDER BY dis_count DESC';
+				$result = ' ORDER BY discount_abs DESC';
 			}
 		}
 		
 		if(empty($this->_page)){
 			unset($_SESSION['sorting']);
-			$result = ' ORDER BY dis_count DESC';
+			$result = ' ORDER BY discount_abs DESC';
 		}
 		return $result;
 	}
 	
 	protected function delDiscount($id) {
-		$del = $this->db->prepare('DELETE FROM coupons WHERE id=?');
-		$del->execute(array($id));
+		$del = $this -> db -> prepare('DELETE FROM coupons WHERE id=?');
+		$del -> execute(array($id));
 	}
 	
 }
