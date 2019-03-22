@@ -87,7 +87,11 @@ function translit($string){
 }
 
 function get_title($str) {
-	return trim(str_replace('&', 'и', $str)) .' промокоды акции и скидки';
+	return trim(str_replace('&', 'и', $str)) .' промокоды и скидки';
+}
+
+function get_meta_title($str) {
+	return 'Скидки на '. mb_strtolower(trim(str_replace('&', 'и', $str)), 'UTF-8')  .', промокоды';
 }
 
 if(!empty($_GET['action']) && $_GET['action'] == 'rfd'){
@@ -110,6 +114,8 @@ if(!empty($_POST['update_cats']) || (!empty($_GET['action']) && $_GET['action'] 
 	$update_alias = $db->prepare('UPDATE categories SET alias=? WHERE id=?');
 
 	$set_title = $db->prepare('UPDATE categories SET title=? WHERE id=?');
+
+	$set_meta_title = $db->prepare('UPDATE categories SET meta_title=? WHERE id=?');
 	
 	$set_all_qnt = $db->prepare('UPDATE categories SET all_qnt=? WHERE id=?');
 	$get_all_qnt = $db->prepare('SELECT id FROM coupons WHERE region=? AND category_ids LIKE ? AND available=?');
@@ -146,6 +152,12 @@ if(!empty($_POST['update_cats']) || (!empty($_GET['action']) && $_GET['action'] 
 
 		if (empty($item['title'])) {
 			$set_title->execute(array($tit, $item['id']));
+		}
+
+		$m_tit = get_meta_title(trim($item['name']));
+
+		if (empty($item['meta_title'])) {
+			$set_meta_title->execute(array($m_tit, $item['id']));
 		}
 		
 		// set quantity

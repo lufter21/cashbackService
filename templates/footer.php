@@ -1,9 +1,12 @@
 	<!--Footer/-->
 	<footer id="footer" class="footer">
 		<div class="wrap">
-			<div class="left">&copy; <?php echo date('Y');?> <span>BomBonus.dealersAir — Кэшбэк, скидки/промокоды</span></div>
+			<div class="left">
+				Промокоды и скидки от лучших интернет магазинов.<br>
+				&copy; <?php echo date('Y');?> Dealers Air Bombonus, https://bombonus.dealersair.com
+			</div>
 			<div class="right">
-				<a class="dealersair" href="http://dealersair.com/" title="«dealersAir» — интернет-проекты и сервисы" target="_blank"><img src="/images/icon-dealersair.svg" onerror="this.onerror=null; this.src='/images/icon-dealersair.png'" alt="DealersAir"></a>
+				<a class="dealersair" href="http://dealersair.com/" title="«Dealers Air» — интернет-проекты и сервисы" target="_blank"><img src="/images/icon-dealersair.svg" alt="DealersAir"></a>
 			</div>
 		</div>
 	</footer>
@@ -110,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		count++;
 		
 		if (count == scriptsSrcArr.length) {
-			console.log('loaded');
 			scriptLoaded();
 		}
 	}

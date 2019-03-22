@@ -1,5 +1,5 @@
 <?php
-$update_cats = $db -> prepare('INSERT INTO categories (id,name,relation) VALUES (:id,:name,:relation) ON DUPLICATE KEY UPDATE name=:u_name');
+$update_cats = $db -> prepare('INSERT INTO categories (id,name,relation) VALUES (:id,:name,:relation)');
 
 //get XML
 $coupons_xml = simplexml_load_file('admitad_coupons.xml');
@@ -15,8 +15,7 @@ foreach ($coupons_xml -> advcampaign_categories -> children() as $value) {
 	$update_cats -> execute(array(
 		'id' => $id,
 		'name' => (string) $value,
-		'relation' => 'shops',
-		'u_name' => (string) $value
+		'relation' => 'shops'
 	));
 }
 
@@ -26,8 +25,7 @@ foreach ($coupons_xml -> categories -> children() as $value) {
 	$update_cats -> execute(array(
 		'id' => $id,
 		'name' => (string) $value,
-		'relation' => 'coupons',
-		'u_name' => (string) $value
+		'relation' => 'coupons'
 	));
 }
 

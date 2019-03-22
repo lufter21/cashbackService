@@ -1,7 +1,8 @@
 .footer{
 	min-width:320px;
-	padding-top:11px;
+	padding: 15px 0;
 	font-size:14px;
+	line-height: 1.5;
 	background:#fff;
 	color:#6699CC;
 	@include clr;
@@ -18,9 +19,9 @@
 }
 .dealersair img{
 	position:relative;
-	top:-5px;
-	height: 21px;
-	width: auto;
+	top:7px;
+	width: 110px;
+	height: auto;
 }
 
 @media(max-width: 1000px){

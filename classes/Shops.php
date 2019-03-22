@@ -6,8 +6,8 @@ class Shops extends Core {
 	protected $_category_id;
 
 	protected function getContent($query) {
-		
 		$cat = array();
+		
 		if ($this->_alias) {
 			$category = $this->db->prepare('SELECT id,key_s,all_shops,ru_shops,ua_shops FROM categories WHERE alias=?');
 			$category->execute(array($this->_alias));
