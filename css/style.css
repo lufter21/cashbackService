@@ -1,7 +1,5 @@
 @charset "UTF-8";
 /*=============================================RESET==================================================*/
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700&subset=cyrillic");
-@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:700&subset=cyrillic");
 html, body, div, span, iframe, h1, h2, h3, h4, h5, h6, p, a, img, strong, b, i, sub, ol, ul, li, form, label, input, textarea, button, header, footer, section, nav, article, aside {
   margin: 0;
   padding: 0;
@@ -43,7 +41,6 @@ img {
   vertical-align: bottom;
 }
 
-/*=============================================FONTS===================================================*/
 /*=============================================GRID===================================================*/
 /*Wrapper*/
 .wrapper {
@@ -692,6 +689,7 @@ img {
 
 .top-menu .menu__item > a {
   font-size: 15px;
+  font-weight: 500;
   text-decoration: none;
   text-transform: uppercase;
   position: relative;
@@ -1013,6 +1011,7 @@ img {
 
 .sidebar li.current a, .sidebar li.menu__item_current a {
   color: #e68717;
+  text-decoration: underline;
 }
 
 .sidebar li:last-child {
@@ -3035,7 +3034,7 @@ body.is-popup-opened {
 
 /*=============================================COMMON===============================================*/
 html, body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Fira Sans', sans-serif;
   color: #797979;
   background: #F1F1F1;
   height: 100%;
@@ -3072,7 +3071,7 @@ ul {
 }
 
 h1 {
-  font-size: 24px;
+  font-size: 21px;
   color: #0F986E;
 }
 

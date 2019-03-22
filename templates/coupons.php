@@ -1,9 +1,9 @@
 <?php
 if(empty($meta)){
 	$meta = array(
-		'title'=>'Скидки и промокоды от лучших интернет магазинов',
-		'name'=>'Скидки/промокоды',
-		'description'=>'Совместно с кэшбэком вы также можете получить дополнительную скидку'
+		'meta_title' => 'Промокоды, акции и скидки от лучших интернет магазинов',
+		'title' => 'Промокоды, акции и скидки',
+		'meta_description' => 'Получите промокоды, акции и скидки от лучших интернет магазинов'
 	);
 }
 include $_SERVER['DOCUMENT_ROOT'] .'/templates/header.php';
@@ -26,7 +26,7 @@ include $_SERVER['DOCUMENT_ROOT'] .'/templates/header.php';
 			<div class="box">
 				<div class="row-col-mid">
 					<div class="col-9">
-						<h1><?php echo $meta['name'];?></h1>
+						<h1><?php echo $meta['title'];?></h1>
 					</div>
 
 					<?php

@@ -99,9 +99,9 @@ class Core {
 		return $region;
 	}
 	
-	protected function getMeta(){
+	protected function getMeta() {
 		if($this->_category_id){
-			$cats = $this->db->prepare('SELECT name,title,description FROM categories WHERE id=?');
+			$cats = $this->db->prepare('SELECT meta_title,title,meta_description,description FROM categories WHERE id=?');
 			$cats->execute(array($this->_category_id));
 			$result = $cats->fetch(PDO::FETCH_ASSOC);
 			return $result;

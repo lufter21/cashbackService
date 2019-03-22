@@ -47,7 +47,7 @@ if ($end) {
 <div class="coupon-item<?php echo $block_class; ?>">
    <div class="inner">
       <?php
-      if(!empty($item['discount'])){
+      if (!empty($item['discount'])) {
          if ($expired) {
       ?>
       <span class="discount"><?php echo $item['discount']; ?></span>
@@ -65,7 +65,7 @@ if ($end) {
       <?php } ?>
 
       <div class="logo">
-         <a href="/shop/<?php echo $content['shops'][$item['shop_id']]['alias']; ?>" title="Все промокоды от <?php echo $content['shops'][$item['shop_id']]['name']; ?>"><img src="/images/logo/<?php echo $content['shops'][$item['shop_id']]['alias']; ?>.png" alt="<?php echo $content['shops'][$item['shop_id']]['name']; ?>"></a>
+         <a href="/shop/<?php echo $content['shops'][$item['shop_id']]['alias']; ?>" title="Все промокоды от <?php echo $content['shops'][$item['shop_id']]['name']; ?>"><img src="<?php echo $item['logo']; ?>" alt="<?php echo $content['shops'][$item['shop_id']]['name']; ?>"></a>
       </div>
       
       <?php if (!$expired) { ?>

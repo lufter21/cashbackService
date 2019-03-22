@@ -2,12 +2,15 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title><?php echo $meta['title']; ?> | BomBonus.dealersAir — Кэшбэк, скидки/промокоды</title>
-<meta name="description" content="<?php echo $meta['description']; ?>">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,400i,500,700&amp;subset=cyrillic" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="/css/style.css">
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="canonical" href="https://bombonus.dealersair.com/<?php echo $route; ?>">
+<title><?php echo $meta['meta_title']; ?> — Dealers Air Bombonus</title>
+<meta name="description" content="<?php echo $meta['meta_description']; ?>">
+<!-- favicons/ -->
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<!-- /favicons -->
 <script>var adBlock = true, unknownUser = false;</script>
 <script src="/js/adframe.js"></script>
 </head>

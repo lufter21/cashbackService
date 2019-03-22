@@ -6,8 +6,8 @@ class Coupons extends Core {
 
 	protected function getContent($query) {
 		$cat = array();
-		if(!empty($this->_alias)){
-			$category = $this->db->prepare('SELECT id,key_s,all_qnt,ru_qnt,ua_qnt FROM categories WHERE alias=?');
+		if (!empty($this->_alias)) {
+			$category = $this->db->prepare('SELECT * FROM categories WHERE alias=?');
 			$category->execute(array($this->_alias));
 			$category_arr = $category->fetch(PDO::FETCH_ASSOC);
 			
@@ -17,18 +17,17 @@ class Coupons extends Core {
 				$this->_page_not_found = true;
 			}
 
-			if(!empty($this->_region)){
-				$cat[0] = '%'.$category_arr['key_s'].'%';
+			if (!empty($this->_region)) {
+				$cat[0] = '%'.$category_arr['id'].'%';
 				$cat[1] = 'all';
 				$cat[2] = $this->_region;
 				$cat[3] = 1;
-				$par = 'category LIKE ? AND (region=? OR region=?) AND available=?';
+				$par = 'category_ids LIKE ? AND (region=? OR region=?) AND available=?';
 				$this->_itemsquantity = $category_arr['all_qnt'] + $category_arr[$this->_region.'_qnt'];
-			}
-			else{
+			} else {
 				$cat[0] = '%'.$category_arr['key_s'].'%';
 				$cat[1] = 1;
-				$par = 'category LIKE ? AND available=?';
+				$par = 'category_ids LIKE ? AND available=?';
 				$this->_itemsquantity = $category_arr['all_qnt'] + $category_arr['ru_qnt'] + $category_arr['ua_qnt'];
 			}
 		} else {

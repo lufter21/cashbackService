@@ -1,5 +1,5 @@
 <?php
-$ins_act = $db -> prepare('INSERT INTO coupons (id,category,category_ids,type,title,description,promocode,discount,discount_abs,date_start,date_end,gotolink,shop_id,region) VALUES (:id,:category,:category_ids,:type,:title,:description,:promocode,:discount,:discount_abs,:date_start,:date_end,:gotolink,:shop_id,:region)');
+$ins_act = $db -> prepare('INSERT INTO coupons (id,category,category_ids,type,title,description,promocode,discount,discount_abs,date_start,date_end,gotolink,logo,shop_id,region) VALUES (:id,:category,:category_ids,:type,:title,:description,:promocode,:discount,:discount_abs,:date_start,:date_end,:gotolink,:logo,:shop_id,:region)');
 
 
 $get_shops = $db->prepare('SELECT * FROM shops');
@@ -76,6 +76,7 @@ foreach ($coupons_xml -> coupons -> children() as $value) {
 		'date_start' => (string) $value -> date_start,
 		'date_end' => (string) $value -> date_end,
 		'gotolink' => (string) $value -> gotolink,
+		'logo' => (string) $value -> logo,
 		'shop_id' => (int) $value -> advcampaign_id,
 		'region' => $shops_resultArr[(int) $value -> advcampaign_id]['region']
 	));

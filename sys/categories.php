@@ -1,129 +1,93 @@
 <?php
-
-if(!empty($_POST['update_cats'])){
-	
-	if(!empty($_POST['del_cat'])){
-		$del_cats = $db->prepare('DELETE FROM categories WHERE id=?');
-		foreach($_POST['del_cat'] as $val){
-			$del_cats->execute(array($val));
-		}
-	}
-	
-	if(!empty($_POST['param'])){
-		$update_cats = $db->prepare('UPDATE categories SET nav=?,id=?,name=?,title=?,description=? WHERE id=?');
-		foreach($_POST['param'] as $key=>$val){
-			$update_cats->execute(array($val['nav'],$val['id'],$val['name'],$val['title'],$val['description'],$key));
-		}
-	}
-}
-
-
-if(!empty($_POST['add_cat'])){
-	
-	$add_cat = $db->prepare('INSERT INTO categories (id,nav,id,name,title) VALUES (:id,:nav,:id,:name,:title)');
-	
-	$add_cat->execute(array(
-		'id'=>$_POST['param']['id'],
-		'nav'=>$_POST['param']['nav'],
-		'id'=>$_POST['param']['id'],
-		'name'=>$_POST['param']['name'],
-		'title'=>$_POST['param']['title']
-	));
-}
-
-
-
 function translit($string){
- $table = array( 
-               'А' => 'A', 
-               'Б' => 'B', 
-               'В' => 'V', 
-               'Г' => 'G', 
-               'Д' => 'D', 
-               'Е' => 'E', 
-               'Ё' => 'YO', 
-               'Ж' => 'ZH', 
-               'З' => 'Z', 
-               'И' => 'I', 
-               'Й' => 'J', 
-               'К' => 'K', 
-               'Л' => 'L', 
-               'М' => 'M', 
-               'Н' => 'N', 
-               'О' => 'O', 
-               'П' => 'P', 
-               'Р' => 'R', 
-               'С' => 'S', 
-               'Т' => 'T', 
-               'У' => 'U', 
-               'Ф' => 'F', 
-               'Х' => 'KH', 
-               'Ц' => 'C', 
-               'Ч' => 'CH', 
-               'Ш' => 'SH', 
-               'Щ' => 'SCH', 
-               'Ь' => '',
-               'Ы' => 'I', 
-               'Ъ' => '', 
-               'Э' => 'E', 
-               'Ю' => 'YU', 
-               'Я' => 'YA',
-               'а' => 'a', 
-               'б' => 'b', 
-               'в' => 'v', 
-               'г' => 'g', 
-               'д' => 'd', 
-               'е' => 'e', 
-               'ё' => 'yo', 
-               'ж' => 'zh', 
-               'з' => 'z', 
-               'и' => 'i', 
-               'й' => 'j', 
-               'к' => 'k', 
-               'л' => 'l', 
-               'м' => 'm', 
-               'н' => 'n', 
-               'о' => 'o', 
-               'п' => 'p', 
-               'р' => 'r', 
-               'с' => 's', 
-               'т' => 't', 
-               'у' => 'u', 
-               'ф' => 'f', 
-               'х' => 'kh', 
-               'ц' => 'c', 
-               'ч' => 'ch', 
-               'ш' => 'sh', 
-               'щ' => 'sch',
-               'ь' => '',
-               'ы' => 'i', 
-               'ъ' => '', 
-               'э' => 'e', 
-               'ю' => 'yu', 
-               'я' => 'ya',
-			   '-,'=> '',
-			   ', '=> '-',		   
-			   ' ('=> '-',
-			   ') '=> '',
-			   ')'=> '',
-			   '  '=> '-',
-			   ' '=> '-',
-			   ','=> '-',
-				'+'=> '-',
-				"'"=>'',
-				'&'=>'i'
-			); 
+	$table = array( 
+		'А' => 'A', 
+		'Б' => 'B', 
+		'В' => 'V', 
+		'Г' => 'G', 
+		'Д' => 'D', 
+		'Е' => 'E', 
+		'Ё' => 'YO', 
+		'Ж' => 'ZH', 
+		'З' => 'Z', 
+		'И' => 'I', 
+		'Й' => 'J', 
+		'К' => 'K', 
+		'Л' => 'L', 
+		'М' => 'M', 
+		'Н' => 'N', 
+		'О' => 'O', 
+		'П' => 'P', 
+		'Р' => 'R', 
+		'С' => 'S', 
+		'Т' => 'T', 
+		'У' => 'U', 
+		'Ф' => 'F', 
+		'Х' => 'KH', 
+		'Ц' => 'C', 
+		'Ч' => 'CH', 
+		'Ш' => 'SH', 
+		'Щ' => 'SCH', 
+		'Ь' => '',
+		'Ы' => 'I', 
+		'Ъ' => '', 
+		'Э' => 'E', 
+		'Ю' => 'YU', 
+		'Я' => 'YA',
+		'а' => 'a', 
+		'б' => 'b', 
+		'в' => 'v', 
+		'г' => 'g', 
+		'д' => 'd', 
+		'е' => 'e', 
+		'ё' => 'yo', 
+		'ж' => 'zh', 
+		'з' => 'z', 
+		'и' => 'i', 
+		'й' => 'j', 
+		'к' => 'k', 
+		'л' => 'l', 
+		'м' => 'm', 
+		'н' => 'n', 
+		'о' => 'o', 
+		'п' => 'p', 
+		'р' => 'r', 
+		'с' => 's', 
+		'т' => 't', 
+		'у' => 'u', 
+		'ф' => 'f', 
+		'х' => 'kh', 
+		'ц' => 'c', 
+		'ч' => 'ch', 
+		'ш' => 'sh', 
+		'щ' => 'sch',
+		'ь' => '',
+		'ы' => 'i', 
+		'ъ' => '', 
+		'э' => 'e', 
+		'ю' => 'yu', 
+		'я' => 'ya',
+		'-,'=> '',
+		', '=> '-',		   
+		' ('=> '-',
+		') '=> '',
+		')'=> '',
+		'  '=> '-',
+		' '=> '-',
+		','=> '-',
+		'+'=> '-',
+		"'"=>'',
+		'&'=>'i'
+	); 
+	
+	$alias = str_replace(array_keys($table),array_values($table),$string);
+	$alias = strtolower($alias);
 
-$alias = str_replace(array_keys($table),array_values($table),$string);
-$alias = strtolower($alias);
-return $alias;
+	return $alias;
 }
 
-function par_al($pre_par_id,$db){
-	$pre_par = $db->prepare('SELECT * FROM categories WHERE id=?');
-	$pre_par->execute(array($pre_par_id));
-	$pre_par = $pre_par->fetch(PDO::FETCH_ASSOC);
-	return $pre_par;
+function get_title($str) {
+	return trim(str_replace('&', 'и', $str)) .' промокоды акции и скидки';
 }
 
 if(!empty($_GET['action']) && $_GET['action'] == 'rfd'){
@@ -142,8 +106,10 @@ if(!empty($_GET['action']) && $_GET['action'] == 'rfd'){
 	}
 }
 
-if(!empty($_POST['add_cat']) || !empty($_POST['update_cats']) || (!empty($_GET['action']) && $_GET['action'] == 'rfd')){
+if(!empty($_POST['update_cats']) || (!empty($_GET['action']) && $_GET['action'] == 'rfd')){
 	$update_alias = $db->prepare('UPDATE categories SET alias=? WHERE id=?');
+
+	$set_title = $db->prepare('UPDATE categories SET title=? WHERE id=?');
 	
 	$set_all_qnt = $db->prepare('UPDATE categories SET all_qnt=? WHERE id=?');
 	$get_all_qnt = $db->prepare('SELECT id FROM coupons WHERE region=? AND category_ids LIKE ? AND available=?');
@@ -162,34 +128,44 @@ if(!empty($_POST['add_cat']) || !empty($_POST['update_cats']) || (!empty($_GET['
 	
 	$set_ua_shops = $db->prepare('UPDATE categories SET ua_shops=? WHERE id=?');
 	$get_ua_shops = $db->prepare('SELECT id FROM shops WHERE region=? AND category_ids LIKE ? AND available=?');
+	
+	$cat_sql = $db -> prepare('SELECT * FROM categories');
+	$cat_sql -> execute();
+	$cats_arr = $cat_sql -> fetchAll(PDO::FETCH_ASSOC);
+	
+	foreach($cats_arr as $item){
+		// set alias
+		$alias = translit(trim($item['name']));
 
-	$pre = $db->prepare('SELECT * FROM categories');
-	$pre->execute();
-	$pre = $pre->fetchAll(PDO::FETCH_ASSOC);
+		if (empty($item['alias'])) {
+			$update_alias->execute(array($alias, $item['id']));
+		}
 
-	foreach($pre as $pre){
-		$alias = translit(trim($pre['name']));
-		if (empty($pre['alias'])) {
-			$update_alias->execute(array($alias,$pre['id']));
+		// set titles
+		$tit = get_title(trim($item['name']));
+
+		if (empty($item['title'])) {
+			$set_title->execute(array($tit, $item['id']));
 		}
 		
-		$get_all_qnt->execute(array('all','%'.$pre['id'].'%',1));
-		$set_all_qnt->execute(array($get_all_qnt->rowCount(),$pre['id']));
+		// set quantity
+		$get_all_qnt->execute(array('all','%'.$item['id'].'%',1));
+		$set_all_qnt->execute(array($get_all_qnt->rowCount(),$item['id']));
 		
-		$get_ru_qnt->execute(array('ru','%'.$pre['id'].'%',1));
-		$set_ru_qnt->execute(array($get_ru_qnt->rowCount(),$pre['id']));
+		$get_ru_qnt->execute(array('ru','%'.$item['id'].'%',1));
+		$set_ru_qnt->execute(array($get_ru_qnt->rowCount(),$item['id']));
 		
-		$get_ua_qnt->execute(array('ua','%'.$pre['id'].'%',1));
-		$set_ua_qnt->execute(array($get_ua_qnt->rowCount(),$pre['id']));
+		$get_ua_qnt->execute(array('ua','%'.$item['id'].'%',1));
+		$set_ua_qnt->execute(array($get_ua_qnt->rowCount(),$item['id']));
 		
-		$get_all_shops->execute(array('all','%'.$pre['id'].'%',1));
-		$set_all_shops->execute(array($get_all_shops->rowCount(),$pre['id']));
+		$get_all_shops->execute(array('all','%'.$item['id'].'%',1));
+		$set_all_shops->execute(array($get_all_shops->rowCount(),$item['id']));
 		
-		$get_ru_shops->execute(array('ru','%'.$pre['id'].'%',1));
-		$set_ru_shops->execute(array($get_ru_shops->rowCount(),$pre['id']));
+		$get_ru_shops->execute(array('ru','%'.$item['id'].'%',1));
+		$set_ru_shops->execute(array($get_ru_shops->rowCount(),$item['id']));
 		
-		$get_ua_shops->execute(array('ua','%'.$pre['id'].'%',1));
-		$set_ua_shops->execute(array($get_ua_shops->rowCount(),$pre['id']));
+		$get_ua_shops->execute(array('ua','%'.$item['id'].'%',1));
+		$set_ua_shops->execute(array($get_ua_shops->rowCount(),$item['id']));
 	}
 }
 
@@ -206,12 +182,12 @@ if($i_del > 0){
 ?>
 
 <div class="left">
-	<a href="?route=update-categories" class="btn">Update Categories</a>
+<a href="?route=update-categories" class="btn">Update Categories</a>
 </div>
 <div class="clr"></div>
 <form class="upd-cats" action="" method="POST">
-	<input type="hidden" name="update_cats" value="true">
-	<input class="upd-cats-btn" type="submit" value="Save Changes">
+<input type="hidden" name="update_cats" value="true">
+<input class="upd-cats-btn" type="submit" value="Save Changes">
 </form>
 
 <?php
