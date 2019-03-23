@@ -349,7 +349,10 @@
 		color:$dg;
 	}
 	p{
-		margin-bottom: 21px;
+		margin-top: 25px;
+		&:first-child{
+			margin-top: 0 !important;
+		}
 		& + h2{
 			padding-top: 7px;
 		}
@@ -374,6 +377,12 @@
 		&:hover{
 			color: $o;
 		}
+	}
+	.row{
+		margin-top: 35px;
+	}
+	.button{
+		color: #ffffff !important;
 	}
 	@media(max-width: 1000px){
 		h2{

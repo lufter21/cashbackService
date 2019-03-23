@@ -1,0 +1,22 @@
+@import "variables";
+@import "extends";
+
+html, body {
+	font-family: $ff;
+	font-size: 16px;
+	color: $bk;
+	background: #ffffff;
+	height: 100%;
+}
+body{
+	display: flex;
+	flex-direction: column;
+}
+a:hover{
+	text-decoration: none;
+}
+hr{
+	margin: 5px 0;
+	border: none;
+	border-bottom: 1px solid $gy;
+}

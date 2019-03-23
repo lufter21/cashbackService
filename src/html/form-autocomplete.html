@@ -1,0 +1,46 @@
+@@include('_head.html', {"title": "Form Autocomplete"})
+
+<!--HEADER/-->
+@@include('../modules/header/header.html', {"menu_item_current": "form_autocomplete", "user_item": "logged"})
+<!--/HEADER-->
+
+<!--MAIN/-->
+<main class="main">
+	
+	<div class="section">
+		
+		<form action="test-ajax.php" method="POST" class="form">
+			
+			<div class="row row_wrp">
+				<div class="col-6">
+					<div class="form__field">
+						<div class="autocomplete">
+							<input type="text" name="planet" data-required="true" placeholder="Select a planet*" class="autocomplete__input">
+							<ul class="autocomplete__options">
+								<!-- values -->
+							</ul>
+						</div>
+						<div class="field-error-tip">Select a planet</div>
+					</div>
+				</div>
+			</div>
+			
+		</form>
+		
+	</div>
+	
+</main>
+<!--/MAIN-->
+
+<!--FOOTER/-->
+@@include('../modules/footer/footer.html')
+<!--/FOOTER-->
+
+<!--POPUPs/-->
+@@include('../modules/popup/popup.html')
+<!--/POPUPs-->
+
+@@include('_javascript.html')
+
+</body>
+</html>

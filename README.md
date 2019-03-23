@@ -1,2 +1,7 @@
-# Cashback Service
-Cashback service (html/css/js/php/mysql)
+# BomBonus.dealersAir
+bombonus.dealersAir resource
+
+### License
+Copyright (c) 2019 Vitaliy Lufter, https://lufter.dealersair.com
+
+Licensed under MIT License
