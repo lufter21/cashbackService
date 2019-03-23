@@ -1197,7 +1197,7 @@ img {
 }
 
 .shop-item .inner {
-  min-height: 320px;
+  min-height: 210px;
   padding: 21px;
   background: #ffffff;
   position: relative;
@@ -1223,7 +1223,7 @@ img {
 .shop-item__qnt {
   display: block;
   text-align: center;
-  margin-top: 70px;
+  margin-top: 40px;
 }
 
 .shop-item .logo {

@@ -1,30 +1,40 @@
 <?php
-$ins_act = $db -> prepare('INSERT INTO coupons (id,category,category_ids,type,title,description,promocode,discount,discount_abs,date_start,date_end,gotolink,logo,shop_id,region) VALUES (:id,:category,:category_ids,:type,:title,:description,:promocode,:discount,:discount_abs,:date_start,:date_end,:gotolink,:logo,:shop_id,:region)');
-
-
-$get_shops = $db->prepare('SELECT * FROM shops');
-$get_shops->execute();
-$shops_result = $get_shops->fetchAll(PDO::FETCH_ASSOC);
-
-$shops_resultArr = array();
-
-foreach ($shops_result as $value) {
-	$shops_resultArr[$value['id']] = $value;
-}
-
 //get XML
 $coupons_xml = simplexml_load_file('admitad_coupons.xml');
 
 $couponsArr = array(
+	'shop_cats' => array(),
 	'coupons_cats' => array(),
 	'coupons_type' => array()
 );
 
-//categories
+// parse xml
+foreach ($coupons_xml -> advcampaign_categories -> children() as $value) {
+   $couponsArr['shop_cats'][(int) $value -> attributes()['id']] = (string) $value;
+}
+
 foreach ($coupons_xml -> categories -> children() as $value) {
 	$couponsArr['coupons_cats'][(int) $value -> attributes()['id']] = (string) $value;
 }
 
+foreach ($coupons_xml -> types -> children() as $value) {
+	$couponsArr['coupons_type'][(int) $value -> attributes()['id']] = (string) $value;
+}
+
+// sql prepare
+$erase_coupons = $db -> prepare('TRUNCATE TABLE coupons');
+
+$ins_coupons = $db -> prepare('INSERT INTO coupons (id,category,category_ids,type,title,description,promocode,discount,discount_abs,date_start,date_end,gotolink,logo,shop_id) VALUES (:id,:category,:category_ids,:type,:title,:description,:promocode,:discount,:discount_abs,:date_start,:date_end,:gotolink,:logo,:shop_id)');
+
+$coupon_sql = $db -> prepare('SELECT * FROM coupons WHERE shop_id=?');
+
+$update_shops = $db -> prepare('INSERT INTO shops (id,name,category,category_ids,logo) VALUES (:id,:name,:category,:category_ids,:logo) ON DUPLICATE KEY UPDATE category=:u_category,category_ids=:u_category_ids,logo=:u_logo');
+
+$get_shops = $db -> prepare('SELECT * FROM shops');
+
+$upd_coupon_region = $db -> prepare('UPDATE coupons SET region=? WHERE shop_id=?');
+
+// fun get coupon cats
 function get_coupon_categories($coupon, $cats) {
 	$categories = array('txt' => '', 'ids' => '');
 	$k = 0;
@@ -38,11 +48,7 @@ function get_coupon_categories($coupon, $cats) {
 	return $categories;
 }
 
-//type
-foreach ($coupons_xml -> types -> children() as $value) {
-	$couponsArr['coupons_type'][(int) $value -> attributes()['id']] = (string) $value;
-}
-
+// fun get coupon type
 function get_coupon_type($coupon, $types) {
 	$type = '';
 	$k = 0;
@@ -55,15 +61,37 @@ function get_coupon_type($coupon, $types) {
 	return $type;
 }
 
-// erase table
-$erase_coupons = $db -> prepare('TRUNCATE TABLE coupons');
+// fun get shop cats
+function get_shop_categories($shop, $cats) {
+	$categories = array('txt' => '', 'ids' => '');
+	$k = 0;
+	
+	foreach ($shop -> categories -> children() as $value) {
+		if ((int) $value != 62) {
+			$categories['txt'] .= (($k) ? ', ' : ''). $cats[(int) $value];
+			$categories['ids'] .= (($k) ? ',' : ''). (int) $value;
+			$k++;
+		}
+	}
+
+	return $categories;
+}
+
+//fun get logo
+function get_logo($id, $coupon_sql) {
+	$coupon_sql -> execute(array($id));
+	$coupon_result = $coupon_sql -> fetch(PDO::FETCH_ASSOC);
+
+	return $coupon_result['logo'];
+}
+
+// insert coupons
 $erase_coupons -> execute();
 
-// execute
 foreach ($coupons_xml -> coupons -> children() as $value) {
 	$cats = get_coupon_categories($value, $couponsArr['coupons_cats']);
 
-	$ins_act -> execute(array(
+	$ins_coupons -> execute(array(
 		'id' => (int) $value -> attributes()['id'],
 		'category' => $cats['txt'],
 		'category_ids' => $cats['ids'],
@@ -77,10 +105,39 @@ foreach ($coupons_xml -> coupons -> children() as $value) {
 		'date_end' => (string) $value -> date_end,
 		'gotolink' => (string) $value -> gotolink,
 		'logo' => (string) $value -> logo,
-		'shop_id' => (int) $value -> advcampaign_id,
-		'region' => $shops_resultArr[(int) $value -> advcampaign_id]['region']
+		'shop_id' => (int) $value -> advcampaign_id
 	));
 }
+
+// update shops
+foreach ($coupons_xml -> advcampaigns -> children() as $value) {
+	$cats = get_shop_categories($value, $couponsArr['shop_cats']);
+	$id = (int) $value -> attributes()['id'];
+	$logo = get_logo($id, $coupon_sql);
+	
+	$update_shops -> execute(array(
+		'id' => $id,
+		'name' => (string) $value -> name,
+		'category' => $cats['txt'],
+		'category_ids' => $cats['ids'],
+		'logo' => $logo,
+		'u_category' => $cats['txt'],
+		'u_category_ids' => $cats['ids'],
+		'u_logo' => $logo
+	));
+}
+
+// update coupons region
+$get_shops -> execute();
+$shops_result = $get_shops -> fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($shops_result as $value) {
+	$upd_coupon_region -> execute(array(
+		'region' => $value['region'],
+		'shop_id' => $value['id']
+	));
+}
+
 
 $tit = 'Import coupons';
 include('header.php');
