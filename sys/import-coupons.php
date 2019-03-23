@@ -28,11 +28,13 @@ $ins_coupons = $db -> prepare('INSERT INTO coupons (id,category,category_ids,typ
 
 $coupon_sql = $db -> prepare('SELECT * FROM coupons WHERE shop_id=?');
 
-$update_shops = $db -> prepare('INSERT INTO shops (id,name,category,category_ids,logo) VALUES (:id,:name,:category,:category_ids,:logo) ON DUPLICATE KEY UPDATE category=:u_category,category_ids=:u_category_ids,logo=:u_logo');
+$update_shops = $db -> prepare('INSERT INTO shops (id,name,category,category_ids,logo,quantity) VALUES (:id,:name,:category,:category_ids,:logo,:quantity) ON DUPLICATE KEY UPDATE category=:u_category,category_ids=:u_category_ids,logo=:u_logo,quantity=:u_quantity');
 
 $get_shops = $db -> prepare('SELECT * FROM shops');
 
 $upd_coupon_region = $db -> prepare('UPDATE coupons SET region=? WHERE shop_id=?');
+
+$ins_categories = $db -> prepare('INSERT INTO categories (id,name,relation) VALUES (:id,:name,:relation)');
 
 // fun get coupon cats
 function get_coupon_categories($coupon, $cats) {
@@ -85,6 +87,16 @@ function get_logo($id, $coupon_sql) {
 	return $coupon_result['logo'];
 }
 
+// fun category title
+function get_title($str) {
+	return trim(str_replace('&', 'и', $str)) .' промокоды и скидки';
+}
+
+// fun category meta title
+function get_meta_title($str) {
+	return 'Скидки на '. mb_strtolower(trim(str_replace('&', 'и', $str)), 'UTF-8')  .', промокоды';
+}
+
 // insert coupons
 $erase_coupons -> execute();
 
@@ -114,6 +126,10 @@ foreach ($coupons_xml -> advcampaigns -> children() as $value) {
 	$cats = get_shop_categories($value, $couponsArr['shop_cats']);
 	$id = (int) $value -> attributes()['id'];
 	$logo = get_logo($id, $coupon_sql);
+	$upd_qnt = $db -> prepare('UPDATE shops SET quantity=? WHERE id=?');
+
+	$coupon_sql->execute(array($id));
+	$quant = $coupon_sql->rowCount();
 	
 	$update_shops -> execute(array(
 		'id' => $id,
@@ -121,9 +137,11 @@ foreach ($coupons_xml -> advcampaigns -> children() as $value) {
 		'category' => $cats['txt'],
 		'category_ids' => $cats['ids'],
 		'logo' => $logo,
+		'quantity' => $quant,
 		'u_category' => $cats['txt'],
 		'u_category_ids' => $cats['ids'],
-		'u_logo' => $logo
+		'u_logo' => $logo,
+		'u_quantity' => $quant
 	));
 }
 
@@ -132,12 +150,25 @@ $get_shops -> execute();
 $shops_result = $get_shops -> fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($shops_result as $value) {
-	$upd_coupon_region -> execute(array(
-		'region' => $value['region'],
-		'shop_id' => $value['id']
+	$upd_coupon_region -> execute(array($value['region'], $value['id']));
+}
+
+// insert categories
+foreach ($couponsArr['shop_cats'] as $key => $value) {
+	$ins_categories -> execute(array(
+		'id' => $key,
+		'name' => $value,
+		'relation' => 'shops'
 	));
 }
 
+foreach ($couponsArr['coupons_cats'] as $key => $value) {
+	$ins_categories -> execute(array(
+		'id' => $key,
+		'name' => $value,
+		'relation' => 'coupons'
+	));
+}
 
 $tit = 'Import coupons';
 include('header.php');

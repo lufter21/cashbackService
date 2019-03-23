@@ -1,11 +1,9 @@
 <?php
 if(!empty($_POST['change-available'])){
-	$update_disc = $db->prepare('UPDATE discounts SET available=? WHERE shop=?');
-	$update_shop = $db->prepare('UPDATE shops SET available=?, popular=? WHERE alias=?');
+	$update_shop = $db -> prepare('UPDATE shops SET available=?, popular=? WHERE alias=?');
 
 	foreach($_POST['available'] as $shop => $val){
-		$update_disc->execute(array($val, $shop));
-		$update_shop->execute(array($val, $_POST['popular'][$shop], $shop));
+		$update_shop -> execute(array($val, $_POST['popular'][$shop], $shop));
 	}
 }
 
@@ -14,31 +12,18 @@ $shops = $db -> prepare('SELECT * FROM shops ORDER BY name');
 $shops -> execute();
 $shops = $shops -> fetchAll(PDO::FETCH_ASSOC);
 
+// coupons available
+if(!empty($_POST['change-available'])){
+	$upd_coupons_available = $db -> prepare('UPDATE coupons SET available=? WHERE shop_id=?');
 
-if ($_GET['action'] && $_GET['action'] == 'quantity') {
-	$coupons_sql = $db -> prepare('SELECT id FROM coupons WHERE shop_id=?');
-
-	$upd_qnt = $db -> prepare('UPDATE shops SET quantity=? WHERE id=?');
-	
-	foreach ($shops as $value) {
-		$coupons_sql->execute(array($value['id']));
-
-		$upd_qnt -> execute(array($coupons_sql->rowCount(), $value['id']));
+	foreach ($shops as $item) {
+		$upd_coupons_available -> execute(array($item['available'], $item['id']));
 	}
 }
 
 $tit = "Shops";
 include('header.php');
 ?>
-
-<div class="left">
-<a class="btn" href="?action=quantity">Calc Quantity</a>
-</div>
-
-<div class="right">
-	<a class="btn" href="?route=update-shops">Update shops</a>
-</div>
-
 <div class="clr"></div>
 
 <form id="shops-form" class="shops-form" action="" method="POST">
@@ -51,8 +36,6 @@ echo '<tr>
 <td>'. $arr['region'] .'</td>
 <td>'. $arr['quantity'] .'</td>
 <td>';
-
-echo '<a href="?route=show-discounts&shop='.$arr['alias'].'" >Show Coupons List</a>';
 
 echo '<input type="hidden" name="change-available" value="true">
 	<select name="available['.$arr['alias'].']">
@@ -71,4 +54,5 @@ echo '<input type="hidden" name="change-available" value="true">
 </tr>';
 }
 ?>
-</table></form>
+</table>
+</form>

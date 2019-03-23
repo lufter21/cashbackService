@@ -1,5 +1,5 @@
 <?php
-function translit($string){
+function translit($string) {
 	$table = array( 
 		'А' => 'A', 
 		'Б' => 'B', 
@@ -78,11 +78,11 @@ function translit($string){
 		'+'=> '-',
 		"'"=>'',
 		'&'=>'i'
-	); 
+	);
 	
 	$alias = str_replace(array_keys($table),array_values($table),$string);
 	$alias = strtolower($alias);
-
+	
 	return $alias;
 }
 
@@ -94,14 +94,15 @@ function get_meta_title($str) {
 	return 'Скидки на '. mb_strtolower(trim(str_replace('&', 'и', $str)), 'UTF-8')  .', промокоды';
 }
 
-if(!empty($_GET['action']) && $_GET['action'] == 'rfd'){
+if (!empty($_GET['action']) && $_GET['action'] == 'rfd') {
 	$del_discount = $db->prepare('DELETE FROM coupons WHERE id=?');
 	$get_discounts = $db->prepare('SELECT id,date_end FROM coupons');
 	$get_discounts->execute();
 	$get_discounts_arr = $get_discounts->fetchAll(PDO::FETCH_ASSOC);
 	$current_time = time();
 	$i_del=0;
-	foreach($get_discounts_arr as $item){
+
+	foreach ($get_discounts_arr as $item) {
 		$d_sec = strtotime($item['date_end']) - $current_time;
 		if($d_sec <= 0){
 			$i_del++;
@@ -110,77 +111,90 @@ if(!empty($_GET['action']) && $_GET['action'] == 'rfd'){
 	}
 }
 
-if(!empty($_POST['update_cats']) || (!empty($_GET['action']) && $_GET['action'] == 'rfd')){
-	$update_alias = $db->prepare('UPDATE categories SET alias=? WHERE id=?');
+$update_alias = $db->prepare('UPDATE categories SET alias=? WHERE id=?');
 
-	$set_title = $db->prepare('UPDATE categories SET title=? WHERE id=?');
+$set_title = $db->prepare('UPDATE categories SET title=? WHERE id=?');
 
-	$set_meta_title = $db->prepare('UPDATE categories SET meta_title=? WHERE id=?');
-	
-	$set_all_qnt = $db->prepare('UPDATE categories SET all_qnt=? WHERE id=?');
-	$get_all_qnt = $db->prepare('SELECT id FROM coupons WHERE region=? AND category_ids LIKE ? AND available=?');
-	
-	$set_ru_qnt = $db->prepare('UPDATE categories SET ru_qnt=? WHERE id=?');
-	$get_ru_qnt = $db->prepare('SELECT id FROM coupons WHERE region=? AND category_ids LIKE ? AND available=?');
-	
-	$set_ua_qnt = $db->prepare('UPDATE categories SET ua_qnt=? WHERE id=?');
-	$get_ua_qnt = $db->prepare('SELECT id FROM coupons WHERE region=? AND category_ids LIKE ? AND available=?');
-	
-	$set_all_shops = $db->prepare('UPDATE categories SET all_shops=? WHERE id=?');
-	$get_all_shops = $db->prepare('SELECT id FROM shops WHERE region=? AND category_ids LIKE ? AND available=?');
-	
-	$set_ru_shops = $db->prepare('UPDATE categories SET ru_shops=? WHERE id=?');
-	$get_ru_shops = $db->prepare('SELECT id FROM shops WHERE region=? AND category_ids LIKE ? AND available=?');
-	
-	$set_ua_shops = $db->prepare('UPDATE categories SET ua_shops=? WHERE id=?');
-	$get_ua_shops = $db->prepare('SELECT id FROM shops WHERE region=? AND category_ids LIKE ? AND available=?');
-	
-	$cat_sql = $db -> prepare('SELECT * FROM categories');
-	$cat_sql -> execute();
-	$cats_arr = $cat_sql -> fetchAll(PDO::FETCH_ASSOC);
-	
-	foreach($cats_arr as $item){
-		// set alias
-		$alias = translit(trim($item['name']));
+$set_meta_title = $db->prepare('UPDATE categories SET meta_title=? WHERE id=?');
 
-		if (empty($item['alias'])) {
-			$update_alias->execute(array($alias, $item['id']));
-		}
+$get_coupons = $db -> prepare('SELECT id FROM coupons WHERE region=? AND category_ids LIKE ? AND available=?');
 
-		// set titles
-		$tit = get_title(trim($item['name']));
+$get_shops = $db -> prepare('SELECT id FROM shops WHERE region=? AND category_ids LIKE ? AND available=?');
 
-		if (empty($item['title'])) {
-			$set_title->execute(array($tit, $item['id']));
-		}
+$set_all_qnt = $db->prepare('UPDATE categories SET all_qnt=? WHERE id=?');
 
-		$m_tit = get_meta_title(trim($item['name']));
+$set_ru_qnt = $db->prepare('UPDATE categories SET ru_qnt=? WHERE id=?');
 
-		if (empty($item['meta_title'])) {
-			$set_meta_title->execute(array($m_tit, $item['id']));
-		}
-		
-		// set quantity
-		$get_all_qnt->execute(array('all','%'.$item['id'].'%',1));
-		$set_all_qnt->execute(array($get_all_qnt->rowCount(),$item['id']));
-		
-		$get_ru_qnt->execute(array('ru','%'.$item['id'].'%',1));
-		$set_ru_qnt->execute(array($get_ru_qnt->rowCount(),$item['id']));
-		
-		$get_ua_qnt->execute(array('ua','%'.$item['id'].'%',1));
-		$set_ua_qnt->execute(array($get_ua_qnt->rowCount(),$item['id']));
-		
-		$get_all_shops->execute(array('all','%'.$item['id'].'%',1));
-		$set_all_shops->execute(array($get_all_shops->rowCount(),$item['id']));
-		
-		$get_ru_shops->execute(array('ru','%'.$item['id'].'%',1));
-		$set_ru_shops->execute(array($get_ru_shops->rowCount(),$item['id']));
-		
-		$get_ua_shops->execute(array('ua','%'.$item['id'].'%',1));
-		$set_ua_shops->execute(array($get_ua_shops->rowCount(),$item['id']));
+$set_ua_qnt = $db->prepare('UPDATE categories SET ua_qnt=? WHERE id=?');
+
+$set_all_shops = $db->prepare('UPDATE categories SET all_shops=? WHERE id=?');
+
+$set_ru_shops = $db->prepare('UPDATE categories SET ru_shops=? WHERE id=?');
+
+$set_ua_shops = $db->prepare('UPDATE categories SET ua_shops=? WHERE id=?');
+
+$cat_sql = $db -> prepare('SELECT * FROM categories');
+$cat_sql -> execute();
+$cats_arr = $cat_sql -> fetchAll(PDO::FETCH_ASSOC);
+
+foreach($cats_arr as $item){
+	// set alias
+	$alias = translit(trim($item['name']));
+	
+	if (empty($item['alias'])) {
+		$update_alias->execute(array($alias, $item['id']));
 	}
-}
+	
+	// set titles
+	$tit = get_title(trim($item['name']));
+	
+	if (empty($item['title'])) {
+		$set_title->execute(array($tit, $item['id']));
+	}
+	
+	$m_tit = get_meta_title(trim($item['name']));
+	
+	if (empty($item['meta_title'])) {
+		$set_meta_title->execute(array($m_tit, $item['id']));
+	}
+	
+	// Set Quantity
+	// all
+	$get_coupons -> execute(array('all','%'.$item['id'].'%',1));
+	$all_qnt = $get_coupons -> rowCount();
 
+	$set_all_qnt->execute(array($all_qnt, $item['id']));
+	
+	// ru
+	$get_coupons -> execute(array('ru','%'.$item['id'].'%',1));
+	$ru_qnt = $get_coupons -> rowCount();
+
+	$set_ru_qnt->execute(array($ru_qnt,$item['id']));
+	
+	// ua
+	$get_coupons -> execute(array('ua','%'.$item['id'].'%',1));
+	$ua_qnt = $get_coupons -> rowCount();
+
+	$set_ua_qnt->execute(array($ua_qnt,$item['id']));
+
+	// all shops
+	$get_shops->execute(array('all','%'.$item['id'].'%',1));
+	$all_shops = $get_shops -> rowCount();
+
+	$set_all_shops->execute(array($all_shops,$item['id']));
+	
+	// ru shops
+	$get_shops->execute(array('ru','%'.$item['id'].'%',1));
+	$ru_shops = $get_shops -> rowCount();
+
+	$set_ru_shops->execute(array($ru_shops,$item['id']));
+	
+	// ua shops
+	$get_shops->execute(array('ua','%'.$item['id'].'%',1));
+	$ua_shops = $get_shops -> rowCount();
+
+	$set_ua_shops->execute(array($ua_shops,$item['id']));
+}
 
 $show = $db->prepare('SELECT * FROM categories');
 $show->execute();
@@ -192,15 +206,7 @@ if($i_del > 0){
 	echo '<p class="message" style="padding-top:30px">Удалено '.$i_del.' скидок</p>';
 }
 ?>
-
-<div class="left">
-<a href="?route=update-categories" class="btn">Update Categories</a>
-</div>
 <div class="clr"></div>
-<form class="upd-cats" action="" method="POST">
-<input type="hidden" name="update_cats" value="true">
-<input class="upd-cats-btn" type="submit" value="Save Changes">
-</form>
 
 <?php
 echo '<table><tr><td>Id</td><td>Alias</td><td>Name</td><td>Title</td><td>Description</td><td>All Disc</td><td>Ru Disc</td><td>Ua Disc</td><td>All Shops</td><td>Ru Shops</td><td>Ua Shops</td></tr>';

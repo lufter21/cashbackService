@@ -52,7 +52,7 @@ form.wide,form.wide input{
 	box-sizing:border-box
 }
 input[type=text],input[type="password"],select,textarea{
-	width:121px;
+	width:165px;
 	border:1px solid #72A0C1;
 	font-size:16px;
 	padding:5px 10px;
@@ -286,6 +286,6 @@ form.shops-form{
 	width:auto;
 }
 form.shops-form select{
-	margin-bottom:0;
+	margin: 0 0 0 20px;
 	float:right;
 }
