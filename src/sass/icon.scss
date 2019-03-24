@@ -4,7 +4,6 @@
 @import "mixins";
 
 %ico{
-	display: inline-block;
 	position: relative;
 	&:before{
 		display: block;
@@ -14,13 +13,13 @@
 	}
 }
 
-.icon{
+.until-icon{
 	@extend %ico;
-	min-height: em(13);
-	padding-left: em(30);
+	min-height: 16px;
+	padding-left: 25px;
 	&:before{
-		width: em(25);
-		height: em(21);
-		top: em(-5);
+		width: 16px;
+		height: 16px;
+		top: -2px;
 	}
 }

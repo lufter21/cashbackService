@@ -9,66 +9,61 @@ if(empty($meta)){
 
 include $_SERVER['DOCUMENT_ROOT'] .'/templates/header.php';
 ?>
-<!--Container/-->
-<div class="container wrap row vw1000-row-col">
 
-	<div class="col-3">
-		<aside id="js-sidebar" class="sidebar box">
-			<div class="pad">
-				<div class="title">Категории</div>
-				<?php echo $lemon->getCategoryMenu(); ?>
-			</div>
-		</aside>
-	</div>
-
-	<div class="col-9 pad-0">
-
-		<div class="pad mb-28">
-			<div class="box">
-				<div class="row-col-mid">
-					<div class="col-9">
-						<h1><?php echo $meta['title'];?></h1>
-					</div>
-
-					<?php
-					if(!empty($content['coupons'])){
-						?>
-						<div class="sorting-block col-3">
-							<form id="sorting-form" action="/coupons<?php echo (!empty($alias)) ? '/'.$alias : '';?>" method="POST">
-								<select name="sorting">
-									<option value=" ORDER BY discount_abs DESC" <?php if($content['sorting'] == ' ORDER BY discount_abs DESC'){echo 'selected';}?>>Наибольшие скидки</option>
-									<option value=" ORDER BY date_start DESC" <?php if($content['sorting'] == ' ORDER BY date_start DESC'){echo 'selected';}?>>Самые новые</option>
-									<option value=" ORDER BY date_end ASC" <?php if($content['sorting'] == ' ORDER BY date_end ASC'){echo 'selected';}?>>Скоро заканчиваются</option>
-								</select>
-							</form>
-						</div>
-						<?php
-					}
-					?>
-
-				</div>
-			</div>
+<!--MAIN/-->
+<main class="main">
+	<div class="row row_wrp">
+		<div class="col-3">
+			<aside class="sidebar">
+				<div class="sidebar__title">Категории</div>
+				<?php echo $lemon -> getCategoryMenu(); ?>
+			</aside>
 		</div>
-		
-		<div id="flex-wrap" class="flex-wrap">
+		<div class="col-9 p-0">
+			<div class="row row_col-middle row_nw">
+				<div class="col">
+					<h1 class="title"><?php echo $meta['title'];?></h1>
+				</div>
+
+				<?php if (!empty($content['coupons'])) { ?>
+				<div class="col col_right">
+					<form id="sorting-form" action="/coupons<?php echo (!empty($alias)) ? '/'.$alias : '';?>" method="POST" class="form sorting-form">
+						<div class="form__field">
+							<select name="sorting" data-placeholder="Сортировать" data-submit-form-onchange="true">
+								<option value="biggest_discounts" <?php if($content['sorting'] == 'biggest_discounts'){echo 'selected';}?>>Наибольшие скидки</option>
+								<option value="newest" <?php if($content['sorting'] == 'newest'){echo 'selected';}?>>Самые новые</option>
+								<option value="expire_soon" <?php if($content['sorting'] == 'expire_soon'){echo 'selected';}?>>Скоро заканчиваются</option>
+							</select>
+							<div class="field-error-tip">Select an animal</div>
+						</div>
+					</form>
+				</div>
+				<?php } ?>
+			</div>
+
+			<div class="row tile">
 			<?php
 			if (!empty($content['coupons'])) {
 				foreach ($content['coupons'] as $item) {
+					echo '<div class="col-4">';
 					include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/coupon-item.php';
+					echo '</div>';
 				}
 			} else {
 				echo '<div class="message">На данный момент, в этом разделе нет акций и скидок</div>';
 			}
 			?>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<ul class="paginate">
+					<?php echo $lemon -> getPagenav(); ?>
+					</ul>
+				</div>
+			</div>
 		</div>
-		
-		<div class="pagination">
-			<?php echo $lemon -> getPagenav(); ?>
-		</div>
-		
 	</div>
-
-</div>
-<!--/Container-->
+</main>
+<!--/MAIN-->
 
 <?php include $_SERVER['DOCUMENT_ROOT'] .'/templates/footer.php'; ?>

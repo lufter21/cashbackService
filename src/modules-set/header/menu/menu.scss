@@ -9,7 +9,7 @@
 	list-style: none;
 	&__item{
 		float: left;
-		margin-left: 45px;
+		margin-left: 75px;
 		@include fch(l);
 		&_has-children{
 			position: relative;
@@ -25,22 +25,26 @@
 				}
 			}
 		}
-		&_current{
+		&_current,
+		&_current-parent{
 			.menu__a{
-				border-bottom-color: $bk;
+				color: $og;
+				border-bottom-color: $og;
 			}
 		}
 	}
 	&__a{
-		font-size: 18px;
+		font-size: 15px;
 		font-weight: 500;
 		line-height: normal;
+		text-transform: uppercase;
 		text-decoration: none;
+		color: $be;
 		border-bottom: 2px solid transparent;
 		transition: .21s;
 		@media(min-width: 1001px){
 			&:hover{
-				color: $rd;
+				color: $og;
 			}
 		}
 	}

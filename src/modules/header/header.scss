@@ -14,12 +14,13 @@
 	align-items: center;
 	transition: .21s;
 	&_fixed{
+		height: 50px;
 		background: #FFF;
 		box-shadow: 0 1px 7px rgba(0,0,0,.21);
 	}
 	&__logo{
 		display: inline-block;
-		width: 121px;
+		width: 124px;
 		img{
 			width: 100%;
 			height: auto;

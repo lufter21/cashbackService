@@ -126,14 +126,14 @@ class Core {
 			}
 			
 			if(is_array($val)){
-				$menu .= ' menu__item_has-sub-menu"><a href="/'.$key.'">'.$val[0].'</a>';
-				$menu .= '<ul class="menu__sub-menu">';
+				$menu .= ' menu__item_has-children"><a href="/'.$key.'" class="menu__a">'.$val[0].'</a>';
+				$menu .= '<ul class="sub-menu">';
 				foreach($val[1] as $s_key=>$s_val){
-					$menu .= '<li><a href="/'.$s_key.'">'.$s_val.'</a></li>';
+					$menu .= '<li><a href="/'.$s_key.'" class="menu__a">'.$s_val.'</a></li>';
 				}
 				$menu .= '</ul>';
 			} else {
-				$menu .= '"><a href="/'.$key.'">'.$val.'</a>';
+				$menu .= '"><a href="/'.$key.'" class="menu__a">'.$val.'</a>';
 			}
 			$menu .= '</li>';
 		}

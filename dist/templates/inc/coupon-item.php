@@ -45,34 +45,32 @@ if ($end) {
 ?>
 
 <div class="coupon-item<?php echo $block_class; ?>">
-   <div class="inner">
-      <?php
-      if (!empty($item['discount'])) {
-         if ($expired) {
-      ?>
-      <span class="discount"><?php echo $item['discount']; ?></span>
-      <?php } else { ?>
-      <a rel="nofollow" href="/coupon/<?php echo $item['id']; ?>" class="discount"><?php echo $item['discount']; ?></a>
-      <?php
-         }
+   <?php
+   if (!empty($item['discount'])) {
+      if ($expired) {
+   ?>
+   <span class="discount"><?php echo $item['discount']; ?></span>
+   <?php } else { ?>
+   <a rel="nofollow" href="/coupon/<?php echo $item['id']; ?>" class="discount"><?php echo $item['discount']; ?></a>
+   <?php
       }
-      ?>
+   }
+   ?>
 
-      <?php if ($expired) { ?>
-      <span class="title"><?php echo $item['title']; ?></span>
-      <?php } else { ?>
-      <a href="/coupon/<?php echo $item['id']; ?>" class="title"><?php echo $item['title']; ?></a>
-      <?php } ?>
+   <?php if ($expired) { ?>
+   <span class="coupon-item__title"><?php echo $item['title']; ?></span>
+   <?php } else { ?>
+   <a href="/coupon/<?php echo $item['id']; ?>" class="coupon-item__title"><?php echo $item['title']; ?></a>
+   <?php } ?>
 
-      <div class="logo">
-         <a href="/shop/<?php echo $content['shops'][$item['shop_id']]['alias']; ?>" title="Все промокоды от <?php echo $content['shops'][$item['shop_id']]['name']; ?>"><img src="<?php echo $item['logo']; ?>" alt="<?php echo $content['shops'][$item['shop_id']]['name']; ?>"></a>
-      </div>
-      
-      <?php if (!$expired) { ?>
-      <div class="until"><?php echo $until; ?></div>
-      <a rel="nofollow" href="/coupon/<?php echo $item['id']; ?>" class="coupon-item__button">Получить промокод</a>
-      <?php } else { ?>
-      <div class="expired">Купон просрочен</div>
-      <?php } ?>
+   <div class="coupon-item__logo">
+      <a href="/shop/<?php echo $content['shops'][$item['shop_id']]['alias']; ?>" title="Все промокоды от <?php echo $content['shops'][$item['shop_id']]['name']; ?>"><img src="<?php echo $item['logo']; ?>" alt="<?php echo $content['shops'][$item['shop_id']]['name']; ?>"></a>
    </div>
+   
+   <?php if (!$expired) { ?>
+   <div class="coupon-item__until until-icon"><?php echo $until; ?></div>
+   <a rel="nofollow" href="/coupon/<?php echo $item['id']; ?>" class="coupon-item__button">Получить промокод</a>
+   <?php } else { ?>
+   <div class="coupon-item__expired">Купон просрочен</div>
+   <?php } ?>
 </div>

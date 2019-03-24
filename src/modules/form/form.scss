@@ -230,3 +230,19 @@
 .file-error{
 	color: $rd;
 }
+
+/* sorting form */
+.sorting-form{
+	width: 230px;
+	.custom-select{
+		&__button{
+			height: 30px;
+			font-size: 14px;
+		}
+		&__val{
+			font-size: 14px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+	}
+}

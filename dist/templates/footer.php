@@ -1,19 +1,30 @@
-	<!--Footer/-->
-	<footer id="footer" class="footer">
-		<div class="wrap">
-			<div class="left">
-				Промокоды и скидки от лучших интернет магазинов.<br>
+<!--FOOTER/-->
+<footer class="footer">
+	<div class="row row_wrp">
+		<div class="col-12">
+			<ul class="foot-nav">
+				<li class="foot-nav__item">
+					<a rel="nofollow" href="/coupons" class="foot-nav__a">Промокоды</a>
+				</li>
+				<li class="foot-nav__item">
+					<a rel="nofollow" href="/shops" class="foot-nav__a">Магазины</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row row_wrp">
+		<div class="col col_grow">
+			<div class="footer__txt">
+				Промокоды и скидки от лучших интернет магазинов.<br> 
 				&copy; <?php echo date('Y');?> Dealers Air Bombonus, https://bombonus.dealersair.com
 			</div>
-			<div class="right">
-				<a class="dealersair" href="http://dealersair.com/" title="«Dealers Air» — интернет-проекты и сервисы" target="_blank"><img src="/images/icon-dealersair.svg" alt="DealersAir"></a>
-			</div>
 		</div>
-	</footer>
-	<!--/Footer-->
-
-</div> 
-<!--/Wrapper-->
+		<div class="col">
+			<a href="http://dealersair.com/" title="«Dealers Air» — интернет-проекты и сервисы" target="_blank" class="footer__logo"><img src="/images/icon-dealersair.svg" alt="Dealers Air"></a>
+		</div>
+	</div>
+</footer>
+<!--/FOOTER-->
 	
 <!--POPUP/-->
 <div class="popup">
@@ -98,37 +109,37 @@
 
 <!--/POPUP-->
 
-<div id="load" class="load"><img src="/images/loader.gif" alt="loader"></div>
+<!-- <div id="load" class="load"><img src="/images/loader.gif" alt="loader"></div> -->
 
-<!-- <script src="/js/script.js"></script>
-<script src="/js/common.js"></script> -->
+<script src="/js/script.js"></script>
+<script src="/js/common.js"></script>
 
 <script>
 // script loading
-document.addEventListener('DOMContentLoaded', function() {
-	var scriptsSrcArr = ['/js/script.js', '/js/common.js'],
-	count = 0;
+// document.addEventListener('DOMContentLoaded', function() {
+// 	var scriptsSrcArr = ['/js/script.js', '/js/common.js'],
+// 	count = 0;
 
-	function loaded() {
-		count++;
+// 	function loaded() {
+// 		count++;
 		
-		if (count == scriptsSrcArr.length) {
-			scriptLoaded();
-		}
-	}
+// 		if (count == scriptsSrcArr.length) {
+// 			scriptLoaded();
+// 		}
+// 	}
 
-	for (var i = 0; i < scriptsSrcArr.length; i++) {
-		var src = scriptsSrcArr[i],
-		scriptElem = document.createElement('script');
+// 	for (var i = 0; i < scriptsSrcArr.length; i++) {
+// 		var src = scriptsSrcArr[i],
+// 		scriptElem = document.createElement('script');
 		
-		scriptElem.async = true;
-		scriptElem.src = src;
+// 		scriptElem.async = true;
+// 		scriptElem.src = src;
 
-		scriptElem.addEventListener('load', loaded);
+// 		scriptElem.addEventListener('load', loaded);
 
-		document.body.appendChild(scriptElem);
-	}
-});
+// 		document.body.appendChild(scriptElem);
+// 	}
+// });
 
 var selRegion = false;
 
@@ -138,8 +149,6 @@ if (empty($region)) {
 }
 ?>
 </script>
-
-
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-49744337-3"></script>
