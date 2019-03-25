@@ -19,16 +19,18 @@ if ($end) {
       $d_sec = $d_sec-($hours*3600);
       $minutes = floor($d_sec/60);
       
-      if ($days>0) {
-         $until .= $days.'д. ';
+      if ($days > 0) {
+         $until .= $days .'д. ';
       }
 
-      if ($hours < 10) {
+      if ($hours > 0) {
+         if ($hours < 10) {
          $until .= '0'.$hours.'ч. ';
-      } else {
-         $until .= $hours.'ч. ';
+         } else {
+            $until .= $hours.'ч. ';
+         }
       }
-
+      
       if ($minutes < 10) {
          $until .= '0'.$minutes.'мин.';
       } else {

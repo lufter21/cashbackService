@@ -6,12 +6,14 @@ class Coupons extends Core {
 	
 	protected function getContent($query) {
 		$cat = array();
+		
+		// params
 		if (!empty($this -> _alias)) {
-			$category = $this -> db ->prepare('SELECT * FROM categories WHERE alias=?');
+			$category = $this -> db -> prepare('SELECT * FROM categories WHERE alias=?');
 			$category -> execute(array($this -> _alias));
 			$category_arr = $category -> fetch(PDO::FETCH_ASSOC);
 			
-			$this->_category_id = $category_arr['id'];
+			$this -> _category_id = $category_arr['id'];
 			
 			if (empty($this -> _category_id)) {
 				$this -> _page_not_found = true;
@@ -28,10 +30,9 @@ class Coupons extends Core {
 				$cat[0] = '%'.$category_arr['key_s'].'%';
 				$cat[1] = 1;
 				$par = 'category_ids LIKE ? AND available=?';
-				$this -> _itemsquantity = $category_arr['all_qnt'] + $category_arr['ru_qnt'] + $category_arr['ua_qnt'];
 			}
 		} else {
-			if(!empty($this -> _region)){
+			if (!empty($this -> _region)) {
 				$cat[0] = 'all';
 				$cat[1] = $this -> _region;
 				$cat[2] = 1;
@@ -40,28 +41,33 @@ class Coupons extends Core {
 				$cat[0] = 1;
 				$par = 'available=?';
 			}
-			$sql = $this -> db -> prepare('SELECT COUNT(*) FROM coupons WHERE '.$par);
-			$sql -> execute($cat);
-			$this -> _itemsquantity = $sql -> fetchColumn();
 		}
 		
+		// page num
 		$this -> _page = $query['page'];
-		if(empty($this -> _page)){
+		if (empty($this -> _page)) {
 			$page = 1;
-		}
-		else{
+		} else {
 			$page = $this -> _page;
 		}
-		$page = ($page-1)*24;
+		$page = ($page - 1) * 24;
 		
+		// sort params
 		$sorting_result = $this -> getSorting();
 		$sorting = $sorting_result['sql'];
 		$result['sorting'] = $sorting_result['param'];
 		
+		// quantity
+		$sql_count = $this -> db -> prepare('SELECT COUNT(*) FROM coupons WHERE '. $par . $sorting);
+		$sql_count -> execute($cat);
+		$this -> _itemsquantity = $sql_count -> fetchColumn();
+
+		// get coupons
 		$sql = $this -> db -> prepare('SELECT * FROM coupons WHERE '. $par . $sorting .' LIMIT '. $page .',24');
-		$sql->execute($cat);
+		$sql -> execute($cat);
 		$result['coupons'] = $sql -> fetchAll(PDO::FETCH_ASSOC);
 		
+		// get shops
 		$shops = $this -> db -> prepare('SELECT * FROM shops');
 		$shops -> execute();
 		$shops = $shops -> fetchAll(PDO::FETCH_ASSOC);
@@ -181,9 +187,9 @@ class Coupons extends Core {
 			break;
 			
 			case 'expire_soon':
-			$result['sql'] = ' ORDER BY date_end ASC';
+			$result['sql'] = ' AND date_end > 0 AND date_end > NOW() ORDER BY date_end ASC';
 			break;
-
+			
 			default:
 			$result['sql'] = ' ORDER BY discount_abs DESC';
 			break;
@@ -196,6 +202,5 @@ class Coupons extends Core {
 		$del = $this -> db -> prepare('DELETE FROM coupons WHERE id=?');
 		$del -> execute(array($id));
 	}
-	
 }
 ?>

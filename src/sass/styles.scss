@@ -208,11 +208,54 @@ ol.list{
 	}
 }
 
+.coupon{
+	background:#ffffff;
+	border-radius: 3px;
+	padding: 15px;
+	&__promocode{
+		display: inline-block;
+		font-size: 20px;
+		padding: 6px 12px;
+		line-height: normal;
+		background: $gy2;
+		border: 1px dashed $gy3;
+		margin-left: 10px;
+	}
+}
+
+/* shop */
+.shop-item{
+	width: 100%;
+	padding:85px 20px;
+	min-height: 320px;
+	background:#ffffff;
+	position:relative;
+	border-radius: 3px;
+	overflow:hidden;
+	flex: 0 1 auto;
+	&__qnt{
+		display: block;
+		text-align: center;
+		margin-top: 40px;
+	}
+	&__logo{
+		display: block;
+		margin-bottom:7px;
+		height:75px !important;
+		text-align: center;
+	}
+	&__link{
+		display: block;
+		@extend %fwh;
+		z-index: 2;
+	}
+}
+
 /* sidebar */
 .sidebar{
 	margin-top: 7px;
 	&__title{
-		margin: 25px 0;
+		margin: 35px 0;
 		@include fch(t);
 	}
 	li{

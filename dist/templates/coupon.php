@@ -4,46 +4,52 @@ $meta = array(
 	'meta_description' => $content['description']
 );
 
-include $_SERVER['DOCUMENT_ROOT'] .'/templates/header.php';
+include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 ?>
-<!--Container/-->
-<div class="container wrap row vw1000-row-col">
-	<div class="col-3">
-		<div class="shop-item shop-item_sng">
-			<div class="inner">
-				<div class="logo mid-image-wrap">
-					<img src="/images/logo/<?php echo $content['alias']; ?>.png" alt="<?php echo $content['name']; ?>" class="mid-image">
-				</div>
-				<div class="cashback"><span><?php echo $content['cashback'];?></span></div>
-				<a rel="nofollow" href="/go/shop/<?php echo $content['id']; ?>" target="_blank" onclick="ga('send', 'event', 'outbound', 'click'); yaCounter39630900.reachGoal('outbound');" class="shop-item__button" title="Перейти в <?php echo $content['name']; ?>">В магазин</a>
-			</div>
+
+<!--MAIN/-->
+<div class="main">
+	<div class="row row_wrp">
+		<div class="col-3">
+			
 		</div>
-	</div>
-	<div class="col-9">
-		<div class="box min-h-272">
-			<div class="content pad">
-				<h1><?php echo $content['title']; ?></h1>
-				<p>
-					<?php echo $content['description']; ?>
-				</p>
-				<p>
-					<span class="c-d-gray">Категории:</span> <?php echo $content['category']; ?>
-				</p>
-				<div class="clear row">
-					<div class="left">
-					<?php if ($content['promocode'] == 'Не нужен' || empty($content['promocode'])) { ?>
-					<span class="c-or">Вводить промокод не требуется. Скидка засчитывается автоматически.</span>
-					<?php } ?>
+		<main class="col-9">
+			<article class="coupon">
+				<div class="row row_col-middle row_nw">
+					<div class="col-12">
+						<h1 class="title"><?php echo $content['title'];?></h1>
 					</div>
-					<div class="right">
-						<a href="<?php echo $content['gotolink']; ?>" target="_blank" class="button">Перейти в магазин</a>
+				</div>
+
+				<div class="row">
+					<div class="article col-12">
+						<?php if ($content['description']) { ?>
+						<p>
+							<?php echo $content['description']; ?>
+						</p>
+						<?php } ?>
+						<p>
+							Категории: <span class="c-gray"><?php echo $content['category']; ?></span>
+						</p>
 					</div>
 				</div>
 				
-			</div>
-		</div>
+				<div class="row row_nw row_col-middle">
+					<div class="col">
+						<?php if ($content['promocode'] == 'Не нужен' || empty($content['promocode'])) { ?>
+						<span class="c-orange">Вводить промокод не требуется. Скидка засчитывается автоматически.</span>
+						<?php } else { ?>
+							<span class="c-orange">При оформлении заказа требуется ввести промокод:</span> <span class="coupon__promocode"><?php echo $content['promocode']; ?></span>
+						<?php } ?>
+					</div>
+					<div class="col col_right">
+						<a href="<?php echo $content['gotolink']; ?>" target="_blank" class="green-btn">Перейти в магазин</a>
+					</div>
+				</div>
+			</article>
+		</main>
 	</div>
 </div>
-<!--/Container-->
+<!--/MAIN-->
 
-<?php include $_SERVER['DOCUMENT_ROOT'] .'/templates/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/footer.php'; ?>

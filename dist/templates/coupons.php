@@ -7,11 +7,11 @@ if(empty($meta)){
 	);
 }
 
-include $_SERVER['DOCUMENT_ROOT'] .'/templates/header.php';
+include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 ?>
 
 <!--MAIN/-->
-<main class="main">
+<div class="main">
 	<div class="row row_wrp">
 		<div class="col-3">
 			<aside class="sidebar">
@@ -63,7 +63,7 @@ include $_SERVER['DOCUMENT_ROOT'] .'/templates/header.php';
 			</div>
 		</div>
 	</div>
-</main>
+</div>
 <!--/MAIN-->
 
-<?php include $_SERVER['DOCUMENT_ROOT'] .'/templates/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/footer.php'; ?>

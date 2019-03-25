@@ -120,11 +120,9 @@
 			color: #fff;
 		}
 		&_checked{
-			background: $og;
-			color: #fff;
-			&:hover{
-				background: #c31d1d;
-			}
+			background: $og !important;
+			color: #fff !important;
+			cursor: not-allowed;
 		}
 	}
 	&_opened{

@@ -7,11 +7,9 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 14px;
-	font-weight: 500;
-	letter-spacing: 1px;
+	letter-spacing: em(.5);
 	color: #FFF;
-	padding: 0 15px;
+	padding: 0 25px;
 	height: 43px;
 	line-height: normal;
 	text-align: center;
@@ -21,7 +19,7 @@
 	background: $bk;
 	user-select: none;
 	position: relative;
-	transition: .5s;
+	transition: .21s;
 	span{
 		display: block;
 		width: 100%;
@@ -38,35 +36,13 @@
 //default btn
 .btn{
 	@extend %btn;
-	width: 150px;
 }
 
-//arrow btn
-.arrow-btn{
+.green-btn{
 	@extend %btn;
-	padding-right: 43px;
-
-	&:after{
-		@extend %btn-icon;
-		width: 15px;
-		height: 16px;
-		right: 15px;
-		margin-top: -8px;
-	}
-}
-
-//plus btn
-.plus-btn{
-	@extend %btn;
-	padding-left: 55px;
-	border-radius: 32px;
-	
-	&:after{
-		@extend %btn-icon;
-		width: 32px;
-		height: 32px;
-		left: 6px;
-		margin-top: -16px;
+	background: $gn2;
+	&:hover{
+		background: $og;
 	}
 }
 
@@ -76,32 +52,18 @@
 	border: none;
 	background: none;
 	-webkit-appearance: none;
-	transition: .5s;
+	transition: .21s;
 	&:hover{
 		opacity: .55;
 	}
 }
 
-.vk-btn{
-	@extend %icon-btn;
-	width: 46px;
-	height: 37px;
-}
-.fb-btn{
-	@extend %icon-btn;
-	width: 32px;
-	height: 36px;
-}
-.tw-btn{
-	@extend %icon-btn;
-	width: 35px;
-	height: 35px;
-}
-.ok-btn{
-	@extend %icon-btn;
-	width: 21px;
-	height: 35px;
-}
+// .vk-btn{
+// 	@extend %icon-btn;
+// 	width: 46px;
+// 	height: 37px;
+// }
+
 
 /* link */
 %link{
@@ -112,25 +74,25 @@
 		border-bottom-color: transparent;
 	}
 }
-.link{
-	@extend %link;
-	color: $be;
-	border-bottom-color: $be;
-}
-.green-link{
-	@extend %link;
-	color: $gn;
-	border-bottom-color: $gn;
-	&_dash{
-		border-bottom-style: dashed;
-	}
-	&_rev{
-		border-bottom-color: transparent;
-		&:hover{
-			border-bottom-color: $gn;
-		}
-	}
-}
+// .link{
+// 	@extend %link;
+// 	color: $be;
+// 	border-bottom-color: $be;
+// }
+// .green-link{
+// 	@extend %link;
+// 	color: $gn;
+// 	border-bottom-color: $gn;
+// 	&_dash{
+// 		border-bottom-style: dashed;
+// 	}
+// 	&_rev{
+// 		border-bottom-color: transparent;
+// 		&:hover{
+// 			border-bottom-color: $gn;
+// 		}
+// 	}
+// }
 
 /* icon link */
 %icon-link{
@@ -152,14 +114,14 @@
 	}
 }
 
-.icon-link{
-	@extend %icon-link;
-	&:before{
-		width: 35px;
-		height: 30px;
-		margin-top: -15px;
-	}
-}
+// .icon-link{
+// 	@extend %icon-link;
+// 	&:before{
+// 		width: 35px;
+// 		height: 30px;
+// 		margin-top: -15px;
+// 	}
+// }
 
 /*paginate*/
 .paginate{
@@ -170,6 +132,7 @@
 		display: inline-block;
 		vertical-align: middle;
 		margin: 0 3px;
+		color: $gy3;
 	}
 	&__a,
 	&__curr{
@@ -178,15 +141,16 @@
 		height: 36px;
 		line-height: 36px;
 		font-size: 21px;
-		color: #000000;
 		text-align: center;
 		text-decoration: none;
 	}
+	&__curr{
+		color: $bk;
+	}
 	&__a{
-		opacity: .3;
-		transition: .5s;
+		transition: .21s;
 		&:hover{
-			opacity: .7;
+			color: $bk;
 		}
 	}
 	&__prev,

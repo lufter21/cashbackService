@@ -56,7 +56,7 @@
 			
 			var opionsElem = this.field.querySelector('.custom-select__options');
 			
-			opionsElem.style.height = ((opionsElem.scrollHeight < 132) ? 132 : (opionsElem.scrollHeight + 2)) +'px';
+			opionsElem.style.height = (opionsElem.scrollHeight + 2) +'px';
 			
 			opionsElem.scrollTop = 0;
 			
@@ -148,9 +148,11 @@
 				
 				for (var i = 0; i < valueElements.length; i++) {
 					valueElements[i].classList.remove('custom-select__val_checked');
+					valueElements[i].disabled = false;
 				}
 				
 				elem.classList.add('custom-select__val_checked');
+				elem.disabled = true;
 				
 				if (button) {
 					button.innerHTML = toButtonValue;
@@ -339,7 +341,7 @@
 					}
 					((opt.hasAttribute('data-second-value')) ? ' data-second-value="'+ opt.getAttribute('data-second-value') +'"' : '')
 					
-					optionsList += '<li><button type="button" class="custom-select__val'+ ((opt.hasAttribute('selected')) ? ' custom-select__val_checked' : '') +'"'+ ( (opt.hasAttribute('value')) ? ' data-value="'+ opt.value +'"' : '') + ((opt.hasAttribute('data-second-value')) ? ' data-second-value="'+ opt.getAttribute('data-second-value') +'"' : '') + ( (opt.hasAttribute('data-target-elements')) ? ' data-target-elements="'+ opt.getAttribute('data-target-elements') +'"' : '') +'>'+ opt.innerHTML +'</button></li>';
+					optionsList += '<li><button type="button" class="custom-select__val'+ ((opt.hasAttribute('selected')) ? ' custom-select__val_checked' : '') +'"'+ ( (opt.hasAttribute('value')) ? ' data-value="'+ opt.value +'"' : '') + ((opt.hasAttribute('data-second-value')) ? ' data-second-value="'+ opt.getAttribute('data-second-value') +'"' : '') + ( (opt.hasAttribute('data-target-elements')) ? ' data-target-elements="'+ opt.getAttribute('data-target-elements') +'"' : '') + ((opt.hasAttribute('selected')) ? ' disabled' : '') +'>'+ opt.innerHTML +'</button></li>';
 				}
 				
 				var require = (elem.hasAttribute('data-required')) ? ' data-required="'+ elem.getAttribute('data-required') +'" ' : '',
