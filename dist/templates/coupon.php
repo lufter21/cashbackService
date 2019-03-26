@@ -4,6 +4,7 @@ $meta = array(
 	'meta_description' => $content['description']
 );
 
+require_once $_SERVER['DOCUMENT_ROOT'] .'/functions/n2w.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 ?>
 
@@ -11,7 +12,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 <div class="main">
 	<div class="row row_wrp">
 		<div class="col-3">
-			
+			<?php include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/shop-item.php'; ?>
 		</div>
 		<main class="col-9">
 			<article class="coupon">
