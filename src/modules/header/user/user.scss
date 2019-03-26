@@ -44,7 +44,7 @@
 	}
 	&__bubble{
 		position: absolute;
-		width: 250px;
+		width: 135px;
 		top: 45px;
 		right: 0;
 		padding: 25px;
@@ -56,6 +56,13 @@
 		&.toggled{
 			visibility: visible;
 			opacity: 1;
+		}
+	}
+	&__menu{
+		&-item{
+			list-style: none;
+			margin-top: 20px;
+			@include fch(t);
 		}
 	}
 	@media(max-width: 1000px){

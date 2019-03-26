@@ -27,7 +27,7 @@ if ($region == 'ua') {
 <header id="header" class="header">
 	<div class="header__row row row_wrp row_col-middle sm-row-col-12">
 		<div class="col-3 p-y-0">
-			<a href="index.html" class="header__logo"><img src="/static/images/bombonus.svg" alt="Dealers Air Bombonus"></a>
+			<a href="/" class="header__logo"><img src="/static/images/bombonus.svg" alt="Dealers Air Bombonus"></a>
 		</div>
 		<div class="col-9 p-y-0">
 			<div class="row row_col-middle sm-row-col-12">
@@ -57,8 +57,8 @@ if ($region == 'ua') {
 						
 						<div id="user-menu" class="user__bubble">
 							<ul>
-								<li><a href="/ru">Россия</a></li>
-								<li><a href="/ua">Украина</a></li>
+								<li class="user__menu-item"><a href="/ru">Россия</a></li>
+								<li class="user__menu-item"><a href="/ua">Украина</a></li>
 							</ul>
 						</div>
 					</div>

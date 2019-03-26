@@ -86,12 +86,20 @@ function translit($string) {
 	return $alias;
 }
 
-function get_title($str) {
-	return trim(str_replace('&', 'и', $str)) .' промокоды и скидки';
+function get_title($str, $div) {
+	if ($div == 'shops') {
+		return trim(str_replace('&', 'и', $str)) .' магазины с промокодами';
+	} else {
+		return trim(str_replace('&', 'и', $str)) .' промокоды и скидки';
+	}
 }
 
-function get_meta_title($str) {
-	return 'Скидки на '. mb_strtolower(trim(str_replace('&', 'и', $str)), 'UTF-8')  .', промокоды';
+function get_meta_title($str, $div) {
+	if ($div == 'shops') {
+		return 'Интернет магазины со скидками на '. mb_strtolower(trim(str_replace('&', 'и', $str)), 'UTF-8')  .', промокоды';
+	} else {
+		return 'Скидки на '. mb_strtolower(trim(str_replace('&', 'и', $str)), 'UTF-8')  .', промокоды';
+	}
 }
 
 if (!empty($_GET['action']) && $_GET['action'] == 'rfd') {
@@ -101,7 +109,7 @@ if (!empty($_GET['action']) && $_GET['action'] == 'rfd') {
 	$get_discounts_arr = $get_discounts->fetchAll(PDO::FETCH_ASSOC);
 	$current_time = time();
 	$i_del=0;
-
+	
 	foreach ($get_discounts_arr as $item) {
 		$d_sec = strtotime($item['date_end']) - $current_time;
 		if($d_sec <= 0){
@@ -146,13 +154,13 @@ foreach($cats_arr as $item){
 	}
 	
 	// set titles
-	$tit = get_title(trim($item['name']));
+	$tit = get_title(trim($item['name']), $item['relation']);
 	
 	if (empty($item['title'])) {
 		$set_title->execute(array($tit, $item['id']));
 	}
 	
-	$m_tit = get_meta_title(trim($item['name']));
+	$m_tit = get_meta_title(trim($item['name']), $item['relation']);
 	
 	if (empty($item['meta_title'])) {
 		$set_meta_title->execute(array($m_tit, $item['id']));
@@ -162,37 +170,37 @@ foreach($cats_arr as $item){
 	// all
 	$get_coupons -> execute(array('all','%'.$item['id'].'%',1));
 	$all_qnt = $get_coupons -> rowCount();
-
+	
 	$set_all_qnt->execute(array($all_qnt, $item['id']));
 	
 	// ru
 	$get_coupons -> execute(array('ru','%'.$item['id'].'%',1));
 	$ru_qnt = $get_coupons -> rowCount();
-
+	
 	$set_ru_qnt->execute(array($ru_qnt,$item['id']));
 	
 	// ua
 	$get_coupons -> execute(array('ua','%'.$item['id'].'%',1));
 	$ua_qnt = $get_coupons -> rowCount();
-
+	
 	$set_ua_qnt->execute(array($ua_qnt,$item['id']));
-
+	
 	// all shops
 	$get_shops->execute(array('all','%'.$item['id'].'%',1));
 	$all_shops = $get_shops -> rowCount();
-
+	
 	$set_all_shops->execute(array($all_shops,$item['id']));
 	
 	// ru shops
 	$get_shops->execute(array('ru','%'.$item['id'].'%',1));
 	$ru_shops = $get_shops -> rowCount();
-
+	
 	$set_ru_shops->execute(array($ru_shops,$item['id']));
 	
 	// ua shops
 	$get_shops->execute(array('ua','%'.$item['id'].'%',1));
 	$ua_shops = $get_shops -> rowCount();
-
+	
 	$set_ua_shops->execute(array($ua_shops,$item['id']));
 }
 

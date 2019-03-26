@@ -226,12 +226,11 @@ ol.list{
 /* shop */
 .shop-item{
 	width: 100%;
-	padding:85px 20px;
-	min-height: 320px;
+	padding:40px 20px;
+	min-height: 220px;
 	background:#ffffff;
 	position:relative;
 	border-radius: 3px;
-	overflow:hidden;
 	flex: 0 1 auto;
 	&__qnt{
 		display: block;
@@ -239,15 +238,20 @@ ol.list{
 		margin-top: 40px;
 	}
 	&__logo{
-		display: block;
-		margin-bottom:7px;
-		height:75px !important;
 		text-align: center;
+		img{
+			max-width: 100%;
+			height: auto;
+		}
 	}
 	&__link{
 		display: block;
 		@extend %fwh;
 		z-index: 2;
+		transition: .21s;
+		&:hover{
+			box-shadow: 0 1px 21px rgba(0,0,0,.21);
+		}
 	}
 }
 

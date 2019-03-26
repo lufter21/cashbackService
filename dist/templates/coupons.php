@@ -7,7 +7,7 @@ if(empty($meta)){
 	);
 }
 
-include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 ?>
 
 <!--MAIN/-->
@@ -66,4 +66,4 @@ include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 </div>
 <!--/MAIN-->
 
-<?php include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/footer.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/footer.php'; ?>

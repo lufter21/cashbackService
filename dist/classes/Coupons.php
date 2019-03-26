@@ -9,8 +9,8 @@ class Coupons extends Core {
 		
 		// params
 		if (!empty($this -> _alias)) {
-			$category = $this -> db -> prepare('SELECT * FROM categories WHERE alias=?');
-			$category -> execute(array($this -> _alias));
+			$category = $this -> db -> prepare('SELECT * FROM categories WHERE alias=? AND relation=?');
+			$category -> execute(array($this -> _alias, 'coupons'));
 			$category_arr = $category -> fetch(PDO::FETCH_ASSOC);
 			
 			$this -> _category_id = $category_arr['id'];

@@ -1,13 +1,14 @@
 <?php
 if(!$meta){
 	$meta = array(
-		'name'=>'Все магазины',
-		'title'=>'Каталог магазинов',
-		'description'=>'Каталог магазинов для покупок с кэшбэком'
+		'meta_title' => 'Лучшие интернет магазины с промокодами и скидками',
+		'title' => 'Интернет магазины с промокодами',
+		'meta_description' => 'Покупайте с промокодами в лучших интернет магазинах'
 	);
 }
 
-include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .'/functions/n2w.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 ?>
 
 <!--MAIN/-->
@@ -30,12 +31,12 @@ include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 			<?php
 			if (!empty($content['shops'])) {
 				foreach ($content['shops'] as $item) {
-					echo '<div class="col-4">';
+					echo '<div class="col-3">';
 					include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/shop-item.php';
 					echo '</div>';
 				}
 			} else {
-				echo '<div class="message">На данный момент, в этом разделе нет магазинов</div>';
+				echo '<div class="col-12">На данный момент, в этой категории нет магазинов.</div>';
 			}
 			?>
 			</div>
@@ -51,4 +52,4 @@ include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 </div>
 <!--/MAIN-->
 
-<?php include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/footer.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/footer.php'; ?>

@@ -905,7 +905,7 @@ hr {
 .header_fixed {
   height: 50px;
   background: #FFF;
-  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.21);
+  box-shadow: 0 1px 21px rgba(0, 0, 0, 0.21);
 }
 
 .header__logo {
@@ -1107,7 +1107,7 @@ hr {
 
 .user__bubble {
   position: absolute;
-  width: 250px;
+  width: 135px;
   top: 45px;
   right: 0;
   padding: 25px;
@@ -1121,6 +1121,15 @@ hr {
 .user__bubble.toggled {
   visibility: visible;
   opacity: 1;
+}
+
+.user__menu-item {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.user__menu-item:first-child {
+  margin-top: 0 !important;
 }
 
 @media (max-width: 1000px) {
@@ -2474,12 +2483,11 @@ ol.list li:before {
 /* shop */
 .shop-item {
   width: 100%;
-  padding: 85px 20px;
-  min-height: 320px;
+  padding: 40px 20px;
+  min-height: 220px;
   background: #ffffff;
   position: relative;
   border-radius: 3px;
-  overflow: hidden;
   flex: 0 1 auto;
 }
 
@@ -2490,15 +2498,22 @@ ol.list li:before {
 }
 
 .shop-item__logo {
-  display: block;
-  margin-bottom: 7px;
-  height: 75px !important;
   text-align: center;
+}
+
+.shop-item__logo img {
+  max-width: 100%;
+  height: auto;
 }
 
 .shop-item__link {
   display: block;
   z-index: 2;
+  transition: .21s;
+}
+
+.shop-item__link:hover {
+  box-shadow: 0 1px 21px rgba(0, 0, 0, 0.21);
 }
 
 /* sidebar */
