@@ -4,21 +4,20 @@ $meta = array(
 	'meta_description' => $content['description']
 );
 
-require_once $_SERVER['DOCUMENT_ROOT'] .'/functions/n2w.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 ?>
 
 <!--MAIN/-->
 <div class="main">
 	<div class="row row_wrp">
-		<div class="col-3">
-			<?php include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/shop-item.php'; ?>
-		</div>
-		<main class="col-9">
+		<main class="col-12">
 			<article class="coupon">
-				<div class="row row_col-middle row_nw">
-					<div class="col-12">
+				<div class="row row_nw">
+					<div class="col">
 						<h1 class="title"><?php echo $content['title'];?></h1>
+					</div>
+					<div class="col col_right p-y-0">
+						<a href="/shop/<?php echo $content['shop']['alias']; ?>" class="coupon__shop-logo"><img src="<?php echo $content['shop']['logo']; ?>" alt="<?php echo $content['shop']['name']; ?>" title="Скидки от <?php echo $content['shop']['name']; ?>"></a>
 					</div>
 				</div>
 

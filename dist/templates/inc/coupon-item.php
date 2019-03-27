@@ -65,10 +65,8 @@ if ($end) {
    <a href="/coupon/<?php echo $item['id']; ?>" class="coupon-item__title"><?php echo $item['title']; ?></a>
    <?php } ?>
 
-   <div class="coupon-item__logo">
-      <a href="/shop/<?php echo $content['shops'][$item['shop_id']]['alias']; ?>" title="Все промокоды от <?php echo $content['shops'][$item['shop_id']]['name']; ?>"><img src="<?php echo $item['logo']; ?>" alt="<?php echo $content['shops'][$item['shop_id']]['name']; ?>"></a>
-   </div>
-   
+   <a href="/shop/<?php echo $content['shops'][$item['shop_id']]['alias']; ?>" title="Все промокоды от <?php echo $content['shops'][$item['shop_id']]['name']; ?>" class="coupon-item__logo"><img src="<?php echo $item['logo']; ?>" alt="<?php echo $content['shops'][$item['shop_id']]['name']; ?>"></a>
+
    <?php if (!$expired) { ?>
    <div class="coupon-item__until until-icon"><?php echo $until; ?></div>
    <a rel="nofollow" href="/coupon/<?php echo $item['id']; ?>" class="coupon-item__button">Получить промокод</a>

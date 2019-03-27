@@ -2241,6 +2241,19 @@ select {
   top: 0;
 }
 
+.coupon-item__logo img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.coupon-item__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* main */
 .main {
   flex: 1 0 auto;
@@ -2358,33 +2371,20 @@ ol.list li:before {
 }
 
 .coupon-item__logo {
-  text-align: center;
+  display: block;
+  width: 80px;
   height: 40px;
   position: absolute;
   right: 20px;
   top: 5px;
-  width: 80px;
-  line-height: 40px;
-  text-align: center;
-  text-align: right;
-}
-
-.coupon-item__logo img {
-  display: inline-block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
-  vertical-align: middle;
-  line-height: normal;
-  font-size: 11px;
-}
-
-.coupon-item__logo a {
   transition: .21s;
 }
 
-.coupon-item__logo a:hover {
+.coupon-item__logo img {
+  font-size: 11px;
+}
+
+.coupon-item__logo:hover {
   opacity: .5;
 }
 
@@ -2468,6 +2468,24 @@ ol.list li:before {
   background: #ffffff;
   border-radius: 3px;
   padding: 15px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.coupon__shop-logo {
+  display: block;
+  width: 150px;
+  text-align: right;
+  transition: .21s;
+}
+
+.coupon__shop-logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.coupon__shop-logo:hover {
+  opacity: .5;
 }
 
 .coupon__promocode {

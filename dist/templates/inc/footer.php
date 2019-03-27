@@ -141,13 +141,6 @@
 // 	}
 // });
 
-var selRegion = false;
-
-<?php
-if (empty($region)) {
-	echo 'selRegion = true;';
-}
-?>
 </script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
