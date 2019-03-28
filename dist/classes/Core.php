@@ -9,7 +9,7 @@ class Core {
 	protected $_page_not_found;
 	
 	public function __construct() {
-		$this->db = DbConect::getInstance();
+		$this->db = DbConnect::getInstance();
 		$this->db = $this->db->getDb();
 	}
 	

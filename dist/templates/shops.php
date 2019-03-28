@@ -21,7 +21,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 			</aside>
 		</div>
 		<div class="col-9 p-0">
-			<div class="row row_col-middle row_nw">
+			<div class="row">
 				<div class="col-12">
 					<h1 class="title"><?php echo $meta['title'];?></h1>
 				</div>

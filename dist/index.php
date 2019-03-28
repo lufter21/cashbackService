@@ -1,30 +1,24 @@
 <?php
-/*$start = microtime(true);*/
-
 error_reporting(E_ALL ^ E_NOTICE); 
 ini_set('display_errors', 1);
 
-//echo phpinfo();
+require_once $_SERVER['DOCUMENT_ROOT'] .'/config.php';
 
-if ((float)phpversion() < 5.3) {
-	exit('App needs php version 5.3 or higher');
+// load classes
+function loadClasses($class_name) {
+	if (file_exists($_SERVER['DOCUMENT_ROOT'] .'/classes/'. $class_name .'.php')) {
+		require_once $_SERVER['DOCUMENT_ROOT'] .'/classes/'. $class_name .'.php';
+	}
 }
+
+spl_autoload_register('loadClasses');
 
 session_start();
 
 require_once('router.php');
 
-function __autoload($cl) {
-	if(file_exists("classes/".$cl.".php")) {
-		require_once("classes/".$cl.".php");
-	}
-}
 if(class_exists($query['class'])){
 	$lemon = new $query['class'];
 	$lemon->getBody($query);
 }
-
-/*$time = microtime(true) - $start;
-printf('Скрипт выполнялся %.4F сек.', $time);
-*/
 ?>

@@ -8,23 +8,15 @@
 	flex: 1 0 auto;
 	position: relative;
 	overflow: hidden;
-	&, &__full-page{
-		padding-top: 100px;
-	}
+	padding: 130px 0 50px;
 	&__full-page{
-		@extend %fwh;
+		padding-top: 100px;
 	}
 }
 
 /* first screen */
 .first-screen{
 	overflow: hidden;
-}
-
-/* section */
-.section{
-	padding-top: 30px;
-	padding-bottom: 30px;
 }
 
 /* list */
@@ -70,7 +62,7 @@ ol.list{
 .title{
 	font-size: 24px;
 	font-weight: 700;
-	line-height: 1.2;
+	line-height: 1.3;
 }
 
 /* article */
@@ -257,6 +249,13 @@ ol.list{
 		&:hover{
 			box-shadow: 0 1px 21px rgba(0,0,0,.21);
 		}
+	}
+}
+
+.shop-logo{
+	width: 110px;
+	img{
+		@extend %r-img;
 	}
 }
 

@@ -63,16 +63,16 @@ class Shops extends Core {
 		
 		$page = ($page - 1) * 24;
 		
-		$sql = $this -> db -> prepare('SELECT * FROM shops WHERE '. $par .' LIMIT '. $page .',24');
+		$sql = $this -> db -> prepare('SELECT * FROM shops WHERE '. $par .' ORDER BY quantity DESC LIMIT '. $page .',24');
 		$sql -> execute($cat);
 		$result['shops'] = $sql -> fetchAll(PDO::FETCH_ASSOC);
 		
 		return $result;
 	}
 	
-	
 	protected function getPagenav() {
-		
+		$base = 'shops';
+
 		if (!empty($this -> _alias)) {
 			$alias = '/'.$this -> _alias;
 		} else {
@@ -87,58 +87,67 @@ class Shops extends Core {
 		
 		$pages = ceil($this -> _itemsquantity / 24);
 		
-		$pagination = '';
+		if ($page > 1) {
+			$pagination = '<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'/page/'. ($page - 1) .'" class="paginate__prev"></a></li>';
+		} else {
+			$pagination = '<li class="paginate__item"><span class="paginate__prev paginate__prev_disabled"></span></li>';
+		}
 		
 		if ($this -> _itemsquantity > 24) {
-			if ($pages<=5) {
+			if ($pages <= 5) {
 				$pag = $pages;
 				$i = 1;
 			} else {
 				$pag = 5;
 				$i = 1;
-				
+
 				if ($page > 3) {
 					$i = $page - 2;
 					$pag = $page + 2;
 				}
-				
+
 				if ($page > ($pages - 2)) {
 					$i = $pages - 4;
 					$pag = $pages;
 				}
 			}
-			
+
 			if ($pages > 5 && $page > 3) {
 				$dots = '';
-				
+
 				if ($page > 4 && $pages != 6) {
-					$dots = '<span class="dots">...</span>';
+					$dots = '<li class="paginate__item">...</li>';
 				}
-				
-				$pagination = '<a rel="nofollow" href="/shops'. $alias .'/page/1" title="1-я страница">1</a>'. $dots;
+
+				$pagination = '<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'" title="1-я страница" class="paginate__a">1</a></li>'. $dots;
 			}
-			
+
 			for ($i; $i <= $pag; $i++) {
 				if ($page == $i) {
-					$pagination .= '<span class="current-page">'. $i .'</span>';
+					$pagination .= '<li class="paginate__item"><span class="paginate__curr">'. $i .'</span></li>';
 				} else {
-					$pagination .= '<a rel="nofollow" href="/shops'. $alias .'/page/'. $i .'" title="'. $i .'-я страница">'. $i .'</a>';
+					if ($i == 1) {
+						$pagination .= '<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'" title="1-я страница" class="paginate__a">1</a></li>';
+					} else {
+						$pagination .= '<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'/page/'. $i .'" title="'. $i .'-я страница" class="paginate__a">'. $i .'</a></li>';
+					}
+					
+					
 				}
 			}
-			
+
 			if ($pages > 5 && $page < ($pages - 2)) {
 				$dots = '';
-				
+
 				if ($page != ($pages - 3) && $pages != 6) {
-					$dots = '<span class="dots">...</span>';
+					$dots = '<li class="paginate__item">...</li>';
 				}
-				
-				$pagination .= $dots .'<a rel="nofollow" href="/shops'. $alias .'/page/'. $pages .'" title="'. $pages .'-я страница">'. $pages .'</a>';
+
+				$pagination .= $dots .'<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'/page/'. $pages .'" title="'. $pages .'-я страница" class="paginate__a">'. $pages .'</a></li>';
 			}
 		}
-		
+
 		return $pagination;
 	}
-	
 }
 ?>

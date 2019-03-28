@@ -80,80 +80,82 @@ class Coupons extends Core {
 	}
 	
 	protected function getPagenav() {
-		if(!empty($this -> _alias)){
+		$base = 'coupons';
+
+		if (!empty($this -> _alias)) {
 			$alias = '/'.$this -> _alias;
-		}
-		else{
+		} else {
 			$alias = '';
 		}
 		
-		if(empty($this -> _page)){
+		if (empty($this -> _page)) {
 			$page = 1;
-		}
-		else{
+		} else {
 			$page = $this -> _page;
 		}
 		
 		$pages = ceil($this -> _itemsquantity / 24);
 		
 		if ($page > 1) {
-			$pagination = '<li class="paginate__item"><a rel="nofollow" href="/coupons'. $alias .'/page/'. ($page - 1) .'" class="paginate__prev"></a></li>';
+			$pagination = '<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'/page/'. ($page - 1) .'" class="paginate__prev"></a></li>';
 		} else {
 			$pagination = '<li class="paginate__item"><span class="paginate__prev paginate__prev_disabled"></span></li>';
 		}
 		
-		if($this->_itemsquantity > 24)
-		{
-			if($pages<=5)
-			{
+		if ($this -> _itemsquantity > 24) {
+			if ($pages <= 5) {
 				$pag = $pages;
 				$i = 1;
-			}
-			else
-			{
+			} else {
 				$pag = 5;
 				$i = 1;
-				if($page > 3)
-				{
+
+				if ($page > 3) {
 					$i = $page - 2;
 					$pag = $page + 2;
 				}
-				if($page > ($pages - 2))
-				{
+
+				if ($page > ($pages - 2)) {
 					$i = $pages - 4;
 					$pag = $pages;
 				}
 			}
-			if($pages > 5 && $page > 3)
-			{
+
+			if ($pages > 5 && $page > 3) {
 				$dots = '';
-				if($page > 4 && $pages != 6)
-				{
+
+				if ($page > 4 && $pages != 6) {
 					$dots = '<li class="paginate__item">...</li>';
 				}
-				$pagination = '<li class="paginate__item"><a rel="nofollow" href="/coupons'. $alias .'/page/1" title="1-я страница" class="paginate__a">1</a></li>'. $dots;
+
+				$pagination = '<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'" title="1-я страница" class="paginate__a">1</a></li>'. $dots;
 			}
-			for($i; $i <= $pag; $i++)
-			{
-				if($page == $i)
-				{
+
+			for ($i; $i <= $pag; $i++) {
+				if ($page == $i) {
 					$pagination .= '<li class="paginate__item"><span class="paginate__curr">'. $i .'</span></li>';
-				}
-				else
-				{
-					$pagination .= '<li class="paginate__item"><a rel="nofollow" href="/coupons'. $alias .'/page/'. $i .'" title="'. $i .'-я страница" class="paginate__a">'. $i .'</a></li>';
+				} else {
+					if ($i == 1) {
+						$pagination .= '<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'" title="1-я страница" class="paginate__a">1</a></li>';
+					} else {
+						$pagination .= '<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'/page/'. $i .'" title="'. $i .'-я страница" class="paginate__a">'. $i .'</a></li>';
+					}
+					
+					
 				}
 			}
-			if($pages > 5 && $page < ($pages - 2))
-			{
+
+			if ($pages > 5 && $page < ($pages - 2)) {
 				$dots = '';
-				if($page != ($pages - 3) && $pages != 6)
-				{
+
+				if ($page != ($pages - 3) && $pages != 6) {
 					$dots = '<li class="paginate__item">...</li>';
 				}
-				$pagination .= $dots .'<li class="paginate__item"><a rel="nofollow" href="/coupons'. $alias .'/page/'. $pages .'" title="'. $pages .'-я страница" class="paginate__a">'. $pages .'</a></li>';
+
+				$pagination .= $dots .'<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'/page/'. $pages .'" title="'. $pages .'-я страница" class="paginate__a">'. $pages .'</a></li>';
 			}
 		}
+
 		return $pagination;
 	}
 	

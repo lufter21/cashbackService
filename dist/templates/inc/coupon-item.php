@@ -63,11 +63,17 @@ if ($end) {
    <span class="coupon-item__title"><?php echo $item['title']; ?></span>
    <?php } else { ?>
    <a href="/coupon/<?php echo $item['id']; ?>" class="coupon-item__title"><?php echo $item['title']; ?></a>
-   <?php } ?>
+   <?php 
+   }
 
+   if ($view_logo !== false) {
+   ?>
    <a href="/shop/<?php echo $content['shops'][$item['shop_id']]['alias']; ?>" title="Все промокоды от <?php echo $content['shops'][$item['shop_id']]['name']; ?>" class="coupon-item__logo"><img src="<?php echo $item['logo']; ?>" alt="<?php echo $content['shops'][$item['shop_id']]['name']; ?>"></a>
-
-   <?php if (!$expired) { ?>
+   <?php
+   }
+   
+   if (!$expired) {
+   ?>
    <div class="coupon-item__until until-icon"><?php echo $until; ?></div>
    <a rel="nofollow" href="/coupon/<?php echo $item['id']; ?>" class="coupon-item__button">Получить промокод</a>
    <?php } else { ?>

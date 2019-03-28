@@ -5,3 +5,4 @@
 package-lock.json
 *.*-workspace
 *.*-project
+/dist/config.php
