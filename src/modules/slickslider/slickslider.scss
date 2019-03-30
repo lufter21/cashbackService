@@ -194,6 +194,9 @@
 		height: 100%;
 	}
 	@media(max-width: 750px){
+		&__logo{
+			width: 100px;
+		}
 		&__item{
 			padding: 0;
 			@for $i from 1 through 5 {
@@ -203,7 +206,7 @@
 			}
 		}
 		&__title{
-			font-size: 22px;
+			font-size: 24px;
 		}
 		.slick-arrow{
 			top: auto;

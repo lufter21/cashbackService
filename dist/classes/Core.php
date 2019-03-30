@@ -150,18 +150,18 @@ class Core {
 			$cats -> execute(array('coupons'));
 			$cats = $cats -> fetchAll(PDO::FETCH_ASSOC);
 
-			foreach($cats as $item){
-				if($this->_region){
-					if($item['all_qnt'] > 0 || $item[$this->_region.'_qnt'] > 0){
+			foreach ($cats as $item) {
+				if ($this->_region) {
+					if ($item['all_qnt'] > 0 || $item[$this -> _region .'_qnt'] > 0) {
 						$categories_arr[] = '<li';
-						$categories_arr[] .= ($item['alias'] == $this->_alias) ? ' class="current"':'';
-						$categories_arr[] .= '><a href="/coupons/'.$item['alias'].'">'.$item['name'].'</a></li>';
+						$categories_arr[] .= ($item['alias'] == $this -> _alias) ? ' class="sidebar__menu-item current"' : ' class="sidebar__menu-item"';
+						$categories_arr[] .= '><a href="/coupons/'. $item['alias'] .'" class="sidebar__menu-a">'. $item['name'] .'</a></li>';
 					}
 				} else {
-					if($item['all_qnt'] > 0 || $item['ru_qnt'] > 0 || $item['ua_qnt'] > 0){
+					if ($item['all_qnt'] > 0 || $item['ru_qnt'] > 0 || $item['ua_qnt'] > 0) {
 						$categories_arr[] = '<li';
-						$categories_arr[] .= ($item['alias'] == $this->_alias) ? ' class="current"':'';
-						$categories_arr[] .= '><a href="/coupons/'.$item['alias'].'">'.$item['name'].'</a></li>';
+						$categories_arr[] .= ($item['alias'] == $this -> _alias) ? ' class="sidebar__menu-item current"' : ' class="sidebar__menu-item"';
+						$categories_arr[] .= '><a href="/coupons/'. $item['alias'] .'" class="sidebar__menu-a">'. $item['name'] .'</a></li>';
 					}
 				}
 			}
@@ -173,14 +173,14 @@ class Core {
 				if($this->_region){
 					if($item['all_shops'] > 0 || $item[$this->_region.'_shops'] > 0){
 						$categories_arr[] = '<li';
-						$categories_arr[] .= ($item['alias'] == $this->_alias) ? ' class="current"':'';
-						$categories_arr[] .= '><a href="/shops/'.$item['alias'].'">'.$item['name'].'</a></li>';
+						$categories_arr[] .= ($item['alias'] == $this->_alias) ? ' class="sidebar__menu-item current"' : ' class="sidebar__menu-item"';
+						$categories_arr[] .= '><a href="/shops/'.$item['alias'].'" class="sidebar__menu-a">'.$item['name'].'</a></li>';
 					}
 				} else {
 					if($item['all_shops'] > 0 || $item['ru_shops'] > 0 || $item['ua_shops'] > 0){
 						$categories_arr[] = '<li';
-						$categories_arr[] .= ($item['alias'] == $this->_alias) ? ' class="current"':'';
-						$categories_arr[] .= '><a href="/shops/'.$item['alias'].'">'.$item['name'].'</a></li>';
+						$categories_arr[] .= ($item['alias'] == $this->_alias) ? ' class="sidebar__menu-item current"' : ' class="sidebar__menu-item"';
+						$categories_arr[] .= '><a href="/shops/'.$item['alias'].'" class="sidebar__menu-a">'.$item['name'].'</a></li>';
 					}
 				}
 			}
