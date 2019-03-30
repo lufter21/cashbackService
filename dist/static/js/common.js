@@ -105,3 +105,19 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	}
 });
+
+// jQuery plugins
+$(document).ready(function(){
+	// slick slider
+	$('#slider').on('init', function() {
+		CoverImg.reInit('#slider');
+	});
+	
+	$('#main-slider').slick({
+		// autoplay: true,
+		fade: true,
+		infinite: true,
+		slidesToShow: 1,
+		slidesToScroll: 1
+	});
+});

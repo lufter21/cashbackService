@@ -1,5 +1,6 @@
 <?php
-require_once ('../classes/DbConect.php');
+require_once $_SERVER['DOCUMENT_ROOT'] .'/config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .'/classes/DbConnect.php';
 
 $adm_log = 'l';
 $adm_pass = '21';
@@ -10,7 +11,7 @@ ini_set('display_errors', 1);
 session_start();		
 	if(isset($_SESSION['log']) && isset($_SESSION['pass']) && $_SESSION['log']==$adm_log && $_SESSION['pass']==$adm_pass)
 	{
-		$db = DbConect::getInstance();
+		$db = DbConnect::getInstance();
 		$db = $db->getDb();
 
 		$route = 'shops';

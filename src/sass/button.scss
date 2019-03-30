@@ -40,9 +40,31 @@
 
 .green-btn{
 	@extend %btn;
+	font-size: 18px;
+	font-weight: 500;
 	background: $gn2;
 	&:hover{
 		background: $og;
+	}
+}
+
+.orange-btn{
+	@extend %btn;
+	font-size: 18px;
+	font-weight: 500;
+	background: $og;
+	&:hover{
+		opacity: .65;
+	}
+}
+
+.wh-bord-btn{
+	@extend %btn;
+	background: none;
+	border: 2px solid #FFF;
+	&:hover{
+		background: #FFF;
+		color: $bk;
 	}
 }
 

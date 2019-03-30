@@ -51,7 +51,7 @@ const modulesOn = [
 	// 'webgl',
 	// 'mouseparallax',
 	// 'floatslider',
-	// 'slickslider',
+	'slickslider',
 	// 'scrollpane',
 ],
 dist_path = 'dist/static';

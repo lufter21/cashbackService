@@ -30,14 +30,15 @@
 		transform: translate3d(0, 0, 0);
 	}
 	@media(max-width: 1000px){
-		height: 65px;
+		height: 50px;
 		&__row{
 			position: fixed;
-			top: 65px;
+			top: 0;
 			bottom: 0;
 			left: -100%;
 			z-index: 3;
 			width: 100%;
+			padding-top: 70px;
 			overflow: auto;
 			align-content: flex-start;
 			background: #FFF;
@@ -47,9 +48,8 @@
 			}
 		}
 		&__logo{
-			width: 75px;
 			position: fixed;
-			top: 10px;
+			top: 9px;
 			left: 15px;
 		}
 	}
@@ -71,7 +71,7 @@
 	-webkit-appearance: none;
 	span{
 		height: 3px;
-		background: $rd;
+		background: $be;
 		position: absolute;
 		left: 0;
 		width: 100%;
@@ -111,7 +111,7 @@
 	height:21px;
 	position: absolute;
 	left: 17px;
-	top: 19px;
+	top: 71px;
 	background: none;
 	border: none;
 	-webkit-appearance: none;

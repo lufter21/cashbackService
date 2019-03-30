@@ -111,6 +111,8 @@
 
 <!-- <div id="load" class="load"><img src="/images/loader.gif" alt="loader"></div> -->
 
+<script src="/static/js/jquery-3.1.1.min.js"></script>
+<script src="/static/js/slick.min.js"></script>
 <script src="/static/js/script.js"></script>
 <script src="/static/js/common.js"></script>
 

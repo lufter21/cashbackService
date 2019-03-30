@@ -10,7 +10,11 @@
 	overflow: hidden;
 	padding: 130px 0 50px;
 	&__full-page{
-		padding-top: 100px;
+		@extend %fwh;
+	}
+	@media(max-width: 1000px){
+		padding-top: 80px;
+		min-height: 550px;
 	}
 }
 

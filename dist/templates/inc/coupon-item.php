@@ -42,7 +42,7 @@ if ($end) {
       $expired = true;
    }
 } else {
-   $until .= 'Вечно';
+   $until .= 'Неограничен';
 }
 ?>
 
