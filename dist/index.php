@@ -17,8 +17,11 @@ session_start();
 
 require_once('router.php');
 
-if(class_exists($query['class'])){
+if (class_exists($query['class'])) {
 	$lemon = new $query['class'];
-	$lemon->getBody($query);
+} else {
+	$lemon = new Core;
 }
+
+$lemon->getBody($query);
 ?>

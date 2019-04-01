@@ -14,13 +14,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 <div class="main">
 	<div class="row row_wrp">
 		<div class="col-3">
-			<aside class="sidebar">
-				<div class="sidebar__title">Категории</div>
-				<?php echo $lemon -> getCategoryMenu(); ?>
-			</aside>
+			<?php include_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/sidebar.php'; ?>
 		</div>
 		<div class="col-9 p-0">
-			<div class="row row_col-middle row_nw">
+			<div class="row row_col-middle row_sm-x-nw">
 				<div class="col">
 					<h1 class="title"><?php echo $meta['title'];?></h1>
 				</div>
@@ -45,7 +42,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 			<?php
 			if (!empty($content['coupons'])) {
 				foreach ($content['coupons'] as $item) {
-					echo '<div class="col-4">';
+					echo '<div class="col-4 md-col-6">';
 					include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/coupon-item.php';
 					echo '</div>';
 				}
@@ -55,7 +52,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 			?>
 			</div>
 			<div class="row">
-				<div class="col-12">
+				<div class="col-12 p-x-0">
 					<ul class="paginate">
 					<?php echo $lemon -> getPagenav(); ?>
 					</ul>

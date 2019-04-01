@@ -1,26 +1,22 @@
 <?php
 header("HTTP/1.1 404 Not Found");
-if(empty($meta)){
-	$meta = array(
-		'name'=>'404',
-		'title'=>'404',
-		'description' => 'Возвращаем деньги за совершенные вами покупки в интернет-магазинах. У нас самый большой процент кэшбэка.'
-		);
-}
-include('templates/header.php');
+
+$meta = array(
+	'meta_title' => '404 Страница не найдена',
+	'meta_description' => '404 Страница не найдена'
+);
+
+require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 ?>
-<!--Container/-->
-<div class="container wrap pad">
-	<article class="box">
-		<div class="pad content">
-			<h1><?php echo $meta['name'];?></h1>
 
-			<p>
-				Страница не найдена
-			</p>
-
+<!--MAIN/-->
+<div class="main">
+	<div class="row row_wrp">
+		<div class="col-12">
+			<h1 class="title">404 Страница не найдена</h1>
 		</div>
-	</article>
+	</div>
 </div>
-<!--/Container-->
-<?php include('templates/footer.php');?>
+<!--/MAIN-->
+
+<?php require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/footer.php'; ?>

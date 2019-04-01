@@ -22,9 +22,10 @@ foreach ($coupons_xml -> types -> children() as $value) {
 }
 
 // sql prepare
-$erase_coupons = $db -> prepare('TRUNCATE TABLE coupons');
+// $erase_coupons = $db -> prepare('TRUNCATE TABLE coupons');
+$erase_coupons = $db -> prepare('DELETE FROM coupons WHERE date_end > 0 AND date_end < NOW()');
 
-$ins_coupons = $db -> prepare('INSERT INTO coupons (id,category,category_ids,type,title,description,promocode,discount,discount_abs,date_start,date_end,gotolink,logo,shop_id,rating) VALUES (:id,:category,:category_ids,:type,:title,:description,:promocode,:discount,:discount_abs,:date_start,:date_end,:gotolink,:logo,:shop_id,:rating)');
+$ins_coupons = $db -> prepare('INSERT INTO coupons (id,category,category_ids,type,title,description,promocode,discount,discount_abs,date_start,date_end,gotolink,logo,shop_id,rating) VALUES (:id,:category,:category_ids,:type,:title,:description,:promocode,:discount,:discount_abs,:date_start,:date_end,:gotolink,:logo,:shop_id,:rating) ON DUPLICATE KEY UPDATE category=:u_category,category_ids=:u_category_ids,type=:u_type,title=:u_title,description=:u_description,promocode=:u_promocode,discount=:u_discount,discount_abs=:u_discount_abs,date_start=:u_date_start,date_end=:u_date_end,gotolink=:u_gotolink,logo=:u_logo,shop_id=:u_shop_id,rating=:u_rating');
 
 $coupon_sql = $db -> prepare('SELECT * FROM coupons WHERE shop_id=?');
 
@@ -102,12 +103,13 @@ $erase_coupons -> execute();
 
 foreach ($coupons_xml -> coupons -> children() as $value) {
 	$cats = get_coupon_categories($value, $couponsArr['coupons_cats']);
+	$types = get_coupon_type($value, $couponsArr['coupons_type']);
 
 	$ins_coupons -> execute(array(
 		'id' => (int) $value -> attributes()['id'],
 		'category' => $cats['txt'],
 		'category_ids' => $cats['ids'],
-		'type' => get_coupon_type($value, $couponsArr['coupons_type']),
+		'type' => $types,
 		'title' => (string) $value -> name,
 		'description' => (string) $value -> description,
 		'promocode' => (string) $value -> promocode,
@@ -118,7 +120,21 @@ foreach ($coupons_xml -> coupons -> children() as $value) {
 		'gotolink' => (string) $value -> gotolink,
 		'logo' => (string) $value -> logo,
 		'shop_id' => (int) $value -> advcampaign_id,
-		'rating' => (float) $value -> rating
+		'rating' => (float) $value -> rating,
+		'u_category' => $cats['txt'],
+		'u_category_ids' => $cats['ids'],
+		'u_type' => $types,
+		'u_title' => (string) $value -> name,
+		'u_description' => (string) $value -> description,
+		'u_promocode' => (string) $value -> promocode,
+		'u_discount' => (string) $value -> discount,
+		'u_discount_abs' => (int) $value -> discount,
+		'u_date_start' => (string) $value -> date_start,
+		'u_date_end' => (string) $value -> date_end,
+		'u_gotolink' => (string) $value -> gotolink,
+		'u_logo' => (string) $value -> logo,
+		'u_shop_id' => (int) $value -> advcampaign_id,
+		'u_rating' => (float) $value -> rating
 	));
 }
 

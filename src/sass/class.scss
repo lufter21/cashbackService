@@ -22,6 +22,10 @@
 	text-align: right !important;
 }
 
+.lh-1_5{
+	line-height: 1.5 !important;
+}
+
 /*background*/
 .bg-gray{
 	background: $gy;
@@ -76,6 +80,9 @@
 
 /*padding*/
 .pt{
+	&-15{
+		padding-top: 15px !important;
+	}
 	&-0{
 		padding-top: 0 !important;
 	}

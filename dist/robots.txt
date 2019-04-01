@@ -1,8 +1,5 @@
 User-agent: *
-Disallow: /go/
-Disallow: /ru$
-Disallow: /ua$
-Disallow: /cabinet$
-Disallow: /cabinet/
+Disallow: /ru/
+Disallow: /ua/
 Disallow: /sys/
 Host: https://bombonus.dealersair.com

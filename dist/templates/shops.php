@@ -15,10 +15,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 <div class="main">
 	<div class="row row_wrp">
 		<div class="col-3">
-			<aside class="sidebar">
-				<div class="sidebar__title">Категории</div>
-				<?php echo $lemon -> getCategoryMenu(); ?>
-			</aside>
+			<?php include_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/sidebar.php'; ?>
 		</div>
 		<div class="col-9 p-0">
 			<div class="row">
@@ -31,7 +28,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 			<?php
 			if (!empty($content['shops'])) {
 				foreach ($content['shops'] as $item) {
-					echo '<div class="col-3">';
+					echo '<div class="col-3 md-col-4">';
 					include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/shop-item.php';
 					echo '</div>';
 				}
@@ -41,7 +38,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 			?>
 			</div>
 			<div class="row">
-				<div class="col-12">
+				<div class="col-12 p-x-0">
 					<ul class="paginate">
 					<?php echo $lemon -> getPagenav(); ?>
 					</ul>

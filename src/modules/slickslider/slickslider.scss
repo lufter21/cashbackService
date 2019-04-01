@@ -171,22 +171,26 @@
 			}
 		}
 	}
+	&__discount{
+		font-size: 75px;
+		font-weight:700;
+		color: #ffffff;
+	}
 	&__logo{
 		width: 120px;
-		margin-bottom: 30px;
 		img{
 			max-width: 100%;
 			height: auto;
 		}
 	}
 	&__title{
-		font-size: 50px;
+		font-size: 38px;
 		font-weight: 700;
 		line-height: 1.35;
 		letter-spacing: em(1,50);
 		color: #ffffff;
-		max-width: 700px;
-		margin-bottom: 45px;
+		max-width: 580px;
+		margin: 25px 0 45px;
 	}
 	&,
 	.slick-list,
@@ -194,6 +198,9 @@
 		height: 100%;
 	}
 	@media(max-width: 750px){
+		&__discount{
+			font-size: 50px;
+		}
 		&__logo{
 			width: 100px;
 		}

@@ -9,7 +9,7 @@ class MainPage extends Core {
 			$par = 'available=?';
 		}
 		
-		$coupons_sql = $this -> db -> prepare('SELECT * FROM coupons WHERE '. $par .' ORDER BY rating DESC LIMIT 5');
+		$coupons_sql = $this -> db -> prepare('SELECT * FROM coupons WHERE '. $par .' AND (date_end = 0 OR date_end > NOW()) ORDER BY rating DESC LIMIT 5');
 		$coupons_sql -> execute($cat);
 		$result['coupons'] = $coupons_sql -> fetchAll(PDO::FETCH_ASSOC);
 		

@@ -26,3 +26,16 @@ $sprite-width: 1404;
 	@extend %svg-clock;
 	@include bgs(532);
 }
+
+.cat-btn::after{
+	@extend %svg-arrow-alt-circle-down;
+	@include bgs(532);
+}
+
+.paginate{
+	&__prev,
+	&__next{
+		@extend %svg-arrow-alt-circle-down;
+		@include bgs(532);
+	}
+}

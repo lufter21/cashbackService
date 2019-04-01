@@ -10,7 +10,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 
 <!--MAIN/-->
 <div class="main">
-	<div class="row row_wrp row_col-middle row_nw">
+	<div class="row row_wrp row_col-middle row_sm-x-nw">
 		<div class="col p-y-0">
 			<div class="shop-logo">
 				<img src="<?php echo $content['logo']; ?>" alt="<?php echo $content['name']; ?>" class="resp-img">
@@ -25,7 +25,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 	if (!empty($content['coupons'])) {
 		$view_logo = false;
 		foreach ($content['coupons'] as $item) {
-			echo '<div class="col-3">';
+			echo '<div class="col-3 md-col-4 sm-col-6">';
 			include $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/coupon-item.php';
 			echo '</div>';
 		}

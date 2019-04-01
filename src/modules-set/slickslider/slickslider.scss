@@ -23,11 +23,9 @@
 	display: block;
 	margin: 0;
 	padding: 0;
-	
 	&:focus {
 		outline: none;
 	}
-
 	&.dragging {
 		cursor: pointer;
 		cursor: hand;
@@ -41,7 +39,6 @@
 	-o-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0);
 }
-
 .slick-track {
 	position: relative;
 	left: 0;
@@ -55,11 +52,9 @@
 		content: "";
 		display: table;
 	}
-
 	&:after {
 		clear: both;
 	}
-
 	.slick-loading & {
 		visibility: hidden;
 	}
@@ -67,27 +62,22 @@
 .slick-slide {
 	float: left;
 	min-height: 1px;
+	display: none;
 	[dir="rtl"] & {
 		float: right;
 	}
 	&.slick-loading img {
 		display: none;
 	}
-
-	display: none;
-
 	&.dragging img {
 		pointer-events: none;
 	}
-
 	.slick-initialized & {
 		display: block;
 	}
-
 	.slick-loading & {
 		visibility: hidden;
 	}
-
 	.slick-vertical & {
 		display: block;
 		border: 1px solid transparent;
@@ -96,7 +86,6 @@
 .slick-arrow.slick-hidden {
 	display: none;
 }
-
 .slick-dots{
 	z-index: 5;
 	position: absolute;
@@ -123,7 +112,6 @@
 		background: $be;
 	}
 }
-
 .slick-arrow{
 	position: absolute;
 	top: 50%;
@@ -132,12 +120,17 @@
 	height: 42px;
 	margin-top: -21px;
 	font-size: 0;
+	border: none;
+	background: none;
 	transition: .5s;
 	&:after{
-		display: inline-block;
-		content: "";
-		width: 12px;
+		@extend %ab;
+		width: 20px;
 		height: 20px;
+		border-top: 1px solid #ffffff;
+		border-left: 1px solid #ffffff;
+		position: absolute;
+		top: 10px;
 	}
 	@media(min-width: 1201px){
 		&:hover{
@@ -149,14 +142,75 @@
 	}
 }
 .slick-prev{
-	left: -42px;
+	left: 5px;
 	&:after{
-		
+		left: 17px;
+		transform: rotate(-45deg);
 	}
 }
 .slick-next{
-	right: -42px;
+	right: 5px;
 	&:after{
-		
+		right: 17px;
+		transform: rotate(135deg);
+	}
+}
+
+/* slider */
+.slider{
+	&__item{
+		height: 100%;
+		background-position: 50% 50%;
+		background-size: cover;
+		display: flex !important;
+		align-items: center;
+		padding: 45px 55px 0;
+		@for $i from 1 through 5 {
+			&_i#{$i} {
+				background-image: url('../images/b#{$i}.jpg');
+			}
+		}
+	}
+	&__logo{
+		width: 120px;
+		margin-bottom: 30px;
+		img{
+			max-width: 100%;
+			height: auto;
+		}
+	}
+	&__title{
+		font-size: 50px;
+		font-weight: 700;
+		line-height: 1.35;
+		letter-spacing: em(1,50);
+		color: #ffffff;
+		max-width: 700px;
+		margin-bottom: 45px;
+	}
+	&,
+	.slick-list,
+	.slick-track{
+		height: 100%;
+	}
+	@media(max-width: 750px){
+		&__logo{
+			width: 100px;
+		}
+		&__item{
+			padding: 0;
+			@for $i from 1 through 5 {
+				&_i#{$i} {
+					background-image: url('../images/b#{$i}-mob.jpg');
+				}
+			}
+		}
+		&__title{
+			font-size: 24px;
+		}
+		.slick-arrow{
+			top: auto;
+			bottom: 10px;
+		}
 	}
 }

@@ -88,7 +88,7 @@ function translit($string) {
 
 function get_title($str, $div) {
 	if ($div == 'shops') {
-		return trim(str_replace('&', 'и', $str)) .' магазины с промокодами';
+		return trim(str_replace('&', 'и', $str)) .' с промокодами и скидками';
 	} else {
 		return trim(str_replace('&', 'и', $str)) .' промокоды и скидки';
 	}
@@ -96,9 +96,9 @@ function get_title($str, $div) {
 
 function get_meta_title($str, $div) {
 	if ($div == 'shops') {
-		return 'Интернет магазины со скидками на '. mb_strtolower(trim(str_replace('&', 'и', $str)), 'UTF-8')  .', промокоды';
+		return trim(str_replace('&', 'и', $str)) .' с промокодами и скидками';
 	} else {
-		return 'Скидки на '. mb_strtolower(trim(str_replace('&', 'и', $str)), 'UTF-8')  .', промокоды';
+		return 'Скидки на '. mb_strtolower(trim(str_replace('&', 'и', $str)), 'UTF-8') .', промокоды';
 	}
 }
 
@@ -224,3 +224,5 @@ foreach($show as $show){
 }
 
 echo '</table>';
+
+// UPDATE `categories` SET `meta_title`='',`title`=''

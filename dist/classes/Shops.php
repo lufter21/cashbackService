@@ -87,13 +87,19 @@ class Shops extends Core {
 		
 		$pages = ceil($this -> _itemsquantity / 24);
 		
-		if ($page > 1) {
-			$pagination = '<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'/page/'. ($page - 1) .'" class="paginate__prev"></a></li>';
-		} else {
-			$pagination = '<li class="paginate__item"><span class="paginate__prev paginate__prev_disabled"></span></li>';
-		}
-		
 		if ($this -> _itemsquantity > 24) {
+			// prev link
+			if ($page > 1) {
+				if ($page == 2) {
+					$pagination = '<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'" class="paginate__prev"></a></li>';
+				} else {
+					$pagination = '<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'/page/'. ($page - 1) .'" class="paginate__prev"></a></li>';
+				}
+			} else {
+				$pagination = '<li class="paginate__item"><span class="paginate__prev paginate__prev_disabled"></span></li>';
+			}
+
+			// page links
 			if ($pages <= 5) {
 				$pag = $pages;
 				$i = 1;
@@ -119,7 +125,7 @@ class Shops extends Core {
 					$dots = '<li class="paginate__item">...</li>';
 				}
 
-				$pagination = '<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'" title="1-я страница" class="paginate__a">1</a></li>'. $dots;
+				$pagination .= '<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'" title="1-я страница" class="paginate__a">1</a></li>'. $dots;
 			}
 
 			for ($i; $i <= $pag; $i++) {
@@ -144,6 +150,13 @@ class Shops extends Core {
 				}
 
 				$pagination .= $dots .'<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'/page/'. $pages .'" title="'. $pages .'-я страница" class="paginate__a">'. $pages .'</a></li>';
+			}
+
+			// next link
+			if ($page < $pages) {
+				$pagination .= '<li class="paginate__item"><a rel="nofollow" href="/'. $base . $alias .'/page/'. ($page + 1) .'" class="paginate__next"></a></li>';
+			} else {
+				$pagination .= '<li class="paginate__item"><span class="paginate__next paginate__next_disabled"></span></li>';
 			}
 		}
 

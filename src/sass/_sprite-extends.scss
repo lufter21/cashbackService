@@ -12,9 +12,19 @@
 	height: 532px;
 }
 
+%svg-arrow-alt-circle-down {
+	@extend %svg-common;
+	background-position: 38.99082568807339% 0;
+}
+
+%svg-arrow-alt-circle-down-dims {
+	width: 532px;
+	height: 532px;
+}
+
 %svg-check {
 	@extend %svg-common;
-	background-position: 0 100%;
+	background-position: 54.732510288065846% 84.17721518987342%;
 }
 
 %svg-check-dims {
@@ -24,7 +34,7 @@
 
 %svg-clock {
 	@extend %svg-common;
-	background-position: 38.99082568807339% 0;
+	background-position: 100% 0;
 }
 
 %svg-clock-dims {
@@ -34,7 +44,7 @@
 
 %svg-search {
 	@extend %svg-common;
-	background-position: 100% 0;
+	background-position: 0 100%;
 }
 
 %svg-search-dims {

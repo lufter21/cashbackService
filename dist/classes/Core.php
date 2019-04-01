@@ -5,7 +5,6 @@ class Core {
 	protected $_alias;
 	protected $_template;
 	protected $_route;
-	protected $_user;
 	protected $_page_not_found;
 	
 	public function __construct() {
@@ -13,58 +12,7 @@ class Core {
 		$this->db = $this->db->getDb();
 	}
 	
-	protected function getUser($update=''){
-		if(!$_SESSION['access']){
-			if($_COOKIE['access']){
-				$access_key = $_SESSION['access'] = $_COOKIE['access'];
-			}
-		} else {
-			$access_key = $_SESSION['access'];
-		}
-
-		if ($access_key) {
-
-			if ($update) {
-				if ($update['country']) {
-					$update_user_country = $this->db->prepare('UPDATE users SET country=? WHERE access_key=?');
-					$update_user_country->execute(array($update['country'], $access_key));
-				}
-			}
-
-			$sql_users = $this->db->prepare('SELECT * FROM users WHERE access_key=?');
-			$sql_users->execute(array($access_key));
-			$user_data = $sql_users->fetch(PDO::FETCH_ASSOC);
-
-			if ($user_data) {
-				$user_info = array(
-					'user_id'=>$user_data['id'],
-					'name'=>$user_data['name'],
-					'country'=>$user_data['country'],
-					'registration_date'=>$user_data['registration_date']
-					);
-			}
-
-		}
-
-		return $user_info ?: array();
-	}
-
-	protected function getUserLink($link){
-		if ($this->_user['user_id']) {
-			$userid = $this->_user['user_id'];
-			if (strpos($link, '?')) {
-				$new_link = $link.'&subid=userid'.$userid;
-			} else {
-				$new_link = $link.'?subid=userid'.$userid;
-			}
-			return $new_link;
-		} else {
-			return $link;
-		}
-	}
-	
 	protected function getRegion($region='') {
-
 		if (!empty($_POST['new_region'])) {
 			$_SESSION['region'] = $_POST['new_region'];
 			if ($this->_user) {
@@ -186,7 +134,7 @@ class Core {
 			}
 		}
 		
-		$categories = '<ul>';
+		$categories = '<ul class="sidebar__menu">';
 		foreach($categories_arr as $item){
 			$categories .= $item;
 		}
@@ -194,41 +142,25 @@ class Core {
 		
 		return $categories;
 	}
-
-	public function getShops() {
-		if(!empty($this->_region)){
-			$cat[0] = 'all';
-			$cat[1] = $this->_region;
-			$cat[2] = 1;
-			$par = '(region=? OR region=?) AND available=?';
-		} else {
-			$cat[0] = 1;
-			$par = 'available=?';
-		}
-		$sql = $this->db->prepare('SELECT name, alias FROM shops WHERE '.$par);
-		$sql->execute($cat);
-		$result = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-		return $result;
-	}
 	
 	public function getBody($query) {
 		$lemon = $this;
-		$user = $this->_user = $this->getUser();
-		$template = $this->_template = $query['template'];
-		$route = $this->_route = $query['route'];
-		$alias = $this->_alias = $query['alias'];
-		$region = $this->_region = $this->getRegion($query['region']);
-		$content = $this->getContent($query);
-		$meta = $this->getMeta();
-		
-		if (file_exists('templates/'.$template.'.php') && !$this->_page_not_found) {
-			include('templates/'.$template.'.php');
-		} else {
-			include('templates/404.php');
-		}
+		$template = $this -> _template = $query['template'];
+		$route = $this -> _route = $query['route'];
+		$alias = $this -> _alias = $query['alias'];
+		$region = $this -> _region = $this -> getRegion($query['region']);
 
+		if ($template) {
+			$content = $this -> getContent($query);
+		}
+		
+		$meta = $this -> getMeta();
+
+		if (file_exists('templates/'. $template .'.php') && !$this -> _page_not_found) {
+			require_once('templates/'. $template .'.php');
+		} else {
+			require_once('templates/404.php');
+		}
 	}
-	
 }
 ?>

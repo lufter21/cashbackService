@@ -1,7 +1,10 @@
 <?php
+$title = (!empty($content['title_translated'])) ? $content['title_translated'] : $content['title'];
+$description = (!empty($content['description_translated'])) ? $content['description_translated'] : $content['description'];
+
 $meta = array(
-	'meta_title' => $content['title'],
-	'meta_description' => $content['description']
+	'meta_title' => $title,
+	'meta_description' => $description
 );
 
 require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
@@ -12,20 +15,39 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 	<div class="row row_wrp">
 		<main class="col-12">
 			<article class="coupon">
-				<div class="row row_nw">
+				<?php if (!empty($content['discount'])) { ?>
+				<div class="row row_col-middle row_nw">
 					<div class="col">
-						<h1 class="title"><?php echo $content['title'];?></h1>
+						<div class="coupon__discount">
+							<?php echo $content['discount']; ?>
+						</div>
 					</div>
-					<div class="col col_right p-y-0">
+					<div class="col col_right">
 						<a href="/shop/<?php echo $content['shop']['alias']; ?>" class="coupon__shop-logo"><img src="<?php echo $content['shop']['logo']; ?>" alt="<?php echo $content['shop']['name']; ?>" title="Скидки от <?php echo $content['shop']['name']; ?>"></a>
 					</div>
 				</div>
 
 				<div class="row">
+					<div class="col">
+						<h1 class="title"><?php echo $title; ?></h1>
+					</div>
+				</div>
+				<?php } else { ?>
+				<div class="row row_col-middle row_sm-x-nw">
+					<div class="col">
+						<h1 class="title"><?php echo $title; ?></h1>
+					</div>
+					<div class="col col_right xs-col-first">
+						<a href="/shop/<?php echo $content['shop']['alias']; ?>" class="coupon__shop-logo"><img src="<?php echo $content['shop']['logo']; ?>" alt="<?php echo $content['shop']['name']; ?>" title="Скидки от <?php echo $content['shop']['name']; ?>"></a>
+					</div>
+				</div>
+				<?php } ?>
+
+				<div class="row">
 					<div class="article col-12">
-						<?php if ($content['description']) { ?>
+						<?php if (!empty($description)) { ?>
 						<p>
-							<?php echo $content['description']; ?>
+							<?php echo $description; ?>
 						</p>
 						<?php } ?>
 						<p>
@@ -34,8 +56,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 					</div>
 				</div>
 				
-				<div class="row row_nw row_col-middle">
-					<div class="col">
+				<div class="row row_col-middle">
+					<div class="col lh-1_5">
 						<?php if ($content['promocode'] == 'Не нужен' || empty($content['promocode'])) { ?>
 						<span class="c-orange">Вводить промокод не требуется. Скидка засчитывается автоматически.</span>
 						<?php } else { ?>

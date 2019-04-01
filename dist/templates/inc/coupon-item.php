@@ -44,6 +44,8 @@ if ($end) {
 } else {
    $until .= 'Неограничен';
 }
+
+$title = (!empty($item['title_translated'])) ? $item['title_translated'] : $item['title'];
 ?>
 
 <div class="coupon-item<?php echo $block_class; ?>">
@@ -57,13 +59,13 @@ if ($end) {
    <?php
       }
    }
-   ?>
 
-   <?php if ($expired) { ?>
-   <span class="coupon-item__title"><?php echo $item['title']; ?></span>
+   if ($expired) {
+   ?>
+   <span class="coupon-item__title"><?php echo $title; ?></span>
    <?php } else { ?>
-   <a href="/coupon/<?php echo $item['id']; ?>" class="coupon-item__title"><?php echo $item['title']; ?></a>
-   <?php 
+   <a href="/coupon/<?php echo $item['id']; ?>" class="coupon-item__title"><?php echo $title; ?></a>
+   <?php
    }
 
    if ($view_logo !== false) {
