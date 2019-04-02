@@ -20,7 +20,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 					<div class="col-12">
 						<div class="row row_col-middle row_nw">
 							<?php if (!empty($item['discount'])) { ?>
-							<div class="col">
+							<div class="col pl-0">
 								<div class="slider__discount">
 									<?php echo $item['discount']; ?>
 								</div>

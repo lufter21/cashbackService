@@ -5,23 +5,23 @@
 <title><?php echo $tit;?></title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <link type="text/css" rel="stylesheet" href="style.css"/>
-<script type="text/javascript" src="/js/0-jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery-3.1.1.min.js"></script>
 <script src="scripts.js"></script>
 </head>
 <body>
 
 <div id="wrapper">
 <div id="header">
-<?php echo $log;
-if(!empty($_SESSION['log'])){
+<?php
+if (!empty($log)) {
+   echo $log;
+}
 ?>
+
 <a class="btn" href="?route=categories&action=rfd">Remove Finished Coupons</a>
 <a class="btn" href="?route=import-coupons">Import all coupons</a>
 <a class="link-btn" href="?route=categories">Categories</a>
 <a class="link-btn" href="/sys/">Shops</a>
-<?
-}
-?>
 
 </div>
 <div class="title"><?php echo $tit;?></div>

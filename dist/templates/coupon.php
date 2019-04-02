@@ -51,7 +51,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 						</p>
 						<?php } ?>
 						<p>
-							Категории: <span class="c-gray"><?php echo $content['category']; ?></span>
+							Категории: <span class="c-gray fs-14"><?php echo $content['category']; ?></span>
 						</p>
 					</div>
 				</div>

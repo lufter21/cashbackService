@@ -1,6 +1,6 @@
 <?php
 //get XML
-$coupons_xml = simplexml_load_file('admitad_coupons.xml');
+$coupons_xml = simplexml_load_file(XML_FEED);
 
 $couponsArr = array(
 	'shop_cats' => array(),
@@ -10,7 +10,11 @@ $couponsArr = array(
 
 // parse xml
 foreach ($coupons_xml -> advcampaign_categories -> children() as $value) {
-   $couponsArr['shop_cats'][(int) $value -> attributes()['id']] = (string) $value;
+	$id = (int) $value -> attributes()['id'];
+
+	if ($id != 62) {
+		$couponsArr['shop_cats'][$id] = (string) $value;
+	}
 }
 
 foreach ($coupons_xml -> categories -> children() as $value) {
@@ -33,7 +37,7 @@ $update_shops = $db -> prepare('INSERT INTO shops (id,name,category,category_ids
 
 $get_shops = $db -> prepare('SELECT * FROM shops');
 
-$upd_coupon_region = $db -> prepare('UPDATE coupons SET region=? WHERE shop_id=?');
+$upd_coupon = $db -> prepare('UPDATE coupons SET region=?, available=? WHERE shop_id=?');
 
 $ins_categories = $db -> prepare('INSERT INTO categories (id,name,relation) VALUES (:id,:name,:relation)');
 
@@ -143,7 +147,6 @@ foreach ($coupons_xml -> advcampaigns -> children() as $value) {
 	$cats = get_shop_categories($value, $couponsArr['shop_cats']);
 	$id = (int) $value -> attributes()['id'];
 	$logo = get_logo($id, $coupon_sql);
-	$upd_qnt = $db -> prepare('UPDATE shops SET quantity=? WHERE id=?');
 
 	$coupon_sql->execute(array($id));
 	$quant = $coupon_sql->rowCount();
@@ -162,12 +165,12 @@ foreach ($coupons_xml -> advcampaigns -> children() as $value) {
 	));
 }
 
-// update coupons region
+// update coupon
 $get_shops -> execute();
 $shops_result = $get_shops -> fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($shops_result as $value) {
-	$upd_coupon_region -> execute(array($value['region'], $value['id']));
+	$upd_coupon -> execute(array($value['region'], $value['available'], $value['id']));
 }
 
 // insert categories
@@ -186,6 +189,8 @@ foreach ($couponsArr['coupons_cats'] as $key => $value) {
 		'relation' => 'coupons'
 	));
 }
+
+header('Location:?route=categories');
 
 $tit = 'Import coupons';
 include('header.php');

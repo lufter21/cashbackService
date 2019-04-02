@@ -103,20 +103,8 @@ function get_meta_title($str, $div) {
 }
 
 if (!empty($_GET['action']) && $_GET['action'] == 'rfd') {
-	$del_discount = $db->prepare('DELETE FROM coupons WHERE id=?');
-	$get_discounts = $db->prepare('SELECT id,date_end FROM coupons');
-	$get_discounts->execute();
-	$get_discounts_arr = $get_discounts->fetchAll(PDO::FETCH_ASSOC);
-	$current_time = time();
-	$i_del=0;
-	
-	foreach ($get_discounts_arr as $item) {
-		$d_sec = strtotime($item['date_end']) - $current_time;
-		if($d_sec <= 0){
-			$i_del++;
-			$del_discount->execute(array($item['id']));
-		}
-	}
+	$del_discount = $db -> prepare('DELETE FROM coupons WHERE date_end > 0 AND date_end < NOW()');
+	$del_discount -> execute();
 }
 
 $update_alias = $db->prepare('UPDATE categories SET alias=? WHERE id=?');
@@ -210,9 +198,6 @@ $show = $show->fetchAll(PDO::FETCH_ASSOC);
 
 $tit = 'Categories';
 include('header.php');
-if($i_del > 0){
-	echo '<p class="message" style="padding-top:30px">Удалено '.$i_del.' скидок</p>';
-}
 ?>
 <div class="clr"></div>
 

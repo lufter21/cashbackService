@@ -100,50 +100,39 @@
 
 	</div> -->
 
+	<div id="alert-block" class="popup__window">
+		<button class="js-popup-close popup-close-btn"></button>
+		<div class="popup__inner">
+			<div class="popup__title">Функционал сайта ограничен</div>
+			<p>
+				В вашем браузере установлено расширение, которое может нарушить работу нашего сайта, блокировать отображение элементов сайта, производить подмену ссылок, блокировать cookie и вызывать другие неполадки. В связи с этим мы не даем гарантии, что вы сможете воспользоваться купоном или получить скидку.
+			</p>
+			<p>
+				Проблема может быть вызвана сторонним расширением AdBlock. В данный момент, фильтры и инструкции для AdBlock могут составлять различные независимые организации, как с целью блокировать рекламу, так и с целью навредить пользователям и владельцам сайтов. На нашем сайте нет рекламы, нашего сайта нет в черных списках, но расширение блокирует даже отображение логотипов магазинов и с большой вероятностью нарушит корректную работу сайтов самих интернет магазинов. Чтобы наш сайт, а также сайты интернет магазинов заработали корректно вам нужно добавить фильтр исключений в AdBlock.
+			</p>
+			<p>
+				<a href="abp:subscribe?location=https%3A%2F%2Fbombonus.dealersair.com%2Fadblock.txt&amp;title=BomBonus" class="orange-btn">Добавить фильтр</a>
+			</p>
+		</div>
+	</div>
+
 	<div id="message-popup" class="popup__window">
 		<button class="popup__close btn-close"></button>
 		<div class="popup__inner"></div>
 	</div>
 
 </div>
-
 <!--/POPUP-->
 
-<!-- <div id="load" class="load"><img src="/images/loader.gif" alt="loader"></div> -->
+<script>
+var adblock = true;
+</script>
+<script src="/static/js/advert.js"></script>
 
 <script src="/static/js/jquery-3.1.1.min.js"></script>
 <script src="/static/js/slick.min.js"></script>
 <script src="/static/js/script.js"></script>
 <script src="/static/js/common.js"></script>
-
-<script>
-// script loading
-// document.addEventListener('DOMContentLoaded', function() {
-// 	var scriptsSrcArr = ['/js/script.js', '/js/common.js'],
-// 	count = 0;
-
-// 	function loaded() {
-// 		count++;
-		
-// 		if (count == scriptsSrcArr.length) {
-// 			scriptLoaded();
-// 		}
-// 	}
-
-// 	for (var i = 0; i < scriptsSrcArr.length; i++) {
-// 		var src = scriptsSrcArr[i],
-// 		scriptElem = document.createElement('script');
-		
-// 		scriptElem.async = true;
-// 		scriptElem.src = src;
-
-// 		scriptElem.addEventListener('load', loaded);
-
-// 		document.body.appendChild(scriptElem);
-// 	}
-// });
-
-</script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-49744337-3"></script>
@@ -157,29 +146,15 @@
 
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
-    (function (d, w, c) {
-        (w[c] = w[c] || []).push(function() {
-            try {
-                w.yaCounter39630900 = new Ya.Metrika({
-                    id:39630900,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true
-                });
-            } catch(e) { }
-        });
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://cdn.jsdelivr.net/npm/yandex-metrica-watch/tag.js", "ym");
 
-        var n = d.getElementsByTagName("script")[0],
-            s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "https://cdn.jsdelivr.net/npm/yandex-metrica-watch/watch.js";
-
-        if (w.opera == "[object Opera]") {
-            d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
-    })(document, window, "yandex_metrika_callbacks");
+   ym(39630900, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/39630900" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
