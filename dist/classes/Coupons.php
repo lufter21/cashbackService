@@ -27,7 +27,7 @@ class Coupons extends Core {
 				$par = 'category_ids LIKE ? AND (region=? OR region=?) AND available=?';
 				$this -> _itemsquantity = $category_arr['all_qnt'] + $category_arr[$this -> _region.'_qnt'];
 			} else {
-				$cat[0] = '%'.$category_arr['key_s'].'%';
+				$cat[0] = '%'.$category_arr['id'].'%';
 				$cat[1] = 1;
 				$par = 'category_ids LIKE ? AND available=?';
 			}

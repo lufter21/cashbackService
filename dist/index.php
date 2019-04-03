@@ -13,9 +13,12 @@ function loadClasses($class_name) {
 
 spl_autoload_register('loadClasses');
 
+require_once $_SERVER['DOCUMENT_ROOT'] .'/functions/set-dair-cookie.php';
+set_dair_cookie('bombonus');
+
 session_start();
 
-require_once('router.php');
+require_once $_SERVER['DOCUMENT_ROOT'] .'/router.php';
 
 if (class_exists($query['class'])) {
 	$lemon = new $query['class'];
