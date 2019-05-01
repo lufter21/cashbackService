@@ -33,6 +33,8 @@ $ins_coupons = $db -> prepare('INSERT INTO coupons (id,category,category_ids,typ
 
 $coupon_sql = $db -> prepare('SELECT * FROM coupons WHERE shop_id=?');
 
+$upd_shop_qnt = $db -> prepare('UPDATE shops SET quantity=? WHERE id=?');
+
 $update_shops = $db -> prepare('INSERT INTO shops (id,name,category,category_ids,logo,quantity) VALUES (:id,:name,:category,:category_ids,:logo,:quantity) ON DUPLICATE KEY UPDATE category=:u_category,category_ids=:u_category_ids,logo=:u_logo,quantity=:u_quantity');
 
 $get_shops = $db -> prepare('SELECT * FROM shops');
@@ -47,8 +49,8 @@ function get_coupon_categories($coupon, $cats) {
 	$k = 0;
 	
 	foreach ($coupon -> categories -> children() as $value) {
-		$categories['txt'] .= (($k) ? ', ' : ''). $cats[(int) $value];
-		$categories['ids'] .= (($k) ? ',' : ''). (int) $value;
+		$categories['txt'] .= (($k) ? ', ' : '') . $cats[(int) $value];
+		$categories['ids'] .= (($k) ? ',' : '') .'"'. (int) $value .'"';
 		$k++;
 	}
 	
@@ -75,8 +77,8 @@ function get_shop_categories($shop, $cats) {
 	
 	foreach ($shop -> categories -> children() as $value) {
 		if ((int) $value != 62) {
-			$categories['txt'] .= (($k) ? ', ' : ''). $cats[(int) $value];
-			$categories['ids'] .= (($k) ? ',' : ''). (int) $value;
+			$categories['txt'] .= (($k) ? ', ' : '') . $cats[(int) $value];
+			$categories['ids'] .= (($k) ? ',' : '') .'"'. (int) $value .'"';
 			$k++;
 		}
 	}
@@ -102,12 +104,20 @@ function get_meta_title($str) {
 	return 'Скидки на '. mb_strtolower(trim(str_replace('&', 'и', $str)), 'UTF-8')  .', промокоды';
 }
 
+// fun modify description
+function mod_description($str) {
+	$str = preg_replace('/(ввод промо(\-|\s)?кода не требуется|не требуется ввод промокода|промокод не требуется|промокод не нужен)(\.|!|;)?/ui', '', $str);
+
+	return trim($str);
+}
+
 // insert coupons
 $erase_coupons -> execute();
 
 foreach ($coupons_xml -> coupons -> children() as $value) {
 	$cats = get_coupon_categories($value, $couponsArr['coupons_cats']);
 	$types = get_coupon_type($value, $couponsArr['coupons_type']);
+	$descr = mod_description((string) $value -> description);
 
 	$ins_coupons -> execute(array(
 		'id' => (int) $value -> attributes()['id'],
@@ -115,7 +125,7 @@ foreach ($coupons_xml -> coupons -> children() as $value) {
 		'category_ids' => $cats['ids'],
 		'type' => $types,
 		'title' => (string) $value -> name,
-		'description' => (string) $value -> description,
+		'description' => $descr,
 		'promocode' => (string) $value -> promocode,
 		'discount' => (string) $value -> discount,
 		'discount_abs' => (int) $value -> discount,
@@ -129,7 +139,7 @@ foreach ($coupons_xml -> coupons -> children() as $value) {
 		'u_category_ids' => $cats['ids'],
 		'u_type' => $types,
 		'u_title' => (string) $value -> name,
-		'u_description' => (string) $value -> description,
+		'u_description' => $descr,
 		'u_promocode' => (string) $value -> promocode,
 		'u_discount' => (string) $value -> discount,
 		'u_discount_abs' => (int) $value -> discount,
@@ -140,6 +150,14 @@ foreach ($coupons_xml -> coupons -> children() as $value) {
 		'u_shop_id' => (int) $value -> advcampaign_id,
 		'u_rating' => (float) $value -> rating
 	));
+}
+
+// reset shop quant
+$get_shops -> execute();
+$shops_result = $get_shops -> fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($shops_result as $value) {
+	$upd_shop_qnt -> execute(array(0, $value['id']));
 }
 
 // update shops

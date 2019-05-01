@@ -57,6 +57,9 @@
 
 /*marging*/
 .mt{
+	&-45{
+		margin-top: 45px !important;
+	}
 	&-0{
 		margin-top: 0 !important;
 	}

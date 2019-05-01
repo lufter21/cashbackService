@@ -13,28 +13,28 @@ if ($item['date_end'] != 0) {
 
 if ($end) {
    if ($d_sec > 0) {
-      $days = floor($d_sec/86400);
-      $d_sec = $d_sec-($days*86400);
-      $hours = floor($d_sec/3600);
-      $d_sec = $d_sec-($hours*3600);
-      $minutes = floor($d_sec/60);
-      
+      $days = floor($d_sec / 86400);
+      $d_sec = $d_sec - ($days * 86400);
+      $hours = floor($d_sec / 3600);
+      $d_sec = $d_sec - ($hours * 3600);
+      $minutes = floor($d_sec / 60);
+
       if ($days > 0) {
-         $until .= $days .'д. ';
+         $until .= $days . 'д. ';
       }
 
       if ($hours > 0) {
          if ($hours < 10) {
-         $until .= '0'.$hours.'ч. ';
+            $until .= '0' . $hours . 'ч. ';
          } else {
-            $until .= $hours.'ч. ';
+            $until .= $hours . 'ч. ';
          }
       }
-      
+
       if ($minutes < 10) {
-         $until .= '0'.$minutes.'мин.';
+         $until .= '0' . $minutes . 'мин.';
       } else {
-         $until .= $minutes.'мин.';
+         $until .= $minutes . 'мин.';
       }
    } else {
       $until .= 'Купон просрочен';
@@ -45,40 +45,48 @@ if ($end) {
    $until .= 'Неограничен';
 }
 
-$title = (!empty($item['title_translated'])) ? $item['title_translated'] : $item['title'];
+$title = $item['title_translated'] ?: $item['title'];
+$description = $item['description_translated'] ?: $item['description'];
 ?>
 
 <div class="coupon-item<?php echo $block_class; ?>">
    <?php
    if (!empty($item['discount'])) {
       if ($expired) {
-   ?>
-   <span class="discount"><?php echo $item['discount']; ?></span>
-   <?php } else { ?>
-   <a rel="nofollow" href="/coupon/<?php echo $item['id']; ?>" class="discount"><?php echo $item['discount']; ?></a>
-   <?php
-      }
+         ?>
+         <span class="discount"><?php echo $item['discount']; ?></span>
+      <?php } else { ?>
+         <a rel="nofollow" href="/coupon/<?php echo $item['id']; ?>" class="discount"><?php echo $item['discount']; ?></a>
+      <?php
    }
+}
 
-   if ($expired) {
+if ($expired) {
    ?>
-   <span class="coupon-item__title"><?php echo $title; ?></span>
+      <span class="coupon-item__title"><?php echo $title; ?></span>
    <?php } else { ?>
-   <a href="/coupon/<?php echo $item['id']; ?>" class="coupon-item__title"><?php echo $title; ?></a>
-   <?php
-   }
+      <a href="/coupon/<?php echo $item['id']; ?>" class="coupon-item__title"><?php echo $title; ?></a>
 
-   if ($view_logo !== false) {
-   ?>
-   <a href="/shop/<?php echo $content['shops'][$item['shop_id']]['alias']; ?>" title="Все промокоды от <?php echo $content['shops'][$item['shop_id']]['name']; ?>" class="coupon-item__logo"><img src="<?php echo $item['logo']; ?>" alt="<?php echo $content['shops'][$item['shop_id']]['name']; ?>"></a>
+      <?php if ($description) { ?>
+         <div class="coupon-item__desc">
+            <?php echo $description; ?>
+         </div>
+      <?php } ?>
+
    <?php
-   }
-   
-   if (!$expired) {
+}
+
+if ($view_logo !== false) {
    ?>
-   <div class="coupon-item__until until-icon"><?php echo $until; ?></div>
-   <a rel="nofollow" href="/coupon/<?php echo $item['id']; ?>" class="coupon-item__button">Получить промокод</a>
+      <a href="/shop/<?php echo $content['shops'][$item['shop_id']]['alias']; ?>" title="Все промокоды от <?php echo $content['shops'][$item['shop_id']]['name']; ?>" class="coupon-item__logo"><img src="<?php echo $item['logo']; ?>" alt="<?php echo $content['shops'][$item['shop_id']]['name']; ?>"></a>
+   <?php
+}
+
+if (!$expired) {
+   ?>
+      <div class="coupon-item__until until-icon"><?php echo $until; ?></div>
+      <a rel="nofollow" href="/coupon/<?php echo $item['id']; ?>" class="coupon-item__button">Получить промокод</a>
    <?php } else { ?>
-   <div class="coupon-item__expired">Купон просрочен</div>
+      <div class="coupon-item__expired">Купон просрочен</div>
    <?php } ?>
 </div>

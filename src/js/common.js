@@ -47,11 +47,19 @@ document.addEventListener('DOMContentLoaded', function() {
 		menuLinkSelector: '.menu a'
 	});
 	
-	// // alert
-	// new Alert({
-	// 	content: '<div class="row alert__row row_col-middle row_sm-x-nw"><div class="col">На нашем веб-сайте используются файлы cookies, которые позволяют улучшить Ваше взаимодействие с сайтом. Когда вы посещаете данный веб-сайт, Вы даете согласие на использование файлов cookies.</div><div class="col"><button class="js-alert-close btn btn_be">Хорошо</button></div></div>',
-	// 	showOnce: true
-	// });
+	// alert
+	if (adblock) {
+		new Alert({
+			content: '<div class="row alert__row row_col-middle row_sm-x-nw"><div class="col"><div class="alert__title">Функционал сайта ограничен</div><p>В вашем браузере установлено расширение, которое может нарушить работу нашего сайта, блокировать отображение элементов сайта.</p><p>Проблема может быть вызвана блокировщиком рекламы. На нашем сайте нет рекламы, нашего сайта нет в черных списках, но расширение блокирует даже отображение логотипов магазинов.</p><p>Отключите пожалуйста блокировщик рекламы на нашем сайте.</p></div><div class="col"><button class="js-alert-close wh-bord-btn wh-bord-btn_w210">Больше не показывать</button></div></div>',
+			showOnce: true,
+			position: 'top'
+		});
+	}
+
+	new Alert({
+		content: '<div class="row alert__row row_col-middle row_sm-x-nw"><div class="col">На нашем веб-сайте используются файлы cookies, которые позволяют улучшить Ваше взаимодействие с&nbsp;сайтом. Когда вы посещаете данный веб-сайт, Вы даете согласие на использование файлов cookies.</div><div class="col"><button class="js-alert-close wh-bord-btn">OK</button></div></div>',
+		showOnce: true
+	});
 	
 	// autocomplete data
 	AutoComplete.setValuesData = function (val, fun) {
@@ -105,9 +113,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	}
 
-	if (adblock) {
-		Popup.open('#alert-block');
-	}
+	// if (adblock) {
+	// 	Popup.open('#alert-block');
+	// }
 });
 
 // jQuery plugins

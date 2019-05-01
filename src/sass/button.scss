@@ -63,8 +63,13 @@
 
 .wh-bord-btn{
 	@extend %btn;
+	font-size: 15px;
 	background: none;
 	border: 2px solid #FFF;
+	&_w210{
+		width: 210px;
+		padding: 0 10px;
+	}
 	&:hover{
 		background: #FFF;
 		color: $bk;

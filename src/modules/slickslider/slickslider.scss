@@ -186,11 +186,17 @@
 	&__title{
 		font-size: 38px;
 		font-weight: 700;
-		line-height: 1.35;
+		line-height: 1.2;
 		letter-spacing: em(1,50);
 		color: #ffffff;
 		max-width: 650px;
-		margin: 25px 0 45px;
+		margin-top: 25px;
+	}
+	&__desc{
+		line-height: 1.5;
+		color: #ffffff;
+		max-width: 500px;
+		margin-top: 15px;
 	}
 	&,
 	.slick-list,

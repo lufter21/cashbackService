@@ -13,7 +13,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 		<div id="main-slider" class="slider">
 			<?php
 			foreach ($content['coupons'] as $k => $item) {
-				$title = (!empty($item['title_translated'])) ? $item['title_translated'] : $item['title'];
+				$title = $item['title_translated'] ?: $item['title'];
+				$description = $item['description_translated'] ?: $item['description'];
 			?>
 			<div class="slider__item slider__item_i<?php echo ++$k; ?>">
 				<div class="row row_wrp">
@@ -35,7 +36,16 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 						<div class="slider__title">
 							<?php echo $title; ?>
 						</div>
-						<a href="/coupon/<?php echo $item['id']; ?>" class="orange-btn">Получить промокод</a>
+						
+						<?php if ($description) { ?>
+						<div class="slider__desc">
+							<?php echo $description; ?>
+						</div>
+						<?php } ?>
+
+						<div class="mt-45">
+							<a href="/coupon/<?php echo $item['id']; ?>" class="orange-btn">Получить промокод</a>
+						</div>
 					</div>
 				</div>
 			</div>

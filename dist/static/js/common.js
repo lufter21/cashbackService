@@ -1,17 +1,17 @@
-document.addEventListener('DOMContentLoaded', function () {
-	var fsElem = document.getElementById('js-first-screen');
-
+document.addEventListener('DOMContentLoaded', function() {
+	const fsElem = document.getElementById('js-first-screen');
+	
 	(function initFun() {
 		if (fsElem) {
-			var padTop = 100;
+			let padTop = 100;
 
 			if (window.innerWidth < 1200) {
 				padTop = 60;
 			}
 
-			fsElem.style.height = window.innerHeight - padTop + 'px';
+			fsElem.style.height = (window.innerHeight - padTop) +'px';
 		}
-
+		
 		// resize events
 		window.removeEventListener('winResized', initFun);
 		window.removeEventListener('winWidthResized', initFun);
@@ -22,12 +22,14 @@ document.addEventListener('DOMContentLoaded', function () {
 			window.addEventListener('winWidthResized', initFun);
 		}
 	})();
-
+	
 	// toggle button
 	Toggle.init('.js-toggle', '.js-document-toggle-off');
-
-	Toggle.onChange = function (tgl, state) {};
-
+	
+	Toggle.onChange = function(tgl, state) {
+		
+	}
+	
 	// popup
 	Popup.init('.js-open-popup');
 	MediaPopup.init('.js-open-media-popup');
@@ -36,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	if (window.innerWidth < 1000) {
 		Menu.init('.menu__item_has-children', '.menu__sub-menu');
 	}
-
+	
 	// mobile nav
 	MobNav.init({
 		openBtn: '.js-open-menu',
@@ -44,69 +46,85 @@ document.addEventListener('DOMContentLoaded', function () {
 		headerId: 'header',
 		menuLinkSelector: '.menu a'
 	});
+	
+	// alert
+	if (adblock) {
+		new Alert({
+			content: '<div class="row alert__row row_col-middle row_sm-x-nw"><div class="col"><div class="alert__title">Функционал сайта ограничен</div><p>В вашем браузере установлено расширение, которое может нарушить работу нашего сайта, блокировать отображение элементов сайта.</p><p>Проблема может быть вызвана блокировщиком рекламы. На нашем сайте нет рекламы, нашего сайта нет в черных списках, но расширение блокирует даже отображение логотипов магазинов.</p><p>Отключите пожалуйста блокировщик рекламы на нашем сайте.</p></div><div class="col"><button class="js-alert-close wh-bord-btn wh-bord-btn_w210">Больше не показывать</button></div></div>',
+			showOnce: true,
+			position: 'top'
+		});
+	}
 
-	// // alert
-	// new Alert({
-	// 	content: '<div class="row alert__row row_col-middle row_sm-x-nw"><div class="col">На нашем веб-сайте используются файлы cookies, которые позволяют улучшить Ваше взаимодействие с сайтом. Когда вы посещаете данный веб-сайт, Вы даете согласие на использование файлов cookies.</div><div class="col"><button class="js-alert-close btn btn_be">Хорошо</button></div></div>',
-	// 	showOnce: true
-	// });
-
+	new Alert({
+		content: '<div class="row alert__row row_col-middle row_sm-x-nw"><div class="col">На нашем веб-сайте используются файлы cookies, которые позволяют улучшить Ваше взаимодействие с&nbsp;сайтом. Когда вы посещаете данный веб-сайт, Вы даете согласие на использование файлов cookies.</div><div class="col"><button class="js-alert-close wh-bord-btn">OK</button></div></div>',
+		showOnce: true
+	});
+	
 	// autocomplete data
 	AutoComplete.setValuesData = function (val, fun) {
-		fun([{ val: "mc", value: "Mercury" }, { val: "vn", value: "Venus" }, { val: "eth", value: "Earth" }, { val: "ms", value: "Mars" }, { val: "mn", value: "Mandarin" }, { val: "mk", value: "Marakuja" }, { val: "mlk", value: "Milk" }]);
-	};
-
+		fun([
+			{val:"mc", value:"Mercury"},
+			{val:"vn", value:"Venus"},
+			{val:"eth", value:"Earth"},
+			{val:"ms", value:"Mars"},
+			{val:"mn", value:"Mandarin"},
+			{val:"mk", value:"Marakuja"},
+			{val:"mlk", value:"Milk"}
+		]);
+	}
+	
 	// submit form
 	Form.init('.form');
-
-	Form.onSubmit = function (form, callback) {
+	
+	Form.onSubmit = function(form, callback) {
 		switch (form.id) {
 			case 'sorting-form':
-				return true;
-
+			return true;
+			
 			case 'custom-form-2':
 			case 'custom-form-3':
 			case 'custom-form-4':
-				var files = CustomFile.getFiles(form);
-
-				console.log(files);
-				return false;
-
+			var files = CustomFile.getFiles(form);
+			
+			console.log(files);
+			return false;
+			
 			default:
-				ajax({
-					url: form.action,
-					send: new FormData(form),
-					success: function success(response) {
-						var response = JSON.parse(response);
-
-						if (response.status == 'sent') {
-							Popup.message('#message-popup', 'Форма отправлена');
-
-							callback({ clearForm: true, unlockSubmitButton: true });
-						} else {
-							console.log(response);
-						}
-					},
-					error: function error(response) {
+			ajax({
+				url: form.action,
+				send: new FormData(form),
+				success: function(response) {
+					var response = JSON.parse(response);
+					
+					if (response.status == 'sent') {
+						Popup.message('#message-popup', 'Форма отправлена');
+						
+						callback({clearForm: true, unlockSubmitButton: true});
+					} else {
 						console.log(response);
 					}
-				});
-				return false;
+				},
+				error: function(response) {
+					console.log(response);
+				}
+			});
+			return false;
 		}
-	};
-
-	if (adblock) {
-		Popup.open('#alert-block');
 	}
+
+	// if (adblock) {
+	// 	Popup.open('#alert-block');
+	// }
 });
 
 // jQuery plugins
-$(document).ready(function () {
+$(document).ready(function(){
 	// slick slider
-	$('#slider').on('init', function () {
+	$('#slider').on('init', function() {
 		CoverImg.reInit('#slider');
 	});
-
+	
 	$('#main-slider').slick({
 		// autoplay: true,
 		fade: true,

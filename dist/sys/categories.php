@@ -156,37 +156,37 @@ foreach($cats_arr as $item){
 	
 	// Set Quantity
 	// all
-	$get_coupons -> execute(array('all','%'.$item['id'].'%',1));
+	$get_coupons -> execute(array('all','%"'.$item['id'].'"%',1));
 	$all_qnt = $get_coupons -> rowCount();
 	
 	$set_all_qnt->execute(array($all_qnt, $item['id']));
 	
 	// ru
-	$get_coupons -> execute(array('ru','%'.$item['id'].'%',1));
+	$get_coupons -> execute(array('ru','%"'.$item['id'].'"%',1));
 	$ru_qnt = $get_coupons -> rowCount();
 	
 	$set_ru_qnt->execute(array($ru_qnt,$item['id']));
 	
 	// ua
-	$get_coupons -> execute(array('ua','%'.$item['id'].'%',1));
+	$get_coupons -> execute(array('ua','%"'.$item['id'].'"%',1));
 	$ua_qnt = $get_coupons -> rowCount();
 	
 	$set_ua_qnt->execute(array($ua_qnt,$item['id']));
 	
 	// all shops
-	$get_shops->execute(array('all','%'.$item['id'].'%',1));
+	$get_shops->execute(array('all','%"'.$item['id'].'"%',1));
 	$all_shops = $get_shops -> rowCount();
 	
 	$set_all_shops->execute(array($all_shops,$item['id']));
 	
 	// ru shops
-	$get_shops->execute(array('ru','%'.$item['id'].'%',1));
+	$get_shops->execute(array('ru','%"'.$item['id'].'"%',1));
 	$ru_shops = $get_shops -> rowCount();
 	
 	$set_ru_shops->execute(array($ru_shops,$item['id']));
 	
 	// ua shops
-	$get_shops->execute(array('ua','%'.$item['id'].'%',1));
+	$get_shops->execute(array('ua','%"'.$item['id'].'"%',1));
 	$ua_shops = $get_shops -> rowCount();
 	
 	$set_ua_shops->execute(array($ua_shops,$item['id']));

@@ -20,14 +20,14 @@ class Coupons extends Core {
 			}
 			
 			if (!empty($this -> _region)) {
-				$cat[0] = '%'.$category_arr['id'].'%';
+				$cat[0] = '%"'. $category_arr['id'] .'"%';
 				$cat[1] = 'all';
 				$cat[2] = $this -> _region;
 				$cat[3] = 1;
 				$par = 'category_ids LIKE ? AND (region=? OR region=?) AND available=?';
 				$this -> _itemsquantity = $category_arr['all_qnt'] + $category_arr[$this -> _region.'_qnt'];
 			} else {
-				$cat[0] = '%'.$category_arr['id'].'%';
+				$cat[0] = '%"'. $category_arr['id'] .'"%';
 				$cat[1] = 1;
 				$par = 'category_ids LIKE ? AND available=?';
 			}

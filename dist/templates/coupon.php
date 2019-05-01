@@ -65,7 +65,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 						<?php } ?>
 					</div>
 					<div class="col col_right">
-						<a href="<?php echo $content['gotolink']; ?>" target="_blank" class="green-btn">Перейти в магазин</a>
+						<a href="/go/<?php echo $content['id']; ?>" target="_blank" class="green-btn">Перейти в магазин</a>
 					</div>
 				</div>
 			</article>

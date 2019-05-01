@@ -12,36 +12,18 @@ class Core {
 		$this->db = $this->db->getDb();
 	}
 	
-	protected function getRegion($region='') {
-		if (!empty($_POST['new_region'])) {
-			$_SESSION['region'] = $_POST['new_region'];
-			if ($this->_user) {
-				$this->getUser(array('country'=>$_POST['new_region']));
-			}
-		}
-
+	protected function getRegion($region = '') {
 		if ($region) {
 			$_SESSION['region'] = $region;
-			if ($this->_user && !$this->_user['country']) {
-				$this->getUser(array('country'=>$region));
-			}
-			header('Location: /');
+			SetCookie('bb_region', $region, time() + 2592000, '/');
+			header('Location: /'. $this -> _alias);
 			exit;
 		} else {
-
 			if ($_SESSION['region']) {
-
 				$region = $_SESSION['region'];
-				if ($this->_user && !$this->_user['country']) {
-					$this->getUser(array('country'=>$region));
-				}
-
-			} else {
-				if ($this->_user['country']) {
-					$region = $_SESSION['region'] = $this->_user['country'];
-				}
+			} elseif ($_COOKIE['bb_region']){
+				$region = $_SESSION['region'] = $_COOKIE['bb_region'];
 			}
-
 		}
 		
 		return $region;

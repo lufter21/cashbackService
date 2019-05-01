@@ -137,10 +137,17 @@ ol.list{
 	}
 	&__title{
 		display:block;
-		line-height:1.5;
+		font-size: 18px;
+		line-height: 1.35;
 		text-decoration: none;
-		margin-top: 20px;
+		margin-top: 25px;
 		transition: .21s;
+	}
+	&__desc{
+		font-size: 12px;
+		line-height: 1.5;
+		color: $gy;
+		margin-top: 20px;
 	}
 	&:not(.coupon-item_expired) {
 		.discount:hover{

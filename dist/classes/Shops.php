@@ -19,7 +19,7 @@ class Shops extends Core {
 			}
 			
 			if (!empty($this -> _region)) {
-				$cat[0] = '%'. $category_arr['id'] .'%';
+				$cat[0] = '%"'. $category_arr['id'] .'"%';
 				$cat[1] = 'all';
 				$cat[2] = $this -> _region;
 				$cat[3] = 1;
@@ -28,7 +28,7 @@ class Shops extends Core {
 				
 				$this -> _itemsquantity = $category_arr['all_shops'] + $category_arr[$this -> _region .'_shops'];
 			} else {
-				$cat[0] = '%'. $category_arr['id'] .'%';
+				$cat[0] = '%"'. $category_arr['id'] .'"%';
 				$cat[1] = 1;
 				
 				$par = 'category_ids LIKE ? AND available=?';
@@ -48,7 +48,7 @@ class Shops extends Core {
 				$par = 'available=?';
 			}
 			
-			$sql = $this -> db -> prepare('SELECT COUNT(*) FROM shops WHERE '. $par);
+			$sql = $this -> db -> prepare('SELECT COUNT(*) FROM shops WHERE '. $par .' AND quantity > 0');
 			$sql -> execute($cat);
 			$this -> _itemsquantity = $sql -> fetchColumn();
 		}
@@ -63,7 +63,7 @@ class Shops extends Core {
 		
 		$page = ($page - 1) * 24;
 		
-		$sql = $this -> db -> prepare('SELECT * FROM shops WHERE '. $par .' ORDER BY quantity DESC LIMIT '. $page .',24');
+		$sql = $this -> db -> prepare('SELECT * FROM shops WHERE '. $par .' AND quantity > 0 ORDER BY quantity DESC LIMIT '. $page .',24');
 		$sql -> execute($cat);
 		$result['shops'] = $sql -> fetchAll(PDO::FETCH_ASSOC);
 		
