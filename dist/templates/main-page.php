@@ -15,6 +15,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 			foreach ($content['coupons'] as $k => $item) {
 				$title = $item['title_translated'] ?: $item['title'];
 				$description = $item['description_translated'] ?: $item['description'];
+				
+				if (mb_strlen($description) > 175) {
+					$description = mb_substr($description, 0, 175) . '...';
+				}
 			?>
 			<div class="slider__item slider__item_i<?php echo ++$k; ?>">
 				<div class="row row_wrp">

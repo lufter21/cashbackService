@@ -29,9 +29,10 @@ class Shops extends Core {
 				$this -> _itemsquantity = $category_arr['all_shops'] + $category_arr[$this -> _region .'_shops'];
 			} else {
 				$cat[0] = '%"'. $category_arr['id'] .'"%';
-				$cat[1] = 1;
+				$cat[1] = 'all';
+				$cat[2] = 1;
 				
-				$par = 'category_ids LIKE ? AND available=?';
+				$par = 'category_ids LIKE ? AND region=? AND available=?';
 				
 				$this -> _itemsquantity = $category_arr['all_shops'] + $category_arr['ru_shops'] + $category_arr['ua_shops'];
 			}
@@ -43,9 +44,10 @@ class Shops extends Core {
 				
 				$par = '(region=? OR region=?) AND available=?';
 			} else {
-				$cat[0] = 1;
+				$cat[0] = 'all';
+				$cat[1] = 1;
 				
-				$par = 'available=?';
+				$par = 'region=? AND available=?';
 			}
 			
 			$sql = $this -> db -> prepare('SELECT COUNT(*) FROM shops WHERE '. $par .' AND quantity > 0');

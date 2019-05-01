@@ -47,6 +47,10 @@ if ($end) {
 
 $title = $item['title_translated'] ?: $item['title'];
 $description = $item['description_translated'] ?: $item['description'];
+
+if (mb_strlen($description) > 175) {
+   $description = mb_substr($description, 0, 175) . '...';
+}
 ?>
 
 <div class="coupon-item<?php echo $block_class; ?>">

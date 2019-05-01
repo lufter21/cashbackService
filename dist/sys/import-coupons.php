@@ -29,6 +29,8 @@ foreach ($coupons_xml -> types -> children() as $value) {
 // $erase_coupons = $db -> prepare('TRUNCATE TABLE coupons');
 $erase_coupons = $db -> prepare('DELETE FROM coupons WHERE date_end > 0 AND date_end < NOW()');
 
+$erase_deleted_coupons = $db -> prepare('DELETE FROM coupons WHERE category_ids = ?');
+
 $ins_coupons = $db -> prepare('INSERT INTO coupons (id,category,category_ids,type,title,description,promocode,discount,discount_abs,date_start,date_end,gotolink,logo,shop_id,rating) VALUES (:id,:category,:category_ids,:type,:title,:description,:promocode,:discount,:discount_abs,:date_start,:date_end,:gotolink,:logo,:shop_id,:rating) ON DUPLICATE KEY UPDATE category=:u_category,category_ids=:u_category_ids,type=:u_type,title=:u_title,description=:u_description,promocode=:u_promocode,discount=:u_discount,discount_abs=:u_discount_abs,date_start=:u_date_start,date_end=:u_date_end,gotolink=:u_gotolink,logo=:u_logo,shop_id=:u_shop_id,rating=:u_rating');
 
 $coupon_sql = $db -> prepare('SELECT * FROM coupons WHERE shop_id=?');
@@ -164,6 +166,8 @@ foreach ($coupons_xml -> coupons -> children() as $value) {
 		'u_rating' => (float) $value -> rating
 	));
 }
+
+$erase_deleted_coupons -> execute(array(''));
 
 // reset shop quant
 $get_shops -> execute();

@@ -5,8 +5,8 @@ class MainPage extends Core {
 			$cat = array('all', $this -> _region, 1);
 			$par = '(region=? OR region=?) AND available=?';
 		} else {
-			$cat = array(1);
-			$par = 'available=?';
+			$cat = array('all', 1);
+			$par = 'region=? AND available=?';
 		}
 		
 		$coupons_sql = $this -> db -> prepare('SELECT * FROM coupons WHERE '. $par .' AND (date_end = 0 OR date_end > NOW()) ORDER BY rating DESC LIMIT 5');

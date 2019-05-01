@@ -13,7 +13,6 @@ if ($region == 'ua') {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
-	<link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,400i,500,700&amp;subset=cyrillic" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="/static/css/style.css">
 	<title><?php echo $meta['meta_title']; ?> — Dealers Air Bombonus</title>
 	<meta name="description" content="<?php echo $meta['meta_description']; ?>">

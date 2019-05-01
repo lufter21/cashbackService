@@ -114,7 +114,7 @@ $(document).ready(function(){
 	});
 	
 	$('#main-slider').slick({
-		// autoplay: true,
+		autoplay: true,
 		fade: true,
 		infinite: true,
 		slidesToShow: 1,

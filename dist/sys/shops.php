@@ -38,7 +38,7 @@ echo '<tr>
 <td>';
 
 echo '<input type="hidden" name="change-available" value="true">
-	<select name="available['.$arr['alias'].']">
+	<select name="available['.$arr['alias'].']"'; if($arr['available'] == 0){echo ' class="bg-orange"';}  echo '>
 		<option value="1"'; if($arr['available'] == 1){echo 'selected';}
 		echo '>on</option>
 		<option value="0"'; if($arr['available'] == 0){echo 'selected';}
