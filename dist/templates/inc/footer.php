@@ -16,7 +16,7 @@
 		<div class="col col_grow">
 			<div class="footer__txt">
 				Промокоды и скидки от лучших интернет магазинов.<br> 
-				&copy; <?php echo date('Y');?> Dealers Air Bombonus, https://bombonus.dealersair.com
+				&copy; <?php echo date('Y');?> BomBonus, https://bombonus.dealersair.com
 			</div>
 		</div>
 		<div class="col">

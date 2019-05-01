@@ -14,7 +14,7 @@ if ($region == 'ua') {
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link type="text/css" rel="stylesheet" href="/static/css/style.css">
-	<title><?php echo $meta['meta_title']; ?> — Dealers Air Bombonus</title>
+	<title><?php echo $meta['meta_title']; ?> — BomBonus</title>
 	<meta name="description" content="<?php echo $meta['meta_description']; ?>">
 	<link rel="canonical" href="https://bombonus.dealersair.com/<?php echo $route; ?>">
 	<!-- favicons/ -->
