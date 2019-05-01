@@ -41,7 +41,7 @@ $update_shops = $db -> prepare('INSERT INTO shops (id,name,category,category_ids
 
 $get_shops = $db -> prepare('SELECT * FROM shops');
 
-$upd_coupon = $db -> prepare('UPDATE coupons SET region=?, available=? WHERE shop_id=?');
+$upd_coupon = $db -> prepare('UPDATE coupons SET by_reg=?, ru_reg=?, ua_reg=?, available=? WHERE shop_id=?');
 
 $ins_categories = $db -> prepare('INSERT INTO categories (id,name,relation) VALUES (:id,:name,:relation)');
 
@@ -205,7 +205,7 @@ $get_shops -> execute();
 $shops_result = $get_shops -> fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($shops_result as $value) {
-	$upd_coupon -> execute(array($value['region'], $value['available'], $value['id']));
+	$upd_coupon -> execute(array($value['by_reg'], $value['ru_reg'], $value['ua_reg'], $value['available'], $value['id']));
 }
 
 // insert categories

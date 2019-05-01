@@ -8,7 +8,7 @@ if(!empty($_GET['route'])){
 	
 	switch($rtn){
 		case 1:
-		if ($rt[0] == 'ua' || $rt[0] == 'ru') {
+		if ($rt[0] == 'by' || $rt[0] == 'ru' || $rt[0] == 'ua') {
 			$query = array(
 				'class' => 'MainPage',
 				'template' => 'main-page',
@@ -24,7 +24,7 @@ if(!empty($_GET['route'])){
 		break;
 		
 		case 2:
-		if ($rt[0] == 'ua' || $rt[0] == 'ru') {
+		if ($rt[0] == 'by' || $rt[0] == 'ru' || $rt[0] == 'ua') {
 			$query = array(
 				'alias' => $rt[1],
 				'region' => $rt[0]
@@ -45,7 +45,7 @@ if(!empty($_GET['route'])){
 		break;
 		
 		case 3:
-		if ($rt[0] == 'ua' || $rt[0] == 'ru') {
+		if ($rt[0] == 'by' || $rt[0] == 'ru' || $rt[0] == 'ua') {
 			$query = array(
 				'alias' => $rt[1] .'/'. $rt[2],
 				'region' => $rt[0]

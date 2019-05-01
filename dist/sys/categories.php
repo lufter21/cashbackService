@@ -113,17 +113,21 @@ $set_title = $db->prepare('UPDATE categories SET title=? WHERE id=?');
 
 $set_meta_title = $db->prepare('UPDATE categories SET meta_title=? WHERE id=?');
 
-$get_coupons = $db -> prepare('SELECT id FROM coupons WHERE region=? AND category_ids LIKE ? AND available=?');
+$get_by_coupons = $db -> prepare('SELECT id FROM coupons WHERE by_reg=? AND category_ids LIKE ? AND available=?');
+$get_ru_coupons = $db -> prepare('SELECT id FROM coupons WHERE ru_reg=? AND category_ids LIKE ? AND available=?');
+$get_ua_coupons = $db -> prepare('SELECT id FROM coupons WHERE ua_reg=? AND category_ids LIKE ? AND available=?');
 
-$get_shops = $db -> prepare('SELECT id FROM shops WHERE region=? AND category_ids LIKE ? AND available=?');
+$get_by_shops = $db -> prepare('SELECT id FROM shops WHERE by_reg=? AND category_ids LIKE ? AND available=?');
+$get_ru_shops = $db -> prepare('SELECT id FROM shops WHERE ru_reg=? AND category_ids LIKE ? AND available=?');
+$get_ua_shops = $db -> prepare('SELECT id FROM shops WHERE ua_reg=? AND category_ids LIKE ? AND available=?');
 
-$set_all_qnt = $db->prepare('UPDATE categories SET all_qnt=? WHERE id=?');
+$set_by_qnt = $db->prepare('UPDATE categories SET by_qnt=? WHERE id=?');
 
 $set_ru_qnt = $db->prepare('UPDATE categories SET ru_qnt=? WHERE id=?');
 
 $set_ua_qnt = $db->prepare('UPDATE categories SET ua_qnt=? WHERE id=?');
 
-$set_all_shops = $db->prepare('UPDATE categories SET all_shops=? WHERE id=?');
+$set_by_shops = $db->prepare('UPDATE categories SET by_shops=? WHERE id=?');
 
 $set_ru_shops = $db->prepare('UPDATE categories SET ru_shops=? WHERE id=?');
 
@@ -155,39 +159,39 @@ foreach($cats_arr as $item){
 	}
 	
 	// Set Quantity
-	// all
-	$get_coupons -> execute(array('all','%"'.$item['id'].'"%',1));
-	$all_qnt = $get_coupons -> rowCount();
+	// by
+	$get_by_coupons -> execute(array(1,'%"'.$item['id'].'"%',1));
+	$by_qnt = $get_by_coupons -> rowCount();
 	
-	$set_all_qnt->execute(array($all_qnt, $item['id']));
+	$set_by_qnt->execute(array($by_qnt, $item['id']));
 	
 	// ru
-	$get_coupons -> execute(array('ru','%"'.$item['id'].'"%',1));
-	$ru_qnt = $get_coupons -> rowCount();
+	$get_ru_coupons -> execute(array(1,'%"'.$item['id'].'"%',1));
+	$ru_qnt = $get_ru_coupons -> rowCount();
 	
 	$set_ru_qnt->execute(array($ru_qnt,$item['id']));
 	
 	// ua
-	$get_coupons -> execute(array('ua','%"'.$item['id'].'"%',1));
-	$ua_qnt = $get_coupons -> rowCount();
+	$get_ua_coupons -> execute(array(1,'%"'.$item['id'].'"%',1));
+	$ua_qnt = $get_ua_coupons -> rowCount();
 	
 	$set_ua_qnt->execute(array($ua_qnt,$item['id']));
 	
-	// all shops
-	$get_shops->execute(array('all','%"'.$item['id'].'"%',1));
-	$all_shops = $get_shops -> rowCount();
+	// by shops
+	$get_by_shops->execute(array(1,'%"'.$item['id'].'"%',1));
+	$by_shops = $get_by_shops -> rowCount();
 	
-	$set_all_shops->execute(array($all_shops,$item['id']));
+	$set_by_shops->execute(array($by_shops,$item['id']));
 	
 	// ru shops
-	$get_shops->execute(array('ru','%"'.$item['id'].'"%',1));
-	$ru_shops = $get_shops -> rowCount();
+	$get_ru_shops->execute(array(1,'%"'.$item['id'].'"%',1));
+	$ru_shops = $get_ru_shops -> rowCount();
 	
 	$set_ru_shops->execute(array($ru_shops,$item['id']));
 	
 	// ua shops
-	$get_shops->execute(array('ua','%"'.$item['id'].'"%',1));
-	$ua_shops = $get_shops -> rowCount();
+	$get_ua_shops->execute(array(1,'%"'.$item['id'].'"%',1));
+	$ua_shops = $get_ua_shops -> rowCount();
 	
 	$set_ua_shops->execute(array($ua_shops,$item['id']));
 }
@@ -202,10 +206,10 @@ include('header.php');
 <div class="clr"></div>
 
 <?php
-echo '<table><tr><td>Id</td><td>Alias</td><td>Name</td><td>Title</td><td>Description</td><td>All Disc</td><td>Ru Disc</td><td>Ua Disc</td><td>All Shops</td><td>Ru Shops</td><td>Ua Shops</td></tr>';
+echo '<table><tr><td>Id</td><td>Alias</td><td>Name</td><td>Title</td><td>Description</td><td>By Disc</td><td>Ru Disc</td><td>Ua Disc</td><td>By Shops</td><td>Ru Shops</td><td>Ua Shops</td></tr>';
 
 foreach($show as $show){
-	echo '<tr><td>'.$show['id'].'</td><td>'.$show['alias'].'</td><td>'.$show['name'].'</td><td>'.$show['title'].'</td><td>'.$show['description'].'</td><td>'.$show['all_qnt'].'</td><td>'.$show['ru_qnt'].'</td><td>'.$show['ua_qnt'].'</td><td>'.$show['all_shops'].'</td><td>'.$show['ru_shops'].'</td><td>'.$show['ua_shops'].'</td><tr>';
+	echo '<tr><td>'.$show['id'].'</td><td>'.$show['alias'].'</td><td>'.$show['name'].'</td><td>'.$show['title'].'</td><td>'.$show['description'].'</td><td>'.$show['by_qnt'].'</td><td>'.$show['ru_qnt'].'</td><td>'.$show['ua_qnt'].'</td><td>'.$show['by_shops'].'</td><td>'.$show['ru_shops'].'</td><td>'.$show['ua_shops'].'</td><tr>';
 }
 
 echo '</table>';

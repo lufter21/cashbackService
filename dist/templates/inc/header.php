@@ -1,12 +1,15 @@
 <?php
+$rgn = 'Выберите страну';
+
 if ($region == 'ua') {
 	$rgn = 'Украина';
 } elseif ($region == 'ru') {
 	$rgn = 'Россия';
-} else {
-	$rgn = 'Выберите страну';
+} elseif ($region == 'by') {
+	$rgn = 'Беларусь';
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -58,16 +61,13 @@ if ($region == 'ua') {
 						<!--User/-->
 						<div class="user">
 							<span class="user__name"><?php echo $rgn; ?></span>
-							<span class="user__thumb"><img src="/static/images/<?php echo (empty($region)) ? 'flags.svg' : 'flag-' . $region . '.svg'; ?>" alt="flag"></span>
+							<span class="user__thumb"><img src="/static/images/<?php echo (empty($region)) ? 'worldwide.svg' : 'flag-' . $region . '.svg'; ?>" alt="flag"></span>
 
-							<button data-target-elements="#user-menu" class="js-toggle js-document-toggle-off user__button<?php if (empty($region)) {
-																																								echo ' toggled';
-																																							} ?>"></button>
+							<button data-target-elements="#user-menu" class="js-toggle js-document-toggle-off user__button<?php echo (empty($region)) ? ' toggled' : ''; ?>"></button>
 
-							<div id="user-menu" class="user__bubble<?php if (empty($region)) {
-																					echo ' toggled';
-																				} ?>">
+							<div id="user-menu" class="user__bubble<?php echo (empty($region)) ? ' toggled' : ''; ?>">
 								<ul>
+									<li class="user__menu-item"><a href="/by">Беларусь</a></li>
 									<li class="user__menu-item"><a href="/ru">Россия</a></li>
 									<li class="user__menu-item"><a href="/ua">Украина</a></li>
 								</ul>

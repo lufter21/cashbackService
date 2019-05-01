@@ -1,4 +1,6 @@
 <?php
+$start = microtime(true);
+
 error_reporting(E_ALL ^ E_NOTICE); 
 ini_set('display_errors', 1);
 
@@ -27,4 +29,7 @@ if (class_exists($query['class'])) {
 }
 
 $lemon->getBody($query);
+
+$time = microtime(true) - $start;
+printf('Скрипт выполнялся %.4F сек.', $time);
 ?>

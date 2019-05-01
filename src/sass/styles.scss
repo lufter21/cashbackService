@@ -111,13 +111,12 @@ ol.list{
 	overflow:hidden;
 	flex: 0 1 auto;
 	&__logo{
-		display: block;
+		@extend %fx-c;
 		width: 80px;
 		height: 40px;
 		position: absolute;
 		right: 20px;
 		top: 5px;
-		@extend %fx-c;
 		transition: .21s;
 		img{
 			@extend %r-img;

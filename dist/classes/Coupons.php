@@ -21,42 +21,44 @@ class Coupons extends Core {
 			
 			if (!empty($this -> _region)) {
 				$cat[0] = '%"'. $category_arr['id'] .'"%';
-				$cat[1] = 'all';
-				$cat[2] = $this -> _region;
-				$cat[3] = 1;
-
-				$par = 'category_ids LIKE ? AND (region=? OR region=?) AND available=?';
-
-				$this -> _itemsquantity = $category_arr['all_qnt'] + $category_arr[$this -> _region.'_qnt'];
-			} else {
-				$cat[0] = '%"'. $category_arr['id'] .'"%';
-				$cat[1] = 'all';
+				$cat[1] = 1;
 				$cat[2] = 1;
 
-				$par = 'category_ids LIKE ? AND region=? AND available=?';
+				$par = 'category_ids LIKE ? AND '. $this -> _region .'_reg=? AND available=?';
+			} else {
+				$cat[0] = '%"'. $category_arr['id'] .'"%';
+				$cat[1] = 1;
+				$cat[2] = 1;
+				$cat[3] = 1;
+				$cat[4] = 1;
+
+				$par = 'category_ids LIKE ? AND by_reg=? AND ru_reg=? AND ua_reg=? AND available=?';
 			}
 		} else {
 			if (!empty($this -> _region)) {
-				$cat[0] = 'all';
-				$cat[1] = $this -> _region;
-				$cat[2] = 1;
-
-				$par = '(region=? OR region=?) AND available=?';
-			} else {
-				$cat[0] = 'all';
+				$cat[0] = 1;
 				$cat[1] = 1;
-				
-				$par = 'region=? AND available=?';
+
+				$par = $this -> _region .'_reg=? AND available=?';
+			} else {
+				$cat[0] = 1;
+				$cat[1] = 1;
+				$cat[2] = 1;
+				$cat[3] = 1;
+
+				$par = 'by_reg=? AND ru_reg=? AND ua_reg=? AND available=?';
 			}
 		}
 		
 		// page num
 		$this -> _page = $query['page'];
+
 		if (empty($this -> _page)) {
 			$page = 1;
 		} else {
 			$page = $this -> _page;
 		}
+
 		$page = ($page - 1) * 24;
 		
 		// sort params
