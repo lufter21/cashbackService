@@ -11,7 +11,7 @@ $couponsArr = array(
 // parse xml
 foreach ($coupons_xml -> advcampaign_categories -> children() as $value) {
 	$id = (int) $value -> attributes()['id'];
-
+	
 	if ($id != 62) {
 		$couponsArr['shop_cats'][$id] = (string) $value;
 	}
@@ -82,7 +82,7 @@ function get_shop_categories($shop, $cats) {
 			$k++;
 		}
 	}
-
+	
 	return $categories;
 }
 
@@ -90,8 +90,20 @@ function get_shop_categories($shop, $cats) {
 function get_logo($id, $coupon_sql) {
 	$coupon_sql -> execute(array($id));
 	$coupon_result = $coupon_sql -> fetch(PDO::FETCH_ASSOC);
-
+	
 	return $coupon_result['logo'];
+}
+
+// fun save logo
+function save_logo($url) {
+	$path = $_SERVER['DOCUMENT_ROOT'] .'/static/images/logos/';
+	$img_name = array_pop(explode('/', $url));
+	
+	if (!file_exists($path . $img_name)) {
+		file_put_contents($path . $img_name, file_get_contents($url));
+	}
+	
+	return $img_name;
 }
 
 // fun category title
@@ -107,7 +119,7 @@ function get_meta_title($str) {
 // fun modify description
 function mod_description($str) {
 	$str = preg_replace('/(ввод промо(\-|\s)?кода не требуется|не требуется ввод промокода|промокод не требуется|промокод не нужен)(\.|!|;)?/ui', '', $str);
-
+	
 	return trim($str);
 }
 
@@ -118,7 +130,8 @@ foreach ($coupons_xml -> coupons -> children() as $value) {
 	$cats = get_coupon_categories($value, $couponsArr['coupons_cats']);
 	$types = get_coupon_type($value, $couponsArr['coupons_type']);
 	$descr = mod_description((string) $value -> description);
-
+	$logo = save_logo((string) $value -> logo);
+	
 	$ins_coupons -> execute(array(
 		'id' => (int) $value -> attributes()['id'],
 		'category' => $cats['txt'],
@@ -132,7 +145,7 @@ foreach ($coupons_xml -> coupons -> children() as $value) {
 		'date_start' => (string) $value -> date_start,
 		'date_end' => (string) $value -> date_end,
 		'gotolink' => (string) $value -> gotolink,
-		'logo' => (string) $value -> logo,
+		'logo' => $logo,
 		'shop_id' => (int) $value -> advcampaign_id,
 		'rating' => (float) $value -> rating,
 		'u_category' => $cats['txt'],
@@ -146,7 +159,7 @@ foreach ($coupons_xml -> coupons -> children() as $value) {
 		'u_date_start' => (string) $value -> date_start,
 		'u_date_end' => (string) $value -> date_end,
 		'u_gotolink' => (string) $value -> gotolink,
-		'u_logo' => (string) $value -> logo,
+		'u_logo' => $logo,
 		'u_shop_id' => (int) $value -> advcampaign_id,
 		'u_rating' => (float) $value -> rating
 	));
@@ -165,7 +178,7 @@ foreach ($coupons_xml -> advcampaigns -> children() as $value) {
 	$cats = get_shop_categories($value, $couponsArr['shop_cats']);
 	$id = (int) $value -> attributes()['id'];
 	$logo = get_logo($id, $coupon_sql);
-
+	
 	$coupon_sql->execute(array($id));
 	$quant = $coupon_sql->rowCount();
 	

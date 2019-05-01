@@ -29,7 +29,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 							<?php } ?>
 							<div class="col">
 								<div class="slider__logo">
-									<img src="<?php echo $item['logo']; ?>" alt="shop logo">
+									<img src="/static/images/logos/<?php echo $item['logo']; ?>" alt="shop logo">
 								</div>
 							</div>
 						</div>

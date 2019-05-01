@@ -51,7 +51,7 @@ $description = $item['description_translated'] ?: $item['description'];
 
 <div class="coupon-item<?php echo $block_class; ?>">
    <?php
-   if (!empty($item['discount'])) {
+   if ($item['discount']) {
       if ($expired) {
          ?>
          <span class="discount"><?php echo $item['discount']; ?></span>
@@ -78,7 +78,7 @@ if ($expired) {
 
 if ($view_logo !== false) {
    ?>
-      <a href="/shop/<?php echo $content['shops'][$item['shop_id']]['alias']; ?>" title="Все промокоды от <?php echo $content['shops'][$item['shop_id']]['name']; ?>" class="coupon-item__logo"><img src="<?php echo $item['logo']; ?>" alt="<?php echo $content['shops'][$item['shop_id']]['name']; ?>"></a>
+      <a href="/shop/<?php echo $content['shops'][$item['shop_id']]['alias']; ?>" title="Все промокоды от <?php echo $content['shops'][$item['shop_id']]['name']; ?>" class="coupon-item__logo"><img src="/static/images/logos/<?php echo $item['logo']; ?>" alt="<?php echo $content['shops'][$item['shop_id']]['name']; ?>"></a>
    <?php
 }
 

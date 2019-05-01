@@ -9,11 +9,11 @@
    left: 0;
    width: 100%;
    z-index: 21;
-   background: rgba(0, 0, 0, .87);
+   background: rgba(0, 0, 0, .78);
    text-align: center;
 	padding: 5px 30px;
-	font-size: 14px;
-   line-height: 1.5;
+	font-size: 12px;
+   line-height: 1.35;
 	color: #fff;
 	transition: .5s;
    &_top{
@@ -63,5 +63,14 @@
 	&__row{
 		max-width: 750px;
 		margin: 0 auto;
+	}
+	&__title{
+		font-size: 16px;
+		font-weight: 700;
+	}
+	p{
+		font-size: 12px;
+		margin-top: 10px;
+		@include fch(t);
 	}
 }
