@@ -10,7 +10,7 @@ class Shop extends Core {
 		}
 
 		// get coupons
-		$coupons_sql = $this -> db -> prepare('SELECT * FROM coupons WHERE shop_id=? ORDER BY discount_abs DESC');
+		$coupons_sql = $this -> db -> prepare('SELECT * FROM coupons WHERE shop_id=? ORDER BY rating DESC');
 		$coupons_sql -> execute(array($result['id']));
 		$result['coupons'] = $coupons_sql -> fetchAll(PDO::FETCH_ASSOC);
 

@@ -4,6 +4,8 @@ $meta = array(
 	'meta_description' => 'Используйте промокоды и покупайте со скидками в лучших интернет магазинах'
 );
 
+$header_class = 'header_bg';
+
 require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 ?>
 

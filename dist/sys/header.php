@@ -18,9 +18,9 @@ if (!empty($log)) {
 }
 ?>
 
-<a class="btn" href="?route=categories&action=rfd">Remove Finished Coupons</a>
 <a class="btn" href="?route=import-coupons">Import all coupons</a>
 <a class="link-btn" href="?route=categories">Categories</a>
+<a class="link-btn" href="?route=coupons">Coupons</a>
 <a class="link-btn" href="/sys/">Shops</a>
 
 </div>

@@ -34,7 +34,7 @@ if ($region == 'ua') {
 <body>
 
 	<!--HEADER/-->
-	<header id="header" class="header">
+	<header id="header" class="header<?php echo (!empty($header_class)) ? ' ' . $header_class : ''; ?>">
 		<div class="header__row row row_wrp row_col-middle sm-row-col-12">
 			<div class="col-3 p-y-0">
 				<a href="/" class="header__logo"><img src="/static/images/bombonus.svg" alt="Dealers Air Bombonus"></a>

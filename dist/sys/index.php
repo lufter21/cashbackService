@@ -19,7 +19,7 @@ if (isset($_GET['route'])) {
 
 session_start();
 
-if ($route == 'shops') {
+if ($route == 'shops' || $route == 'coupons') {
 	if (isset($_SESSION['log']) && isset($_SESSION['pass']) && $_SESSION['log'] == $adm_log && $_SESSION['pass'] == $adm_pass) {
 		$log = $_SESSION['log'].' &nbsp;&nbsp;<a href="/sys/logout.php">Logout</a>';
 	} else {

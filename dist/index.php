@@ -1,26 +1,25 @@
 <?php
-$start = microtime(true);
-
-error_reporting(E_ALL ^ E_NOTICE); 
+error_reporting(E_ALL ^ E_NOTICE);
 ini_set('display_errors', 1);
 
-require_once $_SERVER['DOCUMENT_ROOT'] .'/config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 
 // load classes
-function loadClasses($class_name) {
-	if (file_exists($_SERVER['DOCUMENT_ROOT'] .'/classes/'. $class_name .'.php')) {
-		require_once $_SERVER['DOCUMENT_ROOT'] .'/classes/'. $class_name .'.php';
+function loadClasses($class_name)
+{
+	if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/classes/' . $class_name . '.php')) {
+		require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/' . $class_name . '.php';
 	}
 }
 
 spl_autoload_register('loadClasses');
 
-require_once $_SERVER['DOCUMENT_ROOT'] .'/functions/set-dair-cookie.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/functions/set-dair-cookie.php';
 set_dair_cookie('bombonus');
 
 session_start();
 
-require_once $_SERVER['DOCUMENT_ROOT'] .'/router.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/router.php';
 
 if (class_exists($query['class'])) {
 	$lemon = new $query['class'];
@@ -29,7 +28,3 @@ if (class_exists($query['class'])) {
 }
 
 $lemon->getBody($query);
-
-$time = microtime(true) - $start;
-printf('Скрипт выполнялся %.4F сек.', $time);
-?>

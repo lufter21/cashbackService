@@ -2320,6 +2320,7 @@ new Alert({
 	content: 'We use coockie',
 	position: 'top', // default - bottom
 	showOnce: true, // default - false
+	closeBtn: false // default - true
 	addClass: 'alert-class'
 });
 */
@@ -2333,6 +2334,8 @@ new Alert({
 
 	Alert = function Alert(opt) {
 		opt = opt || {};
+
+		opt.closeBtn = opt.closeBtn !== undefined ? opt.closeBtn : true;
 
 		var alertId = 'alert-id-' + alertIndex++;
 
@@ -2351,7 +2354,7 @@ new Alert({
 
 		alertElem.id = alertId;
 
-		alertElem.innerHTML = '<div></div><button class="js-alert-close alert__close-btn"></button>';
+		alertElem.innerHTML = '<div></div>' + (opt.closeBtn ? '<button class="js-alert-close alert__close-btn"></button>' : '');
 
 		document.body.appendChild(alertElem);
 

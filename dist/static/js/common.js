@@ -47,8 +47,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	// alert
 	new Alert({
-		content: '<div class="row alert__row row_col-middle row_sm-x-nw"><div class="col">На нашем веб-сайте используются файлы cookies, которые позволяют улучшить Ваше взаимодействие с&nbsp;сайтом. Когда вы посещаете данный веб-сайт, Вы даете согласие на использование файлов cookies.</div><div class="col"><button class="js-alert-close wh-bord-btn">OK</button></div></div>',
-		showOnce: true
+		content: '<div class="row alert__row row_col-middle row_sm-x-nw"><div class="col col_center p-y-0">На нашем веб-сайте используются файлы cookie, которые позволяют улучшить Ваше взаимодействие с&nbsp;сайтом.</div><div class="col p-y-0 xs-p-y-10"><button class="js-alert-close wh-bord-btn">OK</button></div></div>',
+		showOnce: true,
+		closeBtn: false
 	});
 
 	// autocomplete data

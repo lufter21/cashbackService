@@ -13,6 +13,7 @@ form, input, textarea, label, td{
 	font-family: inherit;
 	color:inherit;
 	vertical-align: baseline;
+	box-sizing: border-box;
 }
 ol, ul, li{
 	list-style:none
@@ -57,6 +58,10 @@ input[type=text],input[type="password"],select,textarea{
 	font-size:16px;
 	padding:5px 10px;
 	margin-bottom:21px
+}
+input[type="checkbox"]{
+	width: 20px;
+	height: 20px;
 }
 form.wide select{
 	display:block;
@@ -123,7 +128,6 @@ td a{
 #header a.link-btn{
 	float:right;
 	padding:3px 21px;
-	height:21px;
 	margin:5px 0 0 3px;
 	line-height:21px
 }
@@ -281,7 +285,8 @@ form.upd-cats{
 	background:#ffffff
 }
 
-form.shops-form{
+.shops-form,
+.coupons-form{
 	margin: 0;
 	width:auto;
 }
@@ -292,4 +297,17 @@ form.shops-form select{
 
 .bg-orange{
 	background: #ffa500;
+}
+.bg-green{
+	background: #0F986E;
+}
+.c-white{
+	color: #ffffff;
+}
+
+.coupons-form input[type="text"]{
+	margin: 15px 0 0;
+	display: block;
+	width: 100%;
+	font-size: 14px;
 }

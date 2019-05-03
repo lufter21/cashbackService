@@ -27,6 +27,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 					<form id="sorting-form" action="/coupons<?php echo (!empty($alias)) ? '/'.$alias : '';?>" method="POST" class="form sorting-form">
 						<div class="form__field">
 							<select name="sorting" data-placeholder="Сортировать" data-submit-form-onchange="true">
+								<option value="rating" <?php if($content['sorting'] == 'rating'){echo 'selected';}?>>Самые популярные</option>
 								<option value="biggest_discounts" <?php if($content['sorting'] == 'biggest_discounts'){echo 'selected';}?>>Наибольшие скидки</option>
 								<option value="newest" <?php if($content['sorting'] == 'newest'){echo 'selected';}?>>Самые новые</option>
 								<option value="expire_soon" <?php if($content['sorting'] == 'expire_soon'){echo 'selected';}?>>Скоро заканчиваются</option>
