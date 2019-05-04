@@ -46,7 +46,9 @@ if ($region == 'ua') {
 						<ul class="menu">
 							<?php
 							echo $lemon->getMenu(array(
-								'coupons' => 'Промокоды',
+								'discounts' => 'Скидки',
+								'gifts' => 'Подарки',
+								'free-shipping' => 'Бесплатная доставка',
 								'shops' => 'Магазины',
 								// 'about'=>array('О сервисе', array('recomendations'=>'Рекомендации', 'faq'=>'Вопрос/Ответ'))
 							));

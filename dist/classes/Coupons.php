@@ -4,6 +4,7 @@ class Coupons extends Core
 	private $_page;
 	protected $_itemsquantity;
 	protected $_category_id;
+	protected $_type;
 
 	protected function getContent($query)
 	{
@@ -22,35 +23,56 @@ class Coupons extends Core
 			}
 
 			if (!empty($this->_region)) {
-				$cat[0] = '%"' . $category_arr['id'] . '"%';
-				$cat[1] = 1;
-				$cat[2] = 1;
+				$cat[] = '%"' . $category_arr['id'] . '"%';
+				$cat[] = 1;
+				$cat[] = 1;
 
 				$par = 'category_ids LIKE ? AND ' . $this->_region . '_reg=? AND available=?';
 			} else {
-				$cat[0] = '%"' . $category_arr['id'] . '"%';
-				$cat[1] = 1;
-				$cat[2] = 1;
-				$cat[3] = 1;
-				$cat[4] = 1;
+				$cat[] = '%"' . $category_arr['id'] . '"%';
+				$cat[] = 1;
+				$cat[] = 1;
+				$cat[] = 1;
+				$cat[] = 1;
 
 				$par = 'category_ids LIKE ? AND by_reg=? AND ru_reg=? AND ua_reg=? AND available=?';
 			}
 		} else {
 			if (!empty($this->_region)) {
-				$cat[0] = 1;
-				$cat[1] = 1;
+				$cat[] = 1;
+				$cat[] = 1;
 
 				$par = $this->_region . '_reg=? AND available=?';
 			} else {
-				$cat[0] = 1;
-				$cat[1] = 1;
-				$cat[2] = 1;
-				$cat[3] = 1;
+				$cat[] = 1;
+				$cat[] = 1;
+				$cat[] = 1;
+				$cat[] = 1;
 
 				$par = 'by_reg=? AND ru_reg=? AND ua_reg=? AND available=?';
 			}
 		}
+
+		// type
+		$this->_type = $query['type'];
+
+		switch ($query['type']) {
+			case 'free-shipping':
+				$type_id = 1;
+				break;
+
+			case 'discounts':
+				$type_id = 2;
+				break;
+
+			case 'gifts':
+				$type_id = 3;
+				break;
+		}
+
+		$cat[] = '%"' . $type_id . '"%';
+
+		$par .= ' AND type_ids LIKE ?';
 
 		// page num
 		$this->_page = $query['page'];
@@ -74,7 +96,7 @@ class Coupons extends Core
 		$this->_itemsquantity = $sql_count->fetchColumn();
 
 		// get coupons
-		$coupons_sql = $this->db->prepare('SELECT * FROM coupons WHERE ' . $par . $sorting . ' LIMIT ' . $page . ',24');
+		$coupons_sql = $this->db->prepare('SELECT * FROM coupons WHERE ' . $par . $sorting . ' LIMIT ' . $page . ', 24');
 		$coupons_sql->execute($cat);
 		$result['coupons'] = $coupons_sql->fetchAll(PDO::FETCH_ASSOC);
 
@@ -92,7 +114,7 @@ class Coupons extends Core
 
 	protected function getPagenav()
 	{
-		$base = 'coupons';
+		$base = $this->_type;
 
 		if (!empty($this->_alias)) {
 			$alias = '/' . $this->_alias;
@@ -203,26 +225,50 @@ class Coupons extends Core
 			$result['param'] = 'rating';
 		}
 
-		switch ($result['param']) {
-			case 'rating':
-				$result['sql'] = ' ORDER BY rating DESC';
-				break;
+		if ($this->_type_id == 1) {
+			switch ($result['param']) {
+				case 'rating':
+					$result['sql'] = ' ORDER BY type_ids ASC, rating DESC';
+					break;
 
-			case 'biggest_discounts':
-				$result['sql'] = ' ORDER BY discount_abs DESC';
-				break;
+				case 'biggest_discounts':
+					$result['sql'] = ' ORDER BY type_ids ASC, discount_abs DESC';
+					break;
 
-			case 'newest':
-				$result['sql'] = ' ORDER BY date_start DESC';
-				break;
+				case 'newest':
+					$result['sql'] = ' ORDER BY type_ids ASC, date_start DESC';
+					break;
 
-			case 'expire_soon':
-				$result['sql'] = ' AND date_end > 0 AND date_end > NOW() ORDER BY date_end ASC';
-				break;
+				case 'expire_soon':
+					$result['sql'] = ' AND date_end > 0 AND date_end > NOW() ORDER BY type_ids ASC, date_end ASC';
+					break;
 
-			default:
-				$result['sql'] = ' ORDER BY discount_abs DESC';
-				break;
+				default:
+					$result['sql'] = ' ORDER BY type_ids ASC, discount_abs DESC';
+					break;
+			}
+		} else {
+			switch ($result['param']) {
+				case 'rating':
+					$result['sql'] = ' ORDER BY rating DESC';
+					break;
+
+				case 'biggest_discounts':
+					$result['sql'] = ' ORDER BY discount_abs DESC';
+					break;
+
+				case 'newest':
+					$result['sql'] = ' ORDER BY date_start DESC';
+					break;
+
+				case 'expire_soon':
+					$result['sql'] = ' AND date_end > 0 AND date_end > NOW() ORDER BY date_end ASC';
+					break;
+
+				default:
+					$result['sql'] = ' ORDER BY discount_abs DESC';
+					break;
+			}
 		}
 
 		return $result;

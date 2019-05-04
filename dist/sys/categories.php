@@ -87,55 +87,81 @@ function translit($string)
 	return $alias;
 }
 
-function get_title($str, $div)
+function get_coupon_title($str, $type)
 {
-	if ($div == 'shops') {
-		return trim(str_replace('&', 'и', $str)) . ' с промокодами и скидками';
-	} else {
-		return trim(str_replace('&', 'и', $str)) . ' промокоды и скидки';
+	switch ($type) {
+		case 1:
+		return trim(str_replace('&', 'и', $str)) . ', бесплатная доставка';
+			break;
+		
+		case 2:
+		return trim(str_replace('&', 'и', $str)) . ', скидка на заказ';
+			break;
+		
+		case 3:
+		return trim(str_replace('&', 'и', $str)) . ', подарок к заказу';
+			break;
 	}
 }
 
-function get_meta_title($str, $div)
+function get_coupon_meta_title($str, $type)
 {
-	if ($div == 'shops') {
-		return trim(str_replace('&', 'и', $str)) . ' с промокодами и скидками';
-	} else {
-		return 'Скидки на ' . mb_strtolower(trim(str_replace('&', 'и', $str)), 'UTF-8') . ', промокоды';
+	switch ($type) {
+		case 1:
+		return trim(str_replace('&', 'и', $str)) . ' с бесплатной доставкой';
+			break;
+		
+		case 2:
+		return trim(str_replace('&', 'и', $str)) . ' скидки на заказ';
+			break;
+		
+		case 3:
+		return trim(str_replace('&', 'и', $str)) . ' и подарки к заказу';
+			break;
 	}
+}
+
+function get_shop_title($str)
+{
+	return trim(str_replace('&', 'и', $str)) . ' со скидками';
+}
+
+function get_shop_meta_title($str)
+{
+	return trim(str_replace('&', 'и', $str)) . ' со скидками';
 }
 
 $update_alias = $db->prepare('UPDATE categories SET alias=? WHERE id=?');
 
-$set_title = $db->prepare('UPDATE categories SET title=? WHERE id=?');
+$meta_sql = $db->prepare('INSERT INTO meta (id, route, title, meta_title, meta_description) VALUES (:id, :route, :title, :meta_title, :meta_description) ON DUPLICATE KEY UPDATE route=:u_route, title=:u_title, meta_title=:u_meta_title, meta_description=:u_meta_description');
 
-$set_meta_title = $db->prepare('UPDATE categories SET meta_title=? WHERE id=?');
+$get_by_coupons = $db->prepare('SELECT id FROM coupons WHERE by_reg=? AND category_ids LIKE ? AND type_ids LIKE ? AND available=?');
 
-$get_by_coupons = $db->prepare('SELECT id FROM coupons WHERE by_reg=? AND category_ids LIKE ? AND available=?');
-$get_ru_coupons = $db->prepare('SELECT id FROM coupons WHERE ru_reg=? AND category_ids LIKE ? AND available=?');
-$get_ua_coupons = $db->prepare('SELECT id FROM coupons WHERE ua_reg=? AND category_ids LIKE ? AND available=?');
+$get_ru_coupons = $db->prepare('SELECT id FROM coupons WHERE ru_reg=? AND category_ids LIKE ? AND type_ids LIKE ? AND available=?');
+
+$get_ua_coupons = $db->prepare('SELECT id FROM coupons WHERE ua_reg=? AND category_ids LIKE ? AND type_ids LIKE ? AND available=?');
 
 $get_by_shops = $db->prepare('SELECT id FROM shops WHERE by_reg=? AND category_ids LIKE ? AND available=?');
+
 $get_ru_shops = $db->prepare('SELECT id FROM shops WHERE ru_reg=? AND category_ids LIKE ? AND available=?');
+
 $get_ua_shops = $db->prepare('SELECT id FROM shops WHERE ua_reg=? AND category_ids LIKE ? AND available=?');
 
-$set_by_qnt = $db->prepare('UPDATE categories SET by_qnt=? WHERE id=?');
-
-$set_ru_qnt = $db->prepare('UPDATE categories SET ru_qnt=? WHERE id=?');
-
-$set_ua_qnt = $db->prepare('UPDATE categories SET ua_qnt=? WHERE id=?');
-
-$set_by_shops = $db->prepare('UPDATE categories SET by_shops=? WHERE id=?');
-
-$set_ru_shops = $db->prepare('UPDATE categories SET ru_shops=? WHERE id=?');
-
-$set_ua_shops = $db->prepare('UPDATE categories SET ua_shops=? WHERE id=?');
+$set_quantity = $db->prepare('UPDATE categories SET quantity=? WHERE id=?');
 
 $cat_sql = $db->prepare('SELECT * FROM categories');
 $cat_sql->execute();
 $cats_arr = $cat_sql->fetchAll(PDO::FETCH_ASSOC);
 
+$types = array(
+	'free-shipping' => 1,
+	'discounts' => 2,
+	'gifts' => 3
+);
+
 foreach ($cats_arr as $item) {
+	$quantity_arr = array();
+
 	// set alias
 	$alias = translit(trim($item['name']));
 
@@ -143,55 +169,104 @@ foreach ($cats_arr as $item) {
 		$update_alias->execute(array($alias, $item['id']));
 	}
 
-	// set titles
-	$tit = get_title(trim($item['name']), $item['relation']);
+	// set meta
+	if ($item['relation'] == 'coupons') {
+		foreach ($types as $key => $val) {
+			$tit = get_coupon_title(trim($item['name']), $val);
+			$m_tit = get_coupon_meta_title(trim($item['name']), $val);
 
-	if (empty($item['title'])) {
-		$set_title->execute(array($tit, $item['id']));
-	}
+			$meta_sql->execute(array(
+				'id' => $val . $item['id'] . $val,
+				'route' => $key . '/' . $item['alias'],
+				'title' => $tit,
+				'meta_title' => $m_tit,
+				'meta_description' => '',
+				'u_route' => $key . '/' . $item['alias'],
+				'u_title' => $tit,
+				'u_meta_title' => $m_tit,
+				'u_meta_description' => ''
+			));
+		}
+	} else {
+		$tit = get_shop_title(trim($item['name']));
+		$m_tit = get_shop_meta_title(trim($item['name']));
 
-	$m_tit = get_meta_title(trim($item['name']), $item['relation']);
-
-	if (empty($item['meta_title'])) {
-		$set_meta_title->execute(array($m_tit, $item['id']));
+		$meta_sql->execute(array(
+			'id' => $item['id'],
+			'route' => 'shops/' . $item['alias'],
+			'title' => $tit,
+			'meta_title' => $m_tit,
+			'meta_description' => '',
+			'u_route' => 'shops/' . $item['alias'],
+			'u_title' => $tit,
+			'u_meta_title' => $m_tit,
+			'u_meta_description' => ''
+		));
 	}
 
 	// Set Quantity
 	// by
-	$get_by_coupons->execute(array(1, '%"' . $item['id'] . '"%', 1));
-	$by_qnt = $get_by_coupons->rowCount();
+	$get_by_coupons->execute(array(1, '%"' . $item['id'] . '"%', '%"2"%', 1));
+	$by_disc = $get_by_coupons->rowCount();
 
-	$set_by_qnt->execute(array($by_qnt, $item['id']));
+	$get_by_coupons->execute(array(1, '%"' . $item['id'] . '"%', '%"1"%', 1));
+	$by_f_ship = $get_by_coupons->rowCount();
+
+	$get_by_coupons->execute(array(1, '%"' . $item['id'] . '"%', '%"3"%', 1));
+	$by_gift = $get_by_coupons->rowCount();
+
+	$quantity_arr['by_discount'] = $by_disc;
+	$quantity_arr['by_f_ship'] = $by_f_ship;
+	$quantity_arr['by_gift'] = $by_gift;
 
 	// ru
-	$get_ru_coupons->execute(array(1, '%"' . $item['id'] . '"%', 1));
-	$ru_qnt = $get_ru_coupons->rowCount();
+	$get_ru_coupons->execute(array(1, '%"' . $item['id'] . '"%', '%"2"%', 1));
+	$ru_disc = $get_ru_coupons->rowCount();
 
-	$set_ru_qnt->execute(array($ru_qnt, $item['id']));
+	$get_ru_coupons->execute(array(1, '%"' . $item['id'] . '"%', '%"1"%', 1));
+	$ru_f_ship = $get_ru_coupons->rowCount();
+
+	$get_ru_coupons->execute(array(1, '%"' . $item['id'] . '"%', '%"3"%', 1));
+	$ru_gift = $get_ru_coupons->rowCount();
+
+	$quantity_arr['ru_discount'] = $ru_disc;
+	$quantity_arr['ru_f_ship'] = $ru_f_ship;
+	$quantity_arr['ru_gift'] = $ru_gift;
 
 	// ua
-	$get_ua_coupons->execute(array(1, '%"' . $item['id'] . '"%', 1));
-	$ua_qnt = $get_ua_coupons->rowCount();
+	$get_ua_coupons->execute(array(1, '%"' . $item['id'] . '"%', '%"2"%', 1));
+	$ua_disc = $get_ua_coupons->rowCount();
 
-	$set_ua_qnt->execute(array($ua_qnt, $item['id']));
+	$get_ua_coupons->execute(array(1, '%"' . $item['id'] . '"%', '%"1"%', 1));
+	$ua_f_ship = $get_ua_coupons->rowCount();
+
+	$get_ua_coupons->execute(array(1, '%"' . $item['id'] . '"%', '%"3"%', 1));
+	$ua_gift = $get_ua_coupons->rowCount();
+
+	$quantity_arr['ua_discount'] = $ua_disc;
+	$quantity_arr['ua_f_ship'] = $ua_f_ship;
+	$quantity_arr['ua_gift'] = $ua_gift;
 
 	// by shops
 	$get_by_shops->execute(array(1, '%"' . $item['id'] . '"%', 1));
 	$by_shops = $get_by_shops->rowCount();
 
-	$set_by_shops->execute(array($by_shops, $item['id']));
+	$quantity_arr['by_shops'] = $by_shops;
 
 	// ru shops
 	$get_ru_shops->execute(array(1, '%"' . $item['id'] . '"%', 1));
 	$ru_shops = $get_ru_shops->rowCount();
 
-	$set_ru_shops->execute(array($ru_shops, $item['id']));
+	$quantity_arr['ru_shops'] = $ru_shops;
 
 	// ua shops
 	$get_ua_shops->execute(array(1, '%"' . $item['id'] . '"%', 1));
 	$ua_shops = $get_ua_shops->rowCount();
 
-	$set_ua_shops->execute(array($ua_shops, $item['id']));
+	$quantity_arr['ua_shops'] = $ua_shops;
+
+	// set quantity
+	$set_quantity->execute(array(json_encode($quantity_arr), $item['id']));
 }
 
 $show = $db->prepare('SELECT * FROM categories WHERE relation=?');
@@ -208,18 +283,18 @@ include('header.php');
 <div class="clr"></div>
 
 <?php
-echo '<table><tr><td>Id</td><td>Alias</td><td>Name</td><td>Origin Name</td><td>Title</td><td>Description</td><td>By Disc</td><td>Ru Disc</td><td>Ua Disc</td></tr>';
+echo '<table><tr><td>Id</td><td>Alias</td><td>Name</td><td>Origin Name</td><td>Quantity JSON</td></tr>';
 
 foreach ($show_coupons_cats as $show) {
-	echo '<tr><td>' . $show['id'] . '</td><td>' . $show['alias'] . '</td><td>' . $show['name'] . '</td><td>' . $show['origin_name'] . '</td><td>' . $show['title'] . '</td><td>' . $show['description'] . '</td><td>' . $show['by_qnt'] . '</td><td>' . $show['ru_qnt'] . '</td><td>' . $show['ua_qnt'] . '</td><tr>';
+	echo '<tr><td>' . $show['id'] . '</td><td>' . $show['alias'] . '</td><td>' . $show['name'] . '</td><td>' . $show['origin_name'] . '</td><td>' . $show['quantity'] . '</td></tr>';
 }
 
 echo '</table>';
 
-echo '<table><tr><td>Id</td><td>Alias</td><td>Name</td><td>Origin Name</td><td>Title</td><td>Description</td><td>By Shops</td><td>Ru Shops</td><td>Ua Shops</td></tr>';
+echo '<table><tr><td>Id</td><td>Alias</td><td>Name</td><td>Origin Name</td><td>Quantity JSON</td></tr>';
 
 foreach ($show_shops_cats as $show) {
-	echo '<tr><td>' . $show['id'] . '</td><td>' . $show['alias'] . '</td><td>' . $show['name'] . '</td><td>' . $show['origin_name'] . '</td><td>' . $show['title'] . '</td><td>' . $show['description'] . '</td><td>' . $show['by_shops'] . '</td><td>' . $show['ru_shops'] . '</td><td>' . $show['ua_shops'] . '</td><tr>';
+	echo '<tr><td>' . $show['id'] . '</td><td>' . $show['alias'] . '</td><td>' . $show['name'] . '</td><td>' . $show['origin_name'] . '</td><td>' . $show['quantity'] . '</td></tr>';
 }
 
 echo '</table>';

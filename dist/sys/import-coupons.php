@@ -32,7 +32,7 @@ $erase_coupons = $db->prepare('DELETE FROM coupons WHERE date_end > 0 AND date_e
 
 $erase_deleted_coupons = $db->prepare('DELETE FROM coupons WHERE modified < ?');
 
-$ins_coupons = $db->prepare('INSERT INTO coupons (id,category,category_ids,type,title,description,promocode,discount,discount_abs,date_start,date_end,gotolink,logo,shop_id,rating,modified) VALUES (:id,:category,:category_ids,:type,:title,:description,:promocode,:discount,:discount_abs,:date_start,:date_end,:gotolink,:logo,:shop_id,:rating,:modified) ON DUPLICATE KEY UPDATE type=:u_type,title=:u_title,description=:u_description,promocode=:u_promocode,discount=:u_discount,discount_abs=:u_discount_abs,date_start=:u_date_start,date_end=:u_date_end,gotolink=:u_gotolink,logo=:u_logo,shop_id=:u_shop_id,rating=:u_rating,modified=:u_modified');
+$ins_coupons = $db->prepare('INSERT INTO coupons (id,category,category_ids,type,type_ids,title,description,promocode,discount,discount_abs,date_start,date_end,gotolink,logo,shop_id,rating,modified) VALUES (:id,:category,:category_ids,:type,:type_ids,:title,:description,:promocode,:discount,:discount_abs,:date_start,:date_end,:gotolink,:logo,:shop_id,:rating,:modified) ON DUPLICATE KEY UPDATE type=:u_type,type_ids=:u_type_ids,title=:u_title,description=:u_description,promocode=:u_promocode,discount=:u_discount,discount_abs=:u_discount_abs,date_start=:u_date_start,date_end=:u_date_end,gotolink=:u_gotolink,logo=:u_logo,shop_id=:u_shop_id,rating=:u_rating,modified=:u_modified');
 
 $coupon_sql = $db->prepare('SELECT * FROM coupons WHERE shop_id=?');
 
@@ -85,11 +85,12 @@ function get_cat_names($cat_ids, $cats_arr)
 // fun get coupon type
 function get_coupon_type($coupon, $types)
 {
-	$type = '';
+	$type = array('txt' => '', 'ids' => '');
 	$k = 0;
 
 	foreach ($coupon->types->children() as $value) {
-		$type .= (($k) ? ', ' : '') . $types[(int)$value];
+		$type['txt'] .= (($k) ? ', ' : '') . $types[(int)$value];
+		$type['ids'] .= (($k) ? ',' : '') . '"' . (int)$value . '"';
 		$k++;
 	}
 
@@ -168,7 +169,8 @@ foreach ($coupons_xml->coupons->children() as $value) {
 		'id' => (int)$value->attributes()['id'],
 		'category' => $cats['txt'],
 		'category_ids' => $cats['ids'],
-		'type' => $types,
+		'type' => $types['txt'],
+		'type_ids' => $types['ids'],
 		'title' => (string)$value->name,
 		'description' => $descr,
 		'promocode' => (string)$value->promocode,
@@ -181,7 +183,8 @@ foreach ($coupons_xml->coupons->children() as $value) {
 		'shop_id' => (int)$value->advcampaign_id,
 		'rating' => (float)$value->rating,
 		'modified' => $cur_time,
-		'u_type' => $types,
+		'u_type' => $types['txt'],
+		'u_type_ids' => $types['ids'],
 		'u_title' => (string)$value->name,
 		'u_description' => $descr,
 		'u_promocode' => (string)$value->promocode,
