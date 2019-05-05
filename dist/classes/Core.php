@@ -160,6 +160,7 @@ class Core
 			$content = $this->getContent($query);
 		}
 
+		$type = $this->_type;
 		$meta = $this->getMeta();
 
 		if (file_exists('templates/' . $template . '.php') && !$this->_page_not_found) {

@@ -12,23 +12,15 @@
 					<h1 class="title"><?php echo $meta['title']; ?></h1>
 				</div>
 
-				<?php if (!empty($content['coupons'])) { ?>
+				<?php if ($type == 'discounts' && $content['coupons']) { ?>
 					<div class="col col_right">
-						<form id="sorting-form" action="/coupons<?php echo (!empty($alias)) ? '/' . $alias : ''; ?>" method="POST" class="form sorting-form">
+						<form id="sorting-form" action="/discounts<?php echo $alias ? '/' . $alias : ''; ?>" method="POST" class="form sorting-form">
 							<div class="form__field">
 								<select name="sorting" data-placeholder="Сортировать" data-submit-form-onchange="true">
-									<option value="rating" <?php if ($content['sorting'] == 'rating') {
-																		echo 'selected';
-																	} ?>>Самые популярные</option>
-									<option value="biggest_discounts" <?php if ($content['sorting'] == 'biggest_discounts') {
-																						echo 'selected';
-																					} ?>>Наибольшие скидки</option>
-									<option value="newest" <?php if ($content['sorting'] == 'newest') {
-																		echo 'selected';
-																	} ?>>Самые новые</option>
-									<option value="expire_soon" <?php if ($content['sorting'] == 'expire_soon') {
-																				echo 'selected';
-																			} ?>>Скоро заканчиваются</option>
+									<option value="rating" <?php echo ($content['sorting'] == 'rating') ? 'selected' : ''; ?>>Самые популярные</option>
+									<option value="biggest_discounts" <?php echo ($content['sorting'] == 'biggest_discounts') ? 'selected' : ''; ?>>Наибольшие скидки</option>
+									<option value="newest" <?php echo ($content['sorting'] == 'newest') ? 'selected' : ''; ?>>Самые новые</option>
+									<option value="expire_soon" <?php echo ($content['sorting'] == 'expire_soon') ? 'selected' : ''; ?>>Скоро заканчиваются</option>
 								</select>
 								<div class="field-error-tip">Select an animal</div>
 							</div>
@@ -39,7 +31,7 @@
 
 			<div class="row tile">
 				<?php
-				if (!empty($content['coupons'])) {
+				if ($content['coupons']) {
 					foreach ($content['coupons'] as $item) {
 						echo '<div class="col-4 md-col-6">';
 						include $_SERVER['DOCUMENT_ROOT'] . '/templates/inc/coupon-item.php';

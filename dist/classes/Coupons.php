@@ -220,33 +220,15 @@ class Coupons extends Core
 			}
 		}
 
-		if (empty($this->_page)) {
+		if (!$this->_page) {
 			unset($_SESSION['sorting']);
 			$result['param'] = 'rating';
 		}
 
-		if ($this->_type_id == 1) {
-			switch ($result['param']) {
-				case 'rating':
-					$result['sql'] = ' ORDER BY type_ids ASC, rating DESC';
-					break;
-
-				case 'biggest_discounts':
-					$result['sql'] = ' ORDER BY type_ids ASC, discount_abs DESC';
-					break;
-
-				case 'newest':
-					$result['sql'] = ' ORDER BY type_ids ASC, date_start DESC';
-					break;
-
-				case 'expire_soon':
-					$result['sql'] = ' AND date_end > 0 AND date_end > NOW() ORDER BY type_ids ASC, date_end ASC';
-					break;
-
-				default:
-					$result['sql'] = ' ORDER BY type_ids ASC, discount_abs DESC';
-					break;
-			}
+		if ($this->_type == 'free-shipping') {
+			$result['sql'] = ' ORDER BY type_ids ASC, rating DESC';
+		} elseif ($this->_type == 'gifts') {
+			$result['sql'] = ' ORDER BY rating DESC';
 		} else {
 			switch ($result['param']) {
 				case 'rating':
