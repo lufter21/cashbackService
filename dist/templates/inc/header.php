@@ -43,20 +43,19 @@ if ($region == 'ua') {
 				<div class="row row_col-middle sm-row-col-12">
 					<nav class="col p-0">
 						<!--Menu/-->
-						<ul class="menu">
-							<?php
-							echo $lemon->getMenu(array(
-								'discounts' => 'Скидки',
-								'gifts' => 'Подарки',
-								'free-shipping' => 'Бесплатная доставка',
-								'shops' => 'Магазины',
-								// 'about'=>array('О сервисе', array('recomendations'=>'Рекомендации', 'faq'=>'Вопрос/Ответ'))
-							));
-							?>
-							<!-- <li class="menu__item menu__item_current">
+						<?php
+						echo $lemon->getMenu(array(
+							'discounts' => 'Скидки',
+							'gifts' => 'Подарки',
+							'free-shipping' => 'Бесплатная доставка',
+							'shops' => 'Магазины',
+							// 'about'=>array('О сервисе', array('recomendations'=>'Рекомендации', 'faq'=>'Вопрос/Ответ'))
+						));
+						?>
+						<!-- <li class="menu__item menu__item_current">
 							<a href="home.html" class="menu__a">Home</a>
 						</li> -->
-						</ul>
+
 						<!--/Menu-->
 					</nav>
 					<div class="col col_right p-0">

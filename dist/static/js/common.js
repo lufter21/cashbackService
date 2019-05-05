@@ -41,8 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	MobNav.init({
 		openBtn: '.js-open-menu',
 		closeBtn: '.js-close-menu',
-		headerId: 'header',
-		menuLinkSelector: '.menu a'
+		headerId: 'header'
 	});
 
 	// alert

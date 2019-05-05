@@ -400,8 +400,11 @@ hr { margin: 5px 0; border: none; border-bottom: 1px solid #797979; }
 
 .menu__arr { display: none; width: 12px; height: 8px; position: relative; bottom: 2px; margin-left: 7px; border: none; background: none; }
 
-@media (max-width: 1000px) { .menu { padding: 10px 25px; }
-  .menu__item { float: none; text-align: center; margin: 35px 0; }
+@media (max-width: 1200px) { .menu__item { margin-left: 50px; } }
+
+@media (max-width: 1000px) { .menu { padding: 35px 0; }
+  .menu__item { float: none; text-align: center; margin: 35px 0 0; }
+  .menu__item:first-child { margin-top: 0 !important; }
   .menu__item_has-children .menu__a { margin-left: 21px; }
   .menu__a { font-size: 20px; } }
 
