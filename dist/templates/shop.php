@@ -1,6 +1,7 @@
 <?php
 $meta = array(
-	'meta_title' => $content['name'] . ' промокоды и скидки',
+	'title' => 'Cкидки и подарки от ' . $content['name'],
+	'meta_title' => $content['name'] . ' скидки, подарки, бесплатная доставка',
 	'meta_description' => $content['description']
 );
 
@@ -17,7 +18,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/inc/header.php';
 			</div>
 		</div>
 		<div class="col">
-			<h1 class="title">Промокоды и скидки от магазина <?php echo $content['name']; ?></h1>
+			<h1 class="title"><?php echo $meta['title']; ?></h1>
+		</div>
+	</div>
+	<div class="row row_wrp">
+		<div class="col-12 shop-cats">
+			<?php echo $content['category']; ?>
 		</div>
 	</div>
 	<div class="row row_wrp tile">

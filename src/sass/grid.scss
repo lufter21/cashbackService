@@ -31,6 +31,10 @@
 		}
 	}
 	@media(min-width: 1001px){
+		&_wrp{
+			padding-left: 15px;
+			padding-right: 15px;
+		}
 		&_md-x-nw{
 			flex-wrap: nowrap;
 		}
@@ -40,14 +44,6 @@
 			& > [class*="col"]{
 				float: left;
 				width: 100%;
-			}
-		}
-	}
-	@media(max-width: 1000px){
-		@media(min-width: 751px){
-			&_wpr{
-				padding-left: 15px;
-				padding-right: 15px;
 			}
 		}
 	}

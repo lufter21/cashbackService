@@ -251,16 +251,21 @@ ol.list{
 /* shop */
 .shop-item{
 	width: 100%;
-	padding:40px 20px;
+	padding:40px 20px 20px;
 	min-height: 220px;
 	background:#ffffff;
 	position:relative;
 	border-radius: 3px;
 	flex: 0 1 auto;
 	&__qnt{
-		display: block;
 		text-align: center;
-		margin-top: 40px;
+		margin-top: 25px;
+	}
+	&__cats{
+		font-size: 12px;
+		line-height: 1.5;
+		color: $gy;
+		margin-top: 20px;
 	}
 	&__logo{
 		text-align: center;
@@ -285,6 +290,12 @@ ol.list{
 	img{
 		@extend %r-img;
 	}
+}
+
+.shop-cats{
+	font-size: 14px;
+	line-height: 1.5;
+	color: $gy;
 }
 
 /* sidebar */

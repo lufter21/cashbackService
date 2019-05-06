@@ -60,13 +60,18 @@
 		background: none;
 		
 	}
-
+	@media(max-width: 1200px){
+		&__item{
+			margin-left: 50px;
+		}
+	}
 	@media(max-width: 1000px){
-		padding: 10px 25px;
+		padding: 35px 0;
 		&__item{
 			float: none;
 			text-align: center;
-			margin: 35px 0;
+			margin: 35px 0 0;
+			@include fch(t);
 			
 			&_has-children{
 				.menu__a{

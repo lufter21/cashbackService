@@ -38,7 +38,7 @@ $coupon_sql = $db->prepare('SELECT * FROM coupons WHERE shop_id=?');
 
 $upd_shop_qnt = $db->prepare('UPDATE shops SET quantity=? WHERE id=?');
 
-$update_shops = $db->prepare('INSERT INTO shops (id,name,category,category_ids,logo,quantity) VALUES (:id,:name,:category,:category_ids,:logo,:quantity) ON DUPLICATE KEY UPDATE logo=:u_logo,quantity=:u_quantity');
+$update_shops = $db->prepare('INSERT INTO shops (id,name,category,category_ids,logo,quantity) VALUES (:id,:name,:category,:category_ids,:logo,:quantity) ON DUPLICATE KEY UPDATE logo=:u_logo,quantity=:u_quantity,category=:u_category,category_ids=:u_category_ids');
 
 $get_shops = $db->prepare('SELECT * FROM shops');
 
@@ -50,19 +50,23 @@ $upd_coupon = $db->prepare('UPDATE coupons SET by_reg=?, ru_reg=?, ua_reg=?, ava
 
 $upd_coupon_cats = $db->prepare('UPDATE coupons SET category=? WHERE id=?');
 
+$upd_shop_cats = $db->prepare('UPDATE shops SET category=? WHERE id=?');
+
 $ins_categories = $db->prepare('INSERT INTO categories (id,name,origin_name,relation) VALUES (:id,:name,:origin_name,:relation) ON DUPLICATE KEY UPDATE origin_name=:u_origin_name');
 
 // fun get coupon cats
 function get_coupon_categories($coupon, $cats)
 {
-	$categories = array('txt' => '', 'ids' => '');
+	$categories = array('txt' => '', 'ids' => array());
 	$k = 0;
 
 	foreach ($coupon->categories->children() as $value) {
 		$categories['txt'] .= (($k) ? ', ' : '') . $cats[(int)$value];
-		$categories['ids'] .= (($k) ? ',' : '') . '"' . (int)$value . '"';
+		$categories['ids'][] = (string)$value;
 		$k++;
 	}
+
+	$categories['ids'] = json_encode($categories['ids']);
 
 	return $categories;
 }
@@ -72,11 +76,14 @@ function get_cat_names($cat_ids, $cats_arr)
 {
 	$names = '';
 	$k = 0;
-	$cat_ids_arr = explode(',', $cat_ids);
 
-	foreach ($cat_ids_arr as $val) {
-		$names .= (($k) ? ', ' : '') . $cats_arr[(int)trim($val, '"')]['name'];
-		$k++;
+	if ($cat_ids) {
+		$cat_ids_arr = json_decode($cat_ids, true);
+
+		foreach ($cat_ids_arr as $val) {
+			$names .= (($k) ? ', ' : '') . $cats_arr[(int)$val]['name'];
+			$k++;
+		}
 	}
 
 	return $names;
@@ -100,16 +107,18 @@ function get_coupon_type($coupon, $types)
 // fun get shop cats
 function get_shop_categories($shop, $cats)
 {
-	$categories = array('txt' => '', 'ids' => '');
+	$categories = array('txt' => '', 'ids' => array());
 	$k = 0;
 
 	foreach ($shop->categories->children() as $value) {
 		if ((int)$value != 62) {
 			$categories['txt'] .= (($k) ? ', ' : '') . $cats[(int)$value];
-			$categories['ids'] .= (($k) ? ',' : '') . '"' . (int)$value . '"';
+			$categories['ids'][] = (string)$value;
 			$k++;
 		}
 	}
+
+	$categories['ids'] = json_encode($categories['ids']);
 
 	return $categories;
 }
@@ -227,19 +236,18 @@ foreach ($coupons_xml->advcampaigns->children() as $value) {
 		'logo' => $logo,
 		'quantity' => $quant,
 		'u_logo' => $logo,
-		'u_quantity' => $quant
+		'u_quantity' => $quant,
+		'u_category' => $cats['txt'],
+		'u_category_ids' => $cats['ids']
 	));
 }
 
 // update coupons region and available
-$get_shops->execute();
-$shops_result = $get_shops->fetchAll(PDO::FETCH_ASSOC);
-
 foreach ($shops_result as $value) {
 	$upd_coupon->execute(array($value['by_reg'], $value['ru_reg'], $value['ua_reg'], $value['available'], $value['id']));
 }
 
-// update coupons category names
+// get categories
 $get_cats->execute();
 $cats_result = $get_cats->fetchAll(PDO::FETCH_ASSOC);
 
@@ -249,6 +257,7 @@ foreach ($cats_result as $value) {
 	$cats_arr[$value['id']] = $value;
 }
 
+// update coupons category names
 $get_coupons->execute();
 $coupons_result = $get_coupons->fetchAll(PDO::FETCH_ASSOC);
 
@@ -256,6 +265,13 @@ foreach ($coupons_result as $value) {
 	$categories = get_cat_names($value['category_ids'], $cats_arr);
 
 	$upd_coupon_cats->execute(array($categories, $value['id']));
+}
+
+// update shop category names
+foreach ($shops_result as $value) {
+	$categories = get_cat_names($value['category_ids'], $cats_arr);
+
+	$upd_shop_cats->execute(array($categories, $value['id']));
 }
 
 // insert categories

@@ -1,40 +1,46 @@
 <?php
 // get cats
-$get_cats = $db->prepare('SELECT * FROM categories WHERE relation=?');
-$get_cats->execute(array('coupons'));
+$get_cats = $db->prepare('SELECT * FROM categories');
+$get_cats->execute();
 $cats_result = $get_cats->fetchAll(PDO::FETCH_ASSOC);
 
+$coupon_cats_result = array();
+$cats_arr = array();
+
+foreach ($cats_result as $value) {
+	if ($value['relation'] == 'coupons') {
+		$coupon_cats_result[] = $value;
+	}
+
+	$cats_arr[$value['id']] = $value;
+}
+
 // fun get coupon cats
-function get_coupon_categories($coupon, $cats)
+function get_categories_data($cat_ids_arr, $cats_arr)
 {
-	$categories = array('txt' => '', 'ids' => '');
+	$categories = array('txt' => '', 'ids' => array());
 	$k = 0;
 
-	foreach ($coupon as $value) {
-		$categories['txt'] .= (($k) ? ', ' : '') . $cats[$value];
-		$categories['ids'] .= (($k) ? ',' : '') . '"' . $value . '"';
+	foreach ($cat_ids_arr as $value) {
+		$categories['txt'] .= (($k) ? ', ' : '') . $cats_arr[$value]['name'];
+		$categories['ids'][] = (string)$value;
 		$k++;
 	}
+
+	$categories['ids'] = json_encode($categories['ids']);
 
 	return $categories;
 }
 
-
+// change cats
 if (!empty($_POST['change-available'])) {
-	// change cats
-	$cats_arr = array();
-
-	foreach ($cats_result as $value) {
-		$cats_arr[$value['id']] = $value['name'];
-	}
-
-	$update_coupon = $db->prepare('UPDATE coupons SET category=?, category_ids=? WHERE id=?');
+	$update_coupon = $db->prepare('UPDATE coupons SET category=?, category_ids=?, manual_cats=? WHERE id=?');
 
 	if ($_POST['cat_id']) {
 		foreach ($_POST['cat_id'] as $cp_id => $val) {
-			$cat = get_coupon_categories($val, $cats_arr);
+			$cat = get_categories_data($val, $cats_arr);
 
-			$update_coupon->execute(array($cat['txt'], $cat['ids'], $cp_id));
+			$update_coupon->execute(array($cat['txt'], $cat['ids'], 1, $cp_id));
 		}
 	}
 
@@ -58,14 +64,67 @@ if (!empty($_POST['change-available'])) {
 }
 
 // get coupons
-$coupons = $db->prepare('SELECT * FROM coupons ORDER BY rating DESC');
-$coupons->execute();
-$coupons = $coupons->fetchAll(PDO::FETCH_ASSOC);
+if ($_GET['shop_id']) {
+	$coupons = $db->prepare('SELECT * FROM coupons WHERE shop_id=? ORDER BY rating DESC');
+	$coupons->execute(array($_GET['shop_id']));
+	$coupons = $coupons->fetchAll(PDO::FETCH_ASSOC);
+} elseif ($_GET['order_empty_cat']) {
+	$coupons = $db->prepare('SELECT * FROM coupons ORDER BY category_ids DESC');
+	$coupons->execute();
+	$coupons = $coupons->fetchAll(PDO::FETCH_ASSOC);
+} else {
+	$coupons = $db->prepare('SELECT * FROM coupons ORDER BY rating DESC');
+	$coupons->execute();
+	$coupons = $coupons->fetchAll(PDO::FETCH_ASSOC);
+}
 
+// update coupon categories
+if ($_GET['upd_cats']) {
+	$upd_coupon_cats = $db->prepare('UPDATE coupons SET category=?, category_ids=?  WHERE id=?');
 
-$tit = "coupons";
+	$shops_arr = array();
+
+	// get shops
+	$shops = $db->prepare('SELECT * FROM shops');
+	$shops->execute();
+	$shops_result = $shops->fetchAll(PDO::FETCH_ASSOC);
+
+	foreach ($shops_result as $val) {
+		$shops_arr[$val['id']] = $val;
+	}
+
+	// process
+	foreach ($coupons as $item) {
+		if ($item['manual_cats']) {
+			continue;
+		}
+
+		$new_coupon_cat_ids_arr = array();
+
+		$coupon_cat_ids = json_decode($item['category_ids'], true);
+
+		$shop_cat_ids = json_decode($shops_arr[$item['shop_id']]['category_ids'], true);
+
+		foreach ($coupon_cat_ids as $k => $cat_id) {
+			$related = $cats_arr[$cat_id]['related_cats'];
+
+			if (in_array($related, $shop_cat_ids)) {
+				$new_coupon_cat_ids_arr[] = $cat_id;
+			}
+		}
+
+		$cat = get_categories_data($new_coupon_cat_ids_arr, $cats_arr);
+
+		$upd_coupon_cats->execute(array($cat['txt'], $cat['ids'], $item['id']));
+	}
+}
+
+$tit = "Coupons";
 include('header.php');
 ?>
+<div class="left">
+	<a href="?route=coupons&order_empty_cat=1" class="btn">Order by empty Cats</a>
+</div>
 <div class="clr"></div>
 
 <form id="coupons-form" class="coupons-form" action="" method="POST">
@@ -77,7 +136,7 @@ include('header.php');
 			<td>id</td>
 			<td>Title</td>
 			<td>Desc</td>
-			<?php foreach ($cats_result as $val) { ?>
+			<?php foreach ($coupon_cats_result as $val) { ?>
 				<td><?php echo $val['name']; ?></td>
 			<?php } ?>
 		</tr>
@@ -85,7 +144,7 @@ include('header.php');
 		<?php foreach ($coupons as $k => $arr) { ?>
 			<tr>
 				<td>
-					<?php echo $arr['id']; ?>
+					<a href="/coupon/<?php echo $arr['id']; ?>" target="_blank"><?php echo $arr['id']; ?></a>
 				</td>
 				<td>
 					<?php echo $arr['title']; ?>
@@ -96,7 +155,7 @@ include('header.php');
 					<input type="text" data-name="tr_desc[<?php echo $arr['id']; ?>]" value="<?php echo $arr['description_translated']; ?>">
 				</td>
 
-				<?php foreach ($cats_result as $key => $val) { ?>
+				<?php foreach ($coupon_cats_result as $key => $val) { ?>
 					<td><input type="checkbox" data-name="cat_id[<?php echo $arr['id']; ?>][<?php echo $key; ?>]" value="<?php echo $val['id']; ?>" <?php echo (strpos($arr['category_ids'], '"' . $val['id'] . '"') !== false) ? 'checked' : ''; ?>></td>
 				<?php } ?>
 			</tr>
@@ -107,7 +166,7 @@ include('header.php');
 					<td>id</td>
 					<td>Title</td>
 					<td>Desc</td>
-					<?php foreach ($cats_result as $val) { ?>
+					<?php foreach ($coupon_cats_result as $val) { ?>
 						<td><?php echo $val['name']; ?></td>
 					<?php } ?>
 				</tr>

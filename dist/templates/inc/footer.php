@@ -4,10 +4,16 @@
 		<div class="col-12">
 			<ul class="foot-nav">
 				<li class="foot-nav__item">
-					<a rel="nofollow" href="/coupons" class="foot-nav__a">Промокоды</a>
+					<a rel="nofollow" href="/discounts" class="foot-nav__a">Скидки на заказ</a>
 				</li>
 				<li class="foot-nav__item">
-					<a rel="nofollow" href="/shops" class="foot-nav__a">Магазины</a>
+					<a rel="nofollow" href="/gifts" class="foot-nav__a">Подарки к заказу</a>
+				</li>
+				<li class="foot-nav__item">
+					<a rel="nofollow" href="/free-shipping" class="foot-nav__a">Бесплатная доставка</a>
+				</li>
+				<li class="foot-nav__item">
+					<a rel="nofollow" href="/shops" class="foot-nav__a">Каталог магазинов</a>
 				</li>
 			</ul>
 		</div>
@@ -15,7 +21,7 @@
 	<div class="row row_wrp">
 		<div class="col col_grow">
 			<div class="footer__txt">
-				Промокоды и скидки от лучших интернет магазинов.<br> 
+				Скидки, подарки, бесплатная доставка от лучших интернет магазинов.<br> 
 				&copy; <?php echo date('Y');?> BomBonus, https://bombonus.dealersair.com
 			</div>
 		</div>

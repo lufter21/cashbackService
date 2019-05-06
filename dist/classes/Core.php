@@ -32,10 +32,10 @@ class Core
 		return $region;
 	}
 
-	protected function getMeta()
+	protected function getMeta($route = '')
 	{
 		$meta_sql = $this->db->prepare('SELECT * FROM meta WHERE route=?');
-		$meta_sql->execute(array($this->_route));
+		$meta_sql->execute(array($route));
 		$result = $meta_sql->fetch(PDO::FETCH_ASSOC);
 
 		return $result;
@@ -156,13 +156,26 @@ class Core
 		$alias = $this->_alias = $query['alias'];
 		$region = $this->_region = $this->getRegion($query['region']);
 
+		// canonical
+		$canonical_url = $this->_route;
+		$pp = strpos($this->_route, '/page/');
+
+		if ($pp !== false) {
+			$canonical_url = substr($this->_route, 0, $pp);
+		}
+
+		// get meta
+		$meta = $this->getMeta($canonical_url);
+
+		// get content
 		if ($template) {
 			$content = $this->getContent($query);
 		}
 
+		// type
 		$type = $this->_type;
-		$meta = $this->getMeta();
 
+		// include template
 		if (file_exists('templates/' . $template . '.php') && !$this->_page_not_found) {
 			require_once('templates/' . $template . '.php');
 		} else {

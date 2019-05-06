@@ -19,7 +19,7 @@ if ($region == 'ua') {
 	<link type="text/css" rel="stylesheet" href="/static/css/style.css">
 	<title><?php echo $meta['meta_title']; ?> — BomBonus</title>
 	<meta name="description" content="<?php echo $meta['meta_description']; ?>">
-	<link rel="canonical" href="https://bombonus.dealersair.com/<?php echo $route; ?>">
+	<link rel="canonical" href="https://bombonus.dealersair.com/<?php echo $canonical_url; ?>">
 	<!-- favicons/ -->
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">

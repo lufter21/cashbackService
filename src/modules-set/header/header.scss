@@ -13,6 +13,9 @@
 	height: 100px;
 	align-items: center;
 	transition: .21s;
+	&_bg{
+		background: rgba(255, 255, 255, .5);
+	}
 	&_fixed{
 		height: 50px;
 		background: #FFF;
