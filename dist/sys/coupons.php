@@ -123,7 +123,10 @@ $tit = "Coupons";
 include('header.php');
 ?>
 <div class="left">
-	<a href="?route=coupons&order_empty_cat=1" class="btn">Order by empty Cats</a>
+	<a href="?route=coupons&upd_cats=1" class="btn btn_red">Update Cats!</a>
+</div>
+<div class="left">
+	<a href="?route=coupons&order_empty_cat=1">Order by empty Cats</a>
 </div>
 <div class="clr"></div>
 
@@ -142,7 +145,7 @@ include('header.php');
 		</tr>
 
 		<?php foreach ($coupons as $k => $arr) { ?>
-			<tr>
+			<tr <?php echo ($arr['category_ids'] == '[]') ? 'class="bg-yellow"' : ''; ?>>
 				<td>
 					<a href="/coupon/<?php echo $arr['id']; ?>" target="_blank"><?php echo $arr['id']; ?></a>
 				</td>

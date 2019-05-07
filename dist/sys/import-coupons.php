@@ -2,29 +2,29 @@
 $cur_time = date('Y-m-d H:i:s');
 
 //get XML
-$coupons_xml = simplexml_load_file(XML_FEED);
+$xml = simplexml_load_file(XML_FEED);
 
-$couponsArr = array(
+$xml_arr = array(
 	'shop_cats' => array(),
 	'coupons_cats' => array(),
 	'coupons_type' => array()
 );
 
 // parse xml
-foreach ($coupons_xml->advcampaign_categories->children() as $value) {
+foreach ($xml->advcampaign_categories->children() as $value) {
 	$id = (int)$value->attributes()['id'];
 
 	if ($id != 62) {
-		$couponsArr['shop_cats'][$id] = (string)$value;
+		$xml_arr['shop_cats'][$id] = (string)$value;
 	}
 }
 
-foreach ($coupons_xml->categories->children() as $value) {
-	$couponsArr['coupons_cats'][(int)$value->attributes()['id']] = (string)$value;
+foreach ($xml->categories->children() as $value) {
+	$xml_arr['coupons_cats'][(int)$value->attributes()['id']] = (string)$value;
 }
 
-foreach ($coupons_xml->types->children() as $value) {
-	$couponsArr['coupons_type'][(int)$value->attributes()['id']] = (string)$value;
+foreach ($xml->types->children() as $value) {
+	$xml_arr['coupons_type'][(int)$value->attributes()['id']] = (string)$value;
 }
 
 // sql prepare
@@ -54,73 +54,38 @@ $upd_shop_cats = $db->prepare('UPDATE shops SET category=? WHERE id=?');
 
 $ins_categories = $db->prepare('INSERT INTO categories (id,name,origin_name,relation) VALUES (:id,:name,:origin_name,:relation) ON DUPLICATE KEY UPDATE origin_name=:u_origin_name');
 
-// fun get coupon cats
-function get_coupon_categories($coupon, $cats)
-{
-	$categories = array('txt' => '', 'ids' => array());
-	$k = 0;
-
-	foreach ($coupon->categories->children() as $value) {
-		$categories['txt'] .= (($k) ? ', ' : '') . $cats[(int)$value];
-		$categories['ids'][] = (string)$value;
-		$k++;
-	}
-
-	$categories['ids'] = json_encode($categories['ids']);
-
-	return $categories;
-}
-
 // fun get cats name
 function get_cat_names($cat_ids, $cats_arr)
 {
-	$names = '';
-	$k = 0;
+	$names = array();
 
 	if ($cat_ids) {
-		$cat_ids_arr = json_decode($cat_ids, true);
-
-		foreach ($cat_ids_arr as $val) {
-			$names .= (($k) ? ', ' : '') . $cats_arr[(int)$val]['name'];
-			$k++;
+		foreach (json_decode($cat_ids, true) as $id) {
+			if ((int)$id != 62) {
+				$names[] = $cats_arr[(int)$id]['name'];
+			}
 		}
 	}
 
-	return $names;
+	return implode(', ', $names);
 }
 
-// fun get coupon type
-function get_coupon_type($coupon, $types)
+// fun get names and ids
+function get_names_and_ids($ids_arr, $src_arr)
 {
-	$type = array('txt' => '', 'ids' => '');
-	$k = 0;
+	$result = array('names' => array(), 'ids' => array());
 
-	foreach ($coupon->types->children() as $value) {
-		$type['txt'] .= (($k) ? ', ' : '') . $types[(int)$value];
-		$type['ids'] .= (($k) ? ',' : '') . '"' . (int)$value . '"';
-		$k++;
-	}
-
-	return $type;
-}
-
-// fun get shop cats
-function get_shop_categories($shop, $cats)
-{
-	$categories = array('txt' => '', 'ids' => array());
-	$k = 0;
-
-	foreach ($shop->categories->children() as $value) {
-		if ((int)$value != 62) {
-			$categories['txt'] .= (($k) ? ', ' : '') . $cats[(int)$value];
-			$categories['ids'][] = (string)$value;
-			$k++;
+	foreach ($ids_arr as $id) {
+		if ((int)$id != 62) {
+			$result['names'][] = $src_arr[(int)$id];
+			$result['ids'][] = (string)$id;
 		}
 	}
 
-	$categories['ids'] = json_encode($categories['ids']);
+	$result['names'] = implode(', ', $result['names']);
+	$result['ids'] = json_encode($result['ids']);
 
-	return $categories;
+	return $result;
 }
 
 //fun get logo
@@ -145,20 +110,8 @@ function save_logo($url)
 	return $img_name;
 }
 
-// fun category title
-function get_title($str)
-{
-	return trim(str_replace('&', 'и', $str)) . ' промокоды и скидки';
-}
-
-// fun category meta title
-function get_meta_title($str)
-{
-	return 'Скидки на ' . mb_strtolower(trim(str_replace('&', 'и', $str)), 'UTF-8')  . ', промокоды';
-}
-
 // fun modify description
-function mod_description($str)
+function mod_coupon_description($str)
 {
 	$str = preg_replace('/(ввод промо(\-|\s)?кода не требуется|не требуется ввод промокода|промокод не требуется|промокод не нужен)(\.|!|;)?/ui', '', $str);
 
@@ -168,17 +121,17 @@ function mod_description($str)
 // insert/update coupons
 $erase_coupons->execute();
 
-foreach ($coupons_xml->coupons->children() as $value) {
-	$cats = get_coupon_categories($value, $couponsArr['coupons_cats']);
-	$types = get_coupon_type($value, $couponsArr['coupons_type']);
-	$descr = mod_description((string)$value->description);
+foreach ($xml->coupons->children() as $value) {
+	$cats = get_names_and_ids($value->categories->children(), $xml_arr['coupons_cats']);
+	$types = get_names_and_ids($value->types->children(), $xml_arr['coupons_type']);
+	$descr = mod_coupon_description((string)$value->description);
 	$logo = save_logo((string)$value->logo);
 
 	$ins_coupons->execute(array(
 		'id' => (int)$value->attributes()['id'],
-		'category' => $cats['txt'],
+		'category' => $cats['names'],
 		'category_ids' => $cats['ids'],
-		'type' => $types['txt'],
+		'type' => $types['names'],
 		'type_ids' => $types['ids'],
 		'title' => (string)$value->name,
 		'description' => $descr,
@@ -192,7 +145,7 @@ foreach ($coupons_xml->coupons->children() as $value) {
 		'shop_id' => (int)$value->advcampaign_id,
 		'rating' => (float)$value->rating,
 		'modified' => $cur_time,
-		'u_type' => $types['txt'],
+		'u_type' => $types['names'],
 		'u_type_ids' => $types['ids'],
 		'u_title' => (string)$value->name,
 		'u_description' => $descr,
@@ -220,8 +173,8 @@ foreach ($shops_result as $value) {
 }
 
 // insert/update shops
-foreach ($coupons_xml->advcampaigns->children() as $value) {
-	$cats = get_shop_categories($value, $couponsArr['shop_cats']);
+foreach ($xml->advcampaigns->children() as $value) {
+	$cats = get_names_and_ids($value->categories->children(), $xml_arr['shop_cats']);
 	$id = (int)$value->attributes()['id'];
 	$logo = get_logo($id, $coupon_sql);
 
@@ -231,13 +184,13 @@ foreach ($coupons_xml->advcampaigns->children() as $value) {
 	$update_shops->execute(array(
 		'id' => $id,
 		'name' => (string)$value->name,
-		'category' => $cats['txt'],
+		'category' => $cats['names'],
 		'category_ids' => $cats['ids'],
 		'logo' => $logo,
 		'quantity' => $quant,
 		'u_logo' => $logo,
 		'u_quantity' => $quant,
-		'u_category' => $cats['txt'],
+		'u_category' => $cats['names'],
 		'u_category_ids' => $cats['ids']
 	));
 }
@@ -245,6 +198,27 @@ foreach ($coupons_xml->advcampaigns->children() as $value) {
 // update coupons region and available
 foreach ($shops_result as $value) {
 	$upd_coupon->execute(array($value['by_reg'], $value['ru_reg'], $value['ua_reg'], $value['available'], $value['id']));
+}
+
+// insert categories
+foreach ($xml_arr['shop_cats'] as $key => $value) {
+	$ins_categories->execute(array(
+		'id' => $key,
+		'name' => $value,
+		'origin_name' => $value,
+		'relation' => 'shops',
+		'u_origin_name' => $value
+	));
+}
+
+foreach ($xml_arr['coupons_cats'] as $key => $value) {
+	$ins_categories->execute(array(
+		'id' => $key,
+		'name' => $value,
+		'origin_name' => $value,
+		'relation' => 'coupons',
+		'u_origin_name' => $value
+	));
 }
 
 // get categories
@@ -257,6 +231,13 @@ foreach ($cats_result as $value) {
 	$cats_arr[$value['id']] = $value;
 }
 
+// update shop category names
+foreach ($shops_result as $value) {
+	$categories = get_cat_names($value['category_ids'], $cats_arr);
+
+	$upd_shop_cats->execute(array($categories, $value['id']));
+}
+
 // update coupons category names
 $get_coupons->execute();
 $coupons_result = $get_coupons->fetchAll(PDO::FETCH_ASSOC);
@@ -265,34 +246,6 @@ foreach ($coupons_result as $value) {
 	$categories = get_cat_names($value['category_ids'], $cats_arr);
 
 	$upd_coupon_cats->execute(array($categories, $value['id']));
-}
-
-// update shop category names
-foreach ($shops_result as $value) {
-	$categories = get_cat_names($value['category_ids'], $cats_arr);
-
-	$upd_shop_cats->execute(array($categories, $value['id']));
-}
-
-// insert categories
-foreach ($couponsArr['shop_cats'] as $key => $value) {
-	$ins_categories->execute(array(
-		'id' => $key,
-		'name' => $value,
-		'origin_name' => $value,
-		'relation' => 'shops',
-		'u_origin_name' => $value
-	));
-}
-
-foreach ($couponsArr['coupons_cats'] as $key => $value) {
-	$ins_categories->execute(array(
-		'id' => $key,
-		'name' => $value,
-		'origin_name' => $value,
-		'relation' => 'coupons',
-		'u_origin_name' => $value
-	));
 }
 
 header('Location:?route=categories');

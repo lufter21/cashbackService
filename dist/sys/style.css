@@ -96,7 +96,7 @@ td{
 	padding:7px 10px;
 	vertical-align:middle
 }
-.btn, .link-btn ,td a{
+.btn, .link-btn{
 	display:block;
 	padding:7px 15px;
 	color:#3E5567;
@@ -108,7 +108,9 @@ td{
 	text-align:center;
 	cursor:pointer;
 }
-
+.btn_red{
+	color: #ff4400;
+}
 .link-btn{
 	background: none !important;
 	border: none;
@@ -116,14 +118,10 @@ td{
 	text-decoration: underline;
 }
 
-.btn:hover,td a:hover{
+.btn:hover{
 	background:linear-gradient(to top,#EDEDED,#C9C9C9)
 }
-td a{
-	padding:5px 21px;
-	margin:5px;
-	float:left
-}
+
 #header a.btn,
 #header a.link-btn{
 	float:right;
@@ -295,8 +293,11 @@ form.shops-form select{
 	float:right;
 }
 
-.bg-orange{
+.bg-orange, .bg-orange td{
 	background: #ffa500;
+}
+.bg-yellow, .bg-yellow td{
+	background: #f6ce2a;
 }
 .bg-green{
 	background: #0F986E;

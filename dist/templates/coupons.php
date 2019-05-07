@@ -38,7 +38,7 @@
 						echo '</div>';
 					}
 				} else {
-					echo '<div class="message">На данный момент, в этом разделе нет акций и скидок</div>';
+					echo '<div class="message col-12">На данный момент, в этом разделе нет купонов.</div>';
 				}
 				?>
 			</div>

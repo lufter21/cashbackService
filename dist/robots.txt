@@ -1,4 +1,5 @@
 User-agent: *
+Disallow: /by/
 Disallow: /ru/
 Disallow: /ua/
 Disallow: /sys/

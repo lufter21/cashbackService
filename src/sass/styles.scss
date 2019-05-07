@@ -185,15 +185,16 @@ ol.list{
 		right: 20px;
 		bottom:15px;
 		z-index:2;
-		color:#156692;
 		height:42px;
 		padding: 2px 10px 0;
+		border-radius: 2px;
+		font-size: 14px;
+		color:#156692;
 		line-height:normal;
-		text-align:center;
 		text-decoration:none;
 		text-transform:uppercase;
-		font-size: 14px;
-		background: $gy2;
+		text-align:center;
+		background: #fae6cd;
 		transition: .21s;
 		&:hover{
 			color: #ffffff;
@@ -296,6 +297,9 @@ ol.list{
 	font-size: 14px;
 	line-height: 1.5;
 	color: $gy;
+	@media(max-width: 750px){
+		font-size: 12px;
+	}
 }
 
 /* sidebar */
@@ -329,7 +333,7 @@ ol.list{
 			}
 		}
 	}
-	@media(max-width: 1000px){
+	@media(max-width: 1200px){
 		&__title{
 			font-size: 20px;
 			margin: 25px 0;
