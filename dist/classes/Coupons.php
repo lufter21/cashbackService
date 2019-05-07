@@ -58,21 +58,23 @@ class Coupons extends Core
 
 		switch ($query['type']) {
 			case 'free-shipping':
-				$type_id = 1;
+				$cat[] = '["1"]';
+
+				$par .= ' AND type_ids=?';
 				break;
 
 			case 'discounts':
-				$type_id = 2;
+				$cat[] = '%"2"%';
+
+				$par .= ' AND type_ids LIKE ?';
 				break;
 
 			case 'gifts':
-				$type_id = 3;
+				$cat[] = '%"3"%';
+
+				$par .= ' AND type_ids LIKE ?';
 				break;
 		}
-
-		$cat[] = '%"' . $type_id . '"%';
-
-		$par .= ' AND type_ids LIKE ?';
 
 		// page num
 		$this->_page = $query['page'];
@@ -208,28 +210,24 @@ class Coupons extends Core
 	{
 		$result = array();
 
-		if (isset($_POST['sorting'])) {
-			$result['param'] = $_SESSION['sorting'] = $_POST['sorting'];
+		if ($this->_type == 'discounts') {
+			if (isset($_POST['sorting'])) {
+				$result['param'] = $_SESSION['sorting'] = $_POST['sorting'];
 
-			$this->_page = 1;
-		} else {
-			if (isset($_SESSION['sorting'])) {
-				$result['param'] = $_SESSION['sorting'];
+				$this->_page = 1;
 			} else {
+				if (isset($_SESSION['sorting'])) {
+					$result['param'] = $_SESSION['sorting'];
+				} else {
+					$result['param'] = 'rating';
+				}
+			}
+
+			if (!$this->_page) {
+				unset($_SESSION['sorting']);
 				$result['param'] = 'rating';
 			}
-		}
 
-		if (!$this->_page) {
-			unset($_SESSION['sorting']);
-			$result['param'] = 'rating';
-		}
-
-		if ($this->_type == 'free-shipping') {
-			$result['sql'] = ' ORDER BY type_ids ASC, rating DESC';
-		} elseif ($this->_type == 'gifts') {
-			$result['sql'] = ' ORDER BY rating DESC';
-		} else {
 			switch ($result['param']) {
 				case 'rating':
 					$result['sql'] = ' ORDER BY rating DESC';
@@ -251,6 +249,8 @@ class Coupons extends Core
 					$result['sql'] = ' ORDER BY discount_abs DESC';
 					break;
 			}
+		} else {
+			$result['sql'] = ' ORDER BY rating DESC';
 		}
 
 		return $result;
