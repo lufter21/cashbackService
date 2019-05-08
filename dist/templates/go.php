@@ -1,4 +1,3 @@
 <?php
-header('Location: '. $content['gotolink']);
+header('Location: ' . $content['gotolink']);
 exit;
-?>

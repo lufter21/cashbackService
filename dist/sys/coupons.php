@@ -44,6 +44,15 @@ if (!empty($_POST['change-available'])) {
 		}
 	}
 
+	// change deeplink
+	$update_coupon_deeplink = $db->prepare('UPDATE coupons SET deeplink=? WHERE id=?');
+
+	if ($_POST['dpl']) {
+		foreach ($_POST['dpl'] as $cp_id => $val) {
+			$update_coupon_deeplink->execute(array($val, $cp_id));
+		}
+	}
+
 	// change translated title
 	$update_coupon_tit = $db->prepare('UPDATE coupons SET title_translated=? WHERE id=?');
 
@@ -137,6 +146,7 @@ include('header.php');
 	<table>
 		<tr class="bold">
 			<td>id</td>
+			<td>Deeplink</td>
 			<td>Title</td>
 			<td>Desc</td>
 			<?php foreach ($coupon_cats_result as $val) { ?>
@@ -148,6 +158,9 @@ include('header.php');
 			<tr <?php echo ($arr['category_ids'] == '[]') ? 'class="bg-yellow"' : ''; ?>>
 				<td>
 					<a href="/coupon/<?php echo $arr['id']; ?>" target="_blank"><?php echo $arr['id']; ?></a>
+				</td>
+				<td>
+					<input type="text" data-name="dpl[<?php echo $arr['id']; ?>]" value="<?php echo $arr['deeplink']; ?>">
 				</td>
 				<td>
 					<?php echo $arr['title']; ?>
@@ -167,6 +180,7 @@ include('header.php');
 			<?php if ($k > 0 && $k % 5 == 0) { ?>
 				<tr class="bold">
 					<td>id</td>
+					<td>Deeplink</td>
 					<td>Title</td>
 					<td>Desc</td>
 					<?php foreach ($coupon_cats_result as $val) { ?>
