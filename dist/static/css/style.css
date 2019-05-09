@@ -901,7 +901,7 @@ ol.list li:before { counter-increment: listCounter; content: counter(listCounter
 /* title */
 .title { font-size: 24px; font-weight: 700; line-height: 1.3; }
 
-@media (max-width: 750px) { .title { font-size: 22px; } }
+@media (max-width: 750px) { .title { font-size: 20px; } }
 
 /* article */
 .article h2 { font-size: 22px; font-weight: 700; line-height: 1.3; margin: 45px 0 30px; }
@@ -912,9 +912,16 @@ ol.list li:before { counter-increment: listCounter; content: counter(listCounter
 
 .article p:first-child { margin-top: 0 !important; }
 
+.article .until-icon::before { top: 3px; }
+
+.article .fs-14.until-icon::before { top: 0; }
+
 .article blockquote { line-height: 1.5; margin-top: 35px; }
 
 .article blockquote:first-child { margin-top: 0 !important; }
+
+@media (max-width: 750px) { .article { font-size: 14px; }
+  .article .until-icon::before { top: 0; } }
 
 /* tile */
 .tile > [class*="col"] { display: -ms-flexbox; display: flex; }
@@ -952,6 +959,8 @@ ol.list li:before { counter-increment: listCounter; content: counter(listCounter
 
 @media (max-width: 1000px) { .coupon-item { display: block; float: none; width: 100%; } }
 
+@media (max-width: 750px) { .coupon-item__title { font-size: 16px; } }
+
 .coupon { background: #ffffff; border-radius: 3px; padding: 0 15px 15px; max-width: 950px; margin: 0 auto; }
 
 .coupon__discount { font-size: 42px; font-weight: 700; color: #E68717; }
@@ -967,8 +976,9 @@ ol.list li:before { counter-increment: listCounter; content: counter(listCounter
 .coupon_go { padding: 100px 50px; text-align: center; }
 
 @media (max-width: 750px) { .coupon { padding: 5px; }
-  .coupon_go { padding: 50px 20px; }
-  .coupon__shop-logo { width: 100px; } }
+  .coupon__discount { font-size: 32px; }
+  .coupon__shop-logo { width: 100px; }
+  .coupon_go { padding: 50px 20px; } }
 
 /* shop */
 .shop-item { width: 100%; padding: 40px 20px 20px; min-height: 220px; background: #ffffff; position: relative; border-radius: 3px; -ms-flex: 0 1 auto; flex: 0 1 auto; }
@@ -1064,6 +1074,8 @@ ol.list li:before { counter-increment: listCounter; content: counter(listCounter
 .lh-1_5 { line-height: 1.5 !important; }
 
 .fs-14 { font-size: 14px !important; }
+
+.bold { font-weight: 700; }
 
 /*background*/
 .bg-gray { background: #797979; }

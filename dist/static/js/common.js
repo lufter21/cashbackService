@@ -1,41 +1,43 @@
 document.addEventListener('DOMContentLoaded', function () {
-	var fsElem = document.getElementById('js-first-screen');
+	// const fsElem = document.getElementById('js-first-screen');
 
-	(function initFun() {
-		if (fsElem) {
-			var padTop = 100;
+	// (function initFun() {
+	// 	if (fsElem) {
+	// 		let padTop = 100;
 
-			if (window.innerWidth < 1200) {
-				padTop = 60;
-			}
+	// 		if (window.innerWidth < 1200) {
+	// 			padTop = 60;
+	// 		}
 
-			fsElem.style.height = window.innerHeight - padTop + 'px';
-		}
+	// 		fsElem.style.height = (window.innerHeight - padTop) + 'px';
+	// 	}
 
-		// resize events
-		window.removeEventListener('winResized', initFun);
-		window.removeEventListener('winWidthResized', initFun);
+	// 	// resize events
+	// 	window.removeEventListener('winResized', initFun);
+	// 	window.removeEventListener('winWidthResized', initFun);
 
-		if (window.innerWidth > 1200) {
-			window.addEventListener('winResized', initFun);
-		} else {
-			window.addEventListener('winWidthResized', initFun);
-		}
-	})();
+	// 	if (window.innerWidth > 1200) {
+	// 		window.addEventListener('winResized', initFun);
+	// 	} else {
+	// 		window.addEventListener('winWidthResized', initFun);
+	// 	}
+	// })();
 
 	// toggle button
 	Toggle.init('.js-toggle', '.js-document-toggle-off');
 
-	Toggle.onChange = function (tgl, state) {};
+	// Toggle.onChange = function (tgl, state) {
+
+	// }
 
 	// popup
-	Popup.init('.js-open-popup');
-	MediaPopup.init('.js-open-media-popup');
+	// Popup.init('.js-open-popup');
+	// MediaPopup.init('.js-open-media-popup');
 
 	// menu
-	if (window.innerWidth < 1000) {
-		Menu.init('.menu__item_has-children', '.menu__sub-menu');
-	}
+	// if (window.innerWidth < 1000) {
+	// 	Menu.init('.menu__item_has-children', '.menu__sub-menu');
+	// }
 
 	// mobile nav
 	MobNav.init({
@@ -52,57 +54,61 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 
 	// autocomplete data
-	AutoComplete.setValuesData = function (val, fun) {
-		fun([{ val: "mc", value: "Mercury" }, { val: "vn", value: "Venus" }, { val: "eth", value: "Earth" }, { val: "ms", value: "Mars" }, { val: "mn", value: "Mandarin" }, { val: "mk", value: "Marakuja" }, { val: "mlk", value: "Milk" }]);
-	};
+	// AutoComplete.setValuesData = function (val, fun) {
+	// 	fun([
+	// 		{ val: "mc", value: "Mercury" },
+	// 		{ val: "vn", value: "Venus" },
+	// 		{ val: "eth", value: "Earth" },
+	// 		{ val: "ms", value: "Mars" },
+	// 		{ val: "mn", value: "Mandarin" },
+	// 		{ val: "mk", value: "Marakuja" },
+	// 		{ val: "mlk", value: "Milk" }
+	// 	]);
+	// }
 
 	// submit form
-	Form.init('.form');
+	// Form.init('.form');
 
-	Form.onSubmit = function (form, callback) {
-		switch (form.id) {
-			case 'sorting-form':
-				return true;
+	// Form.onSubmit = function (form, callback) {
+	// 	switch (form.id) {
+	// 		case 'sorting-form':
+	// 			return true;
 
-			case 'custom-form-2':
-			case 'custom-form-3':
-			case 'custom-form-4':
-				var files = CustomFile.getFiles(form);
+	// 		case 'custom-form-2':
+	// 		case 'custom-form-3':
+	// 		case 'custom-form-4':
+	// 			var files = CustomFile.getFiles(form);
 
-				console.log(files);
-				return false;
+	// 			console.log(files);
+	// 			return false;
 
-			default:
-				ajax({
-					url: form.action,
-					send: new FormData(form),
-					success: function success(response) {
-						var response = JSON.parse(response);
+	// 		default:
+	// 			ajax({
+	// 				url: form.action,
+	// 				send: new FormData(form),
+	// 				success: function (response) {
+	// 					var response = JSON.parse(response);
 
-						if (response.status == 'sent') {
-							Popup.message('#message-popup', 'Форма отправлена');
+	// 					if (response.status == 'sent') {
+	// 						Popup.message('#message-popup', 'Форма отправлена');
 
-							callback({ clearForm: true, unlockSubmitButton: true });
-						} else {
-							console.log(response);
-						}
-					},
-					error: function error(response) {
-						console.log(response);
-					}
-				});
-				return false;
-		}
-	};
+	// 						callback({ clearForm: true, unlockSubmitButton: true });
+	// 					} else {
+	// 						console.log(response);
+	// 					}
+	// 				},
+	// 				error: function (response) {
+	// 					console.log(response);
+	// 				}
+	// 			});
+	// 			return false;
+	// 	}
+	// }
 });
 
 // jQuery plugins
 $(document).ready(function () {
 	// slick slider
-	$('#slider').on('init', function () {
-		CoverImg.reInit('#slider');
-	});
-
 	$('#main-slider').slick({
 		autoplay: true,
 		fade: true,

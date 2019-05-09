@@ -42,7 +42,7 @@ if ($end) {
       $expired = true;
    }
 } else {
-   $until .= 'Неограничен';
+   $until .= 'Не определено';
 }
 
 $title = $item['title_translated'] ?: $item['title'];
@@ -50,6 +50,23 @@ $description = $item['description_translated'] ?: $item['description'];
 
 if (mb_strlen($description) > 175) {
    $description = mb_substr($description, 0, 175) . '...';
+}
+
+$btn_txt = 'Получить промокод';
+
+switch ($type) {
+   case 'discounts':
+      $btn_txt = 'Получить скидку';
+      break;
+
+   case 'gifts':
+      $btn_txt = 'Получить подарок';
+      break;
+
+   case 'free-shipping':
+   default:
+      $btn_txt = 'Получить промокод';
+      break;
 }
 ?>
 
@@ -65,7 +82,7 @@ if (mb_strlen($description) > 175) {
 
          <?php if ($view_logo !== false) { ?>
             <div class="col-4-5 col_right p-0">
-               <a href="/shop/<?php echo $content['shops'][$item['shop_id']]['alias']; ?>" title="Все промокоды от <?php echo $content['shops'][$item['shop_id']]['name']; ?>" class="coupon-item__logo"><img src="/static/images/logos/<?php echo $item['logo']; ?>" alt="<?php echo $content['shops'][$item['shop_id']]['name']; ?>"></a>
+               <a href="/shop/<?php echo $content['shops'][$item['shop_id']]['alias']; ?>" title="Все купоны от <?php echo $content['shops'][$item['shop_id']]['name']; ?>" class="coupon-item__logo"><img src="/static/images/logos/<?php echo $item['logo']; ?>" alt="<?php echo $content['shops'][$item['shop_id']]['name']; ?>"></a>
             </div>
          <?php } ?>
 
@@ -99,6 +116,6 @@ if ($expired) {
    <?php if ($expired) { ?>
       <div class="coupon-item__expired">Купон просрочен</div>
    <?php } else { ?>
-      <a rel="nofollow" href="/coupon/<?php echo $item['id']; ?>" class="coupon-item__button">Получить промокод</a>
+      <a rel="nofollow" href="/coupon/<?php echo $item['id']; ?>" class="coupon-item__button"><?php echo $btn_txt; ?></a>
    <?php } ?>
 </div>
