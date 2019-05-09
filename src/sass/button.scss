@@ -125,11 +125,13 @@
 		border-bottom-color: transparent;
 	}
 }
-// .link{
-// 	@extend %link;
-// 	color: $be;
-// 	border-bottom-color: $be;
-// }
+
+.link{
+	@extend %link;
+	color: $be;
+	border-bottom-color: $be;
+}
+
 // .green-link{
 // 	@extend %link;
 // 	color: $gn;

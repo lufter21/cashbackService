@@ -10,7 +10,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/templates/inc/header.php';
 ?>
 
 <!--MAIN/-->
-<div class="main">
+<div class="main main_f">
 	<div class="main__full-page">
 		<div id="main-slider" class="slider">
 			<?php

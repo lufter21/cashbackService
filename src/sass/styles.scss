@@ -14,7 +14,9 @@
 	}
 	@media(max-width: 1000px){
 		padding-top: 80px;
-		min-height: 550px;
+		&_f{
+			min-height: 550px;
+		}
 	}
 }
 
@@ -241,8 +243,15 @@ ol.list{
 		border: 1px dashed $gy3;
 		margin: 10px;
 	}
+	&_go{
+		padding: 100px 50px;
+		text-align: center;
+	}
 	@media(max-width: 750px){
 		padding: 5px;
+		&_go{
+			padding: 50px 20px;
+		}
 		&__shop-logo{
 			width: 100px;
 		}

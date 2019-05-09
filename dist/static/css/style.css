@@ -256,6 +256,12 @@ hr { margin: 5px 0; border: none; border-bottom: 1px solid #797979; }
 
 /* icon button */
 /* link */
+.link { text-decoration: none; border-bottom: 1px solid; transition: .21s; }
+
+.link:hover { border-bottom-color: transparent; }
+
+.link { color: #156692; border-bottom-color: #156692; }
+
 /* icon link */
 /*paginate*/
 .paginate { list-style: none; text-align: center; margin: 15px 0; }
@@ -871,7 +877,8 @@ select { visibility: hidden; }
 /* main */
 .main { -ms-flex: 1 0 auto; flex: 1 0 auto; position: relative; overflow: hidden; padding: 130px 0 50px; }
 
-@media (max-width: 1000px) { .main { padding-top: 80px; min-height: 550px; } }
+@media (max-width: 1000px) { .main { padding-top: 80px; }
+  .main_f { min-height: 550px; } }
 
 /* first screen */
 .first-screen { overflow: hidden; }
@@ -957,7 +964,10 @@ ol.list li:before { counter-increment: listCounter; content: counter(listCounter
 
 .coupon__promocode { display: inline-block; font-size: 20px; padding: 6px 12px; line-height: normal; background: #F1F1F1; border: 1px dashed #b3b3b3; margin: 10px; }
 
+.coupon_go { padding: 100px 50px; text-align: center; }
+
 @media (max-width: 750px) { .coupon { padding: 5px; }
+  .coupon_go { padding: 50px 20px; }
   .coupon__shop-logo { width: 100px; } }
 
 /* shop */
