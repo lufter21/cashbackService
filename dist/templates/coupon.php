@@ -40,7 +40,7 @@ if ($end) {
 		$expired = true;
 	}
 } else {
-	$until .= 'Не определено';
+	$until .= 'Не установлен';
 }
 
 $title = (!empty($content['title_translated'])) ? $content['title_translated'] : $content['title'];
@@ -57,7 +57,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/inc/header.php';
 <!--MAIN/-->
 <div class="main">
 	<div class="row row_wrp">
-		<main class="col-12">
+		<main class="col-9-10">
 			<article class="coupon">
 				<?php if ($content['discount']) { ?>
 					<div class="row row_col-middle row_nw">
@@ -104,11 +104,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/inc/header.php';
 							</p>
 						<?php } elseif ($end) { ?>
 							<p class="until-icon">
-								Закончится через: <span class="c-gray"><?php echo $until; ?></span>
+								Срок действия купона истекает через: <span class="c-gray"><?php echo $until; ?></span>
 							</p>
 						<?php } else { ?>
 							<p class="until-icon fs-14">
-								Действие купона не определено. <span class="c-gray">Это означает, что купон может быть удален в любой момент, когда закончится акционный товар или изменится политика магазина.</span>
+								Срок действия купона не установлен. <span class="c-gray">Это означает, что купон может быть удален в любой момент, когда закончится акционный товар или изменится политика магазина.</span>
 							</p>
 						<?php } ?>
 
@@ -132,7 +132,28 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/inc/header.php';
 
 			</article>
 		</main>
+		<div class="col-2-3 ta-c">
+			<a href="/go/1" target="_blank"><img src="/static/images/ls1.png" alt="Letyshops" class="rsp-img"></a>
+		</div>
 	</div>
+	<?php if ($content['similar']) { ?>
+		<div class="row row_wrp mt-45">
+			<div class="col-12">
+				<div class="title title_h2">
+					Смотрите также:
+				</div>
+			</div>
+		</div>
+		<div class="row row_wrp tile">
+			<?php
+			foreach ($content['similar'] as $item) {
+				echo '<div class="col-3 md-col-4">';
+				include $_SERVER['DOCUMENT_ROOT'] . '/templates/inc/coupon-item.php';
+				echo '</div>';
+			}
+			?>
+		</div>
+	<?php } ?>
 </div>
 <!--/MAIN-->
 

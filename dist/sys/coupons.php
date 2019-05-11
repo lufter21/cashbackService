@@ -53,6 +53,15 @@ if (!empty($_POST['change-available'])) {
 		}
 	}
 
+	// change similar
+	$update_coupon_similar = $db->prepare('UPDATE coupons SET similar=? WHERE id=?');
+
+	if ($_POST['sim']) {
+		foreach ($_POST['sim'] as $cp_id => $val) {
+			$update_coupon_similar->execute(array($val, $cp_id));
+		}
+	}
+
 	// change translated title
 	$update_coupon_tit = $db->prepare('UPDATE coupons SET title_translated=? WHERE id=?');
 
@@ -147,6 +156,7 @@ include('header.php');
 		<tr class="bold">
 			<td>id</td>
 			<td>Deeplink</td>
+			<td>Similar(json)</td>
 			<td>Title</td>
 			<td>Desc</td>
 			<?php foreach ($coupon_cats_result as $val) { ?>
@@ -161,6 +171,9 @@ include('header.php');
 				</td>
 				<td>
 					<input type="text" data-name="dpl[<?php echo $arr['id']; ?>]" value="<?php echo $arr['deeplink']; ?>">
+				</td>
+				<td>
+					<input type="text" data-name="sim[<?php echo $arr['id']; ?>]" value="<?php echo $arr['similar']; ?>">
 				</td>
 				<td>
 					<?php echo $arr['title']; ?>
@@ -181,6 +194,7 @@ include('header.php');
 				<tr class="bold">
 					<td>id</td>
 					<td>Deeplink</td>
+					<td>Similar(json)</td>
 					<td>Title</td>
 					<td>Desc</td>
 					<?php foreach ($coupon_cats_result as $val) { ?>

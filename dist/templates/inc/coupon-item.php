@@ -42,7 +42,7 @@ if ($end) {
       $expired = true;
    }
 } else {
-   $until .= 'Не определено';
+   $until .= 'Не установлен';
 }
 
 $title = $item['title_translated'] ?: $item['title'];
