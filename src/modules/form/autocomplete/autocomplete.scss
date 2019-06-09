@@ -9,7 +9,29 @@
    &__input{
       @extend %inp;
       padding-right: 45px;
-   }
+	}
+	&__arr{
+		display: block;
+		width: 40px;
+		height: 44px;
+		position: absolute;
+		right: 0;
+		top: 0;
+		z-index: 3;
+		border: none;
+		background: none;
+		&:after{
+			@extend %ab;
+			width: 0;
+			height: 0;
+			border: 4px solid transparent;
+			border-top: 6px solid $rd;
+			position: absolute;
+			right: 13px;
+			top: 50%;
+			margin-top: -2px;
+		}
+	}
 	&__options{
 		list-style: none;
 		position: absolute;
@@ -24,7 +46,7 @@
 		border-top: none;
 		background: #F0F1F2;
 		visibility: hidden;
-		transition: .5s;
+		transition: .21s;
 		li{
 			border-top: 1px solid #c3c3c3;
 			&.hidden{
@@ -40,6 +62,13 @@
 				}
 			}
 		}
+		&.ovfauto{
+			overflow: auto;
+		}
+		&-empty{
+			padding: 10px 15px;
+			text-align: center;
+		}
 	}
 	&__val{
 		display: block;
@@ -49,7 +78,10 @@
 		text-decoration: none;
 		text-align: left;
 		border: none;
-		transition: .5s;
+		transition: .21s;
+		span{
+			color: $rd;
+		}
 		&:hover{
 			background: $gy;
 			color: #fff;
@@ -58,9 +90,6 @@
 	&_opened{
 		.autocomplete__options{
 			visibility: visible;
-			&.ovfauto{
-				overflow: auto;
-			}
 		}
 	}
 }

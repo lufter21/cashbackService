@@ -31,7 +31,7 @@ const modulesOn = [
 	'form/select',
 	'form/autocomplete',
 	// 'form/file',
-	// 'form/placeholder',
+	'form/placeholder',
 	// 'form/maskinput',
 	'form',
 	// 'accord',

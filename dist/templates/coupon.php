@@ -57,7 +57,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/inc/header.php';
 <!--MAIN/-->
 <div class="main">
 	<div class="row row_wrp">
-		<main class="col-9-10">
+		<main class="col-12">
 			<article class="coupon">
 				<?php if ($content['discount']) { ?>
 					<div class="row row_col-middle row_nw">
@@ -129,12 +129,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/inc/header.php';
 						</div>
 					</div>
 				<?php } ?>
-
 			</article>
 		</main>
-		<div class="col-2-3 ta-c">
-			<a href="/go/1" target="_blank"><img src="/static/images/ls1.png" alt="Letyshops" class="rsp-img"></a>
-		</div>
 	</div>
 	<?php if ($content['similar']) { ?>
 		<div class="row row_wrp mt-45">
